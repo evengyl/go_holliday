@@ -1,0 +1,6 @@
+RewriteEngine on
+AddDefaultCharset utf-8
+
+
+RewriteRule ^([a-z_]+)$ ?page=$1 [L]
+RewriteRule ^([a-z_]+)/([a-z_]+)$ ?page=$1&action=$2 [L]

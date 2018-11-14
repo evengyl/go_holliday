@@ -1,0 +1,3 @@
+<?
+
+paragraphe_style($reponse);
