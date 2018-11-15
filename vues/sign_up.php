@@ -1,49 +1,78 @@
-<?
-if(isset($_SESSION['last_added_subscribe']) && $_SESSION['last_added_subscribe'])
-{?>
-	<div class="col-xs-12 col-without-padding connect-form"><?
-		if(isset($_SESSION['success']))
-		{
-			echo '<p class="bg-success">'.$_SESSION['success'].'</p>';
-			unset($_SESSION['success']);
-		}?>
-		<p class="bg-info" style="text-align: center; font-size:16px; color:black">Vous pouvez vous connecté directement ici : <a href="?page=login">Se connecter</a></p>
-	</div><?
-	unset($_SESSION['last_added_subscribe']);
-}
-else
-{?>
-	<div class="col-xs-12 col-without-padding connect-form" style="margin-top:25px;">	
-		<div class="col-xs-12" style="padding:15px;">
-			Si vous avez déjà un compte c'est par ici : <a href="?page=login">Se connecter</a></br>
-			Attention, votre login et votre mot de passe doivent au minimum faire 6 caractères.
-		</div>
-		<form action="#" method="post" class="col-lg-6 col-lg-offset-3">
+<header id="head" class="secondary"></header>
 
-			<div  class="col-xs-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<?php echo (isset($_SESSION['error']))?'<label for="exampleInputPassword1">'.$_SESSION['error'].'</label>':''; ?>
-				<input name="pseudo" type="text" class="form-control " required placeholder="Pseudo">
-			</div>
+	<div class="container">
+		<div class="row">
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Création de compte</h1>
+				</header><?
+				//veux dire qu'il vient tout juste de créer son compte
+				if(isset($_SESSION['error_sign_up']) && $_SESSION['error_sign_up'] === true)
+				{?>
+					<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h3 class="thin text-center">Finalisation de création de compte</h3>
+								<p class="text-center text-muted">
+									Vous êtes désormais inscrit, Merci de votre confiance !
+									<br>Vous pouvez désormais vous <a href="/login">connecter ici</a>.
+								</p>
+								<hr>
+							</div>
+						</div>
+					</div><?
+					unset($_SESSION['error_sign_up']);
+				}
+				else
+				{?>
+								
+					<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h3 class="thin text-center">Création de votre compte</h3>
+								<p class="text-center text-muted">
+									Votre compte client vous permet de gérer toute vos informations pour vous faciliter la vie
+									<br>Si vous avez déjà un login <a href="/login">connectez-vous ici</a>.
+								</p>
+								<hr><?
+								if(isset($_SESSION['error_sign_up']))
+								{?>
+									<p class="text-center text-danger">
+										<?= $_SESSION['error_sign_up'] ?>
+									</p>
+									<hr><?
+								}?>
+								<form action="#" method="post">
+									<div class="top-margin">
+										<label>Pseudo<span class="text-danger">*</span></label>
+										<input name="pseudo" type="text" required autofocus placeholder="Pseudo" class="form-control">
+									</div>
+									<div class="top-margin">
+										<label>Mot de passe (6 caractères minimum)<span class="text-danger">*</span></label>
+										<input type="password" name="password-1" required placeholder="Mot de passe" class="form-control">
+									</div>
+									<div class="top-margin">
+										<label>Vérification du Mot de passe<span class="text-danger">*</span></label>
+										<input type="password" name="password-2" required placeholder="Vérification du Mot de passe" class="form-control">
+									</div>
+									<div class="top-margin">
+										<label>Adresse Email<span class="text-danger">*</span></label>
+										<input name="email" type="email" required autofocus placeholder="Adresse Email (pas de pub)" class="form-control">
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-lg-5 text-right">
+											<input type="hidden" name="sign_up">
+											<button class="btn btn-action" type="submit">S'inscrire</button>
+										</div>
+										</div>
+								</form>
+							</div>
+						</div>
+					</div><?
+					unset($_SESSION['error_sign_up']); // permet de ne pas afficher les erreurs de connection si on reload la page
+				}?>
 
-			<div  class="col-xs-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<input name="password-1" type="password" class="form-control " required placeholder="Mot de passe">
-			</div>
-
-			<div  class="col-xs-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<input name="password-2" type="password" class="form-control " required placeholder="Confirmer le mot de passe">
-			</div>
-
-			<div  class="col-xs-12 form-group <?php echo (isset($_SESSION['error']))?'has-error':''; ?>">
-				<input name="email" type="mail" class="form-control " required placeholder="Adresse Email (pas de pub)">
-			</div>
-			
-			<input type="hidden" name="return_form_complet" value="14175155">
-			<button type="submit" class="col-lg-4 btn btn-block btn-default">S'inscrire</button>
-
-		</form>
-	</div><?
-	unset($_SESSION['error']); // permet de ne pas afficher les erreurs de connection si on reload la page
-}
-
-
-?>
+		</article>
+	</div>
+</div>

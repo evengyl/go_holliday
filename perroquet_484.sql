@@ -31,7 +31,7 @@ CREATE TABLE `login` (
   `email` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$LMyXpdg11OyYKNOtimiQOOfEABrPA5DOEubnuxvnmOCGiq1Y.BhvS','1490198511','legends','dark.evengyl@gmail.com',3);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$LMyXpdg11OyYKNOtimiQOOfEABrPA5DOEubnuxvnmOCGiq1Y.BhvS','1490198511','legends','dark.evengyl@gmail.com',3),(6,'test','$2y$10$Hf6AeLwdBk6DEnn.ajFp1uKBc2EoQzC7mDq9agpAwzl.s7SVsK8bq','1542277987','legends','dark.evengyl@gmail.com',0);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,6 +71,84 @@ INSERT INTO `option_app` VALUES (1,'view_time_exec_page',1,'Voir le temps d\'exe
 UNLOCK TABLES;
 
 --
+-- Table structure for table `test_enfant`
+--
+
+DROP TABLE IF EXISTS `test_enfant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_enfant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `enfant_name_1` varchar(255) NOT NULL,
+  `enfant_name_2` varchar(255) NOT NULL,
+  `enfant_name_3` varchar(255) NOT NULL,
+  `id_famille` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_enfant`
+--
+
+LOCK TABLES `test_enfant` WRITE;
+/*!40000 ALTER TABLE `test_enfant` DISABLE KEYS */;
+INSERT INTO `test_enfant` VALUES (1,'evan','leano','sean',1),(2,'titi','gros mnit','eliot',4),(3,'nico','phil','marc',3),(4,'leo','elsa','nathalie',2);
+/*!40000 ALTER TABLE `test_enfant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_famille`
+--
+
+DROP TABLE IF EXISTS `test_famille`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_famille` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `coord` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `id_pays` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_famille`
+--
+
+LOCK TABLES `test_famille` WRITE;
+/*!40000 ALTER TABLE `test_famille` DISABLE KEYS */;
+INSERT INTO `test_famille` VALUES (1,'Loic','75','tata@gmail.com',1),(2,'sarah','65','tata@gmail.com',1),(3,'louis','25','tata@gmail.com',2),(4,'frank','46','tata@gmail.com',2);
+/*!40000 ALTER TABLE `test_famille` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test_pays`
+--
+
+DROP TABLE IF EXISTS `test_pays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `test_pays` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pays` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test_pays`
+--
+
+LOCK TABLES `test_pays` WRITE;
+/*!40000 ALTER TABLE `test_pays` DISABLE KEYS */;
+INSERT INTO `test_pays` VALUES (1,'Belgique'),(2,'France');
+/*!40000 ALTER TABLE `test_pays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `translate`
 --
 
@@ -84,7 +162,7 @@ CREATE TABLE `translate` (
   `name_nl` varchar(255) NOT NULL,
   `name_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +171,7 @@ CREATE TABLE `translate` (
 
 LOCK TABLES `translate` WRITE;
 /*!40000 ALTER TABLE `translate` DISABLE KEYS */;
-INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tout les prix sont indicatif et taxe de séjour non comprise','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__');
+INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tout les prix sont indicatif et taxe de séjour non comprise','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone de la maintenance','','','__TRANS_tel_mainteance__'),(16,'Téléphone commercial','','','__TRANS_tel_commercial__');
 /*!40000 ALTER TABLE `translate` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -106,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-14  8:40:06
+-- Dump completed on 2018-11-15 16:01:24

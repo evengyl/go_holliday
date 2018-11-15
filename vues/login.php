@@ -13,7 +13,7 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">Vous êtes déjà connecté</h3>
+							<h3 class="thin text-center">Vous êtes maintenant connecté</h3>
 							<p class="text-center text-muted">
 								Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?><br>
 								Si vous voulez vous déconnecter c'est par ici
@@ -28,7 +28,12 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 	</div><?
 }
 else
-{?>
+{
+	if(isset($_SESSION['tmp_pseudo']))
+		$tmp_pseudo = $_SESSION['tmp_pseudo'];
+	else
+		$tmp_pseudo = "";
+	?>
 
 	<div class="container">
 		<div class="row">
@@ -46,15 +51,13 @@ else
 								<a href="sign_up">S'enregistrer</a>.
 							</p>
 							<hr>
-							<p class="text-center text-muted">
-								<span class="text-danger">
-									<?= (isset($_SESSION['error_login']))?$_SESSION['error_login']:''; ?>
-								</span>
+							<p class="text-center text-danger">
+								<?= (isset($_SESSION['error_login']))?$_SESSION['error_login']:''; ?>
 							</p>
 							<form action="#" method="post">
 								<div class="top-margin">
 									<label>Pseudo<span class="text-danger">*</span></label>
-									<input name="pseudo" type="text" required autofocus placeholder="Pseudo" class="form-control">
+									<input name="pseudo" type="text" required autofocus value="<?= $tmp_pseudo ?>" placeholder="Pseudo" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Mot de passe<span class="text-danger">*</span></label>
@@ -99,7 +102,7 @@ else
 				nous vous enverrons un Mail contenant votre mot de passe</p>
 				<form action="#" method="post">
 					<div class="col-xs-12 form-group">
-						<input name="pseudo" type="text" class="form-control" required autofocus placeholder="Pseudo / Email">
+						<input name="pseudo_mail" type="text" class="form-control" required autofocus placeholder="Pseudo / Email">
 					</div>
 					<input type="hidden" name="lost_login_form">
 					<button type="submit" class="col-xs-12 btn btn-action">Récupérer votre mot de passe</button>

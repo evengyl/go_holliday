@@ -42,15 +42,13 @@ Class base_module
 			if(!empty($this->var_to_extract))
 				extract($this->var_to_extract);
 			
-
-
 			$this->set_template_path();	
 			require($this->template_path);
 
-			$get_html_tpl = ob_get_contents();
+		$get_html_tpl = ob_get_contents();
 			
-			if(!empty($this->module_name_secondary))
-				$get_html_tpl = "__MOD_".$this->module_name_secondary."__";
+		if(!empty($this->module_name_secondary))
+			$get_html_tpl = "__MOD_".$this->module_name_secondary."__";
 			
 		ob_end_clean();
 		return $get_html_tpl;
@@ -77,27 +75,14 @@ Class base_module
 
 		if(strpos($this->template_name, "admin_") !== false)
 		{
-			if(file_exists('../vues/admin_tool/'.$this->template_name.'.php')){
-				//ok vues privée
-				$this->template_path= '../vues/admin_tool/'.$this->template_name.'.php';
-			}
-			else{
-				//ok vues public
-				$this->template_path= '../vues_public/admin_tool/'.$this->template_name.'.php';
-			}
-			
+			if(file_exists('../vues/admin_tool/'.$this->template_name.'.php'))
+				$this->template_path = '../vues/admin_tool/'.$this->template_name.'.php';
 		}
 			
 		else
 		{
-			if(file_exists('../vues/'.$this->template_name.'.php')){
-				//ok vues privée
-				$this->template_path= '../vues/'.$this->template_name.'.php';
-			}
-			else{
-				//ok vues public
-				$this->template_path= '../vues/vues_public/'.$this->template_name.'.php';
-			}
+			if(file_exists('../vues/'.$this->template_name.'.php'))
+				$this->template_path = '../vues/'.$this->template_name.'.php';
 		}
 
 	}

@@ -51,5 +51,5 @@ $_app->navigation = new navigation($_app);
 
 
 //va être appeler a chaque démarage de script page et va checker si le user est connecter ou pas.
-new security($_app);
+new login($_app);
 	

@@ -7,12 +7,10 @@
 					<h3 class="widget-title">__TRANS__contact_detail__</h3>
 					<div class="widget-body">
 						<p>
-							<a href="mailto:perroquet484@matedex.be">perroquet484@gmail.com</a><br>
+							Email de contact : <a href="mailto:perroquet484@matedex.be">Holliday simply online</a><br>
 							<br>
-							<b>__TRANS_address_title__ : </b>Bungalow numéro 484,<br> Camping Perroquet<br>
-							<b>Rue des dunes à 59123 Bray-Dunes</b><br><br>
-							<b>__TRANS_tel__ : </b> +32 (0)497 31 25 23<br>
-							<b>__TRANS_tel_1__ : </b> +32 (0)468 36 17 82<br>
+							<b>__TRANS_tel_mainteance__ : </b> +32 (0)497 31 25 23<br>
+							<b>__TRANS_tel_commercial__ : </b> +32 (0)468 36 17 82<br>
 						</p>	
 						<!--
 						<div class="hidden-xs col-sm-2" id="" style="color:white;">
@@ -63,7 +61,7 @@
 				<div class="col-lg-6 widget">
 					<div class="widget-body">
 						<p class="text-right">
-							<p>© 2018 - <?php echo date('Y'); ?> __TRANS_footer_price__.</p>
+							<p>Créé et maintenu par Evengyl, Holliday Simply Online© 2018 - <?php echo date('Y'); ?> __TRANS_footer_price__.</p>
 						</p>
 					</div>
 				</div>
