@@ -13,64 +13,63 @@ Class admin_unit_test extends base_module
 
 		$_app->navigation->set_breadcrumb('Test unitaire');
 
-	
-	$ok1_or_not = $ok2_or_not = $ok3_or_not = $ok4_or_not = $ok5_or_not = $ok6_or_not = array();
 
-		
+		// OK fonctionne niquel
+	$sql = new stdClass();
+	$sql->table = ["test_pays", "test_famille", "test_enfant"]; 
+	$sql->var = [
+					"test_pays" => ["id", "pays"], 
+					"test_famille" => ["id_pays", "id", "name", "coord", "mail"], 
+					"test_enfant" => ["id_famille", "id", "enfant_name_1", "enfant_name_2", "enfant_name_3"]
+				];
+	$sql->var_translate = ["test_pays" => ['name']];
+	$sql->where = ["pays", "NOT LIKE", "belgique"];
+	$sql->order = ["id" => "DESC"];
+	$sql->limit = "1";
 
-	$ok1_or_not = $this->test_unit_where("id = 1"); //simply better
-	$ok2_or_not = $this->test_unit_where(["id" => "2", '=']); // = <= >= !=
-    $ok4_or_not = $this->test_unit_where(["id" => [1,2,3,4,5], "IN"]);
-	$ok5_or_not = $this->test_unit_where(["id" => [1,2,3], "NOT IN"]);
-	$ok6_or_not = $this->test_unit_where([["id" => "1", "id" => "2"],"OR"]);
-	$ok6_or_not = $this->test_unit_where([[["id" => [1,2,3], "id" => [1,2,3]], "IN"],"OR"]);
+	$res_sql = $this->_app->sql->select($sql, $return_sql_prepare = 1);
+	affiche_pre($res_sql);
+	//Fin
+/* DOCUMENTATION DU SELECT
+
+TABLE
+		1	$sql->table = ["table_1"]
+	OR
+		2	$sql->table = ["table_1", "table_2", "table_3"]
+
+VAR 
+		1	$sql->var = ["id", "var_1", "var_2"]
+	OR
+		2	$sql->var = [
+							"table_1" => ["id", "var_1", "var_2"]
+							"table_2" => ["id_table_1_join", "id", "var_1", "var_2"]
+							"table_3" => ["id_table_2_join", "id", "var_1", "var_2"]
+						]
+	OR 
+		3 	$sql->var = ['*']
+
+VAR_TRANSLATE
+		1	$sql->var_translate = ["table" => ["var_translate_without_fr_rn_nl"]];
+
+WHERE
+		1	$sql->where = "var = 'tata'"
+	OR
+		2	$sql->where = "var_table_1 = 'tata'"
+	OR
+		3   $sql->where = ["var_table_1 = 'tata'", "OR/AND", "var2_table_1 = 'tata'"] //attention que le symbole OR ou AND doit toujours être placé en position pair
+	OR
+		4 	$sql->where = ["var_table_1", "LIKE NOT LIKE", "tata"] //attention que le symbole LIKE/NOT LIKE doit toujours être placé en position pair
+
+ORDER
+		1	$sql->order = ["var" => "DESC/ASC"]
+
+LIMIT
+		1   $sql->limit = "number_limit"
+
+*/
 
 
-	$test_1 = array("id = 1");
-	$test_2 = array("id IN" => array(1,2,3,4));
-	$test_3 = array("id = 1", "id = 2", "id = 3", "OR");
-	$test_4 = array(array("id = 1", "id = 2", "OR"), array("id != 3", "id >= 4", "AND"));
-		/* '6'
-		[
-			[
-				[
-					"id" => [1,2,3]
-					"id" => [1,2,3]
-				]
-				"IN"
-			]
-			"OR"
-		]
 
-
-
-		*/
-
-		$this->get_html_tpl =  $this
-			->assign_var("ok1_or_not", $ok1_or_not)
-			->assign_var("ok2_or_not", $ok2_or_not)
-			->assign_var("ok4_or_not", $ok4_or_not)
-			->assign_var("ok5_or_not", $ok5_or_not)
-			->use_template()->render_tpl();
-	}
-
-
-	private function test_unit_where($where)
-	{
-		//test du select where 1
-		$req_test_1 = new stdClass();
-		$req_test_1->table = "unit_test";
-		$req_test_1->var = "*";
-		$req_test_1->where = $where;
-		$res_sql = $this->_app->sql->select($req_test_1, $return_sql_prepare = 1);
-		
-		if(!empty($res_sql))
-		{
-			if(isset($res_sql[0]->id))
-				return ["success", $res_sql[count($res_sql)-1]];
-			else
-				return ["danger", $res_sql[count($res_sql)-1]];
-				
-		}
+	$this->get_html_tpl =  $this->use_template()->render_tpl();
 	}
 }

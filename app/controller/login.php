@@ -48,9 +48,9 @@ Class login extends base_module
 		if(empty($this->_app->user))
 		{
 			$req_sql = new stdClass;
-			$req_sql->table = "login";
-			$req_sql->var = "*";
-			$req_sql->where = "login ='".$_SESSION['pseudo']."'";
+			$req_sql->table = ["login"];
+			$req_sql->var = ["*"];
+			$req_sql->where = ["login ='".$_SESSION['pseudo']."'"];
 			$res_fx = $this->_app->sql->select($req_sql);	
 			return $res_fx[0];
 		}
@@ -73,9 +73,9 @@ Class login extends base_module
 		    	else
 		    	{	
 		           	$req_sql = new StdClass();
-		           	$req_sql->table = "login";
-		           	$req_sql->var = "login, password, level, last_connect";
-		           	$req_sql->where = ["login" => $pseudo];
+		           	$req_sql->table = ["login"];
+		           	$req_sql->var = ["login", "password", "level", "last_connect"];
+		           	$req_sql->where = ["login ='".$pseudo."'"];
 					$res_fx = $this->_app->sql->select($req_sql);
 
 		            if(empty($res_fx))
@@ -133,9 +133,9 @@ Class login extends base_module
 		    	else
 		    	{	
 		           	$req_sql = new StdClass();
-		           	$req_sql->table = "login";
-		           	$req_sql->var = "login, password, password_no_hash, email";
-		           	$req_sql->where = [["login" => $pseudo, "email" => $pseudo], "OR"];
+		           	$req_sql->table = ["login"];
+		           	$req_sql->var = ["login", "password", "password_no_hash", "email"];
+		           	$req_sql->where = ["login ='".$pseudo."'", "OR", "email = '".$pseudo."'"];
 					$res_fx = $this->_app->sql->select($req_sql, 1);
 
 					affiche_pre($res_fx);

@@ -15,9 +15,9 @@ Class admin_push_bsd extends base_module
 
 		//test de la version de la base et dans le fichier (compare voir quelle version est la plus récente)
 		$req_sql = new stdClass();
-		$req_sql->table = "_option";
-		$req_sql->var = "value";
-		$req_sql->where = "name = 'version'";
+		$req_sql->table = ["_option"];
+		$req_sql->var = ["value"];
+		$req_sql->where = ["name = 'version'"];
 		$req_sql->limit ="1";
 		$res_sql = $_app->sql->select($req_sql);
 

@@ -12,9 +12,9 @@ Class reservation extends base_module
 		
 
 		$req_sql = new stdClass();
-		$req_sql->table = "todo";
-		$req_sql->var = "id, todo_title, todo_content, date, visible";
-		$req_sql->order = "visible DESC, date DESC";
+		$req_sql->table = ["todo"];
+		$req_sql->var = ["id", "todo_title", "todo_content", "date", "visible"];
+		$req_sql->order = ["visible" => "DESC"];
 		$list_todo = $this->_app->sql->select($req_sql);
 
 

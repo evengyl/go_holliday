@@ -1,7 +1,22 @@
 <?
 Class lang_select
 {
-	public function auto_detect($_app)
+	public $_app;
+
+	public function __construct(&$_app)
+	{
+		$this->_app = $_app;
+
+		if(isset($_GET['lang']) && $_GET["lang"] != "")
+			$this->assign_lang($_GET["lang"], $_app);
+
+		else if(!isset($_SESSION['lang']) || empty($_SESSION["lang"]))
+			$this->auto_detect();
+
+
+		$this->_app->lang = $_SESSION['lang'];
+	}
+	public function auto_detect()
 	{
 		$lang_navigateur = explode(',', $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
 
@@ -14,7 +29,7 @@ Class lang_select
 		else
 			$_SESSION['lang'] = 'en';
 
-		$_app->lang = $_SESSION['lang'];
+		
 	}
 
 	public function assign_lang($get_lang, &$_app)

@@ -16,6 +16,7 @@ Class _app
 	public $var_module;
 	public $module_name;
 	public $user = [];
+	public $lang;
 
 	public $time_start;
 	public $time_stop;

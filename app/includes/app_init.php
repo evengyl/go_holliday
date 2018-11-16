@@ -22,8 +22,8 @@ class app_init
 		$array_option = [];
 
 		$sql_get_option = new stdClass();
-		$sql_get_option->table = "option_app";
-		$sql_get_option->where = 1;
+		$sql_get_option->table = ["option_app"];
+		$sql_get_option->var = ['*'];
 		$res_sql = $this->_app->sql->select($sql_get_option);
 
 		foreach($res_sql as $key => $row_sql)

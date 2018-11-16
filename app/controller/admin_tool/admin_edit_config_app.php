@@ -11,10 +11,9 @@ Class admin_edit_config_app extends base_module
 		$this->_app->navigation->set_breadcrumb("Modification des option de base de l'application", "edit_config_app");
 
 		$sql = new stdClass();
-		$sql->table = "option_app";
-		$sql->ctx = new stdClass();
-		$sql->ctx->var = "*";
-		$sql->where = "1";
+		$sql->table = ["option_app"];
+		$sql->var = ["*"];
+		$sql->where = ["1"];
 		$this->list_option = $_app->sql->select($sql);
 
 

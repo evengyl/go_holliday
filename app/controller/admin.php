@@ -9,6 +9,7 @@ Class admin extends base_module
 
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
+		$level = 0;
 		
 		if(isset($_SESSION['level']))
 			$level = $this->check_level_user($_SESSION['pseudo']);
@@ -54,9 +55,9 @@ Class admin extends base_module
 		if($login)
 		{
 			$req_sql = new stdClass();
-			$req_sql->table = 'login';
-			$req_sql->var = "level";
-			$req_sql->where = "login = '".$login."'";
+			$req_sql->table = ['login'];
+			$req_sql->var = ["level"];
+			$req_sql->where = ["login = '".$login."'"];
 			$res_sql = $this->_app->sql->select($req_sql);
 			return $res_sql[0]->level;
 		}

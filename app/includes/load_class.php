@@ -12,44 +12,54 @@ class Autoloader
        switch($class)
        {
             case "_db_connect":
+
                 require("Evengyl/modele/".$class.".class.php");
-                break;
+
+            break;
+
 
             case "all_query":
             case "select":
             case "where":
             case "var_processing":
             case "parse_sql":
-            case "orm":
-            case "modele_sql":
-            case "select_orm":
+            case "parse_table_jointure":
+            case "order_processing":
+            case "limit_processing":
             case "var_processing_select_orm":
-                require("Evengyl/core/".$class.".php");
-                break;
 
-            case strpos($class, "modele_") !== false:
-                if(file_exists($base_dir."/app/modele/modele_object/".$class.".php"))
-                    require($base_dir."/app/modele/modele_object/".$class.".php");
-                break;
+                require("Evengyl/core/".$class.".php");
+
+            break;
 
             case "router":
+
                 require($base_dir."/app/".$class.".php");
-                break;
+
+            break;
+
 
             case "_app":
             case "app_init":                
             case "parser":
             case "parser_translate":
             case "lang_select":
+            case "navigation":
+
                 require($base_dir."/app/includes/".$class.".php");
-                break;
+
+            break;
 
             case strpos($class, "admin_") !== false:
+
                 if(file_exists($base_dir."/app/controller/admin_tool/".$class.".php"))
                     require($base_dir."/app/controller/admin_tool/".$class.".php");
-                break;
+
+            break;
+
 
             default:
+            
                 if(file_exists($base_dir."/app/controller/".$class.'.php'))
                     require($base_dir."/app/controller/".$class.'.php');
                 else

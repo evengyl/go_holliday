@@ -6,10 +6,11 @@ Class breadcrumb extends base_module
 	public function __construct(&$_app)
 	{	
 		$this->_app = $_app;
-		if($this->_app->option_app['view_breadcrumb'])
+		
+		if(!$this->_app->option_app['view_breadcrumb'])
 			return;
+
 		$breadcrumb_brut = [];
-//		$breadcrumb_brut[] = array("__TRANS_accueil__" => "home");
 
 
 		if(isset($this->_app->navigation->_stack_nav))

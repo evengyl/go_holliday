@@ -17,7 +17,7 @@ class parser_translate
 			$res_translate = $this->get_translation();
 
 			foreach($res_translate as $row_translate)
-				$this->page = str_replace($row_translate->name_code, $row_translate->name, $this->page);
+				$this->page = str_replace($row_translate->name_code, $row_translate->{"name_".$this->_app->lang}, $this->page);
 		}
 
 		$this->add_translation_to_bsd();
@@ -29,11 +29,12 @@ class parser_translate
 		foreach($this->_app->translate as $row_translate)
 		{
 			$sql = new stdClass();
-			$sql->table = "translate";
-			$sql->where = "name_code = '".$row_translate."'";
-			$sql->var = "id, name_code";
-			$sql->var_translate = "name";
+			$sql->table = ["translate"];
+			$sql->var = ["id", "name_code"];
+			$sql->var_translate = ["translate" => ["name"]];
+			$sql->where = ["name_code = '".$row_translate."'"];
 			$res_sql = $this->_app->sql->select($sql);
+
 			if(!empty($res_sql))
 				$res_fx[] = $res_sql[0];
 			else
