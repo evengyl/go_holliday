@@ -13,7 +13,7 @@ Class search_type extends base_module
 
 
 		if(isset($this->_app->route['type']))
-			$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->use_module("search_pays")->render_tpl();
+			$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->use_module("search_pays_habitat")->render_tpl();
 		
 		else
 			$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->render_tpl();
