@@ -17,6 +17,7 @@ Class _app
 	public $module_name;
 	public $user = [];
 	public $lang;
+	public $site_name = "Go Hollidays";
 
 	public $time_start;
 	public $time_stop;

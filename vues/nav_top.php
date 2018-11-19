@@ -7,15 +7,16 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="home">
-                <img src="/images/logo.png" alt="Progressus HTML5 template">
+            <a class="navbar-brand" href="/home">
+                <img class="" style="display:inline;" src="/images/logo.png" alt="">
+                <span class="" style="display: inline; margin-top:5px;" class="thin"><?= $_app->site_name; ?></span><br>
             </a>
         </div>
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
                 <li class="<?=($_GET['page'] == 'home')?'active':'' ?>"><a href="/home">__TRANS_accueil__</a></li>
-                <li class="<?=($_GET['page'] == 'reservation')?'active':'' ?>"><a href="/reservation">__TRANS_reservation__</a></li>
+                <li class="<?=($_GET['page'] == 'recherche')?'active':'' ?>"><a href="/recherche">Recherche de vacances</a></li>
                 <li class="<?=($_GET['page'] == 'contact')?'active':'' ?>"><a href="/contact">__TRANS_contact_us__</a></li><?
 
                 if(isset($_SESSION['pseudo']) && $_SESSION['level'] >= 1 && $_app->option_app['app_with_login_option'] == 1)

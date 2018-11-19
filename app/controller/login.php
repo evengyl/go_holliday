@@ -74,9 +74,9 @@ Class login extends base_module
 		    	{	
 		           	$req_sql = new StdClass();
 		           	$req_sql->table = ["login"];
-		           	$req_sql->var = ["login", "password", "level", "last_connect"];
-		           	$req_sql->where = ["login ='".$pseudo."'"];
-					$res_fx = $this->_app->sql->select($req_sql);
+		           	$req_sql->var = ["id", "login", "password", "level", "last_connect"];
+		           	$req_sql->where = ["login = '".$pseudo."'"];
+					$res_fx = $this->_app->sql->select($req_sql,1);
 
 		            if(empty($res_fx))
 		            {

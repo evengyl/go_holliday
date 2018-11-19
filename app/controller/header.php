@@ -9,7 +9,4 @@ Class header extends base_module
 
 		$this->get_html_tpl = $this->render_tpl();
 	}
-
 }
-
-

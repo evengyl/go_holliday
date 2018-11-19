@@ -11,7 +11,9 @@
 				<div class="panel-body">
 					<h3 class="thin text-center">Attention cette page n'existe pas</h3>
 					<p class="text-center text-muted">
-						<?= $_SESSION['error_admin'] ?><br>
+						<?=(isset($_SESSION['error_admin']))?$_SESSION['error_admin']:''; ?><br>
+						<?=(isset($error_code))?$error_code:''; ?>
+						<?=(isset($error_message))?$error_message:''; ?>
 						Retourner à <a href="/home">l'accueil</a>.
 					</p>
 					<hr>

@@ -13,8 +13,11 @@ Class admin extends base_module
 		
 		if(isset($_SESSION['level']))
 			$level = $this->check_level_user($_SESSION['pseudo']);
-		else 
+		else {
+
 			$this->get_html_tpl = $this->use_template('login')->render_tpl();
+			return;
+		}
 
 		//on est admin
 		if($level >= 3)

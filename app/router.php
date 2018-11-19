@@ -8,9 +8,19 @@ Class router
 		$this->_app = $_app;
 		$this->_app->route = $route;
 
+		
+
 		if(isset($this->_app->route['page']))
 		{
-			switch($this->_app->route['page'])
+			$page = $this->_app->route['page'];
+
+			if(isset($this->_app->route['type']))
+				$type = $this->_app->route['type'];
+
+			if(isset($this->_app->route['value']))
+				$value = $this->_app->route['value'];
+
+			switch($page)
 			{
 				case 'home':
 					$this->assign_mod('home');
@@ -45,13 +55,13 @@ Class router
 					$this->assign_mod('find_us');
 					break;
 				
-				case 'reservation':
-						$this->assign_mod('reservation');
+				case 'recherche':
+						$this->assign_mod('search_type');
 					break;
 
 				default:
 					$this->assign_mod('404');
-					unset($this->_app->route['page']);
+					unset($page);
 			}	
 		}
 	}

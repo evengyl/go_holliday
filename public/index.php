@@ -12,6 +12,7 @@ require $_SESSION["base_dir"]."/app/includes/app_min_load.php";
 if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
+
 ob_start();?>
 	<html lang="Fr-be">
 		<head>

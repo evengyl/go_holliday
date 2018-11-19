@@ -1,37 +1,34 @@
 <div class="container">
-	<h2 class="text-center top-space">Frequently Asked Questions</h2>
+	<h2 class="text-center top-space">Questions fréquements posée</h2>
 	<br>
 
 	<div class="row">
 		<div class="col-sm-6">
-			<h3>Which code editor would you recommend?</h3>
-			<p>I'd highly recommend you <a href="http://www.sublimetext.com/">Sublime Text</a> - a free to try text editor which I'm using daily. Awesome tool!</p>
+			<h3>Est-ce que <?= $_app->site_name; ?> deviendra payant ?</h3>
+			<p><?= $_app->site_name; ?> ne sera jamais payant pour les utilisateurs cherchant un lieu de vacances, il deviendra payant pour les annonceurs uniquement après 6 mois d'essais
+			gratuit, tous les tarifs sont disponibles si vous êtes annonceurs ou que vous souhaitez créer un compte annonceurs</p>
 		</div>
 		<div class="col-sm-6">
-			<h3>Nice header. Where do I find more images like that one?</h3>
-			<p>
-				Well, there are thousands of stock art galleries, but personally, 
-				I prefer to use photos from these sites: <a href="http://unsplash.com">Unsplash.com</a> 
-				and <a href="http://www.flickr.com/creativecommons/by-2.0/tags/">Flickr - Creative Commons</a></p>
+			<h3>A qui s'adresse <?= $_app->site_name; ?> ?</h3>
+			<p><?= $_app->site_name; ?> s'adresse à toutes les personnes qui cherche des vacances avec des envies particulière sans devoir chercher sur des centaines de sites ou d'annonces,
+			pas toujours très clair, ou l'on ne sais même pas sur qui l'ont vas tomber ni sur un choix complet de lieux et de références</p>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6">
-			<h3>Can I use it to build a site for my client?</h3>
-			<p>
-				Yes, you can. You may use this template for any purpose, just don't forget about the <a href="http://creativecommons.org/licenses/by/3.0/">license</a>, 
-				which says: "You must give appropriate credit", i.e. you must provide the name of the creator and a link to the original template in your work. 
-			</p>
+			<h3>Je suis propriétaire et je n'arrive pas à loué mon bien de vacances :( que faire ?</h3>
+			<p>Alors <?= $_app->site_name; ?> est fait pour vous !, dès la création de votre compte, vous trouverez un interface simple et complète pour publier une annonce de location,
+			avec vous date, vos prix et tout ce qu'une annoce digne de ce nom dois comporter.</p>
 		</div>
 		<div class="col-sm-6">
-			<h3>Can you customize this template for me?</h3>
-			<p>Yes, I can. Please drop me a line to sergey-at-pozhilov.com and describe your needs in details. Please note, my services are not cheap.</p>
+			<h3>Je cherche des vacances et je n'arrive pas à trouver ce que je veux :( que faire ?</h3>
+			<p>Encore une fois <?= $_app->site_name; ?> est la pour vous, à l'aide de son interface de recherche complète et simple, vous trouverez VOTRE lieu de prédilection selon VOS criètètes !</p>
 		</div>
 	</div>
 
 	<div class="jumbotron top-space">
-		<h4>Dicta, nostrum nemo soluta sapiente sit dolor quae voluptas quidem doloribus recusandae facere magni ullam suscipit sunt atque rerum eaque iusto facilis esse nam veniam incidunt officia perspiciatis at voluptatibus. Libero, aliquid illum possimus numquam fuga.</h4>
- 		<p class="text-right"><a class="btn btn-primary btn-large">Learn more »</a></p>
+		<h4>Si vous avez la moindre question concerant le site, concernant vos attente, si il y a un problème, si vous avez des idées d'amélioration, nous sommes disponible et à votre écoute. Nous tâcherons de vous répondre dans les plus brefs délais</h4>
+ 		<p class="text-right"><a class="btn btn-primary btn-large" href="/contact">Contactez nous</a></p>
 	</div>
 </div>

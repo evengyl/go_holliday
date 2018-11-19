@@ -6,6 +6,6 @@ Class faq extends base_module
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
-		$this->get_html_tpl =  $this->render_tpl();
+		$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->render_tpl();
 	}
 }
