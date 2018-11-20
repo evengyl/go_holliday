@@ -30,43 +30,7 @@ Class admin_unit_test extends base_module
 	$res_sql = $this->_app->sql->select($sql, $return_sql_prepare = 1);
 	affiche_pre($res_sql);
 	//Fin
-/* DOCUMENTATION DU SELECT
 
-TABLE
-		1	$sql->table = ["table_1"]
-	OR
-		2	$sql->table = ["table_1", "table_2", "table_3"]
-
-VAR 
-		1	$sql->var = ["id", "var_1", "var_2"]
-	OR
-		2	$sql->var = [
-							"table_1" => ["id", "var_1", "var_2"]
-							"table_2" => ["id_table_1_join", "id", "var_1", "var_2"]
-							"table_3" => ["id_table_2_join", "id", "var_1", "var_2"]
-						]
-	OR 
-		3 	$sql->var = ['*']
-
-VAR_TRANSLATE
-		1	$sql->var_translate = ["table" => ["var_translate_without_fr_rn_nl"]];
-
-WHERE
-		1	$sql->where = "var = 'tata'"
-	OR
-		2	$sql->where = "var_table_1 = 'tata'"
-	OR
-		3   $sql->where = ["var_table_1 = 'tata'", "OR/AND", "var2_table_1 = 'tata'"] //attention que le symbole OR ou AND doit toujours être placé en position pair
-	OR
-		4 	$sql->where = ["var_table_1", "LIKE NOT LIKE", "tata"] //attention que le symbole LIKE/NOT LIKE doit toujours être placé en position pair
-
-ORDER
-		1	$sql->order = ["var" => "DESC/ASC"]
-
-LIMIT
-		1   $sql->limit = "number_limit"
-
-*/
 
 
 

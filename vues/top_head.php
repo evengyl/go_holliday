@@ -16,3 +16,4 @@
 
 <link rel="stylesheet" href="/css/bootstrap-theme.css" media="screen" >
 <link rel="stylesheet/less" type="text/css" href="/css/main.less" >
+<script src="/js/jquery-3.3.1.js"></script>

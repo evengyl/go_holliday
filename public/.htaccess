@@ -7,4 +7,4 @@ RewriteRule ^([a-z_]+)$ ?page=$1 [L]
 RewriteRule ^(admin)/([a-z_]+)$ ?page=$1&action=$2 [L]
 
 RewriteRule ^(recherche)/([a-z_]+)$ ?page=$1&type=$2 [L]
-RewriteRule ^(recherche)/([a-z_]+)/([a-z_-]+)$ ?page=$1&type=$2&pays_habitat=$3 [L]
+RewriteRule ^(recherche)/([a-z_]+)/(Selection_destination)$ ?page=$1&type=$2&selection_ok=$3 [L]

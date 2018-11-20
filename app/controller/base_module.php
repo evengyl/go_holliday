@@ -22,36 +22,36 @@ Class base_module
 
 	public function assign_var($var_name , $value)
 	{
-		if(empty($var_name) && !empty($value))
-			$this->var_to_extract[$value] = $value;
-
-		else if(empty($value) && !empty($var_name))
-			$this->var_to_extract[$var_name] = "";
-		else		
-        	$this->var_to_extract[$var_name] = $value;
-        
+    	$this->var_to_extract[$var_name] = $value;
         return $this;
 	}
-
-//partie setter du get_html_tpl
 
 
 	public function render_tpl()
 	{
-		ob_start();
-			if(!empty($this->var_to_extract))
-				extract($this->var_to_extract);
-			
-			$this->set_template_path();	
-			require($this->template_path);
-
-		$get_html_tpl = ob_get_contents();
-			
 		if(!empty($this->module_name_secondary))
-			$get_html_tpl = "__MOD_".$this->module_name_secondary."__";
+		{
+			//si un module secondaire lui est envoyée il sera renvoyer pour l'execution par apres
+			$get_module_name_exec = "__MOD_".$this->module_name_secondary."__";
+			return $get_module_name_exec;
+		}
+		else
+		{
+			ob_start();
 			
-		ob_end_clean();
-		return $get_html_tpl;
+				if(!empty($this->var_to_extract))
+					extract($this->var_to_extract);
+			
+				$this->set_template_path();	
+				require($this->template_path);
+
+			$get_html_tpl = ob_get_contents();
+	
+			ob_end_clean();
+			return $get_html_tpl;
+		}
+			
+		
 	}
 
 	public function use_template($template_name = "")
@@ -65,6 +65,7 @@ Class base_module
 	public function use_module($module_name_secondary = "")
 	{
 		$this->module_name_secondary = $module_name_secondary;
+
 		return $this;
 	}
 
