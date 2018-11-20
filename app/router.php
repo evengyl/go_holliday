@@ -56,7 +56,14 @@ Class router
 					break;
 				
 				case 'recherche':
-						$this->assign_mod('search_type');
+						if(!isset($this->_app->route['type']))
+							$this->assign_mod('search_type');
+
+						else if(isset($this->_app->route['type']))
+							$this->assign_mod('search_pays_habitat');
+
+						else if($this->_app->route['selection_ok'])
+							$this->assign_mod('search_result');
 					break;
 
 				default:
