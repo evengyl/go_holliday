@@ -23,10 +23,11 @@
         <div class="caption">
             <h4>Type de vacances : </h4>
             <p class="text-muted"><?= $array_type[0]->name; ?></p>
-            <p><a href="/<?= $array_type[0]->url; ?>" class="btn btn-default" role="button">Je veux changer</a></p>
+            <p><a href="/recherche" class="btn btn-default" role="button">Je veux changer</a></p>
         </div>
     </div>
 </div>
+
 
 <div class="container text-center">
     <div class="row">
