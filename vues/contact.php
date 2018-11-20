@@ -5,37 +5,32 @@
 			<header class="page-header">
 				<h1 class="page-title">__TRANS_contact_us__</h1>
 			</header>
-			
-			<p>
-				We’d love to hear from you. Interested in working together? Fill out the form below with some info about your project and I will get back to you as soon as I can. Please allow a couple days for me to respond.
-			</p>
-			<br>
-				<form action="#" method="post" >
-					<div class="row">
-						<div class="col-sm-4">
-							<input class="form-control" name="name" type="text" required placeholder="Votre Nom et/ou Prénom">
-						</div>
-						<div class="col-sm-4">
-							<input class="form-control" name="email" type="email" required placeholder="Adresse Email (pas de pub)">
-						</div>
-						<div class="col-sm-4">
-							<input class="form-control" name="phone" type="text" Reqired placeholder="Téléphone (pas de pub)">
-						</div>
+			<form action="#" method="post" >
+				<div class="row">
+					<div class="col-sm-4">
+						<input class="form-control" name="name" type="text" required placeholder="Votre Nom et/ou Prénom">
 					</div>
-					<br>
-					<div class="row">
-						<div class="col-sm-12">
-							<textarea placeholder="Votre message / demande" required name="text" type="text" class="form-control" rows="9"></textarea>
-						</div>
+					<div class="col-sm-4">
+						<input class="form-control" name="email" type="email" required placeholder="Adresse Email (pas de pub)">
 					</div>
-					<br>
-					<div class="row">
-						<div class="col-sm-12 text-right">
-							<input type="hidden" name="return_post_contact" value="1">
-							<input class="btn btn-action" type="submit" value="__TRANS_envoyer__">
-						</div>
+					<div class="col-sm-4">
+						<input class="form-control" name="phone" type="text" Reqired placeholder="Téléphone (pas de pub)">
 					</div>
-				</form>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-12">
+						<textarea placeholder="Votre message / demande" required name="text" type="text" class="form-control" rows="9"></textarea>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-12 text-right">
+						<input type="hidden" name="return_post_contact" value="1">
+						<input class="btn btn-action" type="submit" value="__TRANS_envoyer__">
+					</div>
+				</div>
+			</form>
 
 		</article>
 
@@ -43,12 +38,12 @@
 			<div class="widget">
 				<h4>__TRANS__contact_detail__</h4>
 				<address>
-					<a href="mailto:perroquet484@matedex.be">perroquet484@gmail.com</a><br>
+					<a href="mailto:perroquet484@matedex.be"><?= Config::$mail; ?></a><br>
 					<br>
-					<b>__TRANS_address_title__ : </b>Bungalow numéro 484,<br> Camping Perroquet<br>
-					<b>Rue des dunes à 59123 Bray-Dunes</b><br><br>
-					<b>__TRANS_tel__ : </b> +32 (0)497 31 25 23<br>
-					<b>__TRANS_tel_1__ : </b> +32 (0)468 36 17 82<br>
+					<p class="text-muted">La page de contact est fait pour vous permettre de contacter le services clients et maintenances de <?= $_app->site_name; ?></p>
+					<hr>
+					<p class="text-muted">Pour toutes question relative à une publications d'annonces ou un prix ou même un soucis avec une annonces en générale, préféré d'abbord passer par le service qu'il vous est fourni sur l'annonce, ce qui contact directement par message le propriétaire de l'annonce</p>
+					<hr>
 				</address>
 			</div>
 		</aside>

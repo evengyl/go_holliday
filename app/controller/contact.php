@@ -26,7 +26,7 @@ Class contact extends base_module
 			}
 		}
 
-		$this->get_html_tpl = $this->render_tpl();
+		$this->get_html_tpl = $this->assign_var("_app", $this->_app)->render_tpl();
 	}
 
 }

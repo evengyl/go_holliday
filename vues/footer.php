@@ -61,7 +61,7 @@
 				<div class="col-lg-6 widget">
 					<div class="widget-body">
 						<p class="text-right">
-							<p>Créé et maintenu par Evengyl, Holliday Simply Online© 2018 - <?php echo date('Y'); ?> __TRANS_footer_price__.</p>
+							<p><?php echo Config::$footer_text." - ".date('Y'); ?> __TRANS_footer_price__.</p>
 						</p>
 					</div>
 				</div>
