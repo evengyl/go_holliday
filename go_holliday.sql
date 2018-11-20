@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.35-MariaDB, for Win32 (AMD64)
 --
--- Host: localhost    Database: go_holliday
+-- Host: 127.0.0.1    Database: go_holliday
 -- ------------------------------------------------------
 -- Server version	10.1.35-MariaDB
 
@@ -14,6 +14,33 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `habitat`
+--
+
+DROP TABLE IF EXISTS `habitat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `habitat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `url` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habitat`
+--
+
+LOCK TABLES `habitat` WRITE;
+/*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
+INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : ','caravanes'),(2,'Bungalows','bungalow.jpg','Bungalow : ','bungalows'),(3,'Appartements','appartement.jpg','Appartements : ','appartements'),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : ','maisons_d_hotes'),(5,'Gites','gite.jpg','Gites : ','gites'),(6,'Villa','gite.jpg','Villa : ','villa');
+/*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `login`
@@ -71,84 +98,31 @@ INSERT INTO `option_app` VALUES (1,'view_time_exec_page',1,'Voir le temps d\'exe
 UNLOCK TABLES;
 
 --
--- Table structure for table `test_enfant`
+-- Table structure for table `pays`
 --
 
-DROP TABLE IF EXISTS `test_enfant`;
+DROP TABLE IF EXISTS `pays`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `test_enfant` (
+CREATE TABLE `pays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `enfant_name_1` varchar(255) NOT NULL,
-  `enfant_name_2` varchar(255) NOT NULL,
-  `enfant_name_3` varchar(255) NOT NULL,
-  `id_famille` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `url` varchar(20) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `actif` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `test_enfant`
+-- Dumping data for table `pays`
 --
 
-LOCK TABLES `test_enfant` WRITE;
-/*!40000 ALTER TABLE `test_enfant` DISABLE KEYS */;
-INSERT INTO `test_enfant` VALUES (1,'evan','leano','sean',1),(2,'titi','gros mnit','eliot',4),(3,'nico','phil','marc',3),(4,'leo','elsa','nathalie',2);
-/*!40000 ALTER TABLE `test_enfant` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `test_famille`
---
-
-DROP TABLE IF EXISTS `test_famille`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `test_famille` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `coord` varchar(255) NOT NULL,
-  `mail` varchar(255) NOT NULL,
-  `id_pays` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `test_famille`
---
-
-LOCK TABLES `test_famille` WRITE;
-/*!40000 ALTER TABLE `test_famille` DISABLE KEYS */;
-INSERT INTO `test_famille` VALUES (1,'Loic','75','tata@gmail.com',1),(2,'sarah','65','tata@gmail.com',1),(3,'louis','25','tata@gmail.com',2),(4,'frank','46','tata@gmail.com',2);
-/*!40000 ALTER TABLE `test_famille` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `test_pays`
---
-
-DROP TABLE IF EXISTS `test_pays`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `test_pays` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pays` varchar(255) NOT NULL,
-  `name_fr` varchar(40) NOT NULL,
-  `name_en` varchar(40) NOT NULL,
-  `name_nl` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `test_pays`
---
-
-LOCK TABLES `test_pays` WRITE;
-/*!40000 ALTER TABLE `test_pays` DISABLE KEYS */;
-INSERT INTO `test_pays` VALUES (1,'Belgique','Belgique_fr','Belgique_en','Belgique_nl'),(2,'France','France_fr','France_en','France_nl');
-/*!40000 ALTER TABLE `test_pays` ENABLE KEYS */;
+LOCK TABLES `pays` WRITE;
+/*!40000 ALTER TABLE `pays` DISABLE KEYS */;
+INSERT INTO `pays` VALUES (1,'Belgique','belgique','drapeau_belgique.jpg','La Belgique : ',1),(2,'France','france','drapeau_france.jpg','La France : ',1),(3,'Italie','itale','drapeau_italie.jpg','L\'Italie : ',1),(4,'Espagne','espagne','drapeau_espagne.jpg','L\'Espagne : ',1),(5,'Pays-Bas','pays_bas','drapeau_pays_bas.jpg','Les Pays-Bas : ',0);
+/*!40000 ALTER TABLE `pays` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -174,8 +148,41 @@ CREATE TABLE `translate` (
 
 LOCK TABLES `translate` WRITE;
 /*!40000 ALTER TABLE `translate` DISABLE KEYS */;
-INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tout les prix sont indicatif et taxe de séjour non comprise','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone de la maintenance','','','__TRANS_tel_mainteance__'),(16,'Téléphone commercial','','','__TRANS_tel_commercial__'),(17,'','','','__TRANS_204__'),(18,'','','','__TRANS_error_explain__'),(19,'','','','__TRANS_horaire__'),(20,'','','','__TRANS_horaire_list__');
+INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tous les prix sont TVAC','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone de la maintenance','','','__TRANS_tel_mainteance__'),(16,'Téléphone commercial','','','__TRANS_tel_commercial__'),(17,'','','','__TRANS_204__'),(18,'','','','__TRANS_error_explain__'),(19,'','','','__TRANS_horaire__'),(20,'','','','__TRANS_horaire_list__');
 /*!40000 ALTER TABLE `translate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `type_vacances`
+--
+
+DROP TABLE IF EXISTS `type_vacances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `type_vacances` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `icon_1` varchar(100) NOT NULL,
+  `icon_2` varchar(100) NOT NULL,
+  `icon_3` varchar(100) NOT NULL,
+  `icon_4` varchar(100) NOT NULL,
+  `icon_5` varchar(100) NOT NULL,
+  `url` varchar(50) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `type_vacances`
+--
+
+LOCK TABLES `type_vacances` WRITE;
+/*!40000 ALTER TABLE `type_vacances` DISABLE KEYS */;
+INSERT INTO `type_vacances` VALUES (1,'Couples','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','','','couples','couple.jpg','Vacances de couples','Lieux de vacances plus orientées vers les promenades en amoureux, les bon plans restaurant et paysage romantique ect...'),(2,'Familles','<i style=\"font-size:56px; color:#ffaeae;\" class=\"fas fa-female\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:56px; color:#9393fb;\" class=\"fas fa-male\"></i>','familles','famille.jpg','Vacances en familles','Lieux de vacances orientées pour les vacances en familles avec les banbins, la recherche se base sur les activités faites pour les enfants ect...'),(3,'Aventures','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-hiking\"></i>','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-mountain\"></i>','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-campground\"></i>','','','aventures','aventure.jpg','Le pleins d\'aventures','Lieux de vacances plus orientées pour les rendonnées, les lieux à visités, une richesse de la régions ect...');
+/*!40000 ALTER TABLE `type_vacances` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -187,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-19 16:54:45
+-- Dump completed on 2018-11-20 16:04:17
