@@ -31,7 +31,7 @@
                     <div class="caption">
                         <h3><?= $row_type->title; ?></h3>(1200 annonces)
                         <p class="text-muted"><?= $row_type->text; ?></p>
-                        <p><a href="/recherche/<?= $row_type->url; ?>" class="btn btn-primary" role="button">Je choisi les vacances "<?= $row_type->name; ?>"</a></p>
+                        <p><a href="/Recherche/<?= $row_type->name; ?>" class="btn btn-primary" role="button">Je choisi les vacances "<?= $row_type->name; ?>"</a></p>
                     </div>
                 </div>
             </div><?

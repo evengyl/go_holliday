@@ -55,14 +55,14 @@ Class router
 					$this->assign_mod('find_us');
 					break;
 				
-				case 'recherche':
+				case 'Recherche':
 						if(!isset($this->_app->route['type']))
 							$this->assign_mod('search_type');
 
-						else if(isset($this->_app->route['type']))
+						else if(isset($this->_app->route['type']) && !isset($this->_app->route['selection_ok']))
 							$this->assign_mod('search_pays_habitat');
 
-						else if($this->_app->route['selection_ok'])
+						else if(isset($this->_app->route['selection_ok']))
 							$this->assign_mod('search_result');
 					break;
 
