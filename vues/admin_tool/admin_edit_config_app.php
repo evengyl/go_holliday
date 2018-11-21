@@ -1,10 +1,10 @@
-
-
-
 <header id="head" class="secondary"></header>
+
 <div class="container text-center">
 	<br> <br>
 	<h2 class="thin">Administration des option de l'APP</h2>
+	<a class="btn btn-default" href="/admin">Retour à l'administration</a>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">

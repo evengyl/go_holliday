@@ -27,7 +27,6 @@ CREATE TABLE `habitat` (
   `name` varchar(20) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
-  `url` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +37,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : ','caravanes'),(2,'Bungalows','bungalow.jpg','Bungalow : ','bungalows'),(3,'Appartements','appartement.jpg','Appartements : ','appartements'),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : ','maisons_d_hotes'),(5,'Gites','gite.jpg','Gites : ','gites'),(6,'Villa','gite.jpg','Villa : ','villa');
+INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : '),(2,'Bungalows','bungalow.jpg','Bungalow : '),(3,'Appartements','appartement.jpg','Appartements : '),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : '),(5,'Gites','gite.jpg','Gites : '),(6,'Villa','gite.jpg','Villa : ');
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +106,6 @@ DROP TABLE IF EXISTS `pays`;
 CREATE TABLE `pays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `url` varchar(20) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
   `actif` tinyint(1) NOT NULL,
@@ -121,7 +119,7 @@ CREATE TABLE `pays` (
 
 LOCK TABLES `pays` WRITE;
 /*!40000 ALTER TABLE `pays` DISABLE KEYS */;
-INSERT INTO `pays` VALUES (1,'Belgique','belgique','drapeau_belgique.jpg','La Belgique : ',1),(2,'France','france','drapeau_france.jpg','La France : ',1),(3,'Italie','itale','drapeau_italie.jpg','L\'Italie : ',1),(4,'Espagne','espagne','drapeau_espagne.jpg','L\'Espagne : ',1),(5,'Pays-Bas','pays_bas','drapeau_pays_bas.jpg','Les Pays-Bas : ',0);
+INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : ',1),(2,'France','drapeau_france.jpg','La France : ',1),(3,'Italie','drapeau_italie.jpg','L\'Italie : ',1),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : ',1),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ',0);
 /*!40000 ALTER TABLE `pays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-20 16:04:17
+-- Dump completed on 2018-11-21 16:43:14
