@@ -26,7 +26,7 @@ CREATE TABLE `annonces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_pays` int(11) NOT NULL,
   `id_habitat` int(11) NOT NULL,
-  `id_type` int(11) NOT NULL,
+  `id_type_vacances` int(11) NOT NULL,
   `id_proprio` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -249,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 16:37:47
+-- Dump completed on 2018-11-22 17:00:38
