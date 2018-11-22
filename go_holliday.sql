@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `annonces`
+--
+
+DROP TABLE IF EXISTS `annonces`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonces` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pays` int(11) NOT NULL,
+  `id_habitat` int(11) NOT NULL,
+  `id_type` int(11) NOT NULL,
+  `id_proprio` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonces`
+--
+
+LOCK TABLES `annonces` WRITE;
+/*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
+INSERT INTO `annonces` VALUES (1,1,2,3,0),(2,1,4,1,0),(3,4,1,1,0);
+/*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `habitat`
 --
 
@@ -124,6 +151,36 @@ INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : ',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `proprio`
+--
+
+DROP TABLE IF EXISTS `proprio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proprio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `age` varchar(4) NOT NULL,
+  `mail` varchar(50) NOT NULL,
+  `tel` varchar(20) NOT NULL,
+  `address_rue` varchar(100) NOT NULL,
+  `address_localite` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proprio`
+--
+
+LOCK TABLES `proprio` WRITE;
+/*!40000 ALTER TABLE `proprio` DISABLE KEYS */;
+INSERT INTO `proprio` VALUES (1,'Loïc','Baudoux','27','baudouxloic@gmail.com','0497312523','jean jaurès','labuissiere');
+/*!40000 ALTER TABLE `proprio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `translate`
 --
 
@@ -192,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-21 16:43:14
+-- Dump completed on 2018-11-22 16:37:47
