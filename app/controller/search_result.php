@@ -58,13 +58,13 @@ Class search_result extends base_module
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ["annonces", "pays", "habitat", "proprio", "type_vacances"];
 		$sql_annonce->var = [
-				"annonces" => ["id", "id_pays", "id_habitat", "id_type_vacances", "id_proprio"],
+				"annonces" => ["id", "id_pays", "id_habitat", "id_type_vacances", "id_proprio", "active"],
 				"pays" => ["id", "name AS name_pays", "actif"],
 				"habitat" => ["id", "name AS name_habitat"],
 				"proprio" => ["id", "name AS name_proprio"],
 				"type_vacances" => ["id", "name AS name_type_vacances"]
 			];
-		$sql_annonce->where = "id_pays IN " . $str_pays_id . " AND id_habitat IN " . $str_habitat_id . " AND id_type_vacances = '".$type_id."'";
+		$sql_annonce->where = ["id_pays IN " . $str_pays_id, "AND",  "id_habitat IN " . $str_habitat_id, "AND", "id_type_vacances = '".$type_id."'", "AND", "active = '1'"];
 
 		affiche_pre($sql_annonce);
 		$res_sql = $this->_app->sql->select($sql_annonce,1);
