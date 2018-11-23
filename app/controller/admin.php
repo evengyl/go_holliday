@@ -11,13 +11,7 @@ Class admin extends base_module
 
 		$level = 0;
 		
-		if(isset($_SESSION['level']))
-			$level = $this->check_level_user($_SESSION['pseudo']);
-		else {
-
-			$this->get_html_tpl = $this->use_template('login')->render_tpl();
-			return;
-		}
+		$level = $this->check_level_user($_SESSION['pseudo']);
 
 		//on est admin
 		if($level >= 3)

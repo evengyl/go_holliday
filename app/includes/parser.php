@@ -136,7 +136,7 @@ class parser
 				$module = $this->test_module_exist($module_name);
 			}
 			catch(Exception $e){
-				$module = new error_module($this->_app, $e->getMessage(), '204');
+				$module = new module_404($this->_app, $e->getMessage(), '204');
 			}
 			
 
