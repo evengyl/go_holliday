@@ -12,6 +12,7 @@ Class search_type extends base_module
 
 
 		$array_type = $this->get_list_type();
+		$array_type = $this->get_count_annonces_by_type($array_type);
 
 		$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->assign_var("array_type", $array_type)->render_tpl();
 	}
@@ -22,5 +23,20 @@ Class search_type extends base_module
 		$sql_type->table = ["type_vacances"];
 		$sql_type->var = ["*"];
 		return $this->_app->sql->select($sql_type);
+	}
+
+	private function get_count_annonces_by_type($array_type)
+	{
+		$var = 'COUNT(id)';
+		foreach($array_type as $key => $type)
+		{
+			$sql_count_annonce_by_type = new stdClass();
+			$sql_count_annonce_by_type->table = ["annonces"];
+			$sql_count_annonce_by_type->var = $var;
+			$sql_count_annonce_by_type->where = ["id_type_vacances = '". $type->id ."'"];
+			$res_sql =  $this->_app->sql->select($sql_count_annonce_by_type);
+			$array_type[$key]->nb_annonces = $res_sql[0]->$var;
+		}
+		return $array_type;
 	}
 }

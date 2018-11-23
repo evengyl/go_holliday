@@ -29,7 +29,7 @@
                     <hr>
                     <img src="/images/categories/<?= $row_type->img; ?>" class="img-responsive" alt="<?= $row_type->name; ?>">
                     <div class="caption">
-                        <h3><?= $row_type->title; ?></h3>(1200 annonces)
+                        <h3><?= $row_type->title; ?></h3>(<?= $row_type->nb_annonces; ?> Annonces)
                         <p class="text-muted"><?= $row_type->text; ?></p>
                         <p><a href="/Recherche/<?= $row_type->name; ?>" class="btn btn-primary" role="button">Je choisi les vacances "<?= $row_type->name; ?>"</a></p>
                     </div>
