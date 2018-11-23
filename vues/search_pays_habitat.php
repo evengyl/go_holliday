@@ -50,7 +50,7 @@
                         <img src="/images/drapeaux/<?= $row_pays->img; ?>" class="img-responsive" style="max-height:100px;" alt="<?= $row_pays->name; ?>">
                         <div class="caption">
                             <h3><?= $row_pays->name; ?></h3>
-                            (1500 annonces)
+                            (<?= $row_pays->nb_annonces ?> Annonces)
                             <p class="text-muted"><?= $row_pays->text; ?></p>
                             <a data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name; ?>" class="btn btn-primary">Je sélectionne</a>
                         </div>
@@ -77,7 +77,8 @@
                             <hr>
                             <img src="/images/habitats/<?= $row_habitat->img; ?>" class="img-responsive" alt="<?= $row_habitat->name; ?>">
                             <div class="caption">
-                                <h3><?= $row_habitat->name; ?></h3>(1200 annonces)
+                                <h3><?= $row_habitat->name; ?></h3>
+                                (<?= $row_habitat->nb_annonces ?> Annonces)
                                 <p class="text-muted"><?= $row_habitat->text; ?></p>
                                 <a data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->name; ?>" class="btn btn-primary">Je sélectionne</a>
                             </div>
