@@ -98,9 +98,6 @@
     </div>
 </form>
 <script>
-    //*quand on clique sur un des élement avec data-id et data-name, l'ajouter dans la list sur le coté, comme selection, changer le bouton en j'ai choisi au lieu de je sélectionne,
-    //ensuite changer la couleur du bouton, et permettre de recliqué dessus pour enelver de la liste
-    //le script suivant aura cette liste sur le coté comme POST donc ne pas oublier de générer le form a chauqe ajout de selections
     $(document).ready(function()
     {
         var i = 0;
@@ -112,7 +109,8 @@
                 //on receuille les infos utile pour l'ajout dans le left caption
                 var img = '<img class="small_img" src="'+ $(this).parent().parent().find('img').attr('src') +'">';
                 var text = '<p class="text-muted">'+ $(this).attr("data-name") +'</p>';
-                var form_input = '<input name="'+ $(this).attr("data-type") +'[]" value="'+$(this).attr("data-id")+'" type="hidden">';
+                var form_input_id = '<input name="'+ $(this).attr("data-type") +'_id[]" value="'+$(this).attr("data-id")+'" type="hidden">';
+                var form_input_name = '<input name="'+ $(this).attr("data-type") +'_name[]" value="'+$(this).attr("data-name")+'" type="hidden">';
 
                 //on clone le caption vide pour le remplir et l'ajouter
                 var clone_caption = $("div.clone_caption").clone();
@@ -121,9 +119,9 @@
 
                 // on différencie le stype de caption a ajouter
                 if($(this).attr("data-type") == "pays")
-                    clone_caption.find("h4").text("Pays choisi : ").after(text).after(img).after(form_input);
+                    clone_caption.find("h4").text("Pays choisi : ").after(text).after(img).after(form_input_id).after(form_input_name);
                 else if($(this).attr("data-type") == "habitat")
-                    clone_caption.find("h4").text("Habitat choisi : ").after(text).after(img).after(form_input);
+                    clone_caption.find("h4").text("Habitat choisi : ").after(text).after(img).after(form_input_id).after(form_input_name);
 
                 //on ajoute le catpion créer et on le show
                 $("div.asset_left").append(clone_caption);

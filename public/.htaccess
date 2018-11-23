@@ -8,3 +8,4 @@ RewriteRule ^(admin)/([a-z_]+)$ ?page=$1&action=$2 [L]
 
 RewriteRule ^(Recherche)/([a-zA-Z_]+)$ ?page=$1&type=$2 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)$ ?page=$1&type=$2&selection_ok=$3 [L]
+RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)/([0-9])+$ ?page=$1&type=$2&selection_ok=$3&id_annonce=$4 [L]

@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.35-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: go_holliday
 -- ------------------------------------------------------
--- Server version	10.1.36-MariaDB
+-- Server version	10.1.35-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,9 +28,11 @@ CREATE TABLE `annonces` (
   `id_habitat` int(11) NOT NULL,
   `id_type_vacances` int(11) NOT NULL,
   `id_proprio` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `lieu` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,8 +41,35 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (1,1,1,1,1,1),(2,2,1,1,1,1),(3,3,1,1,1,1),(4,4,1,1,1,1),(5,1,1,1,1,1),(6,2,1,1,1,1),(7,3,1,1,1,1),(8,4,1,1,1,1);
+INSERT INTO `annonces` VALUES (1,1,1,1,1,'Bord de mer tatata','Mexico',1),(2,2,1,1,1,'Bord de mer tatata','Mexico',1),(3,3,1,1,1,'Bord de mer tatata','Mexico',1),(4,4,1,1,1,'Bord de mer tatata','Mexico',1),(5,1,1,1,1,'Bord de mer tatata','Mexico',1),(6,2,1,1,1,'Bord de mer tatata','Mexico',1),(7,3,1,1,1,'Bord de mer tatata','Mexico',1),(8,4,1,1,1,'Bord de mer tatata','Mexico',1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `date_annonces`
+--
+
+DROP TABLE IF EXISTS `date_annonces`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `date_annonces` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_annonces` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `prix` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `date_annonces`
+--
+
+LOCK TABLES `date_annonces` WRITE;
+/*!40000 ALTER TABLE `date_annonces` DISABLE KEYS */;
+INSERT INTO `date_annonces` VALUES (1,1,'2018-11-23','2018-11-30',250),(2,2,'2018-11-01','2018-11-20',300),(3,3,'2018-11-11','2018-11-15',350),(4,3,'2018-11-13','2018-11-14',400),(5,4,'2018-11-23','2018-11-30',250),(6,4,'2018-11-01','2018-11-20',300),(7,3,'2018-11-11','2018-11-15',350),(8,4,'2018-11-13','2018-11-14',400),(9,5,'2018-11-23','2018-11-30',250),(10,6,'2018-11-01','2018-11-20',300),(11,7,'2018-11-11','2018-11-15',350),(12,8,'2018-11-13','2018-11-14',400),(13,1,'2018-11-23','2018-11-30',250),(14,1,'2018-11-01','2018-11-20',300),(15,1,'2018-11-11','2018-11-15',350),(16,2,'2018-11-13','2018-11-14',400);
+/*!40000 ALTER TABLE `date_annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -136,7 +165,6 @@ CREATE TABLE `pays` (
   `name` varchar(20) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
-  `actif` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -147,7 +175,7 @@ CREATE TABLE `pays` (
 
 LOCK TABLES `pays` WRITE;
 /*!40000 ALTER TABLE `pays` DISABLE KEYS */;
-INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : ',1),(2,'France','drapeau_france.jpg','La France : ',1),(3,'Italie','drapeau_italie.jpg','L\'Italie : ',1),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : ',1),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ',0);
+INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'France','drapeau_france.jpg','La France : '),(3,'Italie','drapeau_italie.jpg','L\'Italie : '),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ');
 /*!40000 ALTER TABLE `pays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +195,7 @@ CREATE TABLE `proprio` (
   `tel` varchar(20) NOT NULL,
   `address_rue` varchar(100) NOT NULL,
   `address_localite` varchar(60) NOT NULL,
+  `genre` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,7 +206,7 @@ CREATE TABLE `proprio` (
 
 LOCK TABLES `proprio` WRITE;
 /*!40000 ALTER TABLE `proprio` DISABLE KEYS */;
-INSERT INTO `proprio` VALUES (1,'Loïc','Baudoux','27','baudouxloic@gmail.com','0497312523','jean jaurès','labuissiere');
+INSERT INTO `proprio` VALUES (1,'Loïc','Baudoux','27','baudouxloic@gmail.com','0497312523','jean jaurès','labuissiere','Monsieur');
 /*!40000 ALTER TABLE `proprio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-22 19:16:11
+-- Dump completed on 2018-11-23 11:44:49

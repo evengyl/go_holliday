@@ -1,5 +1,5 @@
 
-<header id="head" style="background:#181015 url(<?= $slides; ?>) no-repeat;">
+<header id="head" style="background:#181015 url(<?= $slides; ?>) no-repeat center;">
 	<div class="container">
 		<div class="row">
 			<h1 class="lead">Bienvenue sur <?= $_app->site_name; ?></h1>

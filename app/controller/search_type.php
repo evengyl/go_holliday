@@ -21,7 +21,6 @@ Class search_type extends base_module
 		$sql_type = new stdClass();
 		$sql_type->table = ["type_vacances"];
 		$sql_type->var = ["*"];
-		$sql_type->where = ["1"];
 		return $this->_app->sql->select($sql_type);
 	}
 }

@@ -30,7 +30,6 @@ Class search_pays_habitat extends base_module
 		$sql_pays = new stdClass();
 		$sql_pays->table = ["pays"];
 		$sql_pays->var = ["*"];
-		$sql_pays->where = ["actif = 1"];
 		return $this->_app->sql->select($sql_pays);
 	}
 
@@ -39,7 +38,6 @@ Class search_pays_habitat extends base_module
 		$sql_habitat = new stdClass();
 		$sql_habitat->table = ["habitat"];
 		$sql_habitat->var = ["*"];
-		$sql_habitat->where = ["1"];
 		return $this->_app->sql->select($sql_habitat);	
 	}
 

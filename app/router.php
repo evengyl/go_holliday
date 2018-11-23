@@ -62,8 +62,11 @@ Class router
 						else if(isset($this->_app->route['type']) && !isset($this->_app->route['selection_ok']))
 							$this->assign_mod('search_pays_habitat');
 
-						else if(isset($this->_app->route['selection_ok']))
+						else if(isset($this->_app->route['selection_ok']) && !isset($this->_app->route['id_annonce']))
 							$this->assign_mod('search_result');
+
+						else if(isset($this->_app->route['selection_ok']) && isset($this->_app->route['id_annonce']))
+							$this->assign_mod('home');
 					break;
 
 				default:
