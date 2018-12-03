@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.35-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: go_holliday
 -- ------------------------------------------------------
--- Server version	10.1.35-MariaDB
+-- Server version	10.1.36-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `annonces` (
   `lieu` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : ',1145),(2,'Bungalows','bungalow.jpg','Bungalow : ',1387),(3,'Appartements','appartement.jpg','Appartements : ',1238),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : ',1657),(5,'Gites','gite.jpg','Gites : ',457),(6,'Villa','gite.jpg','Villa : ',4542);
+INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : ',1145),(2,'Bungalows','bungalow.jpg','Bungalow : ',1387),(3,'Appartements','appartement.jpg','Appartements : ',1238),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : ',1657),(5,'Gites','gite.jpg','Gites : ',457),(6,'Villa','villa.jpg','Villa : ',4542);
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,4 +281,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-23 15:00:45
+-- Dump completed on 2018-12-03 21:07:25
