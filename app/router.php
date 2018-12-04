@@ -61,7 +61,7 @@ Class router
 							$this->assign_mod('search_result', '', '', '');
 
 						else if(isset($this->_app->route['selection_ok']) && isset($this->_app->route['id_annonce']))
-							$this->assign_mod('home', '', '', '');
+							$this->assign_mod('annonce', '', '', '');
 					break;
 
 				default:

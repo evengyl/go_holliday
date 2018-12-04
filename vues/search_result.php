@@ -1,14 +1,15 @@
 <header id="head" class="secondary"></header>
 <?
 if(count($annonces) < 1)
-    echo '<div class="container text-center">
-            <div class="row">
-                <h1 class="thin">Oups!... </h1>
-                <h3 class="thin">Aucune annonces ne corresponds exatcement à ce que vous cherchez, essayer peux être d\'élargir vos horizons ?</h3>
-                <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer</a></p>
-            </div>
-        </div>';
-
+{?>
+    <div class="container text-center">
+        <div class="row">
+            <h1 class="thin">Oups!... </h1>
+            <h3 class="thin">Aucune annonces ne corresponds exatcement à ce que vous cherchez, essayer peux être d\'élargir vos horizons ?</h3>
+            <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer</a></p>
+        </div>
+    </div><?
+}
 else
 {?>
      <div class="col-sm-6 col-md-4 col-lg-2">
