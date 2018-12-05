@@ -32,7 +32,7 @@ CREATE TABLE `annonces` (
   `lieu` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (1,1,1,1,1,'Bord de mer tatata','Mexico',1),(2,2,1,1,1,'Bord de mer tatata','Mexico',1),(3,3,1,1,1,'Bord de mer tatata','Mexico',1),(4,4,1,1,1,'Bord de mer tatata','Mexico',1),(5,1,1,1,1,'Bord de mer tatata','Mexico',1),(6,2,1,1,1,'Bord de mer tatata','Mexico',1),(7,3,1,1,1,'Bord de mer tatata','Mexico',1),(8,4,1,1,1,'Bord de mer tatata','Mexico',1);
+INSERT INTO `annonces` VALUES (1,1,1,1,1,'Bord de mer tatata','Mexico',1),(2,2,2,1,1,'Bord de mer tatata','Mexico',1),(3,3,2,1,1,'Bord de mer tatata','Mexico',1),(4,4,1,1,1,'Bord de mer tatata','Mexico',1),(5,1,3,1,1,'Bord de mer tatata','Mexico',1),(6,2,3,1,1,'Bord de mer tatata','Mexico',1),(7,3,4,1,1,'Bord de mer tatata','Mexico',1),(8,4,4,1,1,'Bord de mer tatata','Mexico',1),(9,1,5,2,1,'Bord de mer tatata','Mexico',1),(10,2,5,2,1,'Bord de mer tatata','Mexico',1),(11,3,6,2,1,'Bord de mer tatata','Mexico',1),(12,4,6,2,1,'Bord de mer tatata','Mexico',1),(13,1,1,2,1,'Bord de mer tatata','Mexico',1),(14,2,1,2,1,'Bord de mer tatata','Mexico',1),(15,3,2,2,1,'Bord de mer tatata','Mexico',1),(16,4,2,2,1,'Bord de mer tatata','Mexico',1),(17,1,3,3,1,'Bord de mer tatata','Mexico',1),(18,2,3,3,1,'Bord de mer tatata','Mexico',1),(19,3,4,3,1,'Bord de mer tatata','Mexico',1),(20,4,4,3,1,'Bord de mer tatata','Mexico',1),(21,1,5,3,1,'Bord de mer tatata','Mexico',1),(22,2,5,3,1,'Bord de mer tatata','Mexico',1),(23,3,6,3,1,'Bord de mer tatata','Mexico',1),(24,4,6,3,1,'Bord de mer tatata','Mexico',1),(25,1,1,1,1,'Bord de mer tatata','Mexico',1),(26,2,1,2,1,'Bord de mer tatata','Mexico',1),(27,3,2,3,1,'Bord de mer tatata','Mexico',1),(28,4,2,1,1,'Bord de mer tatata','Mexico',1),(29,1,3,2,1,'Bord de mer tatata','Mexico',1),(30,2,3,3,1,'Bord de mer tatata','Mexico',1),(31,3,4,1,1,'Bord de mer tatata','Mexico',1),(32,4,5,2,1,'Bord de mer tatata','Mexico',1),(33,4,4,3,1,'Bord de mer tatata','Mexico',1),(34,1,5,3,1,'Bord de mer tatata','Mexico',1),(35,2,6,3,1,'Bord de mer tatata','Mexico',1),(36,3,6,3,1,'Bord de mer tatata','Mexico',1),(37,4,1,3,1,'Bord de mer tatata','Mexico',1),(38,1,1,1,1,'Bord de mer tatata','Mexico',1),(39,2,2,2,1,'Bord de mer tatata','Mexico',1),(40,3,2,3,1,'Bord de mer tatata','Mexico',1),(41,4,3,1,1,'Bord de mer tatata','Mexico',1),(42,1,3,2,1,'Bord de mer tatata','Mexico',1),(43,2,4,3,1,'Bord de mer tatata','Mexico',1),(44,3,4,1,1,'Bord de mer tatata','Mexico',1),(45,4,5,2,1,'Bord de mer tatata','Mexico',1),(46,1,5,3,1,'Bord de mer tatata','Mexico',1),(47,2,6,3,1,'Bord de mer tatata','Mexico',1),(48,3,6,3,1,'Bord de mer tatata','Mexico',1),(49,4,1,3,1,'Bord de mer tatata','Mexico',1),(50,1,1,1,1,'Bord de mer tatata','Mexico',1),(51,2,2,2,1,'Bord de mer tatata','Mexico',1),(52,3,2,3,1,'Bord de mer tatata','Mexico',1),(53,4,3,1,1,'Bord de mer tatata','Mexico',1),(54,1,3,2,1,'Bord de mer tatata','Mexico',1),(55,2,4,3,1,'Bord de mer tatata','Mexico',1),(56,3,4,1,1,'Bord de mer tatata','Mexico',1),(57,4,5,2,1,'Bord de mer tatata','Mexico',1),(58,1,5,3,1,'Bord de mer tatata','Mexico',1),(59,2,6,3,1,'Bord de mer tatata','Mexico',1),(60,3,6,3,1,'Bord de mer tatata','Mexico',1),(61,4,1,3,1,'Bord de mer tatata','Mexico',1),(62,1,1,1,1,'Bord de mer tatata','Mexico',1),(63,2,2,2,1,'Bord de mer tatata','Mexico',1),(64,3,2,3,1,'Bord de mer tatata','Mexico',1),(65,4,3,1,1,'Bord de mer tatata','Mexico',1),(66,1,3,2,1,'Bord de mer tatata','Mexico',1),(67,2,4,3,1,'Bord de mer tatata','Mexico',1),(68,3,4,1,1,'Bord de mer tatata','Mexico',1),(69,4,5,2,1,'Bord de mer tatata','Mexico',1),(70,1,5,3,1,'Bord de mer tatata','Mexico',1),(71,2,6,3,1,'Bord de mer tatata','Mexico',1),(72,3,6,3,1,'Bord de mer tatata','Mexico',1),(73,4,1,3,1,'Bord de mer tatata','Mexico',1),(74,1,1,1,1,'Bord de mer tatata','Mexico',1),(75,2,2,2,1,'Bord de mer tatata','Mexico',1),(76,3,2,3,1,'Bord de mer tatata','Mexico',1),(77,4,3,1,1,'Bord de mer tatata','Mexico',1),(78,1,3,2,1,'Bord de mer tatata','Mexico',1),(79,2,4,3,1,'Bord de mer tatata','Mexico',1),(80,3,4,1,1,'Bord de mer tatata','Mexico',1),(81,4,5,2,1,'Bord de mer tatata','Mexico',1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-05 11:52:04
+-- Dump completed on 2018-12-05 13:02:34
