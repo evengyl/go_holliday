@@ -13,10 +13,10 @@ Class search_result extends base_module
 		$pays = array();
 		$habitat = array();
 		$array_type = array();
-		$type = "";
 		$type_id = "";
-		$str_pays = "";
-		$str_habitat = "";
+		$str_pays = "Aucun sélectionné(s)";
+		$str_habitat = "Aucun sélectionné(s)";
+		$str_type = "Aucun type sélectioné";
 		$all = false;
 		
 
@@ -28,8 +28,6 @@ Class search_result extends base_module
 				$str_pays .= $pays_str.', ';
 			$str_pays = substr($str_pays, 0, -2);
 		}
-		else
-			$str_pays = "Aucun sélectionné(s)";
 
 
 		if(isset($_POST['habitat_id']) && isset($_POST['habitat_name']))
@@ -40,19 +38,13 @@ Class search_result extends base_module
 				$str_habitat .= $habitat_str.', ';
 			$str_habitat = substr($str_habitat, 0, -2);
 		}
-		else
-			$str_habitat = "Aucun sélectionné(s)";
 
 
 		if(isset($this->_app->route['all_select'])) //on est face a un click de toute les annonces dispo attention
-		{
-			$str_type = "Aucun type sélectioné";
 			$all = true;
-		}
 		else
 		{
-			$type = $this->_app->route['type'];
-			$array_type = $this->get_infos_type($type);
+			$array_type = $this->get_infos_type($this->_app->route['type']);
 			$type_id = $array_type[0]->id;
 			$str_type = $array_type[0]->name;
 		}
