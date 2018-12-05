@@ -1,30 +1,17 @@
 <header id="head" class="secondary"></header>
-<form action="/Recherche/<?= $selected_type ?>/Selection_destination" method="post">
-     <div class="col-sm-6 col-md-4 col-lg-2 text-center pos_fixed">
-        <br><br><br>
-            <div class="thumbnail asset_left">
-                <div class="caption">
-                    <h4>Type de vacances : </h4>
-                    <?if(isset($array_type[0]->icon_1))
-                        echo $array_type[0]->icon_1."&nbsp;";
-
-                    if(isset($array_type[0]->icon_2))
-                        echo $array_type[0]->icon_2."&nbsp;";
-
-                    if(isset($array_type[0]->icon_3))
-                        echo $array_type[0]->icon_3."&nbsp;";
-
-                    if(isset($array_type[0]->icon_4))
-                        echo $array_type[0]->icon_4."&nbsp;";
-
-                    if(isset($array_type[0]->icon_5))
-                        echo $array_type[0]->icon_5."&nbsp;";?>
-                    <p class="text-muted"><?= $array_type[0]->name; ?></p>
-                </div>
-                 <hr>           
+<form action="/Recherche/<?= $array_type[0]->name ?>/Selection_destination" method="post">
+     <div class="col-sm-6 col-md-4 col-lg-2 text-center pos_fixed_left">
+        <div class="thumbnail asset_left">
+            <div class="caption">
+                <h4>Type de vacances : </h4>
+                <?if(isset($array_type[0]->icon))
+                    echo $array_type[0]->icon;?>
+                    
+                <p class="text-muted"><?= $array_type[0]->name; ?></p>
             </div>
-        
-        <p class="p_fixed"><center><a href="/Recherche" class="btn btn-default" role="button">Je veux changer</a></center></p>
+             <hr>           
+        </div>
+        <p class="p_fixed"><center><a href="/Recherche" class="btn btn-default" role="button" style="padding:10px 10px;">Je veux changer de type de Vacances</a></center></p>
     </div>
 
     <!-- clone -->
@@ -32,6 +19,8 @@
         <h4></h4>
     </div> 
     <!-- end of clone -->
+    <? require($_app->base_path."/vues/asset_right.php"); ?>
+    
 
     <div class="container text-center">
         <div class="row">
@@ -59,6 +48,8 @@
             }?>
         </div>
     </div>
+
+
 
 
     <div class="container text-center">
@@ -92,11 +83,16 @@
     <div class="container text-center">
         <div class="row">
             <p class="text-muted">
-               Et voilà nous y somme déjà, vous n'avez plus qu'a valider et voir ce que l'on vous propose
+               Et voilà nous y somme déjà, vous n'avez plus qu'à valider et voir ce que l'on vous propose
             </p><br>
             <p><button type="submit" class="btn btn-primary" role="button">Je veux voir ce qu'il s'offre à moi</button></p>
         </div>
     </div>
+
+
+
+
+
 </form>
 <script>
     $(document).ready(function()

@@ -51,8 +51,11 @@ Class router
 					break;
 				
 				case 'Recherche':
-						if(!isset($this->_app->route['type']))
+						if(!isset($this->_app->route['type']) && !isset($this->_app->route['all_select']))
 							$this->assign_mod('search_type', '', '', '');
+
+						else if(isset($this->_app->route['all_select']))
+							$this->assign_mod('search_result', '', 'all', '');
 
 						else if(isset($this->_app->route['type']) && !isset($this->_app->route['selection_ok']))
 							$this->assign_mod('search_pays_habitat', '', '', '');
@@ -60,7 +63,7 @@ Class router
 						else if(isset($this->_app->route['selection_ok']) && !isset($this->_app->route['id_annonce']))
 							$this->assign_mod('search_result', '', '', '');
 
-						else if(isset($this->_app->route['selection_ok']) && isset($this->_app->route['id_annonce']))
+						else if(isset($this->_app->route['selection_ok']) && isset($this->_app->route['id_annonce']) && !isset($this->_app->route['all_select']))
 							$this->assign_mod('annonce', '', '', '');
 					break;
 
@@ -111,6 +114,7 @@ Class router
 
 
 		$pre_echo_mod .= "__";
+
 
 		echo $pre_echo_mod;
 	}

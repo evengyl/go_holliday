@@ -6,25 +6,28 @@ if(count($annonces) < 1)
         <div class="row">
             <h1 class="thin">Oups!... </h1>
             <h3 class="thin">Aucune annonces ne corresponds exatcement à ce que vous cherchez, essayer peux être d\'élargir vos horizons ?</h3>
-            <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer</a></p>
+            <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer de type</a></p>
         </div>
     </div><?
 }
 else
 {?>
-     <div class="col-sm-6 col-md-4 col-lg-2">
+     <div class="col-sm-6 col-md-4 col-lg-2 pos_fixed_left">
         <div class="thumbnail">
             <img src="/images/logo.png" class="img-responsive" alt="">
             <hr>
             <div class="caption">
-                <p class="text-muted">Vacances pour : <?= $annonces[0]->name_type_vacances; ?></p>
+                <p class="text-muted">Vacances pour : <?= $type_selected; ?></p>
                 <p class="text-muted">Pays : <?= $pays_selected; ?></p>
                 <p class="text-muted">Habitat(s) : <?= $habitat_selected; ?></p>
                 <p class="text-muted">Nombre d'annonces trouvées : <?= count($annonces); ?></p>
-                <p class="text-center"><a href="/<?= $type_selected->url; ?>" class="btn btn-default" role="button">Je veux changer</a></p>
+                <p class="text-center"><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>" class="btn btn-default" role="button" style="padding:10px 17px;">Je veux changer de pays/habitat</a></p>
             </div>
         </div>
     </div>
+
+    <? require($_app->base_path."/vues/asset_right.php"); ?>
+
 
     <div class="container text-center">
         <div class="row">

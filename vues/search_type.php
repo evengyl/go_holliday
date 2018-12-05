@@ -11,21 +11,8 @@
         {?>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail"><?
-                    if(isset($row_type->icon_1))
-                        echo $row_type->icon_1."&nbsp;";
-
-                    if(isset($row_type->icon_2))
-                        echo $row_type->icon_2."&nbsp;";
-
-                    if(isset($row_type->icon_3))
-                        echo $row_type->icon_3."&nbsp;";
-
-                    if(isset($row_type->icon_4))
-                        echo $row_type->icon_4."&nbsp;";
-
-                    if(isset($row_type->icon_5))
-                        echo $row_type->icon_5."&nbsp;";?>
-
+                    if(isset($row_type->icon))
+                        echo $row_type->icon;?>
                     <hr>
                     <img src="/images/categories/<?= $row_type->img; ?>" class="img-responsive" alt="<?= $row_type->name; ?>">
                     <div class="caption">

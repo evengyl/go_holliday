@@ -27,15 +27,14 @@ Class search_type extends base_module
 
 	private function get_count_annonces_by_type($array_type)
 	{
-		$var = 'COUNT(id)';
 		foreach($array_type as $key => $type)
 		{
 			$sql_count_annonce_by_type = new stdClass();
 			$sql_count_annonce_by_type->table = ["annonces"];
-			$sql_count_annonce_by_type->var = $var;
+			$sql_count_annonce_by_type->var = 'COUNT(id) as nb';
 			$sql_count_annonce_by_type->where = ["id_type_vacances = '". $type->id ."'"];
 			$res_sql =  $this->_app->sql->select($sql_count_annonce_by_type);
-			$array_type[$key]->nb_annonces = $res_sql[0]->$var;
+			$array_type[$key]->nb_annonces = $res_sql[0]->nb;
 		}
 		return $array_type;
 	}

@@ -10,18 +10,22 @@ Class search_pays_habitat extends base_module
 		
 		parent::__construct($this->_app);
 
+
+
+		$array_type = $this->get_list_type($this->_app->route['type']);
+
 		$array_pays = $this->get_list_pays();
 		$array_habitat = $this->get_list_habitat();
+		list($array_habitat, $array_pays) = $this->get_nb_annonce($array_habitat, $array_pays, $array_type[0]->id);
 		
-		$type = $this->_app->route['type'];
-		$array_type = $this->get_list_type($type);
+		
+
 		
 		$this->get_html_tpl =  $this
 			->assign_var("_app", $this->_app)
 			->assign_var("array_type", $array_type)
 			->assign_var('array_pays', $array_pays)
 			->assign_var('array_habitat', $array_habitat)
-			->assign_var('selected_type', $type)
 			->render_tpl();	
 	}
 
@@ -48,5 +52,32 @@ Class search_pays_habitat extends base_module
 		$sql_type->var = ["*"];
 		$sql_type->where = ["url = '".$type."'"];
 		return $this->_app->sql->select($sql_type);
+	}
+
+	private function get_nb_annonce($array_habitat, $array_pays, $id_type)
+	{
+		$var = 'COUNT(id) as nb';
+
+		foreach($array_habitat as $row_habitat)
+		{
+			$sql_number_annonces_habitat = new stdClass();
+			$sql_number_annonces_habitat->table = ["annonces"];
+			$sql_number_annonces_habitat->var = $var;
+			$sql_number_annonces_habitat->where = ["id_habitat = '". $row_habitat->id ."'", "AND", "id_type_vacances = '". (int)$id_type ."'"];
+			$res_sql = $this->_app->sql->select($sql_number_annonces_habitat);
+			$row_habitat->nb_annonces = $res_sql[0]->nb;
+		}
+
+		foreach($array_pays as $row_pays)
+		{
+			$sql_number_annonces_pays = new stdClass();
+			$sql_number_annonces_pays->table = ["annonces"];
+			$sql_number_annonces_pays->var = $var;
+			$sql_number_annonces_pays->where = ["id_pays = '". $row_pays->id ."'", "AND", "id_type_vacances = '". (int)$id_type ."'"];
+			$res_sql = $this->_app->sql->select($sql_number_annonces_pays);
+			$row_pays->nb_annonces = $res_sql[0]->nb;
+		}
+
+		return array($array_habitat, $array_pays);
 	}
 }

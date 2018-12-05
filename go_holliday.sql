@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.35-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: go_holliday
 -- ------------------------------------------------------
--- Server version	10.1.36-MariaDB
+-- Server version	10.1.35-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -84,7 +84,6 @@ CREATE TABLE `habitat` (
   `name` varchar(20) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
-  `nb_annonces` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -95,7 +94,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : ',1145),(2,'Bungalows','bungalow.jpg','Bungalow : ',1387),(3,'Appartements','appartement.jpg','Appartements : ',1238),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : ',1657),(5,'Gites','gite.jpg','Gites : ',457),(6,'Villa','villa.jpg','Villa : ',4542);
+INSERT INTO `habitat` VALUES (1,'Caravanes','caravane.jpg','Caravane : '),(2,'Bungalows','bungalow.jpg','Bungalow : '),(3,'Appartements','appartement.jpg','Appartements : '),(4,'Maisons d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : '),(5,'Gites','gite.jpg','Gites : '),(6,'Villa','villa.jpg','Villa : ');
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +165,6 @@ CREATE TABLE `pays` (
   `name` varchar(20) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
-  `nb_annonces` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -177,7 +175,7 @@ CREATE TABLE `pays` (
 
 LOCK TABLES `pays` WRITE;
 /*!40000 ALTER TABLE `pays` DISABLE KEYS */;
-INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : ',42),(2,'France','drapeau_france.jpg','La France : ',72),(3,'Italie','drapeau_italie.jpg','L\'Italie : ',15),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : ',112),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ',12);
+INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'France','drapeau_france.jpg','La France : '),(3,'Italie','drapeau_italie.jpg','L\'Italie : '),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ');
 /*!40000 ALTER TABLE `pays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,11 +247,7 @@ DROP TABLE IF EXISTS `type_vacances`;
 CREATE TABLE `type_vacances` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `icon_1` varchar(100) NOT NULL,
-  `icon_2` varchar(100) NOT NULL,
-  `icon_3` varchar(100) NOT NULL,
-  `icon_4` varchar(100) NOT NULL,
-  `icon_5` varchar(100) NOT NULL,
+  `icon` text NOT NULL,
   `url` varchar(50) NOT NULL,
   `img` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
@@ -268,7 +262,7 @@ CREATE TABLE `type_vacances` (
 
 LOCK TABLES `type_vacances` WRITE;
 /*!40000 ALTER TABLE `type_vacances` DISABLE KEYS */;
-INSERT INTO `type_vacances` VALUES (1,'Couples','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>','','','couples','couple.jpg','Vacances de couples','Lieux de vacances plus orientées vers les promenades en amoureux, les bon plans restaurant et paysage romantique ect...'),(2,'Familles','<i style=\"font-size:56px; color:#ffaeae;\" class=\"fas fa-female\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>','<i style=\"font-size:56px; color:#9393fb;\" class=\"fas fa-male\"></i>','familles','famille.jpg','Vacances en familles','Lieux de vacances orientées pour les vacances en familles avec les banbins, la recherche se base sur les activités faites pour les enfants ect...'),(3,'Aventures','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-hiking\"></i>','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-mountain\"></i>','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-campground\"></i>','','','aventures','aventure.jpg','Le pleins d\'aventures','Lieux de vacances plus orientées pour les rendonnées, les lieux à visités, une richesse de la régions ect...');
+INSERT INTO `type_vacances` VALUES (1,'Couples','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;','couples','couple.jpg','Vacances de couples','Lieux de vacances plus orientées vers les promenades en amoureux, les bon plans restaurant et paysage romantique ect...'),(2,'Familles','<i style=\"font-size:56px; color:#ffaeae;\" class=\"fas fa-female\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#9393fb;\" class=\"fas fa-male\"></i>&nbsp;','familles','famille.jpg','Vacances en familles','Lieux de vacances orientées pour les vacances en familles avec les banbins, la recherche se base sur les activités faites pour les enfants ect...'),(3,'Aventures','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-hiking\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-mountain\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-campground\"></i>&nbsp;','aventures','aventure.jpg','Le pleins d\'aventures','Lieux de vacances plus orientées pour les rendonnées, les lieux à visités, une richesse de la régions ect...');
 /*!40000 ALTER TABLE `type_vacances` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -281,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-03 21:07:25
+-- Dump completed on 2018-12-05 11:52:04

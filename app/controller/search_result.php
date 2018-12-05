@@ -12,8 +12,12 @@ Class search_result extends base_module
 
 		$pays = array();
 		$habitat = array();
+		$array_type = array();
+		$type = "";
+		$type_id = "";
 		$str_pays = "";
 		$str_habitat = "";
+		$all = false;
 		
 
 		if(isset($_POST['pays_id']) && isset($_POST['pays_name']))
@@ -25,7 +29,7 @@ Class search_result extends base_module
 			$str_pays = substr($str_pays, 0, -2);
 		}
 		else
-			$str_pays = "Aucun pays sélectionné(s)";
+			$str_pays = "Aucun sélectionné(s)";
 
 
 		if(isset($_POST['habitat_id']) && isset($_POST['habitat_name']))
@@ -37,24 +41,35 @@ Class search_result extends base_module
 			$str_habitat = substr($str_habitat, 0, -2);
 		}
 		else
-			$str_habitat = "Aucun habitat spécifique sélectionné(s)";
+			$str_habitat = "Aucun sélectionné(s)";
 
 
-		$type = $this->_app->route['type'];
-		$array_type = $this->get_list_type($type);
-		$type_id = $array_type[0]->id;
+		if(isset($this->_app->route['all_select'])) //on est face a un click de toute les annonces dispo attention
+		{
+			$str_type = "Aucun type sélectioné";
+			$all = true;
+		}
+		else
+		{
+			$type = $this->_app->route['type'];
+			$array_type = $this->get_infos_type($type);
+			$type_id = $array_type[0]->id;
+			$str_type = $array_type[0]->name;
+		}
 
-		$annonces = $this->get_annonces($type_id, $pays, $habitat);
+
+		$annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
 
 		$this->get_html_tpl = $this
-								->assign_var("type_selected", $array_type[0])
+								->assign_var("type_selected", $str_type)
 								->assign_var("pays_selected", $str_pays)
 								->assign_var("habitat_selected", $str_habitat)
 								->assign_var("annonces", $annonces)
+								->assign_var("_app", $this->_app)
 								->render_tpl();
 	}
 
-	private function get_list_type($type)
+	private function get_infos_type($type)
 	{
 		$sql_type = new stdClass();
 		$sql_type->table = ["type_vacances"];
@@ -62,7 +77,7 @@ Class search_result extends base_module
 		return $this->_app->sql->select($sql_type);
 	}
 
-	private function get_annonces($type_id, $pays = array(), $habitat = array())
+	private function get_annonces($type_id, $pays = array(), $habitat = array(), $all)
 	{
 		$str_pays_id = "";
 		$str_habitat_id = "";
@@ -91,7 +106,10 @@ Class search_result extends base_module
 				"proprio" => ["name AS name_proprio", "last_name AS lastname_proprio", "genre"],
 				"type_vacances" => ["name AS name_type_vacances"]
 			];
-		$sql_annonce->where = [$str_pays_id, $str_habitat_id, "", "id_type_vacances = '".$type_id."'", "AND", "active = '1'"];
+
+		if(!$all)
+			$sql_annonce->where = [$str_pays_id, $str_habitat_id, "", "id_type_vacances = '".$type_id."'", "AND", "active = '1'"];
+		
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 
 		if(!empty($res_sql_annonces))
