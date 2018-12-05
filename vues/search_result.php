@@ -45,19 +45,15 @@ else
                         <div class="caption">
                             
                             <h4>A <?= $row_annonces->lieu_annonce; ?>, Pays : <?= $row_annonces->name_pays; ?></h4>
-                            <p class="text-muted">Type de résidence : <?= $row_annonces->name_habitat; ?></p>
+                            <p class="text-muted">Type de résidence : <?= $row_annonces->name_habitat; ?></p><?
                             
-                            <?
                             if(count($row_annonces->dates) > 1)
-                            {
                                 echo '<p class="text-muted">Plusieurs périodes et prix disponibles</p>';
-                            }
                             else
                             {
                                 echo '<h5>Pour : <b style="color:#65b45199;">'. $row_annonces->dates[0]->prix .'€</b></h5>';
                                 echo '<p class="text-muted">Du '. date("d/n/Y", strtotime($row_annonces->dates[0]->start_date)) .' au '. date("d/n/Y", strtotime($row_annonces->dates[0]->end_date)) .'</p>';
-                            }
-                            ?>
+                            }?>
                             
                             <p><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>/Selection_destination/<?= $row_annonces->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
                         </div>
@@ -67,3 +63,6 @@ else
         </div>
     </div><?
 }?>
+
+
+

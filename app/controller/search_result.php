@@ -112,7 +112,7 @@ Class search_result extends base_module
 				$sql_date->table = ["date_annonces"];
 				$sql_date->var = ["start_date", "end_date", "prix"];
 				$sql_date->where = ["id_annonces = '".$row_annonces->id."'"];
-				$res_sql_date = $this->_app->sql->select($sql_date,1);
+				$res_sql_date = $this->_app->sql->select($sql_date);
 				$res_sql_annonces[$key]->dates = $res_sql_date;
 			}
 		}
