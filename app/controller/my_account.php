@@ -2,21 +2,20 @@
 
 Class my_account extends base_module
 {
+	public $_app;
+
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
-		parent::__construct($_app);
-
-		$_app->navigation->_stack_nav[] = 'Mon Compte';
-
-		if($_GET['page'] == 'password_change')
-			$_app->navigation->_stack_nav[] = "Changement de mot de passe";
+		$this->_app = $_app;	
+		$this->_app->module_name = __CLASS__;
+		
+		parent::__construct($this->_app);
 
 
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
 
-		$this->get_html_tpl =  $this->assign_var("user", $this->user)->render_tpl();
+		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->render_tpl();
 	}
 
 
