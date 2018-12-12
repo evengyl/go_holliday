@@ -42,7 +42,7 @@ Class router
 					break;
 
 				case 'my_account':
-						$this->assign_mod('my_account', '', '', '');
+						$this->is_connect()->assign_mod('my_account', '', '', '');
 					break;
 
 

@@ -30,9 +30,10 @@ CREATE TABLE `annonces` (
   `id_proprio` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `lieu` varchar(255) NOT NULL,
+  `vues` int(11) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (1,1,1,1,1,'Bord de mer tatata','Mexico',1),(2,2,2,1,1,'Bord de mer tatata','Mexico',1),(3,3,2,1,1,'Bord de mer tatata','Mexico',1),(4,4,1,1,1,'Bord de mer tatata','Mexico',1),(5,1,3,1,1,'Bord de mer tatata','Mexico',1),(6,2,3,1,1,'Bord de mer tatata','Mexico',1),(7,3,4,1,1,'Bord de mer tatata','Mexico',1),(8,4,4,1,1,'Bord de mer tatata','Mexico',1),(9,1,5,2,1,'Bord de mer tatata','Mexico',1),(10,2,5,2,1,'Bord de mer tatata','Mexico',1),(11,3,6,2,1,'Bord de mer tatata','Mexico',1),(12,4,6,2,1,'Bord de mer tatata','Mexico',1),(13,1,1,2,1,'Bord de mer tatata','Mexico',1),(14,2,1,2,1,'Bord de mer tatata','Mexico',1),(15,3,2,2,1,'Bord de mer tatata','Mexico',1),(16,4,2,2,1,'Bord de mer tatata','Mexico',1),(17,1,3,3,1,'Bord de mer tatata','Mexico',1),(18,2,3,3,1,'Bord de mer tatata','Mexico',1),(19,3,4,3,1,'Bord de mer tatata','Mexico',1),(20,4,4,3,1,'Bord de mer tatata','Mexico',1),(21,1,5,3,1,'Bord de mer tatata','Mexico',1),(22,2,5,3,1,'Bord de mer tatata','Mexico',1),(23,3,6,3,1,'Bord de mer tatata','Mexico',1),(24,4,6,3,1,'Bord de mer tatata','Mexico',1),(25,1,1,1,1,'Bord de mer tatata','Mexico',1),(26,2,1,2,1,'Bord de mer tatata','Mexico',1),(27,3,2,3,1,'Bord de mer tatata','Mexico',1),(28,4,2,1,1,'Bord de mer tatata','Mexico',1),(29,1,3,2,1,'Bord de mer tatata','Mexico',1),(30,2,3,3,1,'Bord de mer tatata','Mexico',1),(31,3,4,1,1,'Bord de mer tatata','Mexico',1),(32,4,5,2,1,'Bord de mer tatata','Mexico',1),(33,4,4,3,1,'Bord de mer tatata','Mexico',1),(34,1,5,3,1,'Bord de mer tatata','Mexico',1),(35,2,6,3,1,'Bord de mer tatata','Mexico',1),(36,3,6,3,1,'Bord de mer tatata','Mexico',1),(37,4,1,3,1,'Bord de mer tatata','Mexico',1),(38,1,1,1,1,'Bord de mer tatata','Mexico',1),(39,2,2,2,1,'Bord de mer tatata','Mexico',1),(40,3,2,3,1,'Bord de mer tatata','Mexico',1),(41,4,3,1,1,'Bord de mer tatata','Mexico',1),(42,1,3,2,1,'Bord de mer tatata','Mexico',1),(43,2,4,3,1,'Bord de mer tatata','Mexico',1),(44,3,4,1,1,'Bord de mer tatata','Mexico',1),(45,4,5,2,1,'Bord de mer tatata','Mexico',1),(46,1,5,3,1,'Bord de mer tatata','Mexico',1),(47,2,6,3,1,'Bord de mer tatata','Mexico',1),(48,3,6,3,1,'Bord de mer tatata','Mexico',1),(49,4,1,3,1,'Bord de mer tatata','Mexico',1),(50,1,1,1,1,'Bord de mer tatata','Mexico',1),(51,2,2,2,1,'Bord de mer tatata','Mexico',1),(52,3,2,3,1,'Bord de mer tatata','Mexico',1),(53,4,3,1,1,'Bord de mer tatata','Mexico',1),(54,1,3,2,1,'Bord de mer tatata','Mexico',1),(55,2,4,3,1,'Bord de mer tatata','Mexico',1),(56,3,4,1,1,'Bord de mer tatata','Mexico',1),(57,4,5,2,1,'Bord de mer tatata','Mexico',1),(58,1,5,3,1,'Bord de mer tatata','Mexico',1),(59,2,6,3,1,'Bord de mer tatata','Mexico',1),(60,3,6,3,1,'Bord de mer tatata','Mexico',1),(61,4,1,3,1,'Bord de mer tatata','Mexico',1),(62,1,1,1,1,'Bord de mer tatata','Mexico',1),(63,2,2,2,1,'Bord de mer tatata','Mexico',1),(64,3,2,3,1,'Bord de mer tatata','Mexico',1),(65,4,3,1,1,'Bord de mer tatata','Mexico',1),(66,1,3,2,1,'Bord de mer tatata','Mexico',1),(67,2,4,3,1,'Bord de mer tatata','Mexico',1),(68,3,4,1,1,'Bord de mer tatata','Mexico',1),(69,4,5,2,1,'Bord de mer tatata','Mexico',1),(70,1,5,3,1,'Bord de mer tatata','Mexico',1),(71,2,6,3,1,'Bord de mer tatata','Mexico',1),(72,3,6,3,1,'Bord de mer tatata','Mexico',1),(73,4,1,3,1,'Bord de mer tatata','Mexico',1),(74,1,1,1,1,'Bord de mer tatata','Mexico',1),(75,2,2,2,1,'Bord de mer tatata','Mexico',1),(76,3,2,3,1,'Bord de mer tatata','Mexico',1),(77,4,3,1,1,'Bord de mer tatata','Mexico',1),(78,1,3,2,1,'Bord de mer tatata','Mexico',1),(79,2,4,3,1,'Bord de mer tatata','Mexico',1),(80,3,4,1,1,'Bord de mer tatata','Mexico',1),(81,4,5,2,1,'Bord de mer tatata','Mexico',1),(82,1,3,2,1,'Bord de mer tatata','Mexico',1),(83,2,4,3,1,'Bord de mer tatata','Mexico',1),(84,3,4,1,1,'Bord de mer tatata','Mexico',1),(85,4,5,2,1,'Bord de mer tatata','Mexico',1),(86,1,5,3,1,'Bord de mer tatata','Mexico',1),(87,2,6,3,1,'Bord de mer tatata','Mexico',1),(88,3,6,3,1,'Bord de mer tatata','Mexico',1),(89,4,1,3,1,'Bord de mer tatata','Mexico',1),(90,1,1,1,1,'Bord de mer tatata','Mexico',1),(91,2,2,2,1,'Bord de mer tatata','Mexico',1),(92,3,2,3,1,'Bord de mer tatata','Mexico',1),(93,4,3,1,1,'Bord de mer tatata','Mexico',1),(94,1,3,2,1,'Bord de mer tatata','Mexico',1),(95,2,4,3,1,'Bord de mer tatata','Mexico',1),(96,3,4,1,1,'Bord de mer tatata','Mexico',1),(97,4,5,2,1,'Bord de mer tatata','Mexico',1),(98,1,3,2,1,'Bord de mer tatata','Mexico',1),(99,2,4,3,1,'Bord de mer tatata','Mexico',1),(100,3,4,1,1,'Bord de mer tatata','Mexico',1),(101,4,5,2,1,'Bord de mer tatata','Mexico',1),(102,1,5,3,1,'Bord de mer tatata','Mexico',1),(103,2,6,3,1,'Bord de mer tatata','Mexico',1),(104,3,6,3,1,'Bord de mer tatata','Mexico',1),(105,4,1,3,1,'Bord de mer tatata','Mexico',1),(106,1,1,1,1,'Bord de mer tatata','Mexico',1),(107,2,2,2,1,'Bord de mer tatata','Mexico',1),(108,3,2,3,1,'Bord de mer tatata','Mexico',1),(109,4,3,1,1,'Bord de mer tatata','Mexico',1),(110,1,3,2,1,'Bord de mer tatata','Mexico',1),(111,2,4,3,1,'Bord de mer tatata','Mexico',1),(112,3,4,1,1,'Bord de mer tatata','Mexico',1),(113,4,5,2,1,'Bord de mer tatata','Mexico',1),(114,1,3,2,1,'Bord de mer tatata','Mexico',1),(115,2,4,3,1,'Bord de mer tatata','Mexico',1),(116,3,4,1,1,'Bord de mer tatata','Mexico',1),(117,4,5,2,1,'Bord de mer tatata','Mexico',1),(118,1,5,3,1,'Bord de mer tatata','Mexico',1),(119,2,6,3,1,'Bord de mer tatata','Mexico',1),(120,3,6,3,1,'Bord de mer tatata','Mexico',1),(121,4,1,3,1,'Bord de mer tatata','Mexico',1),(122,1,1,1,1,'Bord de mer tatata','Mexico',1),(123,2,2,2,1,'Bord de mer tatata','Mexico',1),(124,3,2,3,1,'Bord de mer tatata','Mexico',1),(125,4,3,1,1,'Bord de mer tatata','Mexico',1),(126,1,3,2,1,'Bord de mer tatata','Mexico',1),(127,2,4,3,1,'Bord de mer tatata','Mexico',1),(128,3,4,1,1,'Bord de mer tatata','Mexico',1),(129,4,5,2,1,'Bord de mer tatata','Mexico',1),(130,1,3,2,1,'Bord de mer tatata','Mexico',1),(131,2,4,3,1,'Bord de mer tatata','Mexico',1),(132,3,4,1,1,'Bord de mer tatata','Mexico',1),(133,4,5,2,1,'Bord de mer tatata','Mexico',1),(134,1,5,3,1,'Bord de mer tatata','Mexico',1),(135,2,6,3,1,'Bord de mer tatata','Mexico',1),(136,3,6,3,1,'Bord de mer tatata','Mexico',1),(137,4,1,3,1,'Bord de mer tatata','Mexico',1),(138,1,1,1,1,'Bord de mer tatata','Mexico',1),(139,2,2,2,1,'Bord de mer tatata','Mexico',1),(140,3,2,3,1,'Bord de mer tatata','Mexico',1),(141,4,3,1,1,'Bord de mer tatata','Mexico',1),(142,1,3,2,1,'Bord de mer tatata','Mexico',1),(143,2,4,3,1,'Bord de mer tatata','Mexico',1),(144,3,4,1,1,'Bord de mer tatata','Mexico',1),(145,4,5,2,1,'Bord de mer tatata','Mexico',1),(146,1,3,2,1,'Bord de mer tatata','Mexico',1),(147,2,4,3,1,'Bord de mer tatata','Mexico',1),(148,3,4,1,1,'Bord de mer tatata','Mexico',1),(149,4,5,2,1,'Bord de mer tatata','Mexico',1),(150,1,5,3,1,'Bord de mer tatata','Mexico',1),(151,2,6,3,1,'Bord de mer tatata','Mexico',1),(152,3,6,3,1,'Bord de mer tatata','Mexico',1),(153,4,1,3,1,'Bord de mer tatata','Mexico',1),(154,1,1,1,1,'Bord de mer tatata','Mexico',1),(155,2,2,2,1,'Bord de mer tatata','Mexico',1),(156,3,2,3,1,'Bord de mer tatata','Mexico',1),(157,4,3,1,1,'Bord de mer tatata','Mexico',1),(158,1,3,2,1,'Bord de mer tatata','Mexico',1),(159,2,4,3,1,'Bord de mer tatata','Mexico',1),(160,3,4,1,1,'Bord de mer tatata','Mexico',1),(161,4,5,2,1,'Bord de mer tatata','Mexico',1),(162,1,3,2,1,'Bord de mer tatata','Mexico',1),(163,2,4,3,1,'Bord de mer tatata','Mexico',1),(164,3,4,1,1,'Bord de mer tatata','Mexico',1),(165,4,5,2,1,'Bord de mer tatata','Mexico',1),(166,1,5,3,1,'Bord de mer tatata','Mexico',1),(167,2,6,3,1,'Bord de mer tatata','Mexico',1),(168,3,6,3,1,'Bord de mer tatata','Mexico',1),(169,4,1,3,1,'Bord de mer tatata','Mexico',1),(170,1,1,1,1,'Bord de mer tatata','Mexico',1),(171,2,2,2,1,'Bord de mer tatata','Mexico',1),(172,3,2,3,1,'Bord de mer tatata','Mexico',1),(173,4,3,1,1,'Bord de mer tatata','Mexico',1),(174,1,3,2,1,'Bord de mer tatata','Mexico',1),(175,2,4,3,1,'Bord de mer tatata','Mexico',1),(176,3,4,1,1,'Bord de mer tatata','Mexico',1),(177,4,5,2,1,'Bord de mer tatata','Mexico',1),(178,1,3,2,1,'Bord de mer tatata','Mexico',1),(179,2,4,3,1,'Bord de mer tatata','Mexico',1),(180,3,4,1,1,'Bord de mer tatata','Mexico',1),(181,4,5,2,1,'Bord de mer tatata','Mexico',1),(182,1,5,3,1,'Bord de mer tatata','Mexico',1),(183,2,6,3,1,'Bord de mer tatata','Mexico',1),(184,3,6,3,1,'Bord de mer tatata','Mexico',1),(185,4,1,3,1,'Bord de mer tatata','Mexico',1),(186,1,1,1,1,'Bord de mer tatata','Mexico',1),(187,2,2,2,1,'Bord de mer tatata','Mexico',1),(188,3,2,3,1,'Bord de mer tatata','Mexico',1),(189,4,3,1,1,'Bord de mer tatata','Mexico',1),(190,1,3,2,1,'Bord de mer tatata','Mexico',1),(191,2,4,3,1,'Bord de mer tatata','Mexico',1);
+INSERT INTO `annonces` VALUES (1,1,1,1,1,'Bord de mer tatata','Mexico',175,1),(2,2,2,1,1,'Bord de mer tatata','Mexico',1772,1),(3,3,2,1,1,'Bord de mer tatata','Mexico',274,1),(4,4,1,1,1,'Bord de mer tatata','Mexico',12,1),(5,1,3,1,1,'Bord de mer tatata','Mexico',5,1),(6,2,3,1,1,'Bord de mer tatata','Mexico',0,1),(7,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(8,4,4,1,1,'Bord de mer tatata','Mexico',0,1),(9,1,5,2,1,'Bord de mer tatata','Mexico',0,1),(10,2,5,2,1,'Bord de mer tatata','Mexico',0,1),(11,3,6,2,1,'Bord de mer tatata','Mexico',0,1),(12,4,6,2,1,'Bord de mer tatata','Mexico',0,1),(13,1,1,2,1,'Bord de mer tatata','Mexico',0,1),(14,2,1,2,1,'Bord de mer tatata','Mexico',0,1),(15,3,2,2,1,'Bord de mer tatata','Mexico',0,1),(16,4,2,2,1,'Bord de mer tatata','Mexico',0,1),(17,1,3,3,1,'Bord de mer tatata','Mexico',0,1),(18,2,3,3,1,'Bord de mer tatata','Mexico',0,1),(19,3,4,3,1,'Bord de mer tatata','Mexico',0,1),(20,4,4,3,1,'Bord de mer tatata','Mexico',0,1),(21,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(22,2,5,3,1,'Bord de mer tatata','Mexico',0,1),(23,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(24,4,6,3,1,'Bord de mer tatata','Mexico',0,1),(25,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(26,2,1,2,1,'Bord de mer tatata','Mexico',0,1),(27,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(28,4,2,1,1,'Bord de mer tatata','Mexico',0,1),(29,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(30,2,3,3,1,'Bord de mer tatata','Mexico',0,1),(31,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(32,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(33,4,4,3,1,'Bord de mer tatata','Mexico',0,1),(34,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(35,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(36,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(37,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(38,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(39,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(40,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(41,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(42,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(43,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(44,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(45,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(46,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(47,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(48,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(49,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(50,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(51,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(52,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(53,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(54,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(55,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(56,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(57,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(58,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(59,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(60,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(61,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(62,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(63,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(64,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(65,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(66,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(67,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(68,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(69,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(70,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(71,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(72,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(73,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(74,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(75,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(76,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(77,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(78,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(79,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(80,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(81,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(82,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(83,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(84,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(85,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(86,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(87,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(88,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(89,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(90,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(91,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(92,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(93,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(94,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(95,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(96,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(97,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(98,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(99,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(100,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(101,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(102,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(103,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(104,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(105,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(106,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(107,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(108,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(109,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(110,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(111,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(112,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(113,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(114,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(115,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(116,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(117,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(118,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(119,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(120,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(121,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(122,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(123,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(124,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(125,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(126,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(127,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(128,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(129,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(130,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(131,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(132,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(133,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(134,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(135,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(136,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(137,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(138,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(139,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(140,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(141,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(142,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(143,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(144,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(145,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(146,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(147,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(148,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(149,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(150,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(151,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(152,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(153,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(154,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(155,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(156,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(157,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(158,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(159,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(160,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(161,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(162,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(163,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(164,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(165,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(166,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(167,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(168,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(169,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(170,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(171,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(172,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(173,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(174,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(175,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(176,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(177,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(178,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(179,2,4,3,1,'Bord de mer tatata','Mexico',0,1),(180,3,4,1,1,'Bord de mer tatata','Mexico',0,1),(181,4,5,2,1,'Bord de mer tatata','Mexico',0,1),(182,1,5,3,1,'Bord de mer tatata','Mexico',0,1),(183,2,6,3,1,'Bord de mer tatata','Mexico',0,1),(184,3,6,3,1,'Bord de mer tatata','Mexico',0,1),(185,4,1,3,1,'Bord de mer tatata','Mexico',0,1),(186,1,1,1,1,'Bord de mer tatata','Mexico',0,1),(187,2,2,2,1,'Bord de mer tatata','Mexico',0,1),(188,3,2,3,1,'Bord de mer tatata','Mexico',0,1),(189,4,3,1,1,'Bord de mer tatata','Mexico',0,1),(190,1,3,2,1,'Bord de mer tatata','Mexico',0,1),(191,2,4,3,1,'Bord de mer tatata','Mexico',0,1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +60,7 @@ CREATE TABLE `date_annonces` (
   `end_date` date NOT NULL,
   `prix` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,6 +114,7 @@ CREATE TABLE `login` (
   `password_no_hash` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
+  `id_utilisateurs` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -123,7 +125,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$LMyXpdg11OyYKNOtimiQOOfEABrPA5DOEubnuxvnmOCGiq1Y.BhvS','1490198511','legends','dark.evengyl@gmail.com',3),(6,'test','$2y$10$Hf6AeLwdBk6DEnn.ajFp1uKBc2EoQzC7mDq9agpAwzl.s7SVsK8bq','1542277987','legends','dark.evengyl@gmail.com',0);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$LMyXpdg11OyYKNOtimiQOOfEABrPA5DOEubnuxvnmOCGiq1Y.BhvS','1490198511','legends','dark.evengyl@gmail.com',3,1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,37 +179,6 @@ LOCK TABLES `pays` WRITE;
 /*!40000 ALTER TABLE `pays` DISABLE KEYS */;
 INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'France','drapeau_france.jpg','La France : '),(3,'Italie','drapeau_italie.jpg','L\'Italie : '),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ');
 /*!40000 ALTER TABLE `pays` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `proprio`
---
-
-DROP TABLE IF EXISTS `proprio`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proprio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `age` varchar(4) NOT NULL,
-  `mail` varchar(50) NOT NULL,
-  `tel` varchar(20) NOT NULL,
-  `address_rue` varchar(100) NOT NULL,
-  `address_localite` varchar(60) NOT NULL,
-  `genre` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `proprio`
---
-
-LOCK TABLES `proprio` WRITE;
-/*!40000 ALTER TABLE `proprio` DISABLE KEYS */;
-INSERT INTO `proprio` VALUES (1,'Loïc','Baudoux','27','baudouxloic@gmail.com','0497312523','jean jaurès','labuissiere','Monsieur');
-/*!40000 ALTER TABLE `proprio` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -265,6 +236,40 @@ LOCK TABLES `type_vacances` WRITE;
 INSERT INTO `type_vacances` VALUES (1,'Couples','<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#ef6b6b;\" class=\"fas fa-heart\"></i>&nbsp;','couples','couple.jpg','Vacances de couples','Lieux de vacances plus orientées vers les promenades en amoureux, les bon plans restaurant et paysage romantique ect...'),(2,'Familles','<i style=\"font-size:56px; color:#ffaeae;\" class=\"fas fa-female\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:35px; color:#00800080;\" class=\"fas fa-child\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#9393fb;\" class=\"fas fa-male\"></i>&nbsp;','familles','famille.jpg','Vacances en familles','Lieux de vacances orientées pour les vacances en familles avec les banbins, la recherche se base sur les activités faites pour les enfants ect...'),(3,'Aventures','<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-hiking\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-mountain\"></i>&nbsp;\r\n<i style=\"font-size:56px; color:#773838b3;\" class=\"fas fa-campground\"></i>&nbsp;','aventures','aventure.jpg','Le pleins d\'aventures','Lieux de vacances plus orientées pour les rendonnées, les lieux à visités, une richesse de la régions ect...');
 /*!40000 ALTER TABLE `type_vacances` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `utilisateurs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `last_name` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `age` tinyint(4) NOT NULL DEFAULT '0',
+  `tel` varchar(13) NOT NULL DEFAULT 'Aucun(e)',
+  `address_rue` varchar(100) NOT NULL DEFAULT 'Aucun(e)',
+  `address_numero` varchar(20) NOT NULL DEFAULT 'Aucun(e)',
+  `address_localite` varchar(60) NOT NULL DEFAULT 'Aucun(e)',
+  `zip_code` varchar(10) NOT NULL DEFAULT 'Aucun(e)',
+  `pays` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `genre` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `user_type` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `utilisateurs`
+--
+
+LOCK TABLES `utilisateurs` WRITE;
+/*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2);
+/*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -275,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-05 13:23:59
+-- Dump completed on 2018-12-12 16:59:50

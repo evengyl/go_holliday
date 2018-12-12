@@ -11,11 +11,71 @@ Class my_account extends base_module
 		
 		parent::__construct($this->_app);
 
+		//le form est déclarer autre part mais je peux quand même l'utiliser ici le POST car il font partie de la même page de module
+		$this->set_infos_user();
+
+		//je récupère les infos de l'user en cours
+		$this->get_infos_user();
 
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
 
-		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->render_tpl();
+		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->render_tpl();
+	}
+
+	public function get_infos_user()
+	{
+		//on vas chercher toute les infos de l'utilisateur avec son login id
+		$sql_user = new stdClass();
+		$sql_user->table = ['login', "utilisateurs"];
+		$sql_user->where = ["id = ".$this->_app->user->id];
+		$res_sql = $this->_app->sql->select($sql_user);
+		$this->_app->user = $res_sql[0];
+		
+		//on va compter le nombre d'annonce que l'utilisateur a si il est au bon level
+		if($this->_app->user->user_type == 2)
+		{
+			$sql_nb_annonce = new stdClass();
+			$sql_nb_annonce->table = ['annonces'];
+			$sql_nb_annonce->var = "COUNT(id) as nb";
+			$sql_nb_annonce->where = ["id_proprio = ".$this->_app->user->id_utilisateurs];
+			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
+			$this->_app->user->nb_annonces = $res_sql_nb[0]->nb;
+
+			$sql_vues = new stdClass();
+			$sql_vues->table = ['annonces'];
+			$sql_vues->var = ["vues"];
+			$sql_vues->where = ["id_proprio = ".$this->_app->user->id_utilisateurs, "AND", "vues > 0"];
+			$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
+				affiche_pre($res_sql_nb_vues);
+
+			//$this->_app->user->nb_vues = $res_sql_nb[0]->nb;
+
+		}
+		else if($this->_app->user->user_type == 1){
+			$this->_app->user->nb_annonces = "Vous n'êtes pas annonceurs VIP";	
+		}
+		else if($this->_app->user->user_type == 0){
+			$this->_app->user->nb_annonces = "Vous ne pouvez pas créer d'annonce";
+		}
+
+		$this->parse_user_infos();
+
+
+	}
+
+	public function parse_user_infos()
+	{
+		$array_user_type = [0 => "Utilisateur Standard", 1 => "Annonceurs Gratuit", 2 => "Annonceurs V.I.P"];
+
+		$this->_app->user->user_type_name = $array_user_type[$this->_app->user->user_type];
+
+		
+	}
+
+	public function set_infos_user()
+	{
+
 	}
 
 

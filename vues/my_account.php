@@ -17,21 +17,24 @@
                     	<div class="in_middle"><button class="btn" style=""><i class="fa fa-cog"></i></button></div>
                 	</div>
           			
-          			<h4>Baudoux Loïc</h4>
-              		<p class="text-muted" ><small>@Type D'utilisateur : Annonceurs</small></p>
+          			<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
+              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->user_type_name ?></small></p>
                 </div>
                 <p class="text-muted">
-                	<small>@Adresse Email : dark.evengyl@gmail.com</small>
+                	<small>@Adresse Email : <?= $infos_user->email ?></small>
             	</p>
             	<p class="text-muted">
-                    "Petite annecdote sympathique sur la personne"
+                    @Tel : <?= $infos_user->tel ?>
+                </p>
+                <p class="text-muted">
+                    @Adresse : <?= $infos_user->address_numero.", Rue ".$infos_user->address_rue." à ".$infos_user->zip_code." : ".$infos_user->address_localite ?>
                 </p>
                 <hr>
                 <div class="row block_suivis">
                     <div class="col-lg-4">
                         <h4>
-                        	12<br>
-                    		<small>Annonces</small>
+                        	<?= $infos_user->nb_annonces ?><br>
+                    		<small>Annonces actives</small>
                     	</h4>
                     </div>
                     <div class="col-lg-4">
@@ -115,82 +118,25 @@
             </div>
         </div>
 
-        <div class="col-lg-7 profil_infos">
-            <h4 class="title">Modification de votre profil</h4><hr>
+        <div class="col-lg-7 row">
+        	<!-- Collapse part edit profil -->
+			<div class="col-lg-12 profil_infos">
+				<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse_profil_infos" aria-expanded="false" aria-controls="collapseExample">
+					<i class="fas fa-caret-down "></i>&nbsp;&nbsp;Modification de votre profil&nbsp;&nbsp;<i class="fas fa-caret-down "></i>
+				</button>
 
-            <form method="post" action="#">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Login</label>
-                        <input type="text" class="form-control border-input" placeholder="Login" value="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Adresse Email</label>
-                        <input type="email" class="form-control border-input" placeholder="Adresse Email">
-                    </div>
-                </div>
+				<div class="collapse" id="collapse_profil_infos">
+		            __MOD2_form_profil__
+		        </div>
+		    </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Nom</label>
-                        <input type="text" class="form-control border-input" placeholder="Nom">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Prénom</label>
-                        <input type="text" class="form-control border-input" placeholder="Prénom">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>N° de Téléhpone</label>
-                        <input type="text" class="form-control border-input" placeholder="N° de Téléhpone">
-                    </div>
-                </div>
+		    <div class="col-lg-12 annonces_list">
+				<? require ($_app->base_dir.'/vues/list_annonces_annonceurs.php'); ?>
+    		</div>
+	    </div>
+        
 
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label>Adresse (Rue)</label>
-                        <input type="text" class="form-control border-input" placeholder="Adresse (Rue)">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Adresse (Numéro)</label>
-                        <input type="text" class="form-control border-input" placeholder="Adresse (Numéro)">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Ville</label>
-                        <input type="text" class="form-control border-input" placeholder="Ville">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Pays</label>
-                        <input type="text" class="form-control border-input" placeholder="Pays">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Code Postal</label>
-                        <input type="text" class="form-control border-input" placeholder="Code Postal">
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
-                </div>
-                <div class="clearfix"></div>
-            </form>
-        </div>
-
-        <div class="col-lg-2">
+    	<div class="col-lg-2">
         	<div class="option_account">
 	            <h4 class="title">Option(s) de compte</h4>
 
@@ -201,13 +147,8 @@
 	        	<div class="add_annonces">
 	        		<button class="btn btn-warning" data-toggle="modal" data-target="#tata">Ajouter une annonce</button>
 	        	</div>
-
         	</div>
         </div>
-
-        <div class="col-lg-7 annonces_list">
-			<? require ($_app->base_dir.'/vues/list_annonces_annonceurs.php'); ?>
-    	</div>
 
     </div>
 </div>
