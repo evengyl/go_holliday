@@ -22,6 +22,7 @@ Class search_type extends base_module
 		$sql_type = new stdClass();
 		$sql_type->table = ["type_vacances"];
 		$sql_type->var = ["*"];
+		$sql_type->where = ["1"];
 		return $this->_app->sql->select($sql_type);
 	}
 
@@ -32,7 +33,7 @@ Class search_type extends base_module
 			$sql_count_annonce_by_type = new stdClass();
 			$sql_count_annonce_by_type->table = ["annonces"];
 			$sql_count_annonce_by_type->var = 'COUNT(id) as nb';
-			$sql_count_annonce_by_type->where = ["id_type_vacances = '". $type->id ."'"];
+			$sql_count_annonce_by_type->where = ["id_type_vacances = $1", [$type->id]];
 			$res_sql =  $this->_app->sql->select($sql_count_annonce_by_type);
 			$array_type[$key]->nb_annonces = $res_sql[0]->nb;
 		}

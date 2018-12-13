@@ -65,7 +65,7 @@ Class search_result extends base_module
 	{
 		$sql_type = new stdClass();
 		$sql_type->table = ["type_vacances"];
-		$sql_type->where = ["url = '".$type."'"];
+		$sql_type->where = ["url = $1", [$type]];
 		return $this->_app->sql->select($sql_type);
 	}
 
@@ -75,17 +75,11 @@ Class search_result extends base_module
 		$str_habitat_id = "";
 
 		if(isset($pays[0]))
-		{
-			foreach($pays as $row_pays)
-				$str_pays_id .= $row_pays.", ";
-			$str_pays_id = "id_pays IN (".substr($str_pays_id, 0, -2).") AND";
-		}
+			$str_pays_id = " AND id_pays IN $3";
 
 		if(isset($habitat[0]))
 		{
-			foreach($habitat as $row_habitat)
-				$str_habitat_id .= $row_habitat.", ";
-			$str_habitat_id = "id_habitat IN (".substr($str_habitat_id, 0, -2).") AND";
+			$str_habitat_id = " AND id_habitat IN $4";
 		}
 
 
@@ -100,8 +94,12 @@ Class search_result extends base_module
 			];
 
 		if(!$all)
-			$sql_annonce->where = [$str_pays_id, $str_habitat_id, "", "id_type_vacances = '".$type_id."'", "AND", "active = '1'"];
-		
+			$sql_annonce->where = [
+						"id_type_vacances = $1 AND active = $2".$str_pays_id.$str_habitat_id."", 
+							[$type_id, "1", (isset($pays[0])?$pays:""), (isset($habitat[0])?$habitat:"")]];
+		else
+			$sql_annonce->where = ["1"];
+
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 
 		if(!empty($res_sql_annonces))
@@ -111,7 +109,7 @@ Class search_result extends base_module
 				$sql_date = new stdClass();
 				$sql_date->table = ["date_annonces"];
 				$sql_date->var = ["start_date", "end_date", "prix"];
-				$sql_date->where = ["id_annonces = '".$row_annonces->id."'"];
+				$sql_date->where = ["id_annonces = $1", [$row_annonces->id]];
 				$res_sql_date = $this->_app->sql->select($sql_date);
 				$res_sql_annonces[$key]->dates = $res_sql_date;
 			}

@@ -28,7 +28,7 @@ Class my_account extends base_module
 		//on vas chercher toute les infos de l'utilisateur avec son login id
 		$sql_user = new stdClass();
 		$sql_user->table = ['login', "utilisateurs"];
-		$sql_user->where = ["id = ".$this->_app->user->id];
+		$sql_user->where = ["id = $1", [$this->_app->user->id]];
 		$res_sql = $this->_app->sql->select($sql_user);
 		$this->_app->user = $res_sql[0];
 		
@@ -38,14 +38,14 @@ Class my_account extends base_module
 			$sql_nb_annonce = new stdClass();
 			$sql_nb_annonce->table = ['annonces'];
 			$sql_nb_annonce->var = "COUNT(id) as nb";
-			$sql_nb_annonce->where = ["id_proprio = ".$this->_app->user->id_utilisateurs];
+			$sql_nb_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
 			$this->_app->user->nb_annonces = $res_sql_nb[0]->nb;
 
 			$sql_vues = new stdClass();
 			$sql_vues->table = ['annonces'];
 			$sql_vues->var = ["vues"];
-			$sql_vues->where = ["id_proprio = ".$this->_app->user->id_utilisateurs, "AND", "vues > 0"];
+			$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
 			$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
 				affiche_pre($res_sql_nb_vues);
 

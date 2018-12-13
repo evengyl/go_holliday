@@ -17,7 +17,7 @@ Class admin_push_bsd extends base_module
 		$req_sql = new stdClass();
 		$req_sql->table = ["_option"];
 		$req_sql->var = ["value"];
-		$req_sql->where = ["name = 'version'"];
+		$req_sql->where = ["name = $1", ['version']];
 		$req_sql->limit ="1";
 		$res_sql = $_app->sql->select($req_sql);
 

@@ -23,7 +23,7 @@ Class admin_unit_test extends base_module
 					"test_enfant" => ["id_famille", "id", "enfant_name_1", "enfant_name_2", "enfant_name_3"]
 				];
 	$sql->var_translate = ["test_pays" => ['name']];
-	$sql->where = ["pays", "NOT LIKE", "belgique"];
+	$sql->where = ["pays LIKE $1", ["belgique"]];
 	$sql->order = ["id" => "DESC"];
 	$sql->limit = "1";
 

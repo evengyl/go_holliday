@@ -40,7 +40,7 @@ Class sign_up extends base_module
 	    		$req_sql = new stdClass;
 				$req_sql->table = ["login"];
 				$req_sql->var = ["login"];
-				$req_sql->where = ["login = '".$pseudo."'"];
+				$req_sql->where = ["login = $1", [$pseudo]];
 				$res_sql = $this->_app->sql->select($req_sql);
 
 				//si le pseudo n'est pas existant on peux créer le login

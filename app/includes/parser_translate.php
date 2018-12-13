@@ -32,7 +32,7 @@ class parser_translate
 			$sql->table = ["translate"];
 			$sql->var = ["id", "name_code"];
 			$sql->var_translate = ["translate" => ["name"]];
-			$sql->where = ["name_code = '".$row_translate."'"];
+			$sql->where = ["name_code = $1", [$row_translate]];
 			$res_sql = $this->_app->sql->select($sql);
 
 			if(!empty($res_sql))

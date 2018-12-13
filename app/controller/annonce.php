@@ -27,7 +27,7 @@ Class annonce extends base_module
 		$sql_verif = new stdClass();
 		$sql_verif->table = ["annonces"];
 		$sql_verif->var = ["*"];
-		$sql_verif->where = ["id = '".(int)$_GET['id_annonce']."'"];
+		$sql_verif->where = ["id = $1", [(int)$_GET['id_annonce']]];
 		$res_sql_verif = $this->_app->sql->select($sql_verif);
 		$res_sql_verif = $res_sql_verif[0];
 

@@ -54,7 +54,7 @@ Class admin extends base_module
 			$req_sql = new stdClass();
 			$req_sql->table = ['login'];
 			$req_sql->var = ["level"];
-			$req_sql->where = ["login = '".$login."'"];
+			$req_sql->where = ["login = $1", [$login]];
 			$res_sql = $this->_app->sql->select($req_sql);
 			return $res_sql[0]->level;
 		}
