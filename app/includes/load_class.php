@@ -40,7 +40,8 @@ class Autoloader
 
 
             case "_app":
-            case "app_init":                
+            case "app_init":   
+            case "can_do_user":             
             case "parser":
             case "parser_translate":
             case "lang_select":

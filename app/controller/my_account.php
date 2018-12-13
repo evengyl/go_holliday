@@ -3,6 +3,7 @@
 Class my_account extends base_module
 {
 	public $_app;
+	public $annonces;
 
 	public function __construct(&$_app)
 	{		
@@ -16,6 +17,9 @@ Class my_account extends base_module
 
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
+
+		//récupérations des annonces de l'utilisateur
+		$this->get_list_annonce_user();
 
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
@@ -47,10 +51,12 @@ Class my_account extends base_module
 			$sql_vues->var = ["vues"];
 			$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
 			$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
-				affiche_pre($res_sql_nb_vues);
 
-			//$this->_app->user->nb_vues = $res_sql_nb[0]->nb;
+			$count = 0;
+			foreach($res_sql_nb_vues as $row)
+				$count += (int)$row->vues;
 
+			$this->_app->user->nb_vues_total = $count;	
 		}
 		else if($this->_app->user->user_type == 1){
 			$this->_app->user->nb_annonces = "Vous n'êtes pas annonceurs VIP";	
@@ -71,6 +77,16 @@ Class my_account extends base_module
 		$this->_app->user->user_type_name = $array_user_type[$this->_app->user->user_type];
 
 		
+	}
+
+	public function get_list_annonce_user()
+	{
+		$sql_annonce = new stdClass();
+		$sql_annonce->table = ['annonces'];
+		$sql_annonce->var = ["*"];
+		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
+		$this->annonces = $res_sql_annonces;
 	}
 
 	public function set_infos_user()

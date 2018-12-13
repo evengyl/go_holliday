@@ -43,3 +43,7 @@ echo $page;
 $_app->admin_tools();
 
 affiche_pre($_app);
+
+
+
+affiche_pre($_app->can_do_user);

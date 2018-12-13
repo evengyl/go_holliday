@@ -14,7 +14,8 @@ class app_init
 			$this->init_table_login();
 		}
 		
-		$_app->option_app = $this->get_app_option();
+		$this->_app->option_app = $this->get_app_option();
+		
 	}
 
 	private function get_app_option()

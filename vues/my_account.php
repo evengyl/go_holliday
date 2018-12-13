@@ -39,82 +39,17 @@
                     </div>
                     <div class="col-lg-4">
                         <h4>
-                        	15687<br>
+                        	<?= $infos_user->nb_vues_total ?><br>
                         	<small>Vues</small>
                         </h4>
                     </div>
                     <div class="col-lg-4">
                         <h4>
-                        	12<br>
-                        	<small>Messages</small>
+                        	0<br>
+                        	<small>Messages non lus</small>
                         </h4>
                     </div>
                 </div>
-            </div>
-
-            <div class="block_annonces">
-                <h4 class="title">Annonces actives</h4><hr>
-                <ul class="list-unstyled team-members">
-                    <li>
-                    	<div class="row" style="padding-left:15px; padding-right:15px;">
-                            <div class="col-xs-3">
-                                <div class="avatar">
-                                    <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                Nom de l'annonce
-                                <br />
-                                <span class="text-muted"><small>154 Vues</small></span>
-                            </div>
-
-                            <div class="col-xs-3 text-right">
-                                <btn class="btn btn-success" style="padding:10px 20px;"><i class="fa fa-angle-double-right "></i></btn>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
-                    <li>
-                    	<div class="row" style="padding-left:15px; padding-right:15px;">
-                            <div class="col-xs-3">
-                                <div class="avatar">
-                                    <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                Nom de l'annonce
-                                <br />
-                                <span class="text-muted"><small>248 Vues</small></span>
-                            </div>
-
-                            <div class="col-xs-3 text-right">
-                                <btn class="btn btn-success" style="padding:10px 20px;"><i class="fa fa-angle-double-right "></i></btn>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-
-                    <li>
-                    	<div class="row" style="padding-left:15px; padding-right:15px;">
-                            <div class="col-xs-3">
-                                <div class="avatar">
-                                    <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                Nom de l'annonce
-                                <br />
-                                <span class="text-muted"><small>149 Vues</small></span>
-                            </div>
-
-                            <div class="col-xs-3 text-right">
-                                <btn class="btn btn-success" style="padding:10px 20px;"><i class="fa fa-angle-double-right "></i></btn>
-                            </div>
-                        </div>
-                        <hr>
-                    </li>
-                </ul>
             </div>
         </div>
 
