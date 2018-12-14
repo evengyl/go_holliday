@@ -84,13 +84,14 @@ Class search_result extends base_module
 
 
 		$sql_annonce = new stdClass();
-		$sql_annonce->table = ["annonces", "pays", "habitat", "utilisateurs", "type_vacances"];
+		$sql_annonce->table = ["annonces", "pays", "habitat", "utilisateurs", "type_vacances", "date_annonces"];
 		$sql_annonce->var = [
 				"annonces" => ["id", "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active"],
 				"pays" => ["name AS name_pays"],
 				"habitat" => ["name AS name_habitat"],
 				"utilisateurs" => ["name AS name_proprio", "last_name AS lastname_proprio", "genre"],
-				"type_vacances" => ["name AS name_type_vacances"]
+				"type_vacances" => ["name AS name_type_vacances"],
+				"date_annonces" => ["start_date", "end_date", "prix"]
 			];
 
 		if(!$all)
@@ -101,21 +102,6 @@ Class search_result extends base_module
 			$sql_annonce->where = ["1"];
 
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
-
-		if(!empty($res_sql_annonces))
-		{
-			foreach($res_sql_annonces as $key => $row_annonces)
-			{
-				$sql_date = new stdClass();
-				$sql_date->table = ["date_annonces"];
-				$sql_date->var = ["start_date", "end_date", "prix"];
-				$sql_date->where = ["id_annonces = $1", [$row_annonces->id]];
-				$res_sql_date = $this->_app->sql->select($sql_date);
-				$res_sql_annonces[$key]->dates = $res_sql_date;
-			}
-		}
-		else
-			$res_sql_annonces = array();
 
 		return $res_sql_annonces;
 	}

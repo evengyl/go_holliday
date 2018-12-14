@@ -18,13 +18,17 @@ Class my_account extends base_module
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
 
-		//récupérations des annonces de l'utilisateur
-		$this->get_list_annonce_user();
+		if($this->_app->can_do_user->view_infos_annonce)
+		{
+			//récupérations des annonces de l'utilisateur
+			$this->get_list_annonce_user();
+		}
+		
 
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
 
-		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->render_tpl();
+		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->assign_var("annonces", $this->annonces)->render_tpl();
 	}
 
 	public function get_infos_user()
@@ -65,28 +69,32 @@ Class my_account extends base_module
 			$this->_app->user->nb_annonces = "Vous ne pouvez pas créer d'annonce";
 		}
 
-		$this->parse_user_infos();
 
 
-	}
-
-	public function parse_user_infos()
-	{
-		$array_user_type = [0 => "Utilisateur Standard", 1 => "Annonceurs Gratuit", 2 => "Annonceurs V.I.P"];
-
-		$this->_app->user->user_type_name = $array_user_type[$this->_app->user->user_type];
-
-		
 	}
 
 	public function get_list_annonce_user()
 	{
 		$sql_annonce = new stdClass();
-		$sql_annonce->table = ['annonces'];
-		$sql_annonce->var = ["*"];
+		$sql_annonce->table = ['annonces', "date_annonces"];
+		$sql_annonce->var = [
+			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active", "create_date", "vues"],
+			"date_annonces" => ["start_date", "end_date", "prix"]
+		];
+
 		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 		$this->annonces = $res_sql_annonces;
+
+		foreach($this->annonces as $key => $row_annonce)
+		{
+			$sql_message = new stdClass();
+			$sql_message->table = ['private_message'];
+			$sql_message->var = "COUNT(id) as nb";
+			$sql_message->where = ["id_annonces_link = $1", [$row_annonce->id]];
+			$res_sql_message = $this->_app->sql->select($sql_message);
+			$this->annonces[$key]->message = $res_sql_message[0];
+		}
 	}
 
 	public function set_infos_user()

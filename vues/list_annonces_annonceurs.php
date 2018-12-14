@@ -1,11 +1,8 @@
 <h4 class="title">Listes de vos annonces</h4><hr>
-<ul class="list-unstyled list_annonces_max">
-
-    <?
-    $i = 0;
-    while($i < 10)
+<ul class="list-unstyled list_annonces_max"><?
+    
+    foreach($annonces as $row_annonce)
     {?>
-        
         <li>
             <div class="row" style="padding-left:15px; padding-right:15px;">
                 <div class="col-xs-2">
@@ -14,19 +11,19 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <b>Nom de l'annonce</b>
+                    <b><?= $row_annonce->name_annonce ?></b>
                     <br>
-                    <span class="text-muted"><small>Date d'ajout : 12/12/2018</small></span>
+                    <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
                     <br>
-                    <span class="text-muted"><small>154 Vues</small></span>
+                    <span class="text-muted"><small><?= $row_annonce->vues ?> Vues</small></span>
                     <br>
-                    <span class="text-muted"><small>Date : du <b>01/01/1991</b> au <b>31/12/2018</b></small></span>
+                    <span class="text-muted"><small>Date : du <b><?= $row_annonce->start_date ?></b> au <b><?= $row_annonce->end_date ?></b></small></span>
                     <br>
-                    <span class="text-muted"><small>Prix demandé : <b style="color:red;">250 €</b></small></span>
+                    <span class="text-muted"><small>Prix demandé : <b style="color:orange;"><?= $row_annonce->prix ?> €</b></small></span>
                     <br>
-                    <span class="text-muted"><small>Nombre de demandes : <b style="color:green;">123</b></small></span>
+                    <span class="text-muted"><small>Nombre de demandes : <b style="color:green;"><?= $row_annonce->message->nb ?></b></small></span>
                     <br>
-                    <span class="text-muted"><small>Active : <b style="color:green;">Oui</b></small></span>
+                    <span class="text-muted"><small>Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                 </div>
 
                 <div class="col-xs-6 text-right">
@@ -39,7 +36,6 @@
             </div>
             <hr><hr>
         </li><?
-        $i++;
-    }    ?>
+    }?>
 
 </ul>
