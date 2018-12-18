@@ -7,25 +7,25 @@
 			</header>
 			<form action="#" method="post" >
 				<div class="row">
-					<div class="col-sm-4">
-						<input class="form-control" name="name" type="text" required placeholder="Votre Nom et/ou Prénom">
+					<div class="col-xs-12 col-sm-4">
+						<input class="form-control" name="name" type="text" required value="<?=(isset($_app->user->name)?$_app->user->name:'') ?>" placeholder="Votre Nom et/ou Prénom">
 					</div>
-					<div class="col-sm-4">
-						<input class="form-control" name="email" type="email" required placeholder="Adresse Email (pas de pub)">
+					<div class="col-xs-12 col-sm-4">
+						<input class="form-control" name="email" type="email" required value="<?=(isset($_app->user->email)?$_app->user->email:'') ?>" placeholder="Adresse Email">
 					</div>
-					<div class="col-sm-4">
-						<input class="form-control" name="phone" type="text" Reqired placeholder="Téléphone (pas de pub)">
+					<div class="col-xs-12 col-sm-4">
+						<input class="form-control" name="phone" type="text" value="<?=(isset($_app->user->tel)?$_app->user->tel:'') ?>"  Reqired placeholder="Téléphone (pas de pub)">
 					</div>
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xs-12 col-sm-12">
 						<textarea placeholder="Votre message / demande" required name="text" type="text" class="form-control" rows="9"></textarea>
 					</div>
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-sm-12 text-right">
+					<div class="col-xs-12 col-sm-12 text-right">
 						<input type="hidden" name="return_post_contact" value="1">
 						<input class="btn btn-action" type="submit" value="__TRANS_envoyer__">
 					</div>
@@ -34,7 +34,7 @@
 
 		</article>
 
-		<aside class="col-sm-3 sidebar sidebar-right">
+		<aside class="col-xs-12 col-sm-3 sidebar sidebar-right">
 			<div class="widget">
 				<h4>__TRANS__contact_detail__</h4>
 				<address>
@@ -50,6 +50,3 @@
 	</div>
 </div>
 
-<section class="container-full top-space">
-	<div id="map"></div>
-</section>

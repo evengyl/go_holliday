@@ -18,7 +18,7 @@
                 	</div>
           			
           			<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
-              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->user_type_name ?></small></p>
+              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->txt["infos_type_user"] ?></small></p>
                 </div>
                 <p class="text-muted">
                 	<small>@Adresse Email : <?= $infos_user->email ?></small>
@@ -34,7 +34,7 @@
                     <div class="col-lg-4">
                         <h4>
                         	<?= $infos_user->nb_annonces ?><br>
-                    		<small>Annonces actives</small>
+                    		<small><?= $this->_app->user->txt['infos_annonces_active']; ?></small>
                     	</h4>
                     </div>
                     <div class="col-lg-4">

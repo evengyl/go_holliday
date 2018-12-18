@@ -51,7 +51,7 @@ Class login extends base_module
 			$req_sql->table = ["login", "utilisateurs"];
 			$req_sql->var = [
 				"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
-				"utilisateurs" => ["name AS name_proprio", "last_name AS lastname_proprio", "genre", "user_type"],
+				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel"],
 			];
 			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 			$res_fx = $this->_app->sql->select($req_sql,1);	

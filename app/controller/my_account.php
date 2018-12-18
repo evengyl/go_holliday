@@ -12,8 +12,6 @@ Class my_account extends base_module
 		
 		parent::__construct($this->_app);
 
-		//le form est déclarer autre part mais je peux quand même l'utiliser ici le POST car il font partie de la même page de module
-		$this->set_infos_user();
 
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
@@ -28,6 +26,8 @@ Class my_account extends base_module
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
 
+		affiche_pre($this->_app->user);
+
 		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->assign_var("annonces", $this->annonces)->render_tpl();
 	}
 
@@ -41,16 +41,27 @@ Class my_account extends base_module
 		$this->_app->user = $res_sql[0];
 		
 		//on va compter le nombre d'annonce que l'utilisateur a si il est au bon level
-		if($this->_app->user->user_type == 2)
+		if($this->_app->user->user_type == 0)
 		{
+			$this->_app->user->nb_annonces = "Vous ne pouvez pas créer d'annonce";
+			$this->_app->user->nb_vues_total = "Vous n'êtes pas annonceurs VIP";
+			$this->_app->user->txt['infos_type_user'] = "Client à la recherche de vacances";
+		}
+
+		if($this->_app->user->user_type >= 1){
 			$sql_nb_annonce = new stdClass();
 			$sql_nb_annonce->table = ['annonces'];
 			$sql_nb_annonce->var = "COUNT(id) as nb";
 			$sql_nb_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
 			$this->_app->user->nb_annonces = $res_sql_nb[0]->nb;
+			$this->_app->user->nb_vues_total = "Vous n'êtes pas annonceurs VIP";
+			$this->_app->user->txt['infos_annonces_active'] = "Vos annonces sont inactives";
+			$this->_app->user->txt['infos_type_user'] = "Annonceur sans abonnement";
+		}
 
-			$sql_vues = new stdClass();
+		if($this->_app->user->user_type >= 2){
+				$sql_vues = new stdClass();
 			$sql_vues->table = ['annonces'];
 			$sql_vues->var = ["vues"];
 			$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
@@ -61,15 +72,9 @@ Class my_account extends base_module
 				$count += (int)$row->vues;
 
 			$this->_app->user->nb_vues_total = $count;	
+			$this->_app->user->txt['infos_annonces_active'] = "Annonces actives";
+			$this->_app->user->txt['infos_type_user'] = "Annonceur VIP";
 		}
-		else if($this->_app->user->user_type == 1){
-			$this->_app->user->nb_annonces = "Vous n'êtes pas annonceurs VIP";	
-		}
-		else if($this->_app->user->user_type == 0){
-			$this->_app->user->nb_annonces = "Vous ne pouvez pas créer d'annonce";
-		}
-
-
 
 	}
 
@@ -95,11 +100,6 @@ Class my_account extends base_module
 			$res_sql_message = $this->_app->sql->select($sql_message);
 			$this->annonces[$key]->message = $res_sql_message[0];
 		}
-	}
-
-	public function set_infos_user()
-	{
-
 	}
 
 
