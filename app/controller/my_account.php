@@ -26,7 +26,6 @@ Class my_account extends base_module
 		if(isset($_POST['return_post_account_pass_change']))
 			$this->change_infos($_POST);
 
-		affiche_pre($this->_app->user);
 
 		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->assign_var("annonces", $this->annonces)->render_tpl();
 	}
@@ -36,8 +35,12 @@ Class my_account extends base_module
 		//on vas chercher toute les infos de l'utilisateur avec son login id
 		$sql_user = new stdClass();
 		$sql_user->table = ['login', "utilisateurs"];
+		$sql_user->var = [
+			'login' => ["id", "login", "password", "email", "level", "id_utilisateurs"], 
+			"utilisateurs" => ["*"]];
 		$sql_user->where = ["id = $1", [$this->_app->user->id]];
-		$res_sql = $this->_app->sql->select($sql_user);
+		$res_sql = $this->_app->sql->select($sql_user,1);
+
 		$this->_app->user = $res_sql[0];
 		
 		//on va compter le nombre d'annonce que l'utilisateur a si il est au bon level

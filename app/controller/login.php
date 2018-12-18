@@ -21,17 +21,18 @@ Class login extends base_module
 			Config::$is_connect = $this->check_session($_POST);
 
 		else if(isset($_SESSION['pseudo']))
-            Config::$is_connect =  1;
+            Config::$is_connect =  $this->check_session("", $check_only = true);
 
 		else
             Config::$is_connect =  0;
 
+
+
 		//on check si connecter, si oui on set les infos user dans le app
 		if(Config::$is_connect)
-			$this->_app->user = $this->set_user_infos($this->_app);
+			$this->_app->user = $this->set_user_infos_on_app($this->_app);
 		else
 			$this->_app->user = [];
-
 
         
         // on set le bread
@@ -43,7 +44,7 @@ Class login extends base_module
 
 	}
 
-	private function set_user_infos()
+	private function set_user_infos_on_app()
 	{
 		if(empty($this->_app->user))
 		{
@@ -54,12 +55,12 @@ Class login extends base_module
 				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel"],
 			];
 			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-			$res_fx = $this->_app->sql->select($req_sql,1);	
+			$res_fx = $this->_app->sql->select($req_sql);	
 			return $res_fx[0];
 		}
 	}
 
-	public function check_session($post)
+	public function check_session($post = array(), $check_only = false)
 	{
 		if(isset($post['connect_form']))
 		{
@@ -163,8 +164,26 @@ Class login extends base_module
 		    }
 		    return 0;
 		}
+		else if($check_only)
+		{
+			//on vérifie juste la connexion pour le mettre en mode conneceté la session est déjà remplie
+			if(isset($_SESSION['pseudo']))
+			{
+				$req_sql = new StdClass();
+	           	$req_sql->table = ["login"];
+	           	$req_sql->var = ["login"];
+	           	$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
+				$res_fx = $this->_app->sql->select($req_sql);
+
+				if(isset($res_fx[0]->login))
+					return 1;
+				else
+					return 0;
+			}
+		}
 		else
 		{
+			//alors ici ou le client a tenter une session hack
 			$_SESSION['error_login'] = "Attention, Le clients à tenter quelque chose avec le formulaire";
 			return 0;
 		}
