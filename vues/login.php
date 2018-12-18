@@ -82,7 +82,7 @@ else
 			</article>
 		</div>
 	</div><?
-	unset($_SESSION['error_login']); // permet de ne pas afficher les erreurs de connection si on reload la page
+	
 	
 }
 
@@ -102,7 +102,7 @@ else
 				nous vous enverrons un Mail contenant votre mot de passe</p>
 				<form action="#" method="post">
 					<div class="col-xs-12 form-group">
-						<input name="pseudo_mail" type="text" class="form-control" required autofocus placeholder="Pseudo / Email">
+						<input name="pseudo_mail" minlength="6" type="text" class="form-control" required autofocus placeholder="Pseudo / Email">
 					</div>
 					<input type="hidden" name="lost_login_form">
 					<button type="submit" class="col-xs-12 btn btn-action">Récupérer votre mot de passe</button>
@@ -111,3 +111,9 @@ else
 		</div>
 	</div>
 </div>
+
+<?
+
+unset($_SESSION['error_login']); // permet de ne pas afficher les erreurs de connection si on reload la page
+
+?>

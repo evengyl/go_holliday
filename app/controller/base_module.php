@@ -88,13 +88,26 @@ Class base_module
 
 	}
 
-	public function check_post_login($text, $is_pseudo = 0)
+	public function check_post_login_login($text)
 	{
 		$text = trim($text);
 		$text = htmlentities($text);
 		$nb_char = strlen($text);
 
-		$caractere_min = ($is_pseudo)? 4 : 6;
+		$caractere_min = 6;
+		if($nb_char < $caractere_min)
+			return 0;	
+		else
+			return $text;
+	}
+
+	public function check_post_login_password($text)
+	{
+		$text = trim($text);
+		$text = htmlentities($text);
+		$nb_char = strlen($text);
+
+		$caractere_min = 6;
 		if($nb_char < $caractere_min)
 			return 0;		
 		else

@@ -38,7 +38,9 @@ $_app->navigation = new navigation($_app);
 
 
 //va être appeler a chaque démarage de script page et va checker si le user est connecter ou pas.
-new login($_app);
+
+$security = new security($_app);
+$security->check_session(); 
 
 $_app->can_do_user = new can_do_user($_app);
 	

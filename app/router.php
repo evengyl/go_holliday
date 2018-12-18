@@ -83,16 +83,16 @@ Class router
 	}
 
 	
-	protected function assign_mod($specific_module = false, $module_secondaire = false, $var_module = false, $tpl = false)
+	protected function assign_mod($module = false, $module_secondaire = false, $var_module = false, $tpl = false)
 	{
 		$pre_echo_mod = "";
 		
 		//si is connect nous retourne false c'est qu'il n'est pas loggé et donc come on a appeler is_connect c'est pour qu'il soit logger, donc on renvoi vers login.php
 		if($this->is_connect === false)
-			$specific_module = "login";
+			$module = "login";
 
 
-		if($specific_module)
+		if($module)
 			$pre_echo_mod = "__MOD";
 
 
@@ -105,8 +105,8 @@ Class router
 		if($tpl)
 			$pre_echo_mod = "__TPL_".$tpl;
 
-		if($specific_module)
-			$pre_echo_mod .= $specific_module;
+		if($module)
+			$pre_echo_mod .= $module;
 			
 
 		if($var_module)
@@ -114,7 +114,6 @@ Class router
 
 
 		$pre_echo_mod .= "__";
-
 
 		echo $pre_echo_mod;
 	}

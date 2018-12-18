@@ -3,31 +3,28 @@ Class login extends base_module
 {
 	public $_app;
 
-	public function __construct(&$_app)
+	public function __construct(&$_app, $check_only = false)
 	{
 		$this->_app = $_app;
-
-		//on met le nom du module dans le app pour l'envoyer a base module
 		$this->_app->module_name = __CLASS__;
 		parent::__construct($this->_app);
 
 
-		if(!$this->_app->option_app['app_with_login_option'])
+		if($this->_app->option_app['app_with_login_option'] == false)
 			$this->get_html_tpl = $this->use_template('home')->render_tpl();
 
 
+		if(isset($_POST['lost_login_form']))
+			$this->restore_password($_POST);
+
+
 		//va checker a chaque page si on est bien logger
-		if(isset($_POST['connect_form']) || isset($_POST['lost_login_form'])) 
-			Config::$is_connect = $this->check_session($_POST);
-
-		else if(isset($_SESSION['pseudo']))
-            Config::$is_connect =  $this->check_session("", $check_only = true);
-
+		if(isset($_POST['connect_form'])) 
+			Config::$is_connect = $this->check_form_session($_POST);
 		else
             Config::$is_connect =  0;
 
-
-
+        
 		//on check si connecter, si oui on set les infos user dans le app
 		if(Config::$is_connect)
 			$this->_app->user = $this->set_user_infos_on_app($this->_app);
@@ -60,14 +57,14 @@ Class login extends base_module
 		}
 	}
 
-	public function check_session($post = array(), $check_only = false)
+	public function check_form_session($post = array())
 	{
 		if(isset($post['connect_form']))
 		{
 		    if(isset($post["pseudo"]) && isset($post["password"]))
 		    {
-		    	$pseudo = $this->check_post_login($post['pseudo'], $is_pseudo = 1);
-		    	$password = $this->check_post_login($post['password']);
+		    	$pseudo = $this->check_post_login_login($post['pseudo'], $is_pseudo = 1);
+		    	$password = $this->check_post_login_password($post['password']);
 
 		    	if(!$pseudo || !$password)
 		    	{
@@ -123,70 +120,50 @@ Class login extends base_module
 		        return 0;
 		    }
 		}
-		else if(isset($post['lost_login_form']))
-		{
-		    if(isset($post["pseudo_mail"]))
-		    {
-		    	$pseudo = $this->check_post_login($post['pseudo_mail'], $is_pseudo = 1);
-
-		    	if(!$pseudo)
-		    	{
-		    		$_SESSION['error_login'] = "!! Attention votre login est trop court !!";
-		    		return 0;
-		    	}
-		    	else
-		    	{	
-		           	$req_sql = new StdClass();
-		           	$req_sql->table = ["login"];
-		           	$req_sql->var = ["login", "password", "password_no_hash", "email"];
-		           	$req_sql->where = ["login = $1 OR email = $2", [$pseudo, $pseudo]];
-					$res_fx = $this->_app->sql->select($req_sql, 1);
-
-					affiche_pre($res_fx);
-/*
-		            if(empty($res_fx))
-		            {
-		                $_SESSION['error_login'] = 'Login incorrect pour la récupération de mot de passe.';
-		            }
-		            else
-		            {
-		            	$res_fx = $res_fx[0];
-		            	unset($_SESSION['error_login']);
-		            	unset($post);
-		            	$subject = "Voici votre mot de passe : ".$res_fx->password_no_hash;
-						mail($res_fx->email, "Recupération de mot de passe.", $subject);
-		            }*/
-		    	}
-		    }
-		    else
-		    {
-		        $_SESSION['error_login'] = 'Formulaire mal rempli';
-		    }
-		    return 0;
-		}
-		else if($check_only)
-		{
-			//on vérifie juste la connexion pour le mettre en mode conneceté la session est déjà remplie
-			if(isset($_SESSION['pseudo']))
-			{
-				$req_sql = new StdClass();
-	           	$req_sql->table = ["login"];
-	           	$req_sql->var = ["login"];
-	           	$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-				$res_fx = $this->_app->sql->select($req_sql);
-
-				if(isset($res_fx[0]->login))
-					return 1;
-				else
-					return 0;
-			}
-		}
+		
+		
 		else
 		{
 			//alors ici ou le client a tenter une session hack
 			$_SESSION['error_login'] = "Attention, Le clients à tenter quelque chose avec le formulaire";
 			return 0;
 		}
+	}
+
+	private function restore_password($post)
+	{
+		affiche_pre($_POST);
+	    if(isset($post["pseudo_mail"]))
+	    {
+	    	$pseudo = $this->check_post_login_login($post['pseudo_mail']);
+
+	    	if(!$pseudo)
+	    	{
+	    		$_SESSION['tmp_pseudo'] = "";
+	    		$_SESSION['error_login'] = "!! Attention votre login est trop court !!";
+	    	}
+	    	else
+	    	{	
+	           	$req_sql = new StdClass();
+	           	$req_sql->table = ["login"];
+	           	$req_sql->var = ["login", "password_no_hash", "email"];
+	           	$req_sql->where = ["login = $1 OR email = $2", [$pseudo, $pseudo]];
+				$res_fx = $this->_app->sql->select($req_sql);
+
+	            if(empty($res_fx))
+	            {
+	                $_SESSION['error_login'] = 'Login incorrect pour la récupération de mot de passe.';
+	            }/*
+	            else
+	            {
+	            	$res_fx = $res_fx[0];
+	            	unset($_SESSION['error_login']);
+	            	unset($post);
+	            	$subject = "Voici votre mot de passe : ".$res_fx->password_no_hash;
+					mail($res_fx->email, "Recupération de mot de passe.", $subject);
+	            }*/
+	    	}
+	    }
 	}
 }
 
