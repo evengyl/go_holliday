@@ -22,11 +22,32 @@ Class security extends base_module
 			$res_fx = $this->_app->sql->select($req_sql);
 
 			if(isset($res_fx[0]->login))
+			{
 				Config::$is_connect = 1;
-			
+				//si connecter, si oui on set les infos user dans le app
+				$this->_app->user = $this->set_user_infos_on_app($this->_app);
+			}
 			else
 				Config::$is_connect = 0;
 		}
+	}
+
+	private function set_user_infos_on_app()
+	{
+
+		if(empty($this->_app->user))
+		{
+			$req_sql = new stdClass;
+			$req_sql->table = ["login", "utilisateurs"];
+			$req_sql->var = [
+				"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
+				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel"],
+			];
+			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
+			$res_fx = $this->_app->sql->select($req_sql);	
+			return $res_fx[0];
+		}
+
 	}
 }
 

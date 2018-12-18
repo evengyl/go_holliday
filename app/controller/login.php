@@ -3,8 +3,10 @@ Class login extends base_module
 {
 	public $_app;
 
-	public function __construct(&$_app, $check_only = false)
+	public function __construct(&$_app)
 	{
+
+
 		$this->_app = $_app;
 		$this->_app->module_name = __CLASS__;
 		parent::__construct($this->_app);
@@ -14,48 +16,24 @@ Class login extends base_module
 			$this->get_html_tpl = $this->use_template('home')->render_tpl();
 
 
+		//si login perdu on retaure ici 
 		if(isset($_POST['lost_login_form']))
 			$this->restore_password($_POST);
 
 
-		//va checker a chaque page si on est bien logger
+		//page de connection formulaire
 		if(isset($_POST['connect_form'])) 
 			Config::$is_connect = $this->check_form_session($_POST);
-		else
-            Config::$is_connect =  0;
 
-        
-		//on check si connecter, si oui on set les infos user dans le app
-		if(Config::$is_connect)
-			$this->_app->user = $this->set_user_infos_on_app($this->_app);
-		else
-			$this->_app->user = [];
-
-        
         // on set le bread
 		if(isset($_GET['page']) && $_GET['page'] == "login")
 			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
 
-		
 		$this->get_html_tpl = $this->use_template('login')->render_tpl();
 
 	}
 
-	private function set_user_infos_on_app()
-	{
-		if(empty($this->_app->user))
-		{
-			$req_sql = new stdClass;
-			$req_sql->table = ["login", "utilisateurs"];
-			$req_sql->var = [
-				"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
-				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel"],
-			];
-			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-			$res_fx = $this->_app->sql->select($req_sql);	
-			return $res_fx[0];
-		}
-	}
+	
 
 	public function check_form_session($post = array())
 	{
