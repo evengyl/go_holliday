@@ -42,7 +42,7 @@ echo $page;
 
 $_app->admin_tools();
 
-affiche_pre($_app->user);
+affiche_pre($_app);
 
 affiche_pre($_app->option_app);
 

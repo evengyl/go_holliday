@@ -132,7 +132,6 @@ Class login extends base_module
 
 	private function restore_password($post)
 	{
-		affiche_pre($_POST);
 	    if(isset($post["pseudo_mail"]))
 	    {
 	    	$pseudo = $this->check_post_login_login($post['pseudo_mail']);
@@ -153,24 +152,27 @@ Class login extends base_module
 	            if(empty($res_fx))
 	            {
 	                $_SESSION['error_login'] = 'Login incorrect pour la récupération de mot de passe.';
-	            }/*
+	            }
 	            else
 	            {
-	            	$res_fx = $res_fx[0];
+	            	require($this->_app->base_path."/vues/tpl_mail.php");
+
+		            $title_mail = "test";
+		            $password_mail = $res_fx[0]->password_no_hash;
+		            $email_to_send = $res_fx[0]->email;
+		            $headers[] = "MIME-Version: 1.0";
+		            $headers[] = "Content-type: text/html; charset=iso-8859-1";
+
+		            ob_start();
+		            	get_tpl_mail_password_recover($title_mail, $password_mail);
+		            $tpl = ob_get_clean();
+
 	            	unset($_SESSION['error_login']);
 	            	unset($post);
-	            	$subject = "Voici votre mot de passe : ".$res_fx->password_no_hash;
-					mail($res_fx->email, "Recupération de mot de passe.", $subject);
-	            }*/
+	            	
+					mail($email_to_send, "Recupération de mot de passe.", $tpl, implode("\r\n", $headers));
+	            }
 	    	}
 	    }
 	}
 }
-
-
-/* en terme de niveau de login
-3 = superadmin
-2 = employer
-1 = client
-0 = pas de login
-*/
