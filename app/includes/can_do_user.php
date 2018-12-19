@@ -9,6 +9,8 @@ Class can_do_user
 	public $view_nb_vues_total;
 	public $view_annonce_list;
 	public $view_nb_private_message;
+	public $edit_active;
+	public $view_private_message;
 
 	public $_app;
 
@@ -27,6 +29,7 @@ Class can_do_user
 				$this->view_nb_vues_total = false;
 				$this->view_annonce_list = false;
 				$this->view_nb_private_message = false;
+				$this->edit_active = false;
 
 
 				$this->_app->user->txt_user_type = "Client à la recherche de vacances";
@@ -40,7 +43,9 @@ Class can_do_user
 				$this->view_nb_annonce = true;
 				$this->view_nb_vues_total = false;
 				$this->view_annonce_list = true;
-				$this->view_nb_private_message = false;
+				$this->view_nb_private_message = true;
+				$this->edit_active = false;
+				$this->view_private_message = true;
 
 
 				$this->_app->user->txt_user_type = "Vous n'êtes pas annonceurs VIP";
@@ -55,6 +60,8 @@ Class can_do_user
 				$this->view_nb_vues_total = true;
 				$this->view_annonce_list = true;
 				$this->view_nb_private_message = true;
+				$this->edit_active = true;
+				$this->view_private_message = true;
 
 
 				$this->_app->user->txt_user_type = "Annonceur VIP";

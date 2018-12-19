@@ -17,16 +17,16 @@
                     	<div class="in_middle"><button class="btn" style=""><i class="fa fa-cog"></i></button></div>
                 	</div>
           			<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
-              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->txt_user_type ?></small></p>
+              		<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $infos_user->txt_user_type ?></b></small></p>
                 </div>
                 <p class="text-muted">
-                	<small>@Adresse Email : <?= $infos_user->email ?></small>
+                	<small>@Adresse Email : <b><?= $infos_user->email ?></b></small>
             	</p>
             	<p class="text-muted">
-                    @Tel : <?= $infos_user->tel ?>
+                    @Tel : <b><?= $infos_user->tel ?></b>
                 </p>
                 <p class="text-muted">
-                    @Adresse : <?= $infos_user->address_numero.", Rue ".$infos_user->address_rue." à ".$infos_user->zip_code." : ".$infos_user->address_localite ?>
+                    @Adresse : <b><?= $infos_user->address_numero.", Rue ".$infos_user->address_rue." à ".$infos_user->zip_code." : ".$infos_user->address_localite ?></b>
                 </p>
                 <hr>
                 <div class="row block_suivis">

@@ -28,11 +28,14 @@
                     </div>
 
                     <div class="col-xs-6 text-right">
-                        <btn class="btn btn-success" style="padding:6px 10px; margin-top:10px;"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir l'annonce</small></btn>
-                        <btn class="btn btn-info" style="padding:6px 10px; margin-top:10px;"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn>
-                        <btn class="btn btn-danger" style="padding:6px 10px; margin-top:10px;"><small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme supprimée</small></btn>
-                        <btn class="btn btn-warning" style="padding:6px 10px; margin-top:10px;"><small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small></btn>
-                        <btn class="btn btn-info" style="padding:6px 10px; margin-top:10px;"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les demandes</small></btn>
+                        <btn class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir l'annonce</small></btn>
+                        <btn class="opt_annonce btn btn-info"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn>
+
+                        <?=($_app->can_do_user->edit_active)?'<btn class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme supprimée</small></btn>':'';?>
+
+                        <?=($_app->can_do_user->edit_annonce)?'<btn class="opt_annonce btn btn-warning"><small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small></btn>':'';?>
+
+                        <?=($_app->can_do_user->view_private_message)?'<btn class="opt_annonce btn btn-info"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les messages</small></btn>':'';?>
                     </div>
                 </div>
                 <hr><hr>
