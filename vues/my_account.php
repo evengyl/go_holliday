@@ -16,9 +16,8 @@
                   		<img class="img-circle" src="/images/autre_licences/face-0.jpg" alt="..."/>
                     	<div class="in_middle"><button class="btn" style=""><i class="fa fa-cog"></i></button></div>
                 	</div>
-          			
           			<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
-              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->txt["infos_type_user"] ?></small></p>
+              		<p class="text-muted" ><small>@Type D'utilisateur : <?= $infos_user->txt_user_type ?></small></p>
                 </div>
                 <p class="text-muted">
                 	<small>@Adresse Email : <?= $infos_user->email ?></small>
@@ -34,7 +33,7 @@
                     <div class="col-lg-4">
                         <h4>
                         	<?= $infos_user->nb_annonces ?><br>
-                    		<small><?= $this->_app->user->txt['infos_annonces_active']; ?></small>
+                    		<small>Annonces</small>
                     	</h4>
                     </div>
                     <div class="col-lg-4">

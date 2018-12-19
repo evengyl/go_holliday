@@ -27,14 +27,9 @@ Class admin extends base_module
 				else if($action == "eval")
 					$this->get_html_tpl = $this->use_module('admin_eval')->render_tpl();
 
-				else if($action == "list_user")
-					$this->get_html_tpl = $this->use_module('admin_edit_user')->render_tpl();
-
 				else if($action == "pull_bsd")
 					$this->get_html_tpl = $this->use_module('admin_pull_bsd')->render_tpl();
 
-				else if($action == "unit_test_where")
-					$this->get_html_tpl = $this->use_module('admin_unit_test')->render_tpl();
 			}
 		}
 		else // il 'agit d'office d'un essaie de piratage car la page admin n'est pas trouvable donc 404
