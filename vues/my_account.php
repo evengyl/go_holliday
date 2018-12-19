@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h4>
-                        	0<br>
+                        	<?= $infos_user->total_private_message; ?><br>
                         	<small>Messages non lus</small>
                         </h4>
                     </div>

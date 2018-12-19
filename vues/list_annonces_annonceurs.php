@@ -22,7 +22,7 @@
                         <br>
                         <span class="text-muted"><small>Prix demandé : <b style="color:orange;"><?= $row_annonce->prix ?> €</b></small></span>
                         <br>
-                        <span class="text-muted"><small>Nombre de demandes : <b style="color:green;"><?= $row_annonce->message->nb ?></b></small></span>
+                        <span class="text-muted"><small>Nombre de demandes : <b style="color:green;"><?= $row_annonce->message ?></b></small></span>
                         <br>
                         <span class="text-muted"><small>Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                     </div>
