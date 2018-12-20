@@ -16,7 +16,8 @@ Class my_account extends base_module
 		
 		
 		//récupérations des annonces de l'utilisateur
-		$this->get_list_annonce_user();
+		$limit_pagination = $this->set_limit_pagination((isset($_GET['num_page'])?(int)$_GET['num_page']:1));
+		$this->get_list_annonce_user($limit_pagination);
 
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
@@ -86,29 +87,33 @@ Class my_account extends base_module
 
 	}
 
-	public function get_list_annonce_user()
+	public function set_limit_pagination($num_page)
 	{
-		$this->_app->user->total_private_message = 0;
-
 		//part pagination LIMIT
-		if(isset($_GET['num_page']) && $_GET['num_page'] != 1)
+		if(isset($num_page) && $num_page != 1)
 		{
-			$limit_get = (int)$_GET['num_page'];
+			$limit_get = (int)$num_page;
 			$max_limit = $limit_get*10;
 			$min_limit = $max_limit-10;
-			$limit_current = $min_limit .", ". $max_limit;
+			$limit = $min_limit .", ". $max_limit;
 			$this->num_page["active"] = $limit_get;
 			$this->num_page["prev"] = $limit_get-1;
 			$this->num_page["next"] = $limit_get+1;
 		}
 		else
 		{
-			$limit_current = "0, 10";
+			$limit = "0, 10";
 			$this->num_page["active"] = 1;
 			$this->num_page["prev"] = 1;
 			$this->num_page["next"] = 2;
 		}
 
+		return $limit;
+	}
+
+	public function get_list_annonce_user($pagination_limit)
+	{
+		$this->_app->user->total_private_message = 0;
 
 		//part sql annonces list
 		if($this->_app->can_do_user->view_annonce_list)
@@ -119,7 +124,7 @@ Class my_account extends base_module
 				"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active", "create_date", "vues"],
 				"date_annonces" => ["start_date", "end_date", "prix"]
 			];
-			$sql_annonce->limit = $limit_current;
+			$sql_annonce->limit = $pagination_limit;
 			$sql_annonce->order = "id";
 
 			$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
