@@ -127,7 +127,7 @@
 
 
     <div class="text-center col-md-12"><hr>
-    	<input type="hidden" name="rand_id" value="<?= $rand_id ?>">
+    	<input type="hidden" name="rand_id_update_profil" value="<?= $rand_id_update_profil ?>">
         <button type="submit" class="btn btn-success btn-fill btn-wd">Update Profile</button>
     </div>
     <div class="clearfix"></div>

@@ -22,7 +22,7 @@ if($_app->can_do_user->view_infos_annonce)
 
         foreach($annonces as $row_annonce)
         {?>
-            <li>
+            <li><hr>
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
                         <div class="avatar_annonce">
@@ -56,7 +56,7 @@ if($_app->can_do_user->view_infos_annonce)
                         <?=($_app->can_do_user->view_private_message)?'<btn class="opt_annonce btn btn-info"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les messages</small></btn>':'';?>
                     </div>
                 </div>
-                <hr><hr>
+                <hr>
             </li><?
         }?>
 

@@ -21,10 +21,17 @@ Class my_account extends base_module
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
 		
-		//affiche_pre($_app->user);
+		//part change password
 
-		if(isset($_POST['return_post_account_pass_change']))
-			$this->change_infos($_POST);
+		//on check le form avec la session du random id form
+		if(isset($_SESSION['rand_id_form_change_password']) && isset($_POST['return_post_account_pass_change']))
+		{
+			if($_SESSION['rand_id_form_change_password'] == $_POST['return_post_account_pass_change'])
+				$this->change_infos($_POST);
+		}
+		$rand_id_form = rand();
+		$_SESSION['rand_id_form_change_password'] = $rand_id_form;
+			
 
 
 		$this->get_html_tpl =  $this->assign_var("nb_page", $this->nb_page)
@@ -32,6 +39,7 @@ Class my_account extends base_module
 									->assign_var('_app', $this->_app)
 									->assign_var('infos_user', $this->_app->user)
 									->assign_var("annonces", $this->annonces)
+									->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
 								->render_tpl();
 	}
 
@@ -145,64 +153,30 @@ Class my_account extends base_module
 
 	public function change_infos($post)
 	{
+		affiche_pre($post);
 
-		if($post['return_post_account_pass_change'] == 18041997)
-		{
-		    if(isset($post["password-new_1"]) && isset($post["password-new_2"]))
-		    {
-		    	if($post['password-new_1'] != "" && $post['password-new_2'] != "")
-		    	{
-			    	$password = $this->check_post_login($post['password-new_1']);
-			    	$password_verification = $this->check_post_login($post['password-new_2']);
+    	$password = $this->check_post_login_password($post['password-new']);
 
-			    	if($password == '0' || $password_verification == '0')
-			    	{
-			    		$_SESSION['error'] = "!! Attention votre mot de passe est trop court !!";
-			    		return 0;
-			    	}
-			    	else if($password != $password_verification)
-			    	{
-			    		$_SESSION['error'] = "Les mots de passe ne correspondent pas.";
-			    		return 0;
-			    	}
-			    	else
-			    	{
-			    		$req_sql = new stdClass;
-						$req_sql->table = "login";
-						$req_sql->ctx = new stdClass;
-						$req_sql->ctx->password_no_hash = $password;
-						$req_sql->ctx->password = $password = password_hash($password, PASSWORD_DEFAULT);
-						$req_sql->where = "login = '".$this->user->user_infos->login."'";
-						$res_sql = $this->user->update($req_sql);
+    	if($password == '0')
+    	{
+    		$_SESSION['error_change_password'] = "!! Attention votre mot de passe est trop court !!";
+    		return 0;
+    	}
+    	else
+    	{
+    		$req_sql = new stdClass;
+			$req_sql->table = "login";
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->password_no_hash = $password;
+			$req_sql->ctx->password = $password = password_hash($password, PASSWORD_DEFAULT);
+			$req_sql->where = "id = '".$this->_app->user->id."'";
+			$res_sql = $this->_app->sql->update($req_sql);
 
-						if(!$res_sql)
-						{
-							$subject = "Attention le joueur : ".$this->user->user_infos->login." a voulu changer son mot de passe mais il y a eu un probleme dans la requete.";
-							mail(Config::$mail, "Message d'erreur du site Diy N Game.", $subject);
-							$_SESSION['error'] = 'Une erreur est survenue, l\'administration en est directement informée merci de patienter vous serez contacté.';
-						}
-						else
-						{
-							$_SESSION['error'] = 'Votre mot de passe à bien été changé.';	
-						}
-			    	}	
-		    	}
-		    	else
-		    	{
-		    		$_SESSION['error'] = 'Formulaire mal rempli';
-		        	return 0;
-		    	}
-		    }
-		    else
-		    {
-		        $_SESSION['error'] = 'Formulaire mal rempli';
-		        return 0;
-		    }
-		}
-		else
-		{
-			$_SESSION['error'] = "Attention, Le clients à tenter un priratage";
-			return 0;
-		}
+			if(!$res_sql)
+				$_SESSION['error_change_password'] = 'Votre mot de passe n\'à pas été changé, veuiller en informer l\'administrateur par la page de contact.';	
+
+			else
+				$_SESSION['error_change_password'] = 'Votre mot de passe à bien été changé.';	
+    	}	
 	}
 }
