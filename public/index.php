@@ -31,7 +31,7 @@ $page = ob_get_clean();
 //appel le parseur qui rendra tout les modules et tout les vues
 $start = $_app->microtime_float();
  //contiendra tout les modules de l'applications appelé sur la page. apres execution de celui ci, il est placé dans l'app.
-$parser = new parser($_app);
+
 $page = $parser->parser_main($page);
 
 $parser_translate = new parser_translate($_app, $page);
@@ -49,3 +49,4 @@ affiche_pre($_app->option_app);
 
 
 affiche_pre($_app->can_do_user);
+

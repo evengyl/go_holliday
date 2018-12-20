@@ -16,7 +16,7 @@ Class can_do_user
 
 	public function __construct(&$_app)
 	{		
-		$this->_app = $_app;
+		$this->_app = &$_app;
 		//liste des droit user par rapport a leur status
 		if(isset($this->_app->user->user_type))
 		{

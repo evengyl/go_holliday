@@ -15,9 +15,7 @@ Class my_account extends base_module
 
 		
 		//récupérations des annonces de l'utilisateur
-		
-			
-			$this->get_list_annonce_user();
+		$this->get_list_annonce_user();
 
 		//je récupère les infos de l'user en cours
 		$this->get_infos_user();
@@ -28,7 +26,11 @@ Class my_account extends base_module
 			$this->change_infos($_POST);
 
 
-		$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('infos_user', $this->_app->user)->assign_var("annonces", $this->annonces)->render_tpl();
+		$this->get_html_tpl =  $this->assign_var("nb_page", $this->nb_page)
+									->assign_var('_app', $this->_app)
+									->assign_var('infos_user', $this->_app->user)
+									->assign_var("annonces", $this->annonces)
+								->render_tpl();
 	}
 
 	public function get_infos_user()
@@ -72,6 +74,17 @@ Class my_account extends base_module
 	{
 		$this->_app->user->total_private_message = 0;
 
+		//part pagination LIMIT
+		$limit_current = "LIMIT 10 ORDER BY id";
+		affiche_pre($_GET);
+		if(isset($_GET['num_page']))
+		{
+			$limit_get = (int)$_GET['num_page'];
+			$limit_current = "LIMIT ". $limit_get*10 .", ". $limit_get ." ORDER BY id";
+		}
+
+		affiche_pre($limit_current);
+
 		if($this->_app->can_do_user->view_annonce_list)
 		{
 			$sql_annonce = new stdClass();
@@ -84,6 +97,10 @@ Class my_account extends base_module
 			$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 			$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 			$this->annonces = $res_sql_annonces;
+			// part pagination
+			$nb_page = count($this->annonces);
+			$nb_page = ceil($nb_page / 10);
+			$this->nb_page = $nb_page;
 			
 			if($this->_app->can_do_user->view_nb_private_message)
 			{

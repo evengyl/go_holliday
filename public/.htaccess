@@ -2,13 +2,23 @@ RewriteEngine on
 AddDefaultCharset utf-8
 
 
-RewriteRule ^([a-zA-Z_-]+)$ ?page=$1 [L]
 
-RewriteRule ^(admin)/([a-z_]+)$ ?page=$1&action=$2 [L]
 
+
+
+RewriteRule ^Connection$ ?page=login [L]
+RewriteRule ^Contact$ ?page=contact [L]
+RewriteRule ^Accueil$ ?page=home [L]
+RewriteRule ^Mon_compte$ ?page=my_account [L]
+RewriteRule ^Deconnection$ ?page=logout [L]
+
+
+RewriteRule ^Recherche$ ?page=Recherche [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)$ ?page=$1&type=$2 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)$ ?page=$1&type=$2&selection_ok=$3 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)/([0-9])+$ ?page=$1&type=$2&selection_ok=$3&id_annonce=$4 [L]
-
-
 RewriteRule ^(Recherche)/(Toutes-les-annonces)$ ?page=$1&all_select=$2 [L]
+
+
+
+RewriteRule ^(admin)/([a-z_]+)$ ?page=$1&action=$2 [L]

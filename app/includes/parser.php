@@ -5,10 +5,12 @@ class parser
 	private $rendu_module = "";
 	private $stack_mod_tpl = "";
 	public $_app;
+	public $page_origin;
 
-	public function __construct(&$_app)
+	public function __construct(&$_app, &$page = "")
 	{
 		$this->_app = &$_app;
+		$this->page_origin = &$page;
 	}
 	public function parser_main($page)
 	{
@@ -121,7 +123,7 @@ class parser
 		}
 	}
 
-	private function exec_mod($match_module, $page, $module_name,$var_in_module_name)
+	private function exec_mod($match_module, $page, $module_name, $var_in_module_name)
 	{
 		if($module_name != "")
 		{
@@ -138,7 +140,7 @@ class parser
 				$module = new module_404($this->_app, $e->getMessage(), '204');
 			}
 			
-
+			//get html tpl est dans le base module.
 			$rendu_module =  $module->get_html_tpl;
 
 			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')
@@ -153,6 +155,11 @@ class parser
 		$page = str_replace($match_module, $rendu_module, $page);
 
 		return $this->parser_main($page);
+	}
+
+	public function reset_tpl()
+	{
+
 	}
 }
 ?>

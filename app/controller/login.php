@@ -25,6 +25,7 @@ Class login extends base_module
 		if(isset($_POST['connect_form'])) 
 			Config::$is_connect = $this->check_form_session($_POST);
 
+
         // on set le bread
 		if(isset($_GET['page']) && $_GET['page'] == "login")
 			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 

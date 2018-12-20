@@ -24,5 +24,6 @@
 </div>
 
 	<?
+	affiche_pre($_GET);
 	unset($_SESSION['error_admin']);
 	?>

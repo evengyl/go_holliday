@@ -17,7 +17,7 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 							<p class="text-center text-muted">
 								Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?><br>
 								Si vous voulez vous déconnecter c'est par ici
-								<a href="logout">Se déconnecter</a>.
+								<a href="/Deconnection">Se déconnecter</a>.
 							</p>
 							<hr>
 						</div>

@@ -32,7 +32,6 @@ $_app->base_dir = $_app->base_path;
 //setting parse
 $parser = new parser($_app);
 
-
 //Mise en route de la navigation
 $_app->navigation = new navigation($_app);
 
