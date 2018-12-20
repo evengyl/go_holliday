@@ -44,9 +44,3 @@ $_app->admin_tools();
 
 affiche_pre($_app);
 
-affiche_pre($_app->option_app);
-
-
-
-affiche_pre($_app->can_do_user);
-

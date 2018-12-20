@@ -153,8 +153,6 @@ Class my_account extends base_module
 
 	public function change_infos($post)
 	{
-		affiche_pre($post);
-
     	$password = $this->check_post_login_password($post['password-new']);
 
     	if($password == '0')

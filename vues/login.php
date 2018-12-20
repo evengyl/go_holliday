@@ -48,7 +48,7 @@ else
 							<h3 class="thin text-center">Connexion à votre compte</h3>
 							<p class="text-center text-muted">
 								Si vous ne possédez pas de compte c'est par ici
-								<a href="sign_up">S'enregistrer</a>.
+								<a href="/Inscription">S'enregistrer</a>.
 							</p>
 							<hr>
 							<p class="text-center text-danger">

@@ -12,6 +12,7 @@ RewriteRule ^Accueil$ ?page=home [L]
 RewriteRule ^Mon_compte$ ?page=my_account [L]
 RewriteRule ^Mon_compte/Annonces/([0-9]+)$ ?page=my_account&num_page=$1 [L]
 RewriteRule ^Deconnection$ ?page=logout [L]
+RewriteRule ^Inscription$ ?page=sign_up [L]
 
 
 RewriteRule ^Recherche$ ?page=Recherche [L]
