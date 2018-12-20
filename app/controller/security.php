@@ -23,6 +23,7 @@ Class security extends base_module
 
 			if(isset($res_fx[0]->login))
 			{
+				//Is_connect permet de voir si on est connecté tout au long des module et des tpl
 				Config::$is_connect = 1;
 				//si connecter, si oui on set les infos user dans le app
 				$this->_app->user = $this->set_user_infos_on_app($this->_app);
