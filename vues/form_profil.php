@@ -96,7 +96,7 @@
     	<div class="form-group has-feedback">
         	<div class="input-group">
             	<span class="input-group-addon">Ville</span>
-            	<input id="ville_form" name="ville" type="text" value="<?= $infos_user->address_localite ?>" class="form-control">
+            	<input id="ville_form" name="address_localite" type="text" value="<?= $infos_user->address_localite ?>" class="form-control">
         	</div>
         	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         	<div class="help-block with-errors"></div>
@@ -128,7 +128,7 @@
 
     <div class="text-center col-md-12"><hr>
     	<input type="hidden" name="rand_id_update_profil" value="<?= $rand_id_update_profil ?>">
-        <button type="submit" class="btn btn-success btn-fill btn-wd">Update Profile</button>
+        <button type="submit" class="btn btn-success btn-fill btn-wd">Sauvegarder le Profile</button>
     </div>
     <div class="clearfix"></div>
 </form>
