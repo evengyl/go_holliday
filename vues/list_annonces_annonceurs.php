@@ -1,23 +1,8 @@
 <h4 class="title"><?=($_app->can_do_user->view_infos_annonce)?"Listes de vos annonces":"Vous n'avez pas accès à vos annonces, car votre niveau VIP n'est pas assez haut"; ?></h4><hr><?
 
 if($_app->can_do_user->view_infos_annonce)
-{?>
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="/Mon_compte/Annonces/<?= $num_page['prev']; ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-            </li><?
-            $i = 1;
-            while($i <= $nb_page)
-            {?>
-                <li class="<?=($i == $num_page['active'])?'active':''; ?>"><a href="/Mon_compte/Annonces/<?= $i; ?>"><?= $i; ?></a></li><?
-                $i++;
-            }?>
-            <li>
-                <a href="/Mon_compte/Annonces/<?= $num_page['next']; ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-            </li>
-        </ul>
-    </nav>
+{
+    require("pagination_annonces_profil.php");?>
     <ul class="list-unstyled list_annonces_max"><?
 
         foreach($annonces as $row_annonce)
@@ -26,7 +11,7 @@ if($_app->can_do_user->view_infos_annonce)
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
                         <div class="avatar_annonce">
-                            <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
+                            <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive"><span><?= $row_annonce->id; ?></span>
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -58,24 +43,9 @@ if($_app->can_do_user->view_infos_annonce)
                 </div>
                 <hr>
             </li><?
-        }?>
+        }
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                </li><?
-                $i = 1;
-                while($i <= $nb_page)
-                {?>
-                    <li class="<?=($i == $num_page_active)?'active':''; ?>"><a href="/Mon_compte/Annonces/<?= $i; ?>"><?= $i; ?></a></li><?
-                    $i++;
-                }?>
-                <li>
-                    <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                </li>
-            </ul>
-        </nav>
+        require("pagination_annonces_profil.php");?>
     </ul><?
 }?>
 
