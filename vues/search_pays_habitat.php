@@ -46,6 +46,80 @@
                     </div>
                 </div><?
             }?>
+                    <!--  test ergonomie -->
+                    <div class="col-lg-12">
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+                            <div class="thumbnail">
+                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
+                                <div class="caption">
+                                    <h3 style="margin-top:0px;">Belgique</h3>
+                                    (14 Annonces)
+                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
+                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         </div>
     </div>
 
