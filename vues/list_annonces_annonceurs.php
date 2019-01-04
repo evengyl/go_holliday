@@ -6,7 +6,8 @@ if($_app->can_do_user->view_infos_annonce)
     <ul class="list-unstyled list_annonces_max"><?
 
         foreach($annonces as $row_annonce)
-        {?>
+        {
+            affiche_pre($row_annonce);?>
             <li><hr>
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
@@ -31,10 +32,27 @@ if($_app->can_do_user->view_infos_annonce)
                     </div>
 
                     <div class="col-xs-6 text-right">
-                        <btn class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir l'annonce</small></btn>
-                        <btn class="opt_annonce btn btn-info"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn>
+                        <a href="/Recherche/<?= $row_annonce->name_type_vacances; ?>/Annonces/<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir l'annonce</small></a>
 
-                        <?=($_app->can_do_user->edit_active)?'<btn class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme supprimée</small></btn>':'';?>
+                        <btn class="opt_annonce btn btn-info" data-toggle="modal" data-target="#view_avis_<?= $row_annonce->id ?>"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn><?
+                        
+                        if($_app->can_do_user->edit_active)
+                        {
+                            if($row_annonce->active)
+                            {?>
+                                <btn data-toggle="modal" data-target="#desactivate_<?= $row_annonce->id; ?>" class="opt_annonce btn btn-danger">
+                                    <small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme inactive</small>
+                                </btn><?
+                            }
+                            else
+                            {?>
+                                <btn data-toggle="modal" data-target="#desactivate_<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success">
+                                    <small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme active</small>
+                                </btn><?
+                            }
+                            
+                            
+                        }?>
 
                         <?=($_app->can_do_user->edit_annonce)?'<btn class="opt_annonce btn btn-warning"><small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small></btn>':'';?>
 
@@ -42,7 +60,53 @@ if($_app->can_do_user->view_infos_annonce)
                     </div>
                 </div>
                 <hr>
-            </li><?
+            </li>
+
+            <!-- Modal Desactivate annonce -->
+            <div class="modal fade" id="desactivate_<?= $row_annonce->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Désactivation de l'annonce : <?= $row_annonce->name_annonce ?></h4>
+                        </div>
+                        <div class="modal-body" style="height:235px;">
+                            <p class="text-center text-muted">Désactivation id annonce : <?= $row_annonce->id ?></p><?
+                            if($row_annonce->active)
+                            {?>
+                                <a class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Désactiver cette annonces</small></a>
+                                <hr>
+                                <p class="text-center text-muted">Désactiver une annonce permet de l'enlever de la liste des annonces sur le site et sur les moteurs de recherches, pour par exemple la completée ou simplement car vous êtes en pour parler pour une réservation ou tout autre choses qui vous semble important au point de vouloir la désactivée.</p><?
+                            }
+                            else
+                            {?>
+                                <a class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Activer cette annonces</small></a>
+                                <hr>
+                                <p class="text-center text-muted">Activer une annonce la rendra active sur le site et sur les moteur de recherche, les client pourront donc la trouver et mettre une offre dessus ou vous poser des questions, poser des avis, et possiblement, la louée.</p><?
+                            }?>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                    <!-- Modal List avis-->
+            <div class="modal fade" id="view_avis_<?= $row_annonce->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Liste des avis sur votre annonces</h4>
+                        </div>
+                        <div class="modal-body" style="height:100px;">
+                            <p class="text-center text-muted">Blabla pas encore fait id annonce : <?= $row_annonce->id ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?
         }
 
         require("pagination_annonces_profil.php");?>

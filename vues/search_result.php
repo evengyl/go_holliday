@@ -49,7 +49,7 @@ else
                             <h5>Pour : <b style="color:#65b45199;"><?= $row_annonces->prix ?>€</b></h5>
                             <p class="text-muted">Du <?= date("d/n/Y", strtotime($row_annonces->start_date)) .' au '. date("d/n/Y", strtotime($row_annonces->end_date)) ?></p>
                             
-                            <p><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>/Selection_destination/<?= $row_annonces->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
+                            <p><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>/Annonces/<?= $row_annonces->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
                         </div>
                     </div>
                 </div><?

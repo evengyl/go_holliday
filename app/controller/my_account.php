@@ -121,10 +121,11 @@ Class my_account extends base_module
 	public function get_list_annonce_user($pagination_limit)
 	{
 		$sql_annonce = new stdClass();
-		$sql_annonce->table = ['annonces', "date_annonces"];
+		$sql_annonce->table = ['annonces', "date_annonces", "type_vacances"];
 		$sql_annonce->var = [
 			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active", "create_date", "vues"],
-			"date_annonces" => ["start_date", "end_date", "prix"]
+			"date_annonces" => ["start_date", "end_date", "prix"],
+			"type_vacances" => ["name AS name_type_vacances"]
 		];
 		$sql_annonce->limit = $pagination_limit;
 		$sql_annonce->order = ["id"];
