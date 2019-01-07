@@ -1,4 +1,10 @@
-<h4 class="title"><?=($_app->can_do_user->view_infos_annonce)?"Listes de vos annonces":"Vous n'avez pas accès à vos annonces, car votre niveau VIP n'est pas assez haut"; ?></h4><hr><?
+<h4 class="title"><?=($_app->can_do_user->view_infos_annonce)?"Listes de vos annonces":"Vous n'avez pas accès à vos annonces, car votre niveau VIP n'est pas assez haut"; ?></h4><hr>
+<?
+if(isset($_SESSION['message_top_annonce'])){
+    echo "<h4 class='title' style='color:green;'>".$_SESSION['message_top_annonce']."</h4>";
+    unset($_SESSION['message_top_annonce']);
+}
+
 
 if($_app->can_do_user->view_infos_annonce)
 {
@@ -71,16 +77,16 @@ if($_app->can_do_user->view_infos_annonce)
                             <h4 class="modal-title">Désactivation de l'annonce : <?= $row_annonce->name_annonce ?></h4>
                         </div>
                         <div class="modal-body" style="height:235px;">
-                            <p class="text-center text-muted">Désactivation id annonce : <?= $row_annonce->id ?></p><?
+                            <p class="text-center text-muted">Désactivation / Activation : <?= $row_annonce->name_annonce ?></p><?
                             if($row_annonce->active)
                             {?>
-                                <a class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Désactiver cette annonces</small></a>
+                                <a href='/Mon_compte/Desactivate/<?= $row_annonce->id ?>' class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Désactiver cette annonces</small></a>
                                 <hr>
                                 <p class="text-center text-muted">Désactiver une annonce permet de l'enlever de la liste des annonces sur le site et sur les moteurs de recherches, pour par exemple la completée ou simplement car vous êtes en pour parler pour une réservation ou tout autre choses qui vous semble important au point de vouloir la désactivée.</p><?
                             }
                             else
                             {?>
-                                <a class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Activer cette annonces</small></a>
+                                <a href='/Mon_compte/Activate/<?= $row_annonce->id ?>' class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Activer cette annonces</small></a>
                                 <hr>
                                 <p class="text-center text-muted">Activer une annonce la rendra active sur le site et sur les moteur de recherche, les client pourront donc la trouver et mettre une offre dessus ou vous poser des questions, poser des avis, et possiblement, la louée.</p><?
                             }?>
