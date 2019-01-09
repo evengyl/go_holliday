@@ -7,51 +7,39 @@
     <div class="row page-profil">
         <div class="col-lg-3">
             <div class="profil">
-
                 <div class="back_profil">
-                    <img class="img-responsive" src="/images/autre_licences/background.jpg" alt="..."/>
+                    <img class="img-responsive" src="/images/background_profil/<?= $_app->user->id_background_profil; ?>.jpg" alt="..."/>
+                    <div class="in_top_right"><button data-toggle="modal" data-target="#change_back_profil" class="btn" style=""><i class="fa fa-cog"></i></button></div>
                 </div>
-
-                <div style="text-align: center; text-transform: none; margin-top: -65px;">
-                	<div class="content-image-profil">
-                  		<img class="img-circle" src="/images/autre_licences/face-0.jpg" alt="..."/>
-                    	<div class="in_middle"><button class="btn" style=""><i class="fa fa-cog"></i></button></div>
-                	</div>
-          			<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
-              		<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $_app->can_do_user->text_user_type ?></b></small></p>
-                </div>
-                <p class="text-muted">
-                	<small>@Adresse Email : <b><?= $infos_user->email ?></b></small>
-            	</p>
-            	<p class="text-muted">
-                    @Tel : <b><?= $infos_user->tel ?></b>
-                </p>
-                <p class="text-muted">
-                    @Adresse : <b><?= $infos_user->address_numero.", Rue ".$infos_user->address_rue." à ".$infos_user->zip_code." : ".$infos_user->address_localite ?></b>
-                </p>
-                <hr>
-                <div class="row block_suivis">
-                    <div class="col-lg-4">
-                        <h4>
-                        	<?= $infos_user->nb_annonces ?><br>
-                    		<small>Annonces</small>
-                    	</h4>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4>
-                        	<?= $infos_user->nb_vues_total ?><br>
-                        	<small>Vues</small>
-                        </h4>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4>
-                        	<?= $infos_user->total_private_message; ?><br>
-                        	<small>Messages non lus</small>
-                        </h4>
-                    </div>
-                </div>
+                __MOD3_view_lateral_profil__
             </div>
         </div>
+
+         <!-- Modal changement de back profil -->
+<div class="modal fade" id="change_back_profil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Changement du fond d'écran du profil</h4>
+                <p class="text-muted">Cliquez sur le nouveau fond pour l'activer</p>
+            </div>
+            <div class="modal-body" style="height:540px;"><?
+                foreach($img_back_profil as $row_img)
+                {?>
+                    <form method="POST" action="#">
+                        <div class="col-xs-4" style="height:130px;">
+                            <input type="hidden" name="id_img_selected" value="<?= $row_img ?>">
+                            <button type="submit" class="thumbnail">
+                                <img src='/images/background_profil/<?= $row_img ?>.jpg' class='img-responsive img_modal_back_profil'>
+                            </button>
+                        </div>
+                    </form><?
+                }?>
+            </div>
+        </div>
+    </div>
+</div>
 
         <div class="col-lg-7 row">
         	<!-- Collapse part edit profil -->
@@ -59,7 +47,6 @@
 				<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse_profil_infos" aria-expanded="false" aria-controls="collapseExample">
 					<i class="fas fa-caret-down "></i>&nbsp;&nbsp;Modification de votre profil&nbsp;&nbsp;<i class="fas fa-caret-down "></i>
 				</button>
-
 				<div class="collapse" id="collapse_profil_infos">
 		            __MOD2_form_profil__
 		        </div>

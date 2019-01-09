@@ -19,6 +19,7 @@ Class form_profil extends base_module
 				$this->set_new_infos_profil($_POST);
 		}
 
+
 		//on génère un nombre aléatoire pour valider un form unique
 		$rand_id_form = rand();
 		$_SESSION['rand_id_form_profil'] = $rand_id_form;
@@ -66,9 +67,8 @@ Class form_profil extends base_module
 		$req_sql->where = "id = '".$this->_app->user->id_utilisateurs."'";
 		$res_sql = $this->_app->sql->update($req_sql);
 
+		//on reset le user _app pour avoir les bonne infos mise à jour pour le tpl
 		$security = new security($this->_app);
 		$security->set_user_infos_on_app($forced_query = 1);
 	}
-	
-
 }

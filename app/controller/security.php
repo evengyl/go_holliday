@@ -51,11 +51,12 @@ Class security extends base_module
 			$req_sql->table = ["login", "utilisateurs"];
 			$req_sql->var = [
 				"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
-				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel", "address_numero", "address_rue", "zip_code", "address_localite", "age", "pays"],
+				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel", "address_numero", "address_rue", "zip_code", "address_localite", "age", "pays", "id_background_profil"],
 			];
 			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 			$res_fx = $this->_app->sql->select($req_sql);	
-			$this->_app->user = $res_fx[0];
+			$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
+			$this->_app->user = $merge_array_user;
 		}
 
 	}

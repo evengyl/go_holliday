@@ -18,6 +18,12 @@ Class my_account extends base_module
 		$this->get_nb_annonces();
 		$this->get_nb_vues_total();
 
+		//va chercher la liste des images dispo pour le changement d'image de back profil
+		$array_back_profil_img = $this->get_list_lateral_back_profil_img();
+		//va permettre de set dans la db le nouvel id de l'img de background
+		if(isset($_POST['id_img_selected']))
+			$this->set_new_img_back_profil($_POST['id_img_selected'], $array_back_profil_img);
+
 
 		//récupérations des annonces de l'utilisateur
 		if($this->_app->can_do_user->view_annonce_list)
@@ -27,9 +33,8 @@ Class my_account extends base_module
 		}
 
 		$this->get_nb_private_message();
-		
-		//part change password
 
+		//part change password
 		//on check le form avec la session du random id form
 		if(isset($_SESSION['rand_id_form_change_password']) && isset($_POST['return_post_account_pass_change']))
 		{
@@ -40,14 +45,49 @@ Class my_account extends base_module
 		$_SESSION['rand_id_form_change_password'] = $rand_id_form;
 			
 
-
 		$this->get_html_tpl =  $this->assign_var("nb_page", $this->nb_page)
 									->assign_var("num_page", $this->num_page)
 									->assign_var('_app', $this->_app)
-									->assign_var('infos_user', $this->_app->user)
 									->assign_var("annonces", $this->annonces)
 									->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
+									->assign_var("img_back_profil", $array_back_profil_img)
+									
 								->render_tpl();
+	}
+
+	public function get_list_lateral_back_profil_img()
+	{
+		$array_back_profil_img = array();
+
+		if($dossier = opendir($this->_app->base_dir.'/public/images/background_profil/'))
+		{
+			while(false !== ($fichier = readdir($dossier)))
+			{
+				if($fichier != '.' && $fichier != '..')
+				{
+					$array_back_profil_img[] = substr($fichier, 0, -4);
+				}
+			}
+		}
+		return $array_back_profil_img;
+	}
+
+
+	public function set_new_img_back_profil($id_img, $array_back_profil_img)
+	{
+		if(in_array($id_img, $array_back_profil_img))
+		{
+			$req_sql = new stdClass;
+			$req_sql->table = "utilisateurs";
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->id_background_profil = $id_img;
+			$req_sql->where = "id = '".$this->_app->user->id."'";
+			$res_sql = $this->_app->sql->update($req_sql);
+		}
+
+		//on reset le user _app pour avoir les bonne infos mise à jour pour le tpl
+		$security = new security($this->_app);
+		$security->set_user_infos_on_app($forced_query = 1);
 	}
 
 	public function get_nb_annonces()
@@ -61,7 +101,14 @@ Class my_account extends base_module
 			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
 			$this->_app->user->nb_annonces = $res_sql_nb[0]->nb;
 
-			$this->_app->user->txt['infos_annonces_active'] = "Annonces actives";
+			$sql_nb_annonce = new stdClass();
+			$sql_nb_annonce->table = ['annonces'];
+			$sql_nb_annonce->var = "COUNT(id) as nb";
+			$sql_nb_annonce->where = ["id_utilisateurs = $1 AND active = $2", [$this->_app->user->id_utilisateurs, '1']];
+			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
+			$this->_app->user->nb_annonces_active = $res_sql_nb[0]->nb;
+
+			$this->_app->user->nb_annonces_inactive = (int)$this->_app->user->nb_annonces - (int)$this->_app->user->nb_annonces_active;
 		}
 		else
 			$this->_app->user->nb_annonces = "N/A";
@@ -141,6 +188,7 @@ Class my_account extends base_module
 		if($this->_app->can_do_user->view_nb_private_message)
 		{
 			$this->_app->user->total_private_message = 0;
+			$this->_app->user->private_message_not_view = 0;
 
 			if(!empty($this->annonces))
 			{
@@ -153,6 +201,14 @@ Class my_account extends base_module
 					$res_sql_message = $this->_app->sql->select($sql_message);
 					$this->_app->user->total_private_message += $res_sql_message[0]->nb;
 					$this->annonces[$key]->message = $res_sql_message[0]->nb;
+
+
+					$sql_message = new stdClass();
+					$sql_message->table = ['private_message'];
+					$sql_message->var = "COUNT(id) as nb";
+					$sql_message->where = ["id_annonces_link = $1 AND vu = $2", [$row_annonce->id, '0']];
+					$res_sql_message = $this->_app->sql->select($sql_message);
+					$this->_app->user->private_message_not_view += $res_sql_message[0]->nb;
 				}
 			}
 		}
