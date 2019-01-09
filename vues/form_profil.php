@@ -56,7 +56,9 @@
     	</div>
     </div>
 
-    <div class="col-md-6">
+    
+
+    <div class="col-md-5">
     	<div class="form-group has-feedback">
         	<div class="input-group">
             	<span class="input-group-addon">Téléphone (Mobile)</span>
@@ -65,6 +67,38 @@
         	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         	<div class="help-block with-errors"></div>
     	</div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="form-group has-success">
+            <div class="input-group" style="border: 1px solid #3c763d; color: #3c763d; background-color: #dff0d8;">
+                <span class="input-group-addon" style="border:none;">Genre</span>
+                <div class="radio" style="display:inline-block; margin-right:10px;">
+                    <label>
+                        <input <?=($_app->user->genre == "Monsieur")?'checked="checked"':''; ?> type="radio" name="genre" required>
+                        Monsieur
+                    </label>
+                </div>
+                <div class="radio" style="display:inline-block; margin-right:10px;">
+                    <label>
+                        <input <?=($_app->user->genre == "Madame")?'checked="checked"':''; ?>type="radio" name="genre" required>
+                        Madame
+                    </label>
+                </div>
+                <div class="radio" style="display:inline-block; margin-right:10px;">
+                    <label>
+                        <input <?=($_app->user->genre == "Mademoiselle")?'checked="checked"':''; ?>type="radio" name="genre" required>
+                        Mademoiselle
+                    </label>
+                </div>
+                <div class="radio" style="display:inline-block; margin-right:10px;">
+                    <label>
+                        <input <?=($_app->user->genre == "N/C")?'checked="checked"':''; ?>type="radio" name="genre" required>
+                        Ne se prononce pas
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 
 
