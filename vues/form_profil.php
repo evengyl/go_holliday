@@ -5,7 +5,7 @@
     	<div class="form-group has-feedback">
         	<div class="input-group">
             	<span class="input-group-addon">Login</span>
-            	<input id="login_form" name="login" type="text" value="<?= $infos_user->login ?>" maxlength="20" pattern="[a-zA-Z_]{,6}" class="form-control" data-error="Votre login est trop court ou contient des chiffres" >
+            	<input id="login_form" name="login" type="text" value="<?= $infos_user->login ?>" maxlength="20" pattern="[a-zA-Z_]{6,}" class="form-control" data-error="Votre login est trop court ou contient des chiffres" >
         	</div>
         	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         	<div class="help-block with-errors"></div>
@@ -118,7 +118,7 @@
     	<div class="form-group has-feedback">
         	<div class="input-group">
             	<span class="input-group-addon">Pays</span>
-            	<input id="pays_form" name="pays" type="text" value="<?= $infos_user->pays ?>" pattern="[a-zA-Z_- ]+" class="form-control" data-error="Pays inconnu" >
+            	<input id="pays_form" name="pays" type="text" value="<?= $infos_user->pays ?>" pattern="[a-zA-Z_\- ]+" class="form-control" data-error="Pays inconnu" >
         	</div>
         	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         	<div class="help-block with-errors"></div>

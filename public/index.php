@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <?
 
-$_SESSION["base_dir"] = dirname(dirname(__FILE__));
 
+$_SESSION["base_dir"] = dirname(dirname(__FILE__));
 //require de base avec les fonciton diverse et le loader, la fonction microtime est la uniquement pour le temps d'execution des requete pour optimiser
-require $_SESSION["base_dir"]."/app/includes/app_min_load.php";
+require dirname(dirname(__FILE__))."/app/includes/app_min_load.php";
 
 
 //mise en route de la session

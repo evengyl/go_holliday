@@ -25,8 +25,16 @@ Class _app
 
 	public function __construct()
 	{
-		$this->base_dir = basename($_SESSION['base_dir']);
-		$this->base_path = $_SESSION['base_dir'];
+		if(isset($_SESSION['base_dir']))
+		{
+			$this->base_dir = basename($_SESSION['base_dir']);
+			$this->base_path = $_SESSION['base_dir'];
+		}
+		else
+		{
+			$this->base_dir = basename(dirname(dirname(__DIR__)));
+			$this->base_path = dirname(dirname(__DIR__));
+		} 
 	}
 
 

@@ -1,9 +1,5 @@
 <h4 class="title"><?=($_app->can_do_user->view_infos_annonce)?"Listes de vos annonces":"Vous n'avez pas accès à vos annonces, car votre niveau VIP n'est pas assez haut"; ?></h4><hr>
-<?
-if(isset($_SESSION['message_top_annonce'])){
-    echo "<h4 class='title' style='color:green;'>".$_SESSION['message_top_annonce']."</h4>";
-    unset($_SESSION['message_top_annonce']);
-}
+<h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
 
 
 if($_app->can_do_user->view_infos_annonce)
@@ -12,13 +8,12 @@ if($_app->can_do_user->view_infos_annonce)
     <ul class="list-unstyled list_annonces_max"><?
 
         foreach($annonces as $row_annonce)
-        {
-            affiche_pre($row_annonce);?>
+        {?>
             <li><hr>
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
                         <div class="avatar_annonce">
-                            <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive"><span><?= $row_annonce->id; ?></span>
+                            <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
                         </div>
                     </div>
                     <div class="col-xs-4">
@@ -34,7 +29,7 @@ if($_app->can_do_user->view_infos_annonce)
                         <br>
                         <span class="text-muted"><small>Nombre de demandes : <b style="color:green;"><?= $row_annonce->message ?></b></small></span>
                         <br>
-                        <span class="text-muted"><small>Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
+                        <span class="text-muted statut_active"><small>Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                     </div>
 
                     <div class="col-xs-6 text-right">
@@ -43,21 +38,10 @@ if($_app->can_do_user->view_infos_annonce)
                         <btn class="opt_annonce btn btn-info" data-toggle="modal" data-target="#view_avis_<?= $row_annonce->id ?>"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn><?
                         
                         if($_app->can_do_user->edit_active)
-                        {
-                            if($row_annonce->active)
-                            {?>
-                                <btn data-toggle="modal" data-target="#desactivate_<?= $row_annonce->id; ?>" class="opt_annonce btn btn-danger">
-                                    <small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme inactive</small>
-                                </btn><?
-                            }
-                            else
-                            {?>
-                                <btn data-toggle="modal" data-target="#desactivate_<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success">
-                                    <small><i class="fa fa-angle-double-right "></i>&nbsp;Marquer comme active</small>
-                                </btn><?
-                            }
-                            
-                            
+                        {?>
+                            <button data-toggle="modal" data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" data-id="<?= $row_annonce->id; ?>" data-target="#set_active_<?= $row_annonce->id; ?>" class="opt_annonce btn">
+                                <small><i class="fa fa-angle-double-right "></i><span></span></small>
+                            </button><?
                         }?>
 
                         <?=($_app->can_do_user->edit_annonce)?'<btn class="opt_annonce btn btn-warning"><small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small></btn>':'';?>
@@ -69,35 +53,32 @@ if($_app->can_do_user->view_infos_annonce)
             </li>
 
             <!-- Modal Desactivate annonce -->
-            <div class="modal fade" id="desactivate_<?= $row_annonce->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="set_active_<?= $row_annonce->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Désactivation de l'annonce : <?= $row_annonce->name_annonce ?></h4>
                         </div>
-                        <div class="modal-body" style="height:235px;">
-                            <p class="text-center text-muted">Désactivation / Activation : <?= $row_annonce->name_annonce ?></p><?
-                            if($row_annonce->active)
-                            {?>
-                                <a href='/Mon_compte/Desactivate/<?= $row_annonce->id ?>' class="opt_annonce btn btn-danger"><small><i class="fa fa-angle-double-right "></i>&nbsp;Désactiver cette annonces</small></a>
-                                <hr>
-                                <p class="text-center text-muted">Désactiver une annonce permet de l'enlever de la liste des annonces sur le site et sur les moteurs de recherches, pour par exemple la completée ou simplement car vous êtes en pour parler pour une réservation ou tout autre choses qui vous semble important au point de vouloir la désactivée.</p><?
-                            }
-                            else
-                            {?>
-                                <a href='/Mon_compte/Activate/<?= $row_annonce->id ?>' class="opt_annonce btn btn-success"><small><i class="fa fa-angle-double-right "></i>&nbsp;Activer cette annonces</small></a>
-                                <hr>
-                                <p class="text-center text-muted">Activer une annonce la rendra active sur le site et sur les moteur de recherche, les client pourront donc la trouver et mettre une offre dessus ou vous poser des questions, poser des avis, et possiblement, la louée.</p><?
-                            }?>
-                            
+                        <div class="modal-body" style="height:340px;">
+                            <p class="text-center text-muted">Désactivation / Activation : <?= $row_annonce->name_annonce ?></p>
+
+                            <button data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" data-toggle="modal" data-id="<?= $row_annonce->id; ?>" class="opt_annonce btn">
+                                <small><i class="fa fa-angle-double-right "></i><span></span></small>
+                            </button>
+
+                            <hr>
+                            <p class="text-center text-muted">Désactiver une annonce permet de l'enlever de la liste des annonces sur le site et sur les moteurs de recherches, pour par exemple la completée ou simplement car vous êtes en pour parler pour une réservation ou tout autre choses qui vous semble important au point de vouloir la désactivée.</p>
+
+                            <hr>
+                            <p class="text-center text-muted">Activer une annonce la rendra active sur le site et sur les moteur de recherche, les client pourront donc la trouver et mettre une offre dessus ou vous poser des questions, poser des avis, et possiblement, la louée.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-                    <!-- Modal List avis-->
+            <!-- Modal List avis-->
             <div class="modal fade" id="view_avis_<?= $row_annonce->id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -120,3 +101,4 @@ if($_app->can_do_user->view_infos_annonce)
 }?>
 
     
+<script src="/js/activate_desactivate_annonce.js"></script>

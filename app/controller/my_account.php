@@ -18,12 +18,6 @@ Class my_account extends base_module
 		$this->get_nb_annonces();
 		$this->get_nb_vues_total();
 
-		//si on clique sur activer ou désactiver une annonce 
-		if(isset($_GET['activate']) && $_GET['activate'] = 1)
-			$this->activate_annonce($_GET['id_annonce']);
-
-		if(isset($_GET['desactivate']) && $_GET['desactivate'] = 1)
-			$this->desactivate_annonce($_GET['id_annonce']);
 
 		//récupérations des annonces de l'utilisateur
 		if($this->_app->can_do_user->view_annonce_list)
@@ -46,7 +40,6 @@ Class my_account extends base_module
 		$_SESSION['rand_id_form_change_password'] = $rand_id_form;
 			
 
-		affiche_pre($_SESSION);
 
 		$this->get_html_tpl =  $this->assign_var("nb_page", $this->nb_page)
 									->assign_var("num_page", $this->num_page)
@@ -56,42 +49,6 @@ Class my_account extends base_module
 									->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
 								->render_tpl();
 	}
-
-	public function desactivate_annonce()
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "annonces";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->active = "0";
-		$req_sql->where = "id = '".$_GET['id_annonce']."'";
-		$res_sql = $this->_app->sql->update($req_sql);
-
-		if(!$res_sql)
-			$_SESSION['message_top_annonce'] = 'Bizarre votre annonce était déjà inactive !';	
-
-		else
-			$_SESSION['message_top_annonce'] = 'Votre annonce à bien été désactivée.';	
-			
-	}
-
-	public function activate_annonce()
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "annonces";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->active = "1";
-		$req_sql->where = "id = '".$_GET['id_annonce']."'";
-		$res_sql = $this->_app->sql->update($req_sql);
-
-		if(!$res_sql)
-			$_SESSION['message_top_annonce'] = 'Bizarre votre annonce était déjà active !';	
-
-		else
-			$_SESSION['message_top_annonce'] = 'Votre annonce à bien été activée.';	
-			
-
-	}
-
 
 	public function get_nb_annonces()
 	{
