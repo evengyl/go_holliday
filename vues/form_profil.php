@@ -87,13 +87,13 @@
                 </div>
                 <div class="radio" style="display:inline-block; margin-right:10px;">
                     <label>
-                        <input <?=($_app->user->genre == "Mademoiselle")?'checked="checked"':''; ?>type="radio" name="genre" required>
+                        <input <?=($_app->user->genre == "Mademoiselle")?'checked="checked"':''; ?>t ype="radio" name="genre" required>
                         Mademoiselle
                     </label>
                 </div>
                 <div class="radio" style="display:inline-block; margin-right:10px;">
                     <label>
-                        <input <?=($_app->user->genre == "N/C")?'checked="checked"':''; ?>type="radio" name="genre" required>
+                        <input <?=($_app->user->genre == "N/C")?'checked="checked"':''; ?> type="radio" name="genre" required>
                         Ne se prononce pas
                     </label>
                 </div>

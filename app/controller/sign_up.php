@@ -13,13 +13,30 @@ Class sign_up extends base_module
 
 		if(isset($_POST['sign_up']))
 			$this->treatment_sign_up($_POST);
+
+		//on check le form avec la session du random id form
+		if(isset($_SESSION['rand_id_form_sign_up']) && isset($_POST['rand_id_sign_up']))
+		{
+			if($_SESSION['rand_id_form_sign_up'] == $_POST['rand_id_sign_up'])
+				$this->treatment_sign_up($_POST);
+		}
+
+
+		//on génère un nombre aléatoire pour valider un form unique
+		$rand_id_form = rand();
+		$_SESSION['rand_id_form_sign_up'] = $rand_id_form;
 		
-		$this->get_html_tpl =  $this->render_tpl();
+		$this->get_html_tpl =  $this
+								->assign_var('_app', $this->_app)
+								->assign_var('rand_id_sign_up',$rand_id_form)
+							->render_tpl();
 	}
 
 
 	public function treatment_sign_up($post)
 	{
+		affiche_pre($_POST);
+		/*
 	    if(isset($post["pseudo"]) && isset($post["password-1"]) && isset($post["password-2"]) && isset($post["email"]))
 	    {
 	    	$pseudo = $this->check_post_login($post['pseudo'], $is_pseudo = 1);
@@ -72,6 +89,6 @@ Class sign_up extends base_module
 	    	}	        
 	    }
 	    else
-	        $_SESSION['error_sign_up'] = 'Formulaire mal rempli';
+	        $_SESSION['error_sign_up'] = 'Formulaire mal rempli';*/
 	}
 }

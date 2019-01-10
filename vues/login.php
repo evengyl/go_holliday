@@ -15,7 +15,7 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 						<div class="panel-body">
 							<h3 class="thin text-center">Vous êtes maintenant connecté</h3>
 							<p class="text-center text-muted">
-								Vous êtes connecté en tant que <?= ucfirst($_SESSION['pseudo']) ?><br>
+								Vous êtes connecté en tant que <b><?= ucfirst($_SESSION['pseudo']) ?></b><br>
 								Si vous voulez vous déconnecter c'est par ici
 								<a href="/Deconnection">Se déconnecter</a>.
 							</p>
@@ -47,8 +47,8 @@ else
 						<div class="panel-body">
 							<h3 class="thin text-center">Connexion à votre compte</h3>
 							<p class="text-center text-muted">
-								Si vous ne possédez pas de compte c'est par ici
-								<a href="/Inscription">S'enregistrer</a>.
+								<b>Si vous ne possédez pas de compte c'est par ici</b>
+								<a href="/Inscription"><b>S'enregistrer</b></a>.
 							</p>
 							<hr>
 							<p class="text-center text-danger">

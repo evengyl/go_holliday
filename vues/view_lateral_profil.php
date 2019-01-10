@@ -24,18 +24,18 @@
 </p>
 <hr>
 <div class="block_suivis">
-        <h4>
-        	<?= $infos_user->nb_annonces ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-tags"></span><br>
-    		<small>Annonces crées</small><br>
-            <small>Dont <?= $infos_user->nb_annonces_active ?> Active(s)&nbsp;&nbsp;et&nbsp;&nbsp;<?= $infos_user->nb_annonces_inactive ?> Inactive(s)</small>
-    	</h4><hr>
-        <h4>
-        	<?= $infos_user->nb_vues_total ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span><br>
-        	<small>Vues sur le total de vos annonce, actives ou non</small>
-        </h4><hr>
-        <h4>
-        	<?= $infos_user->total_private_message; ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span><br>
-        	<small>Message(s) au total</small><br>
-            <small>Dont <?= $infos_user->private_message_not_view; ?> Non lu(s)</small>
-        </h4><hr>
+    <h4>
+    	<?= $infos_user->nb_annonces ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-tags"></span><br>
+		<small>Annonces crées</small><br>
+        <small>Dont <?= $infos_user->nb_annonces_active ?> Active(s)&nbsp;&nbsp;et&nbsp;&nbsp;<?= $infos_user->nb_annonces_inactive ?> Inactive(s)</small>
+	</h4><hr>
+    <h4>
+    	<?= $infos_user->nb_vues_total ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span><br>
+    	<small>Vues sur le total de vos annonce, actives ou non</small>
+    </h4><hr>
+    <h4>
+    	<?= $infos_user->total_private_message; ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span><br>
+    	<small>Message(s) au total</small><br>
+        <small>Dont <?= $infos_user->private_message_not_view; ?> Non lu(s)</small>
+    </h4><hr>
 </div>
