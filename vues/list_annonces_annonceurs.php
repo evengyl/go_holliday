@@ -12,8 +12,10 @@ if($_app->can_do_user->view_infos_annonce)
             <li><hr>
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
-                        <div class="avatar_annonce">
-                            <img src="/images/autre_licences/face-0.jpg" alt="Circle Image" class="img-circle img-responsive">
+                        <div class="img_annonce">
+                            <a href="#" disabled class="thumbnail" style="cursor:default;">
+                                <img src="/images/annonces/<?= $row_annonce->id; ?>/1.jpg" class="img-responsive">
+                            </a>
                         </div>
                     </div>
                     <div class="col-xs-4">
