@@ -15,7 +15,7 @@ Class _app
 	public $stack_module = [];
 	public $var_module;
 	public $module_name;
-	public $user = [];
+	public $user;
 	public $lang;
 	public $site_name = "Go Hollidays";
 

@@ -70,12 +70,19 @@ Class login extends base_module
 
 		            	if(password_verify($password, $res_fx->password))
 		            	{
+		            		$req_sql = new StdClass();
+				           	$req_sql->table = ["utilisateurs"];
+				           	$req_sql->var = ["user_type"];
+				           	$req_sql->where = ["id = $1", [$res_fx->id]];
+							$res_fx_id_user = $this->_app->sql->select($req_sql);
+
 			            	unset($_SESSION['error_login']);
 			            	unset($_SESSION['tmp_pseudo']);
 			            	unset($post);
 			                $_SESSION['pseudo'] = $res_fx->login;
 			                $_SESSION['level'] = $res_fx->level;
 			                $_SESSION['last_connect'] = $res_fx->last_connect;
+			                $_SESSION['user_type'] = $res_fx_id_user[0]->user_type;
 			                return 1;
 		            	}
 		            	else

@@ -12,6 +12,7 @@ Class can_do_user
 	public $edit_active;
 	public $view_private_message;
 	public $text_user_type;
+	public $edit_preference;
 
 
 	public function __construct(&$_app)

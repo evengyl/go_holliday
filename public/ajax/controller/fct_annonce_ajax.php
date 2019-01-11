@@ -19,6 +19,8 @@ if(isset($_POST))
 
 function desactivate_annonce($_app)
 {
+	if(!$_app->can_do_user->edit_active) echo "Sérieusement c'est pas très beau de tricher...";
+
 	if(isset($_POST['id_annonce']))
 	{
 		$req_sql = new stdClass;
@@ -38,6 +40,8 @@ function desactivate_annonce($_app)
 
 function activate_annonce($_app)
 {
+	if(!$_app->can_do_user->edit_active) echo "Sérieusement c'est pas très beau de tricher...";
+
 	if(isset($_POST['id_annonce']))
 	{
 		$req_sql = new stdClass;
