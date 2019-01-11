@@ -10,7 +10,7 @@ class Config
     public static $base = "";
     
 
-    public static $mail = "perroquet484@gmail.com";
+    public static $mail = "pas encore d'adresse mail@gmail.com";
 
     public static $footer_text = "Créé et maintenu par Evengyl, Go Hollidays© 2018";
 

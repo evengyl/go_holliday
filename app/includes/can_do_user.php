@@ -19,22 +19,7 @@ Class can_do_user
 		//liste des droit user par rapport a leur status
 		if(isset($_app->user->user_type))
 		{
-			if($_app->user->user_type == 0) //utilisateur standart sans compte annonceurs
-			{
-				$this->create_annonce = false;
-				$this->view_infos_annonce = false;
-				$this->edit_annonce = false;
-				$this->view_nb_annonce = false;
-				$this->view_nb_vues_total = false;
-				$this->view_annonce_list = false;
-				$this->view_nb_private_message = false;
-				$this->edit_active = false;
-
-
-				$this->text_user_type = "Client à la recherche de vacances";
-			}
-
-			else if($_app->user->user_type == 1) //utilisateur annonceurs mais n'ayant plus ou pas d'abonnement
+			if($_app->user->user_type == 1) //utilisateur annonceurs mais n'ayant plus ou pas d'abonnement
 			{
 				$this->create_annonce = false;
 				$this->view_infos_annonce = true;
@@ -45,6 +30,7 @@ Class can_do_user
 				$this->view_nb_private_message = true;
 				$this->edit_active = false;
 				$this->view_private_message = true;
+				$this->edit_preference = false;
 
 
 				$this->text_user_type = "Vous n'êtes pas annonceurs VIP";
@@ -61,6 +47,7 @@ Class can_do_user
 				$this->view_nb_private_message = true;
 				$this->edit_active = true;
 				$this->view_private_message = true;
+				$this->edit_preference = true;
 
 
 				$this->text_user_type = "Annonceur VIP";

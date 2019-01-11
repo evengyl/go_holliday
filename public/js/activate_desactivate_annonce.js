@@ -18,7 +18,7 @@ $(document).ready(function()
 
             $.ajax({
                 type : 'POST',
-                url  : 'ajax/controller/fct_annonce_ajax.php',
+                url  : '/ajax/controller/fct_annonce_ajax.php',
                 dataType : "HTML",
                 data : {"app_fct" : "desactivate_annonce", "id_annonce" : id_annonce_selected},
                 success : function(data_return)
@@ -50,7 +50,7 @@ $(document).ready(function()
 
             $.ajax({
                 type : 'POST',
-                url  : 'ajax/controller/fct_annonce_ajax.php',
+                url  : '/ajax/controller/fct_annonce_ajax.php',
                 dataType : "HTML",
                 data : {"app_fct" : "activate_annonce", "id_annonce" : id_annonce_selected},
                 success : function(data_return)

@@ -26,13 +26,17 @@
 				else
 				{?>
 								
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-10 col-md-offset-1">
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<h3 class="thin text-center">Création de votre compte</h3>
 								<p class="text-center text-muted">
-									Votre compte client vous permet de gérer toute vos informations pour vous faciliter la vie
+									Votre compte client vous permet de gérer vos annonces de locations ect...
 									<br>Si vous avez déjà un login <a href="/login"><b>connectez-vous ici</b></a>.
+								</p>
+								<hr>
+								<p class="col-xs-12 text-center text-muted" style="margin-top:10px;">
+									<?= $_app->site_name; ?>, est actuellement gratuit le premiers mois, il vous sera ensuite demandé de souscrire un abonement, vous pourrez accéder au formule d'abonement directement depuis votre page "Mon compte".
 								</p>
 								<hr><?
 								if(isset($_SESSION['error_sign_up']))
@@ -208,8 +212,9 @@
 									Toutes les informations complémentaires serons modifiables dans le menu "Mon compte" puis "Profil"<hr>
 								</p>
 								<p class="col-xs-12 text-center text-muted" style="margin-top:10px;">
-									<b>Le type de compte que vous souhaitez acquérir ce choisi également dans le panneau de configuration de votre compte, sur la page "Mon compte"</b>
+									<b>Votre inscription sera validée par un administrateur, vous serez contacter par sms pour la véracité de votre demande.</b>
 								</p>
+								
 
 								<p class="text-center">
 									<a data-toggle="modal" data-target="#view_condition_general" class="opt_annonce">

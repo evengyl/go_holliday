@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-sm-6">
 			<h3>Est-ce que <?= $_app->site_name; ?> deviendra payant ?</h3>
-			<p><?= $_app->site_name; ?> ne sera jamais payant pour les utilisateurs cherchant un lieu de vacances, il deviendra payant pour les annonceurs uniquement après 6 mois d'essais
+			<p><?= $_app->site_name; ?> ne sera jamais payant pour les utilisateurs cherchant un lieu de vacances, il deviendra payant pour les annonceurs uniquement après 1 mois d'essais
 			gratuit, tous les tarifs sont disponibles si vous êtes annonceurs ou que vous souhaitez créer un compte annonceurs</p>
 		</div>
 		<div class="col-sm-6">
@@ -29,6 +29,6 @@
 
 	<div class="jumbotron top-space">
 		<h4>Si vous avez la moindre question concerant le site, concernant vos attente, si il y a un problème, si vous avez des idées d'amélioration, nous sommes disponible et à votre écoute. Nous tâcherons de vous répondre dans les plus brefs délais</h4>
- 		<p class="text-right"><a class="btn btn-primary btn-large" href="/contact">Contactez nous</a></p>
+ 		<p class="text-right"><a class="btn btn-primary btn-large" href="/Contact">Contactez nous</a></p>
 	</div>
 </div>

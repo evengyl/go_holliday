@@ -10,6 +10,7 @@
     	</span>
     </div>
 	<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
+    <h5><?= $infos_user->login ?></h5>
 	<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $_app->can_do_user->text_user_type ?></b></small></p>
 </div>
 

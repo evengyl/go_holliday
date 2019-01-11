@@ -42,16 +42,6 @@
 </div>
 
         <div class="col-lg-7 row">
-        	<!-- Collapse part edit profil -->
-			<div class="col-lg-12 profil_infos">
-				<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse_profil_infos" aria-expanded="false" aria-controls="collapseExample">
-					<i class="fas fa-caret-down "></i>&nbsp;&nbsp;Modification de votre profil&nbsp;&nbsp;<i class="fas fa-caret-down "></i>
-				</button>
-				<div class="collapse" id="collapse_profil_infos">
-		            __MOD2_form_profil__
-		        </div>
-		    </div>
-
 		    <div class="col-lg-12 annonces_list">
 				<? require ($_app->base_dir.'/vues/list_annonces_annonceurs.php'); ?>
     		</div>
@@ -60,15 +50,27 @@
 
     	<div class="col-lg-2">
         	<div class="option_account">
-	            <h4 class="title">Option(s) de compte</h4>
+	            <h4 class="title">Option(s) de compte</h4><hr>
+
+                <h5 class="sub_title">Partie personnelle</h5>
+                <div class="edit_profil">
+                    <button class="btn btn-info" data-toggle="modal" data-target="#form_profil">Modification de votre profil</button>
+                </div>
+
+                <div class="edit_profil">
+                    <button class="btn btn-info" <?= (!$_app->can_do_user->edit_preference)?"disabled":""; ?> data-toggle="modal" data-target="#form_prefe">Vos préférences</button>
+                </div>
 
 	        	<div class="change_password">
 	        		<button class="btn btn-danger" data-toggle="modal" data-target="#change_password">Changer de mot de passe</button>
 	        	</div>
+                <hr>
 
+                <h5 class="sub_title">Partie Annonces</h5>
 	        	<div class="add_annonces">
-	        		<button class="btn btn-warning" data-toggle="modal" data-target="#tata">Ajouter une annonce</button>
+	        		<button class="btn btn-warning" <?= (!$_app->can_do_user->edit_preference)?"create_annonce":""; ?> data-toggle="modal" data-target="#tata">Ajouter une annonce</button>
 	        	</div>
+                <hr>
         	</div>
         </div>
 
@@ -78,37 +80,10 @@
 
 
 	<!-- Modal Lost login-->
-<div class="modal fade" id="change_password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Changement de votre mot de passe</h4>
-			</div>
-			<div class="modal-body" style="height:235px;">
-				<p class="text-center text-muted">Le mot de passe doit contenir au moins 6 caractères</p>
-				<form action="#" method="post" data-toggle="validator" role="form">
-                    <div class="form-group">
-                        <div class="form-inline row">
-                            <div class="form-group col-sm-12">
-                                <input name="password-new" type="password" data-minlength="6" style="width:100%;" class="form-control" id="inputPassword" placeholder="Mot de passe" required>
-                            </div>
+<? require("modal_lost_password.php"); ?>
+<? require("modal_my_preferences.php"); ?>
 
-                            <div class="form-group col-sm-12" style="margin-top:15px;">
-                                <input type="password" style="width:100%;" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Oups!, les deux mots de passe ne correspondent pas." placeholder="Confirmation du mot de passe" required>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="return_post_account_pass_change" value="<?= $rand_id_change_password ?>">
-                        <button type="submit" class="col-xs-12 btn btn-action">Envoyer</button>
-                    </div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-
+__MOD2_form_profil__
 
 
         

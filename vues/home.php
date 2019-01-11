@@ -4,7 +4,7 @@
 		<div class="row">
 			<h1 class="lead">Bienvenue sur <?= $_app->site_name; ?></h1>
 			<p class="tagline"><a href="#" style="background: #0006; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre interface gratuite pour trouver vos vacances&nbsp;&nbsp;&nbsp;</a></p>
-			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a> <a class="btn btn-action btn-lg" href="/sign_up" role="button">Vous inscrire</a></p>
+			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a> <a class="btn btn-action btn-lg" href="/sign_up" role="button">Vous inscrire (en tant qu'annonceur)</a></p>
 		</div>
 	</div>
 </header>
