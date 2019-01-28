@@ -72,7 +72,7 @@ Class login extends base_module
 		            	{
 		            		$req_sql = new StdClass();
 				           	$req_sql->table = ["utilisateurs"];
-				           	$req_sql->var = ["user_type"];
+				           	$req_sql->var = ["id","user_type"];
 				           	$req_sql->where = ["id = $1", [$res_fx->id]];
 							$res_fx_id_user = $this->_app->sql->select($req_sql);
 
@@ -83,6 +83,7 @@ Class login extends base_module
 			                $_SESSION['level'] = $res_fx->level;
 			                $_SESSION['last_connect'] = $res_fx->last_connect;
 			                $_SESSION['user_type'] = $res_fx_id_user[0]->user_type;
+			                $_SESSION['id_utilisateurs'] = $res_fx_id_user[0]->id;
 			                return 1;
 		            	}
 		            	else

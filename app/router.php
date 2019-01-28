@@ -42,7 +42,6 @@ Class router
 					break;
 
 				case 'my_account':
-						$_GET['page_text_name'] = "Mon_compte";
 						$this->is_connect()->assign_mod('my_account', '', '', '');
 					break;
 

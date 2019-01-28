@@ -18,7 +18,11 @@
 <h5 class="sub_title">Partie Annonces</h5>
 
 <div class="add_annonces">
-	<button class="btn btn-warning" <?= (!$_app->can_do_user->edit_preference)?"create_annonce":""; ?> data-toggle="modal" data-target="#tata">Ajouter une annonce</button>
+	<a class="btn btn-warning" <?= (!$_app->can_do_user->create_annonce)?"disabled":""; ?> href="/Mon_compte/creation-annonces">Ajouter une annonce</a>
+</div>
+
+<div class="view_annonces">
+	<a class="btn btn-success" <?= (!$_app->can_do_user->view_infos_annonce)?"disabled":""; ?> href="/Mon_compte">Voir mes annonces</a>
 </div>
 
 <hr>

@@ -1,5 +1,6 @@
 <header id="head" class="secondary"></header>
 <?
+
 if(count($annonces) < 1)
 {?>
     <div class="container text-center">

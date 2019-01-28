@@ -2,7 +2,7 @@
 <div class="container text-center">
 
     <div class="row">
-        <h2 class="thin">Commencer votre recherche ici</h2>
+        <h1 class="thin">Commencer votre recherche ici</h1>
         <p class="text-muted">
            Commencez votre recherche, cliquez d'abord sur le type de vacances vous souhaitez.
         </p><br><?

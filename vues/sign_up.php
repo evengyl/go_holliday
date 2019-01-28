@@ -46,14 +46,14 @@
 									</p>
 									<hr><?
 								}?>
-								<form method="post" action="#"  data-toggle="validator" role="form">
+								<form method="post" action="#" data-toggle="validator" role="form">
 
 									<h4 class="title col-md-12">Partie personnelle<hr></h4>
 								    <div class="col-md-12">
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Login</span>
-								            	<input  id="login_form" name="login" type="text" maxlength="20" pattern="[a-zA-Z_]{6,}" class="form-control" data-error="Votre login est trop court ou contient des chiffres" >
+								            	<input required name="login" type="text" maxlength="20" pattern="[a-zA-Z_]{6,}" class="form-control" data-error="Votre login est trop court ou contient des chiffres" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -65,7 +65,7 @@
 							            <div class="form-group has-feedback">
 							            	<div class="input-group">
 							            		<span class="input-group-addon">Mot de passe</span>
-								                <input name="password-new" type="password" data-minlength="6" class="form-control" id="inputPassword" data-error="Votre mot de passe doit contenir au minimum 6 caractères" placeholder="Mot de passe" >
+								                <input required name="password-new" type="password" data-minlength="6" class="form-control" id="inputPassword" data-error="Votre mot de passe doit contenir au minimum 6 caractères" placeholder="Mot de passe" >
 							                </div>
 							                <div class="help-block with-errors"></div>
 							            </div>
@@ -75,7 +75,7 @@
 							            <div class="form-group has-feedback">
 							            	<div class="input-group">
 							            		<span class="input-group-addon">Confirmation</span>
-							                	<input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Oups!, les deux mots de passe ne correspondent pas." placeholder="Confirmation du mot de passe" >
+							                	<input required type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Oups!, les deux mots de passe ne correspondent pas." placeholder="Confirmation du mot de passe" >
 							            	</div>
 							            </div>
 									</div>
@@ -85,7 +85,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Adresse Email</span>
-								            	<input  id="mail_form" name="mail" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" data-error="Votre adresse Email n'est pas valide" >
+								            	<input required id="mail_form" name="mail" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" data-error="Votre adresse Email n'est pas valide" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -96,7 +96,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Nom</span>
-								            	<input  id="last_name_form" name="last_name" type="text" maxlength="50" pattern="[^0-9]+" class="form-control" data-error="Caractère incorrect" >
+								            	<input required id="last_name_form" name="last_name" type="text" maxlength="50" pattern="[^0-9]+" class="form-control" data-error="Caractère incorrect" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -107,7 +107,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Prénom</span>
-								            	<input  id="name_form" name="name" type="text"  maxlength="50" pattern="[^0-9]+" class="form-control" data-error="Caractère incorrect" >
+								            	<input required id="name_form" name="name" type="text"  maxlength="50" pattern="[^0-9]+" class="form-control" data-error="Caractère incorrect" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -118,7 +118,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Age</span>
-								            	<input  id="age_form" name="age" type="text" value="" maxlength="3" pattern="[0-9]+" class="form-control" data-error="Max 999, uniquement des chiffres" >
+								            	<input required id="age_form" name="age" type="text" value="" maxlength="3" pattern="[0-9]+" class="form-control" data-error="Max 999, uniquement des chiffres" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -131,7 +131,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Téléphone (Mobile)</span>
-								            	<input  id="tel_form" name="tel" type="tel" value="" maxlength="10" pattern="[0-9]+" class="form-control" data-error="Caractère incorrect" >
+								            	<input required id="tel_form" name="tel" type="tel" value="" maxlength="10" pattern="[0-9]+" class="form-control" data-error="Caractère incorrect" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -171,13 +171,13 @@
 								    </div>
 
 
-								    <h4 class="title col-md-12 ">Partie adresse<hr></h4>
+								    <h4 class="title col-md-12 ">Partie adresse <small class="thin"> (De l'annonceur, pas des résidences)</small><hr></h4>
 
 								    <div class="col-md-8">
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Rue</span>
-								            	<input  id="address_rue_form" name="address_rue" type="text" value="" class="form-control">
+								            	<input required id="address_rue_form" name="address_rue" type="text" value="" class="form-control">
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -188,7 +188,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Numéro</span>
-								            	<input  id="address_numero_form" id="address_numero" type="text" value="" class="form-control" >
+								            	<input required id="address_numero_form" id="address_numero" type="text" value="" class="form-control" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -199,7 +199,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Ville</span>
-								            	<input  id="ville_form" name="address_localite" type="text" value="" class="form-control">
+								            	<input required id="ville_form" name="address_localite" type="text" value="" class="form-control">
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>
@@ -210,7 +210,7 @@
 								    	<div class="form-group has-feedback">
 								        	<div class="input-group">
 								            	<span class="input-group-addon">Code Postal</span>
-								            	<input  id="zip_code_form" name="zip_code" type="text" value="" maxlength="5" pattern="[0-9]+" class="form-control" data-error="Code postal incorrect" >
+								            	<input required id="zip_code_form" name="zip_code" type="text" value="" maxlength="5" pattern="[0-9]+" class="form-control" data-error="Code postal incorrect" >
 								        	</div>
 								        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
 								        	<div class="help-block with-errors"></div>

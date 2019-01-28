@@ -20,7 +20,11 @@
 
         <div class="col-lg-7 row">
 		    <div class="col-lg-12 annonces_list">
-				<? require ($_app->base_dir.'/vues/list_annonces_annonceurs.php'); ?>
+				<?
+                if(isset($_GET['create_announce'])) 
+                    echo "__MOD3_create_announce__";
+                else
+                    require ($_app->base_dir.'/vues/list_annonces_annonceurs.php');?>
     		</div>
 	    </div>
         

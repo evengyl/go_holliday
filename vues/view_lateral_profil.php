@@ -9,8 +9,8 @@
             echo '<i class="fas fa-chess-rook" style="color:#9c7ccf;"></i>';?>
     	</span>
     </div>
-	<h4><?= $infos_user->last_name." ".$infos_user->name ?></h4>
-    <h5><?= $infos_user->login ?></h5>
+	<h4><?= ucfirst($infos_user->last_name)." ".ucfirst($infos_user->name) ?></h4>
+    <h5><?= ucfirst($infos_user->login) ?></h5>
 	<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $_app->can_do_user->text_user_type ?></b></small></p>
 </div>
 
@@ -21,7 +21,7 @@
     @Tel : <b><?= $infos_user->tel ?></b>
 </p>
 <p class="text-muted">
-    @Adresse : <b><?= $infos_user->address_numero.", Rue ".$infos_user->address_rue." à ".$infos_user->zip_code." : ".$infos_user->address_localite ?></b>
+    @Adresse : <b><?= $infos_user->address_numero.", Rue ".ucfirst($infos_user->address_rue)." à ".$infos_user->zip_code." : ".ucfirst($infos_user->address_localite) ?></b>
 </p>
 <hr>
 <div class="block_suivis">
