@@ -23,8 +23,10 @@
 				<?
                 if(isset($_GET['create_announce'])) 
                     echo "__MOD3_create_announce__";
+                else if($_app->can_do_user->view_infos_annonce)
+                    require ($_app->base_dir.'/vues/list_annonces_annonceurs.php');
                 else
-                    require ($_app->base_dir.'/vues/list_annonces_annonceurs.php');?>
+                    echo "__MOD3_account_client__";?>
     		</div>
 	    </div>
         

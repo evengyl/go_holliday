@@ -32,6 +32,8 @@ Class my_account extends base_module
 			$this->get_list_annonce_user($limit_pagination);	
 		}
 
+		
+
 		$this->get_nb_private_message();
 
 		//part change password
@@ -55,6 +57,7 @@ Class my_account extends base_module
 								->render_tpl();
 	}
 
+	
 	public function get_list_lateral_back_profil_img()
 	{
 		$array_back_profil_img = array();
@@ -110,8 +113,11 @@ Class my_account extends base_module
 
 			$this->_app->user->nb_annonces_inactive = (int)$this->_app->user->nb_annonces - (int)$this->_app->user->nb_annonces_active;
 		}
-		else
+		else{
+			$this->_app->user->nb_annonces_active = "0";
+			$this->_app->user->nb_annonces_inactive = "0";
 			$this->_app->user->nb_annonces = "N/A";
+		}
 	}
 
 	public function get_nb_vues_total()

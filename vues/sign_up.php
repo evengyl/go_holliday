@@ -29,7 +29,7 @@
 					<div class="col-md-10 col-md-offset-1">
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<h3 class="thin text-center">Création de votre compte</h3>
+								<h3 class="thin text-center">Création de votre compte Annonceur de locations</h3>
 								<p class="text-center text-muted">
 									Votre compte client vous permet de gérer vos annonces de locations ect...
 									<br>Si vous avez déjà un login <a href="/login"><b>connectez-vous ici</b></a>.

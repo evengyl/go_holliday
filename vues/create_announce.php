@@ -5,8 +5,11 @@ if($_app->can_do_user->create_annonce)
     	<h3 class="title">Création d'annonce(s)</h3><hr>
 
     	<h4>Ajouter dès à présent vos photos / images (10 Max)<br><small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small></h4>
-    	<form action="/ajax/controller/upload_image_annonces.php" class="dropzone" id="dropzone_image_announce">
-	    </form>
+
+
+		<div class="dropzone" id="dropzone_img_upload"></div>
+
+
 	    <hr>
     	<form method="post" action="" data-toggle="validator" role="form" >
     		<div class="col-md-12">
@@ -148,26 +151,24 @@ if($_app->can_do_user->create_annonce)
 }
 else
 {?>
-	<h4 class="title">Vous ne pouvez pas créer d'annonces, car votre niveau VIP n'est pas assez haut</h4><hr><?
+	<h4 class="title">Vous ne pouvez pas créer d'annonces, car votre niveau VIP n'est pas assez haut ou vous n'êtes pas annonceur...</h4><hr><?
 }?>
-    <script>
-    	$( document ).ready(function() {
 
 
-		    Dropzone.options.dropzone_image_announce = {
-				paramName: "file[]", // The name that will be used to transfer the file
-				maxFilesize: 1, // MB
-				uploadMultiple: true,
-				resizeWidth:300,
-				maxFiles:10,
-				clickable: false,
-				accept: function(file, done)
-				{
 
-				    alert("tata");
-				}
-			};
-		});
-    	
+<script>
 
-    </script>
+	var accept = ".png,.jpg,.jpeg,.bnp,.gif,.tif";
+	Dropzone.autoDiscover = false;
+
+	// Dropzone class:
+	var myDropzone = new Dropzone("#dropzone_img_upload",
+	{
+		url: "/ajax/controller/upload_image_annonces.php",
+		paramName: "file",
+	    acceptedFiles: accept,
+	    createImageThumbnails: true,
+	    addRemoveLinks: true,
+	    maxFiles: 10,
+	});
+</script>
