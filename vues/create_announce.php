@@ -8,9 +8,13 @@ if($_app->can_do_user->create_annonce)
 
 
 		<div class="dropzone" id="dropzone_img_upload"></div>
-
-
 	    <hr>
+
+		<div class="row" id="list_image_uploaded">
+			
+		</div>
+
+
     	<form method="post" action="" data-toggle="validator" role="form" >
     		<div class="col-md-12">
 		    	<div class="form-group has-feedback">
@@ -158,17 +162,44 @@ else
 
 <script>
 
-	var accept = ".png,.jpg,.jpeg,.bnp,.gif,.tif";
-	Dropzone.autoDiscover = false;
+var url_uploads = "/ajax/controller/upload_image_annonces.php";
+var accept = ".png,.jpg,.jpeg,.bnp,.gif,.tif";
+Dropzone.autoDiscover = false;
 
-	// Dropzone class:
-	var myDropzone = new Dropzone("#dropzone_img_upload",
-	{
-		url: "/ajax/controller/upload_image_annonces.php",
-		paramName: "file",
-	    acceptedFiles: accept,
-	    createImageThumbnails: true,
-	    addRemoveLinks: true,
-	    maxFiles: 10,
+
+
+// Dropzone class:
+var myDropzone = new Dropzone("#dropzone_img_upload",
+{
+	url: "/ajax/controller/upload_image_annonces.php",
+	paramName: "file",
+    acceptedFiles: accept,
+    createImageThumbnails: true,
+    addRemoveLinks: true,
+    maxFiles: 10,
+    success: function(){
+    	list_preview();
+    }
+
+});
+
+$(document).ready(function()
+{
+	list_preview();
+});
+
+
+function list_preview()
+{
+	$.ajax({
+		url: url_uploads,
+		type: 'GET',
+		data: "option=preview",
+		dataType: "html",
+		success:function(data){
+			$('#list_image_uploaded').html(data);
+		}
 	});
+}
+
 </script>

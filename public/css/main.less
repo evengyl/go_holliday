@@ -520,3 +520,34 @@ img{
 }
 
 
+//part create annonce
+.page-create_announce{
+	#list_image_uploaded{
+		>div{
+			
+			a{
+				height:210px;
+				.delete_img{
+					opacity: 0;
+					position: absolute;
+					top: 0px;
+					left: 0px;
+					button{
+						display: inline-block;
+						height: 210px;
+						i{
+							font-size:30px;
+						}
+					}
+				}
+				img{
+					max-height:200px;
+				}
+			}
+			a:hover .delete_img{
+				opacity: 0.8;
+			}
+
+		}
+	}
+}
