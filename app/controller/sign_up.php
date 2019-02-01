@@ -14,22 +14,40 @@ Class sign_up extends base_module
 		if(isset($_POST['sign_up']))
 			$this->treatment_sign_up($_POST);
 
-		//on check le form avec la session du random id form
-		if(isset($_SESSION['rand_id_form_sign_up']) && isset($_POST['rand_id_sign_up']))
+		//on check le form avec la session du random id form pour creation de compte Client
+		if(isset($_SESSION['rand_id_form_sign_up_client']) && isset($_POST['rand_id_sign_up_client']))
 		{
-			if($_SESSION['rand_id_form_sign_up'] == $_POST['rand_id_sign_up'])
+			if($_SESSION['rand_id_form_sign_up_client'] == $_POST['rand_id_sign_up_client'])
 				$this->treatment_sign_up($_POST);
 		}
 
+		//on check le form avec la session du random id form pour creation de compte VIP
+		if(isset($_SESSION['rand_id_form_sign_up_vip']) && isset($_POST['rand_id_sign_up_vip']))
+		{
+			if($_SESSION['rand_id_form_sign_up_vip'] == $_POST['rand_id_sign_up_vip'])
+				$this->treatment_sign_up($_POST);
+		}
 
-		//on génère un nombre aléatoire pour valider un form unique
+		//on génère un nombre aléatoire pour valider un form unique pour creation de compte Client
 		$rand_id_form = rand();
-		$_SESSION['rand_id_form_sign_up'] = $rand_id_form;
+		$_SESSION['rand_id_form_sign_up_client'] = $rand_id_form;
+
+		//on génère un nombre aléatoire pour valider un form unique pour creation de compte VIP
+		$rand_id_form = rand();
+		$_SESSION['rand_id_form_sign_up_vip'] = $rand_id_form;
 		
-		$this->get_html_tpl =  $this
-								->assign_var('_app', $this->_app)
-								->assign_var('rand_id_sign_up',$rand_id_form)
-							->render_tpl();
+
+		if(isset($_GET['option_sign_up']))
+		{
+			if($_GET['option_sign_up'] == 'VIP')
+				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_sign_up_vip',$rand_id_form)->use_template('sign_up_vip')->render_tpl();
+
+			else if($_GET['option_sign_up'] == 'Client')
+				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_sign_up_client',$rand_id_form)->use_template('sign_up_client')->render_tpl();
+		}
+		else
+			$this->get_html_tpl =  $this->render_tpl();
+		
 	}
 
 	private function verif_all_post($post)

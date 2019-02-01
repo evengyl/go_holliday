@@ -19,7 +19,8 @@ RewriteRule ^Mon_compte/creation-annonces$ ?page=my_account&create_announce [L]
 
 RewriteRule ^Deconnection$ ?page=logout [L]
 RewriteRule ^Inscription$ ?page=sign_up [L]
-
+RewriteRule ^Inscription/(Client)$ ?page=sign_up&option_sign_up=$1 [L]
+RewriteRule ^Inscription/(VIP)$ ?page=sign_up&option_sign_up=$1 [L]
 
 RewriteRule ^Recherche$ ?page=Recherche [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)$ ?page=$1&type=$2 [L]
