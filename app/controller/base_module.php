@@ -79,6 +79,12 @@ Class base_module
 			if(file_exists('../vues/admin_tool/'.$this->template_name.'.php'))
 				$this->template_path = '../vues/admin_tool/'.$this->template_name.'.php';
 		}
+
+		else if(strpos($this->template_name, "sign_up") !== false)
+		{
+			if(file_exists('../vues/sign_up/'.$this->template_name.'.php'))
+				$this->template_path = '../vues/sign_up/'.$this->template_name.'.php';
+		}
 			
 		else
 		{
@@ -86,31 +92,5 @@ Class base_module
 				$this->template_path = '../vues/'.$this->template_name.'.php';
 		}
 
-	}
-
-	public function check_post_login_login($text)
-	{
-		$text = trim($text);
-		$text = htmlentities($text);
-		$nb_char = strlen($text);
-
-		$caractere_min = 6;
-		if($nb_char < $caractere_min)
-			return 0;	
-		else
-			return $text;
-	}
-
-	public function check_post_login_password($text)
-	{
-		$text = trim($text);
-		$text = htmlentities($text);
-		$nb_char = strlen($text);
-
-		$caractere_min = 6;
-		if($nb_char < $caractere_min)
-			return 0;		
-		else
-			return $text;
 	}
 }

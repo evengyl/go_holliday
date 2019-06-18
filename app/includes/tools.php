@@ -21,9 +21,4 @@ function logout($base_dir)
     require($base_dir.'/public/logout.php');
 }
 
-function affiche_pre($var_a_print)
-{
-    ?><div class='col-xs-12' style='z-index: 1; margin-bottom:50px;'><pre><?
-        print_r($var_a_print);
-    ?></pre></div><?
-}
+

@@ -58,7 +58,6 @@ class Autoloader
 
             break;
 
-
             default:
             
                 if(file_exists($base_dir."/app/controller/".$class.'.php'))

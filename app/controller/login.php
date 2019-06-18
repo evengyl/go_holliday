@@ -1,4 +1,5 @@
-<?php 
+<?
+
 Class login extends base_module
 {
 	public $_app;
@@ -38,12 +39,18 @@ Class login extends base_module
 
 	public function check_form_session($post = array())
 	{
+		$_SESSION['first_try_pseudo'] = "";
+		$_SESSION['error_login'] = "";
+		$pseudo = "";
+		$password = "";
+
+
 		if(isset($post['connect_form']))
 		{
 		    if(isset($post["pseudo"]) && isset($post["password"]))
 		    {
-		    	$pseudo = $this->check_post_login_login($post['pseudo'], $is_pseudo = 1);
-		    	$password = $this->check_post_login_password($post['password']);
+		    	$pseudo = $this->check_post_login($post['pseudo']);
+		    	$password = $this->check_post_password($post['password']);
 
 		    	if(!$pseudo || !$password)
 		    	{
@@ -56,48 +63,35 @@ Class login extends base_module
 		           	$req_sql->table = ["login"];
 		           	$req_sql->var = ["id", "login", "password", "level", "last_connect"];
 		           	$req_sql->where = ["login = $1", [$pseudo]];
-					$res_fx = $this->_app->sql->select($req_sql);
+					$res_sql_login = $this->_app->sql->select($req_sql);
 
-		            if(empty($res_fx))
+		            if(!empty($res_sql_login))
 		            {
-		            	$_SESSION['tmp_pseudo'] = "";
-		                $_SESSION['error_login'] = 'Login incorrect ou inexistant';
-		                return 0;
-		            }
-		            else if(isset($res_fx[0]->login))
-		            {
-		            	$res_fx = $res_fx[0];
+		            	$res_sql_login = $res_sql_login[0];
 
-		            	if(password_verify($password, $res_fx->password))
+		            	if(password_verify($password, $res_sql_login->password))
 		            	{
 		            		$req_sql = new StdClass();
 				           	$req_sql->table = ["utilisateurs"];
 				           	$req_sql->var = ["id","user_type"];
-				           	$req_sql->where = ["id = $1", [$res_fx->id]];
+				           	$req_sql->where = ["id = $1", [$res_sql_login->id]];
 							$res_fx_id_user = $this->_app->sql->select($req_sql);
 
-			            	unset($_SESSION['error_login']);
-			            	unset($_SESSION['tmp_pseudo']);
-			            	unset($post);
-			                $_SESSION['pseudo'] = $res_fx->login;
-			                $_SESSION['level'] = $res_fx->level;
-			                $_SESSION['last_connect'] = $res_fx->last_connect;
-			                $_SESSION['user_type'] = $res_fx_id_user[0]->user_type;
-			                $_SESSION['id_utilisateurs'] = $res_fx_id_user[0]->id;
+							$this->set_session_login($res_sql_login, $res_fx_id_user);
 			                return 1;
 		            	}
 		            	else
 		            	{
-		            		$_SESSION['tmp_pseudo'] = $pseudo;
+		            		$_SESSION['first_try_pseudo'] = $pseudo;
 		            		$_SESSION['error_login'] = 'Mot de passe incorrect';
 		            		return 0;
 		            	}
+		                
 		            }
 		            else
 		            {
-		            	$_SESSION['tmp_pseudo'] = $pseudo;
-		            	$_SESSION['error_login'] = 'Mot de passe incorrect';
-		            	return 0;
+		            	$_SESSION['error_login'] = 'Login incorrect ou inexistant';
+		                return 0;
 		            }
 		    	}
 		    }
@@ -107,15 +101,22 @@ Class login extends base_module
 		        return 0;
 		    }
 		}
-		
-		
 		else
-		{
-			//alors ici ou le client a tenter une session hack
-			$_SESSION['error_login'] = "Attention, Le clients à tenter quelque chose avec le formulaire";
 			return 0;
-		}
 	}
+
+
+	private function set_session_login($res_sql_login, $res_fx_id_user)
+	{
+		unset($_SESSION['error_login']);
+    	unset($_SESSION['first_try_pseudo']);
+    	unset($post);
+        $_SESSION['pseudo'] = $res_sql_login->login;
+        $_SESSION['level'] = $res_sql_login->level;
+        $_SESSION['last_connect'] = $res_sql_login->last_connect;
+        $_SESSION['user_type'] = $res_fx_id_user[0]->user_type;
+	}
+
 
 	private function restore_password($post)
 	{
@@ -125,7 +126,7 @@ Class login extends base_module
 
 	    	if(!$pseudo)
 	    	{
-	    		$_SESSION['tmp_pseudo'] = "";
+	    		$_SESSION['first_try_pseudo'] = "";
 	    		$_SESSION['error_login'] = "!! Attention votre login est trop court !!";
 	    	}
 	    	else
@@ -161,5 +162,31 @@ Class login extends base_module
 	            }
 	    	}
 	    }
+	}
+
+	private function check_post_login($text)
+	{
+		$text = trim($text);
+		$text = htmlentities($text);
+		$nb_char = strlen($text);
+
+		$caractere_min = 6;
+		if($nb_char < $caractere_min)
+			return 0;	
+		else
+			return $text;
+	}
+
+	private function check_post_password($text)
+	{
+		$text = trim($text);
+		$text = htmlentities($text);
+		$nb_char = strlen($text);
+
+		$caractere_min = 6;
+		if($nb_char < $caractere_min)
+			return 0;		
+		else
+			return $text;
 	}
 }

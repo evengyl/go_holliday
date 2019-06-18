@@ -11,79 +11,51 @@ Class sign_up extends base_module
 
 		parent::__construct($_app);
 
-		if(isset($_POST['sign_up']))
-			$this->treatment_sign_up($_POST);
-
 		//on check le form avec la session du random id form pour creation de compte Client
-		if(isset($_SESSION['rand_id_form_sign_up_client']) && isset($_POST['rand_id_sign_up_client']))
+		if(isset($_SESSION['rand_id_form_sign_up']) && isset($_POST['rand_id_form_sign_up']))
 		{
-			if($_SESSION['rand_id_form_sign_up_client'] == $_POST['rand_id_sign_up_client'])
+			if($_SESSION['rand_id_form_sign_up'] == $_POST['rand_id_form_sign_up'])
 				$this->treatment_sign_up($_POST);
 		}
 
-		//on check le form avec la session du random id form pour creation de compte VIP
-		if(isset($_SESSION['rand_id_form_sign_up_vip']) && isset($_POST['rand_id_sign_up_vip']))
-		{
-			if($_SESSION['rand_id_form_sign_up_vip'] == $_POST['rand_id_sign_up_vip'])
-				$this->treatment_sign_up($_POST);
-		}
 
 		//on génère un nombre aléatoire pour valider un form unique pour creation de compte Client
-		$rand_id_form = rand();
-		$_SESSION['rand_id_form_sign_up_client'] = $rand_id_form;
+		$rand_id_form_sign_up = rand();
+		$_SESSION['rand_id_form_sign_up'] = $rand_id_form_sign_up;
 
-		//on génère un nombre aléatoire pour valider un form unique pour creation de compte VIP
-		$rand_id_form = rand();
-		$_SESSION['rand_id_form_sign_up_vip'] = $rand_id_form;
 		
 
 		if(isset($_GET['option_sign_up']))
 		{
-			if($_GET['option_sign_up'] == 'VIP')
-				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_sign_up_vip',$rand_id_form)->use_template('sign_up_vip')->render_tpl();
-
-			else if($_GET['option_sign_up'] == 'Client')
-				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_sign_up_client',$rand_id_form)->use_template('sign_up_client')->render_tpl();
+			if($_GET['option_sign_up'] !== '')
+				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
 		}
 		else
-			$this->get_html_tpl =  $this->render_tpl();
+			$this->get_html_tpl =  $this->use_template('sign_up_global')->render_tpl();
 		
 	}
 
-	private function verif_all_post($post)
+	private function treatment_sign_up($post)
 	{
+		$level_client = 0;
+
 		foreach($post as $row_form_post)
 		{
 			if(empty($row_form_post))
-				return 0;
+				$post_verif = 0;
+			else
+				$post_verif = 1;
 		}
-		return 1;
-	}
 
 
-	public function treatment_sign_up($post)
-	{
-		$post = [
-			"login" => "legends",
-	    "mail" => "dark.evengyl@gmail.com",
-	    "last_name" => "baudoux",
-	    "name" => "loic",
-	    "age" => "27",
-	    "tel" => "0497312523",
-	    "genre" => "Monsieur",
-	    "address_rue" => "sous ghoys",
-	    "address_localite" => "labuissiere",
-	    "zip_code" => "6567",
-	    "pays" => "belgique",
-	    "rand_id_sign_up" => "1270243225"];
+		if($post_verif)
+		{
 
-		affiche_pre($post);
-
-		$post_verif = $this->verif_all_post($post);
-		if(!$post_verif)
-			$_SESSION['error_sign_up'] = "Le formulaire n'a bizarement pas été rempli correctement.";
-
-		else{
+			//on set sont type de sign_up
+			if($this->_app->route["option_sign_up"] == "Client")
+				$level_client = 0;
+			else if($this->_app->route["option_sign_up"] == "VIP")
+				$level_client = 1;
 
 			//check si le login existe déjà dans la bsd
     		$req_sql = new stdClass;
@@ -91,34 +63,60 @@ Class sign_up extends base_module
 			$req_sql->var = ["login"];
 			$req_sql->where = ["login = $1", [$post['login']]];
 			$res_sql = $this->_app->sql->select($req_sql);
-/*
+
 			//si le pseudo n'est pas existant on peux créer le login
         	if(empty($res_sql))
             {
+
                 $password_hash = password_hash($post["password"], PASSWORD_DEFAULT);
 
-	    		$req_sql = new stdClass;
-				$req_sql->ctx = new stdClass;
-				$req_sql->ctx->login = $post["login"];
-				$req_sql->ctx->password_no_hash = $password;
-				$req_sql->ctx->password = $password_hash;
-				$req_sql->ctx->email = $email;
-				$req_sql->ctx->last_connect = date("U");
-				$req_sql->ctx->level = 0;
-				$req_sql->table = "login";
-				//$this->_app->sql->insert_into($req_sql);
+	    		$req_sql_login = new stdClass;
+				$req_sql_login->ctx = new stdClass;
+				$req_sql_login->ctx->login = $post["login"];
+				$req_sql_login->ctx->password_no_hash = $post["password"];
+				$req_sql_login->ctx->password = $password_hash;
+				$req_sql_login->ctx->email = $post["mail"];
+				$req_sql_login->ctx->last_connect = date("U");
+				$req_sql_login->ctx->level = $level_client;
+				$req_sql_login->table = "login";
+				$id_login = $this->_app->sql->insert_into($req_sql_login, $view_sql_prepare = 0, $return_insert_id = 1);
 
-				//va insrer les données de bases pour le commencent du jeu
+				//Enregistrement des infos utilisateurs
+	    		$req_sql_utilisateurs = new stdClass;
+				$req_sql_utilisateurs->ctx = new stdClass;
+				$req_sql_utilisateurs->ctx->name = $post["name"];
+				$req_sql_utilisateurs->ctx->last_name = $post["last_name"];
+				$req_sql_utilisateurs->ctx->age = $post["age"];
+				$req_sql_utilisateurs->ctx->tel = $post["tel"];
+				$req_sql_utilisateurs->ctx->address_rue = $post["address_rue"];
+				$req_sql_utilisateurs->ctx->address_numero = $post["address_numero"];
+				$req_sql_utilisateurs->ctx->address_localite = $post["address_localite"];
+				$req_sql_utilisateurs->ctx->zip_code = $post["zip_code"];
+				$req_sql_utilisateurs->ctx->pays = $post["pays"];
+				$req_sql_utilisateurs->ctx->genre = $post["genre"];
+				$req_sql_utilisateurs->ctx->account_verify = 0;
+				$req_sql_utilisateurs->table = "utilisateurs";
+				$id_utilisateurs = $this->_app->sql->insert_into($req_sql_utilisateurs, $view_sql_prepare = 0, $return_insert_id = 1);
+
+
+				//mise à jour de l'id user dans la table login pour lié le compte login a l'utilisateur
+				$req_sql_utilisateurs = new stdClass;
+				$req_sql_utilisateurs->ctx = new stdClass;
+				$req_sql_utilisateurs->ctx->id_utilisateurs = $id_utilisateurs;
+				$req_sql_utilisateurs->table = "login";
+				$req_sql_utilisateurs->where = "id = ".$id_login;
+				$this->_app->sql->update($req_sql_utilisateurs);
+
+
 				
-				unset($_SESSION['error_sign_up']);
 				$_SESSION['error_sign_up'] = true;
 	            unset($_POST); //on vide le post
-	            return 1; //on
 	            
             }
             else
             	$_SESSION['error_sign_up'] = 'Ce pseudo est déjà utilisé, veuillez en choisir un autre, Merci.';
-*/
 		}
+		else
+			$_SESSION['error_sign_up'] = "Le formulaire n'a pas été rempli correctement.";
 	}
 }

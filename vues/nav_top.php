@@ -35,7 +35,7 @@
                         $active = "";
                         if($_GET['page'] == 'login')
                             $active = "active";
-                        echo '<li class="' . $active . '"><a class="btn" href="/Connection">Se connecter</a></li>';
+                        echo '<li class="' . $active . '"><a class="btn" href="/Connexion">Se connecter</a></li>';
                     }
 
                     if(Config::$is_connect)
@@ -44,6 +44,14 @@
                         if($_GET['page'] == 'logout')
                             $active = "active";
                         echo '<li class="' . $active . '"><a class="btn" href="/Deconnection">Se déconnecter</a></li>';
+                    }
+
+                    if(Config::$is_connect && $_app->user->level >= 3)
+                    {
+                        $active = "";
+                        if($_GET['page'] == 'admin')
+                            $active = "active";
+                        echo '<li class="' . $active . '"><a href="/admin">Administration</a></li>';
                     }
                 }
                 ?>

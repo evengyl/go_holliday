@@ -29,10 +29,11 @@ if(isset($_SESSION['pseudo'])) //donc il est connecté
 }
 else
 {
-	if(isset($_SESSION['tmp_pseudo']))
-		$tmp_pseudo = $_SESSION['tmp_pseudo'];
+	//si la personne a déjà tenter une connexion, sont pseudo qu'il à déjà entré vas se remettre dans le input
+	if(isset($_SESSION['first_try_pseudo']))
+		$first_try_pseudo = $_SESSION['first_try_pseudo'];
 	else
-		$tmp_pseudo = "";
+		$first_try_pseudo = "";
 	?>
 
 	<div class="container">
@@ -45,7 +46,7 @@ else
 				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h3 class="thin text-center">Connexion à votre compte Annonceurs</h3>
+							<h3 class="thin text-center">Connexion à votre compte</h3>
 							<p class="text-center text-muted">
 								<b>Si vous ne possédez pas de compte c'est par ici</b>
 								<a href="/Inscription"><b>S'enregistrer</b></a>.
@@ -57,7 +58,7 @@ else
 							<form action="#" method="post">
 								<div class="top-margin">
 									<label>Pseudo<span class="text-danger">*</span></label>
-									<input name="pseudo" type="text" required autofocus value="<?= $tmp_pseudo ?>" placeholder="Pseudo" class="form-control">
+									<input name="pseudo" type="text" required autofocus value="<?= $first_try_pseudo ?>" placeholder="Pseudo" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Mot de passe<span class="text-danger">*</span></label>
@@ -86,34 +87,6 @@ else
 	
 }
 
-?>
-
-
-	<!-- Modal Lost login-->
-<div class="modal fade" id="lost_login_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Récupération de votre mot de passe</h4>
-			</div>
-			<div class="modal-body" style="height:180px;">
-				<p class="text-center text-muted">Pour récupérer votre mot de passe veuillez entrer votre adresse mail ou votre pseudo,</br>
-				nous vous enverrons un Mail contenant votre mot de passe</p>
-				<form action="#" method="post">
-					<div class="col-xs-12 form-group">
-						<input name="pseudo_mail" minlength="6" type="text" class="form-control" required autofocus placeholder="Pseudo / Email">
-					</div>
-					<input type="hidden" name="lost_login_form">
-					<button type="submit" class="col-xs-12 btn btn-action">Récupérer votre mot de passe</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-<?
+include("modal_recorvery_password.php");
 
 unset($_SESSION['error_login']); // permet de ne pas afficher les erreurs de connection si on reload la page
-
-?>

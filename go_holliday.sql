@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.36-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.35-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: go_holliday
 -- ------------------------------------------------------
--- Server version	10.1.36-MariaDB
+-- Server version	10.1.35-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -143,9 +143,9 @@ CREATE TABLE `login` (
   `password_no_hash` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `level` int(11) NOT NULL,
-  `id_utilisateurs` int(11) DEFAULT '0',
+  `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$T7x5EwQfQ7SeonbzQBpCUOI6mjR.T6ReuCC5JiJeTiIRJY.IOz0HW','1490198511','legends','dark.evengyl@gmail.com',3,1);
+INSERT INTO `login` VALUES (17,'sign_up_test','$2y$10$QBU4OrKOjPIZdEF8zoIEQODzksr84AzrXuPHYCTbFrQwUDztCif7C','1560861159','sign_up_test','sign_up_test@gmail.com',0,25),(18,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,26);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,8 +347,9 @@ CREATE TABLE `utilisateurs` (
   `user_type` tinyint(4) NOT NULL,
   `date_fin_abonement` date DEFAULT NULL,
   `id_background_profil` tinyint(4) NOT NULL DEFAULT '1',
+  `account_verify` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,7 +358,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,NULL,7),(2,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7),(3,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7),(4,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7),(5,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7),(6,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-02-20',7),(7,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-01',7),(8,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7),(9,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-09',7),(10,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-31',7),(11,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-28',7),(12,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-21',7),(13,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-17',7),(14,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-18',7),(15,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-13',7),(16,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7);
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,NULL,10,0),(2,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(3,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(4,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(5,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(6,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-02-20',7,0),(7,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-01',7,0),(8,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(9,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-09',7,0),(10,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-31',7,0),(11,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-28',7,0),(12,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-21',7,0),(13,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-17',7,0),(14,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-18',7,0),(15,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-13',7,0),(16,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(17,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(18,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(19,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(20,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(21,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(22,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(23,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(24,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(25,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(26,'loic','baudoux',28,'0497312523','jean jaures','12','labuissiere','6567','Belgique','Monsieur',2,NULL,1,0);
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -370,4 +371,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-03 11:36:05
+-- Dump completed on 2019-06-18 16:06:46

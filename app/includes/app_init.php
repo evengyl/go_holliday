@@ -59,8 +59,7 @@ class app_init
 			last_connect VARCHAR(50) NOT NULL,
 			password_no_hash VARCHAR(255) NOT NULL,
 			email VARCHAR(255) NOT NULL,
-			level INT(11) NOT NULL,
-			id_utilisateurs INT(11) NOT NULL
+			level INT(11) NOT NULL
 		)";
 		$this->_app->sql->query_simple($sql_init_table_option);	
 
@@ -71,8 +70,7 @@ class app_init
 			"last_connect" => "1490198511", 
 			"password_no_hash" => "legends",
 			"email" => "dark.evengyl@gmail.com",
-			"level" => "3",
-			"id_utilisateurs" => "1"
+			"level" => "3"
 		];
 
 		$sql_init_option = new stdClass();

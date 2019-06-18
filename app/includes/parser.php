@@ -50,7 +50,6 @@ class parser
 	{
 		$tpl_name = preg_replace(array("/__TPL[0-9]*_/", "/__/"), "", $match_template);
 
-		
 
 		if(strpos($tpl_name, "admin_") !== false)
 		{
@@ -64,7 +63,7 @@ class parser
 			}
 			
 		}
-			
+
 		else
 		{
 			if(file_exists('../vues/'.$tpl_name.'.php')){

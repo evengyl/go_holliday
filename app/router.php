@@ -21,7 +21,7 @@ Class router
 					$this->assign_mod('home', '', '', '');
 					break;
 
-				case 'sign_up':	
+				case 'sign_up_global':	
 					$this->assign_mod('sign_up', '', '', '');
 					break;
 
