@@ -1,35 +1,8 @@
 <header id="head" class="secondary"></header><?
 
-
-if(isset($_SESSION['pseudo'])) //donc il est connecté
-{?>
-	<div class="container">
-		<div class="row">
-			<article class="col-xs-12 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">Connexion</h1>
-				</header>
-				
-				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h3 class="thin text-center">Vous êtes maintenant connecté</h3>
-							<p class="text-center text-muted">
-								Vous êtes connecté en tant que <b><?= ucfirst($_SESSION['pseudo']) ?></b><br>
-								Si vous voulez vous déconnecter c'est par ici
-								<a href="/Deconnection">Se déconnecter</a>.
-							</p>
-							<hr>
-						</div>
-					</div>
-				</div>
-			</article>
-		</div>
-	</div><?
-}
-else
+if(!isset($_SESSION['pseudo'])) //donc il est connecté
 {
-	//si la personne a déjà tenter une connexion, sont pseudo qu'il à déjà entré vas se remettre dans le input
+//si la personne a déjà tenter une connexion, sont pseudo qu'il à déjà entré vas se remettre dans le input
 	if(isset($_SESSION['first_try_pseudo']))
 		$first_try_pseudo = $_SESSION['first_try_pseudo'];
 	else
@@ -83,8 +56,32 @@ else
 			</article>
 		</div>
 	</div><?
-	
-	
+}
+else
+{?>
+	<div class="container">
+		<div class="row">
+			<article class="col-xs-12 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Connexion</h1>
+				</header>
+				
+				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3 class="thin text-center">Vous êtes maintenant connecté</h3>
+							<p class="text-center text-muted">
+								Vous êtes connecté en tant que <b><?= ucfirst($_SESSION['pseudo']) ?></b><br>
+								Si vous voulez vous déconnecter c'est par ici
+								<a href="/Deconnection">Se déconnecter</a>.
+							</p>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div><?
 }
 
 include("modal_recorvery_password.php");

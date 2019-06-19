@@ -1,7 +1,8 @@
-
 <form method="post" action="#" data-toggle="validator" role="form">
 
 	<h4 class="title col-md-12">Partie personnelle<hr></h4>
+
+
     <div class="col-md-12">
     	<div class="form-group has-feedback">
         	<div class="input-group">
@@ -38,6 +39,7 @@
         </div>
     </div>
 
+
     <div class="col-md-6">
         <div class="form-group has-feedback">
         	<div class="input-group">
@@ -72,6 +74,7 @@
     	</div>
     </div>
 
+
     <div class="col-md-6">
     	<div class="form-group has-feedback">
         	<div class="input-group">
@@ -90,6 +93,7 @@
         	<div class="help-block with-errors"></div>
     	</div>
     </div>
+
 
     <div class="col-md-6">
     	<div class="form-group has-feedback">
@@ -110,6 +114,7 @@
     	</div>
     </div>
 
+
     <div class="col-md-4">
     	<div class="form-group has-feedback">
         	<div class="input-group">
@@ -128,7 +133,6 @@
         	<div class="help-block with-errors"></div>
     	</div>
     </div>
-
     
 
     <div class="col-md-8">
@@ -150,29 +154,31 @@
     	</div>
     </div>
 
+
     <div class="col-md-12">
         <div class="form-group has-success">
             <div class="input-group" style="border: 1px solid #3c763d; color: #3c763d; background-color: #dff0d8;">
                 <span class="input-group-addon" style="border:none;">Genre</span>
-                <div class="radio" style="display:inline-block; margin-right:10px;">
+
+                <div class="radio" style="display:inline-block; margin-right:5px; margin-left:10px;">
                     <label>
                         <input value="Monsieur" checked="checked" type="radio" name="genre" >
                         Monsieur
                     </label>
                 </div>
-                <div class="radio" style="display:inline-block; margin-right:10px;">
+                <div class="radio" style="display:inline-block; margin-right:5px; margin-left:10px;">
                     <label>
                         <input value="Madame" type="radio" name="genre" >
                         Madame
                     </label>
                 </div>
-                <div class="radio" style="display:inline-block; margin-right:10px;">
+                <div class="radio" style="display:inline-block; margin-right:5px; margin-left:10px;">
                     <label>
                         <input value="Mademoiselle" type="radio" name="genre" >
                         Mademoiselle
                     </label>
                 </div>
-                <div class="radio" style="display:inline-block; margin-right:10px;">
+                <div class="radio" style="display:inline-block; margin-right:5px; margin-left:10px;">
                     <label>
                         <input value="Ne se prononce pas" type="radio" name="genre" >
                         Ne se prononce pas
@@ -183,7 +189,8 @@
     </div>
 
 
-    <h4 class="title col-md-12 ">Partie adresse <small class="thin"> (De l'annonceur, pas des résidences)</small><hr></h4>
+    <h4 class="title col-md-12 ">Partie adresse <?=($_GET['option_sign_up'] == 'VIP')?'<small class="thin"> (De l\'annonceur, pas des résidences)</small>':''; ?><hr></h4>
+
 
     <div class="col-md-8">
     	<div class="form-group has-feedback">
@@ -201,6 +208,7 @@
     	</div>
     </div>
 
+
     <div class="col-md-4">
     	<div class="form-group has-feedback">
         	<div class="input-group">
@@ -217,6 +225,7 @@
     	</div>
     </div>
 
+
     <div class="col-md-8">
     	<div class="form-group has-feedback">
         	<div class="input-group">
@@ -232,6 +241,7 @@
         	<div class="help-block with-errors"></div>
     	</div>
     </div>
+
 
     <div class="col-md-4">
     	<div class="form-group has-feedback">
@@ -252,8 +262,8 @@
     	</div>
     </div>
 
+
     <div class="col-md-12">
-    	
     	<div class="form-group has-feedback">
         	<div class="input-group">
             	<span class="input-group-addon">Pays</span>
@@ -291,9 +301,13 @@
 	<p class="col-xs-12 text-center text-muted" style="margin-top:10px;">
 		Toutes les informations complémentaires serons modifiables dans le menu "Mon compte" ensuite "Profil"<hr>
 	</p>
-	<p class="col-xs-12 text-center text-muted" style="margin-top:10px;">
-		<b>Votre inscription sera validée par un administrateur, vous serez contacter par Sms / Mail / Appel pour la véracité de votre demande.</b>
-	</p>
+
+    <?=($_GET['option_sign_up'] == 'VIP')
+        ?'<p class="col-xs-12 text-center text-muted" style="margin-top:10px;">
+		  <b>Votre inscription sera validée par un administrateur, vous serez contacter par Sms / Mail / Appel pour la véracité de votre demande.</b>
+	      </p>'
+        :''; 
+    ?>
 	
 
 	<p class="col-xs-12 text-center">
@@ -307,10 +321,12 @@
 	</p>
 	<hr>
 
+
 	<div class="text-center col-md-12"><hr>
     	<input type="hidden" name="rand_id_form_sign_up" value="<?= $rand_id_form_sign_up ?>">
         <button type="submit" class="btn btn-success btn-fill btn-wd">S'inscrire</button>
     </div>
     <div class="clearfix"></div>
+    
 </form>
 								

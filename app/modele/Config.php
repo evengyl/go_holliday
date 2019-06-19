@@ -10,9 +10,9 @@ class Config
     public static $base = "";
     
 
-    public static $mail = "pas encore d'adresse mail@gmail.com";
+    public static $mail = "info.go.holliday@gmail.com";
 
-    public static $footer_text = "Créé et maintenu par Evengyl, Go Hollidays© 2018";
+    public static $footer_text = "Créé et maintenu par Evengyl, Go Hollidays© 2019";
 
     public static $bsd_first_init = false;
 

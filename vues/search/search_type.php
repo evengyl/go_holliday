@@ -4,7 +4,7 @@
     <div class="row">
         <h1 class="thin">Commencer votre recherche ici</h1>
         <p class="text-muted">
-           Commencez votre recherche, cliquez d'abord sur le type de vacances vous souhaitez.
+           Pour Commencer votre recherche, cliquez d'abord sur le type de vacances dont vous rêvez.
         </p><br><?
 
         foreach($array_type as $row_type)

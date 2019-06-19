@@ -11,6 +11,9 @@ Class sign_up extends base_module
 
 		parent::__construct($_app);
 
+		//on indique qu'on arrive sur la page sign up
+		$_SESSION['just_sign_up'] = false;
+
 		//on check le form avec la session du random id form pour creation de compte Client
 		if(isset($_SESSION['rand_id_form_sign_up']) && isset($_POST['rand_id_form_sign_up']))
 		{
@@ -107,11 +110,9 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->where = "id = ".$id_login;
 				$this->_app->sql->update($req_sql_utilisateurs);
 
-
-				
-				$_SESSION['error_sign_up'] = true;
+				//sign up ok
+				$_SESSION['just_sign_up'] = true;
 	            unset($_POST); //on vide le post
-	            
             }
             else
             	$_SESSION['error_sign_up'] = 'Ce pseudo est déjà utilisé, veuillez en choisir un autre, Merci.';

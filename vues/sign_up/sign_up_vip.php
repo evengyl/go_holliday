@@ -1,4 +1,3 @@
-
 <header id="head" class="secondary"></header>
 
 	<div class="container">
@@ -7,24 +6,11 @@
 				<header class="page-header">
 					<h1 class="page-title">Création d'un compte Annonceur</h1>
 				</header><?
+				
 				//veux dire qu'il vient tout juste de créer son compte
-				if(isset($_SESSION['error_sign_up']) && $_SESSION['error_sign_up'] === true)
-				{?>
-					<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<h3 class="thin text-center">Finalisation de création de compte</h3>
-								<p class="text-center text-muted">
-									Vous êtes désormais inscrit, Merci de votre confiance !
-									<br>Vous pouvez désormais vous <a href="/Connection">connecter ici</a>.
-								</p>
-								<hr>
-							</div>
-						</div>
-					</div><?
-					unset($_SESSION['error_sign_up']);
-				}
-				else
+				include("sign_up_confirm.php");
+
+				if($_SESSION['just_sign_up'] == false)
 				{?>
 								
 					<div class="col-md-10 col-md-offset-1">

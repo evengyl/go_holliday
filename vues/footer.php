@@ -50,9 +50,6 @@
 					<div class="widget-body">
 						<p class="simplenav">
 							<a href="#">Acceuil</a> | 
-							<a href="#">Port Folio</a> |
-							<a href="#">Video</a> |
-							<a href="#">Activité sur place</a> |
 							<b><a href="#">Contact</a></b>
 						</p>
 					</div>
@@ -64,8 +61,18 @@
 							<p><?php echo Config::$footer_text." - ".date('Y'); ?> __TRANS_footer_price__.</p>
 						</p>
 					</div>
-				</div>
-
+				</div><?
+				if(Config::$is_connect && $_app->user->level >= 3)
+                {?>
+					<div class="col-xs-12 widget">
+						<div class="widget-body" style="text-align:center; margin-top:15px; font-size:15px;"><?
+	                        $active = "";
+	                        if($_GET['page'] == 'admin')
+	                            $active = "active";
+	                        echo '<a href="/admin">Administration</a>';?>
+		                </div>
+		            </div><?
+		        }?>
 			</div>
 		</div>
 	</div>

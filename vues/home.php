@@ -3,8 +3,12 @@
 	<div class="container">
 		<div class="row">
 			<h1 class="lead">Bienvenue sur <?= $_app->site_name; ?></h1>
-			<p class="tagline"><a href="#" style="background: #0006; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre interface gratuite pour trouver vos vacances&nbsp;&nbsp;&nbsp;</a></p>
-			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a> <a class="btn btn-action btn-lg" href="/Inscription" role="button">Vous inscrire</a></p>
+			<p class="tagline"><a style="background: #0007; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre site de recherche gratuit pour trouver vos vacances&nbsp;&nbsp;&nbsp;</a></p>
+			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a></p>
+			<?
+				if(!Config::$is_connect)
+					echo '<p><a class="btn btn-action btn-lg" href="/Inscription" role="button">Vous inscrire</a></p>';
+			?>
 		</div>
 	</div>
 </header>
@@ -23,5 +27,6 @@ __MOD2_search_type__
 
 
 __MOD_reason_why__
+
 
 __MOD_faq__

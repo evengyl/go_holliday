@@ -85,6 +85,12 @@ Class base_module
 			if(file_exists('../vues/sign_up/'.$this->template_name.'.php'))
 				$this->template_path = '../vues/sign_up/'.$this->template_name.'.php';
 		}
+
+		else if(strpos($this->template_name, "search") !== false)
+		{
+			if(file_exists('../vues/search/'.$this->template_name.'.php'))
+				$this->template_path = '../vues/search/'.$this->template_name.'.php';
+		}
 			
 		else
 		{

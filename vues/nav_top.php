@@ -8,8 +8,8 @@
             </button>
 
             <a class="navbar-brand" href="/Accueil">
-                <img class="" style="display:inline;" src="/images/logo.png" alt="">
-                <span class="" style="display: inline; margin-top:5px;" class="thin"><?= $_app->site_name; ?></span><br>
+                <img style="display:inline;" src="/images/logo.png" alt="">
+                <span style="display: inline; margin-top:5px;" class="thin"><?= $_app->site_name; ?></span><br>
             </a>
         </div>
 
@@ -46,13 +46,7 @@
                         echo '<li class="' . $active . '"><a class="btn" href="/Deconnection">Se déconnecter</a></li>';
                     }
 
-                    if(Config::$is_connect && $_app->user->level >= 3)
-                    {
-                        $active = "";
-                        if($_GET['page'] == 'admin')
-                            $active = "active";
-                        echo '<li class="' . $active . '"><a href="/admin">Administration</a></li>';
-                    }
+                    
                 }
                 ?>
             </ul>
