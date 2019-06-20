@@ -27,6 +27,7 @@ if(!isset($_SESSION['pseudo'])) //donc il est connecté
 							<hr>
 							<p class="text-center text-danger">
 								<?= (isset($_SESSION['error_login']))?$_SESSION['error_login']:''; ?>
+								<?= (isset($error))?$error:''; ?>
 							</p>
 							<form action="#" method="post">
 								<div class="top-margin">

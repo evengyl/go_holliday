@@ -3,6 +3,7 @@
 Class login extends base_module
 {
 	public $_app;
+	public $error;
 
 	public function __construct(&$_app)
 	{
@@ -12,26 +13,46 @@ Class login extends base_module
 		$this->_app->module_name = __CLASS__;
 		parent::__construct($this->_app);
 
+		$post = $_POST;
+
 
 		if($this->_app->option_app['app_with_login_option'] == false)
 			$this->get_html_tpl = $this->use_template('home')->render_tpl();
 
 
 		//si login perdu on retaure ici 
-		if(isset($_POST['lost_login_form']))
-			$this->restore_password($_POST);
+		if(isset($post['lost_login_form']))
+			$this->restore_password($post);
 
 
-		//page de connection formulaire
-		if(isset($_POST['connect_form'])) 
-			Config::$is_connect = $this->check_form_session($_POST);
+		//page de connexion formulaire
+		if(isset($post['connect_form'])) {
+			if($res_check_session = $this->check_form_session($post))
+			{
+
+				if($res_check_session === true){
+
+					Config::$is_connect = 1;
+				}
+				else if(is_array($res_check_session))
+				{
+					$this->error = $res_check_session["error"];
+					Config::$is_connect = 0;
+					//message perso
+				}
+				else if($res_check_session === false){
+					Config::$is_connect = 0;
+				}
+				
+			}
+		}
 
 
         // on set le bread
 		if(isset($_GET['page']) && $_GET['page'] == "login")
 			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
 
-		$this->get_html_tpl = $this->use_template('login')->render_tpl();
+		$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
 
 	}
 
@@ -54,7 +75,7 @@ Class login extends base_module
 
 		    	if(!$pseudo || !$password)
 		    	{
-		    		$_SESSION['error_login'] = "!! Attention votre login ou votre mot de passe est trop court !!";
+		    		$this->error = "!! Attention votre login ou votre mot de passe est trop court !!";
 		    		return 0;
 		    	}
 		    	else
@@ -73,31 +94,40 @@ Class login extends base_module
 		            	{
 		            		$req_sql = new StdClass();
 				           	$req_sql->table = ["utilisateurs"];
-				           	$req_sql->var = ["id","user_type"];
+				           	$req_sql->var = ["id","user_type", "account_verify"];
 				           	$req_sql->where = ["id = $1", [$res_sql_login->id_utilisateurs]];
 							$res_fx_id_user = $this->_app->sql->select($req_sql);
 
-							$this->set_session_login($res_sql_login, $res_fx_id_user);
-			                return 1;
+							if($res_fx_id_user[0]->account_verify == 1)
+							{
+								$this->set_session_login($res_sql_login, $res_fx_id_user);
+			                	return 1;
+							}
+							else
+							{
+	            				return ["error" => "Ce compte n'a pas encore été activé, veuillez vérifier vos Email"];
+								
+							}
+							
 		            	}
 		            	else
 		            	{
 		            		$_SESSION['first_try_pseudo'] = $pseudo;
-		            		$_SESSION['error_login'] = 'Mot de passe incorrect';
+		            		$this->error = 'Mot de passe incorrect';
 		            		return 0;
 		            	}
 		                
 		            }
 		            else
 		            {
-		            	$_SESSION['error_login'] = 'Login incorrect ou inexistant';
+		            	$this->error = 'Login incorrect ou inexistant';
 		                return 0;
 		            }
 		    	}
 		    }
 		    else
 		    {
-		        $_SESSION['error_login'] = 'Formulaire mal rempli';
+		        $this->error = 'Formulaire mal rempli';
 		        return 0;
 		    }
 		}
@@ -108,7 +138,6 @@ Class login extends base_module
 
 	private function set_session_login($res_sql_login, $res_fx_id_user)
 	{
-		unset($_SESSION['error_login']);
     	unset($_SESSION['first_try_pseudo']);
     	unset($post);
         $_SESSION['pseudo'] = $res_sql_login->login;
@@ -127,7 +156,7 @@ Class login extends base_module
 	    	if(!$pseudo)
 	    	{
 	    		$_SESSION['first_try_pseudo'] = "";
-	    		$_SESSION['error_login'] = "!! Attention votre login est trop court !!";
+	    		$this->error = "!! Attention votre login est trop court !!";
 	    	}
 	    	else
 	    	{	
@@ -139,7 +168,7 @@ Class login extends base_module
 
 	            if(empty($res_fx))
 	            {
-	                $_SESSION['error_login'] = 'Login incorrect pour la récupération de mot de passe.';
+	                $this->error = 'Login incorrect pour la récupération de mot de passe.';
 	            }
 	            else
 	            {
@@ -155,7 +184,7 @@ Class login extends base_module
 		            	get_tpl_mail_password_recover($title_mail, $password_mail);
 		            $tpl = ob_get_clean();
 
-	            	unset($_SESSION['error_login']);
+	            	unset($this->error);
 	            	unset($post);
 	            	
 					mail($email_to_send, "Recupération de mot de passe.", $tpl, implode("\r\n", $headers));
