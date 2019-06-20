@@ -13,6 +13,7 @@ Class base_module
 	public $sql;
 	public $_app;
 	public $module_name_secondary;
+	public $var_to_module;
 
 	public function __construct(&$_app)
 	{
@@ -32,7 +33,13 @@ Class base_module
 		if(!empty($this->module_name_secondary))
 		{
 			//si un module secondaire lui est envoyée il sera renvoyer pour l'execution par apres
-			$get_module_name_exec = "__MOD_".$this->module_name_secondary."__";
+			$get_module_name_exec = "__MOD_".$this->module_name_secondary;
+
+			if($this->var_to_module != "")
+				$get_module_name_exec .= "(".$this->var_to_module.")__";
+			else
+				$get_module_name_exec .= "__";
+
 			return $get_module_name_exec;
 		}
 		else
@@ -62,9 +69,12 @@ Class base_module
 		return $this;
 	}
 
-	public function use_module($module_name_secondary = "")
+	public function use_module($module_name_secondary = "", $var_to_module = "")
 	{
 		$this->module_name_secondary = $module_name_secondary;
+
+		if($var_to_module != "")
+			$this->var_to_module = $var_to_module;
 
 		return $this;
 	}

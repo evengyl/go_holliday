@@ -88,7 +88,7 @@ class parser
 		$module_name = trim(preg_replace(array('/__[MOD]*[0-9]*_/', '/[(\"]+[a-zA-Z0-9_éèçàê \']*[\")]+/',  '/__/', '[\(\[]', '[\]\)]', '[=>]'), '', $match_module));
 
 		if(preg_match_all('/[(\"]+([a-zA-Z0-9_éèçàê \']*)[\")]+/', $match_module, $match_var))
-			$var_in_module_name[] = $match_var[1][0];
+			$var_in_module_name[$match_var[1][0]] = $match_var[1][0];
 			
 
 		return $this->exec_mod($match_module, $page, $module_name, $var_in_module_name);

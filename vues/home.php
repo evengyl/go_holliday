@@ -6,8 +6,11 @@
 			<p class="tagline"><a style="background: #0007; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre site de recherche gratuit pour trouver vos vacances&nbsp;&nbsp;&nbsp;</a></p>
 			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a></p>
 			<?
+			if($_app->option_app['app_with_login_option'])
+			{
 				if(!Config::$is_connect)
 					echo '<p><a class="btn btn-action btn-lg" href="/Inscription" role="button">Vous inscrire</a></p>';
+			}
 			?>
 		</div>
 	</div>
@@ -17,7 +20,7 @@
 	<br> <br>
 	<h2 class="thin">Nous réalisons vos envies de vacances simple et directement en ligne</h2>
 	<p class="text-muted">
-		Nous vous proposons une interface simple et intuitive pour chercher/trouver/réservez vos vacances en familles ou en couples.</br>
+		Nous vous proposons une interface simple et intuitive pour chercher / trouver / réservez vos vacances en familles ou en couples.</br>
 		Vous aurez accès a une interface gratuite et sans limite d'utilisation pour gérer vos vacances car :<br> nous vous mettons directement en relation avec un propriétaire 
 		de bungalow, appartement, maison d'hôtes, maison de vacances.
 	</p>

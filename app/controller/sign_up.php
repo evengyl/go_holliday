@@ -11,6 +11,7 @@ Class sign_up extends base_module
 
 		parent::__construct($_app);
 
+
 		//on indique qu'on arrive sur la page sign up
 		$_SESSION['just_sign_up'] = false;
 
@@ -32,10 +33,9 @@ Class sign_up extends base_module
 		{
 			if($this->_app->route["option_sign_up"] == "Client" || $this->_app->route["option_sign_up"] == "VIP")
 				$this->get_html_tpl = $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
+			
 			else
-			{
 				$this->get_html_tpl = $this->use_template('404')->render_tpl();
-			}	
 
 		}
 		else if(isset($_GET['id_sign_up_confirm']))

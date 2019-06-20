@@ -20,6 +20,7 @@ RewriteRule ^Mon_compte/creation-annonces$ ?page=my_account&create_announce [L]
 RewriteRule ^Deconnection$ ?page=logout [L]
 
 RewriteRule ^Inscription$ ?page=sign_up_global [L]
+RewriteRule ^Inscription/$ ?page=sign_up_global [L]
 RewriteRule ^Inscription/([a-zA-Z]+)$ ?page=sign_up_global&option_sign_up=$1 [L]
 RewriteRule ^ConfirmSignUp/([0-9]{10})$ ?page=sign_up_global&id_sign_up_confirm=$1 [L]
 

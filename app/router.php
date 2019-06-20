@@ -26,7 +26,7 @@ Class router
 					break;
 
 				case 'admin':
-						$this->is_connect()->assign_mod('admin', '', '', '');
+						$this->assign_mod('admin', '', '', '');
 					break;
 			
 				case 'login':
@@ -92,6 +92,9 @@ Class router
 			$module = "login";
 
 
+		$module = $this->test_option_connect_app($module);
+
+
 		if($module)
 			$pre_echo_mod = "__MOD";
 
@@ -116,5 +119,18 @@ Class router
 		$pre_echo_mod .= "__";
 
 		echo $pre_echo_mod;
+	}
+
+	private function test_option_connect_app($module)
+	{
+		if($module == "my_account" || $module == "sign_up")
+		{
+			if($this->_app->option_app['app_with_login_option'] == 0){
+				return "home";
+			}	
+		}
+		else
+			return $module;
+		
 	}
 }

@@ -19,6 +19,7 @@
 				{?>
 					<a href="/admin/go_to_no_vip_view" type="button" class="btn btn-success btn-lg btn-block">Passer en vues Non VIP</a><?
 				}?>
+				<a class="btn btn-danger btn-lg btn-block" href="/Deconnection">Se déconnecter du mode Admin</a>
 			</div>
 		</div>
 	</div>

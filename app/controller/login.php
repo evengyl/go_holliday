@@ -7,8 +7,6 @@ Class login extends base_module
 
 	public function __construct(&$_app)
 	{
-
-
 		$this->_app = $_app;
 		$this->_app->module_name = __CLASS__;
 		parent::__construct($this->_app);
@@ -16,64 +14,75 @@ Class login extends base_module
 		$post = $_POST;
 
 
-		if($this->_app->option_app['app_with_login_option'] == false)
-			$this->get_html_tpl = $this->use_template('home')->render_tpl();
+		if($_GET['page'] = 'admin')
+			$this->test_connect_form($post);
 
 
-		//si login perdu on retaure ici 
-		if(isset($post['lost_login_form']))
-			$this->restore_password($post);
+		if($this->_app->option_app['app_with_login_option'] == 0)
+		{
+			if(isset($this->_app->var_module['AuthAdmin']))
+				$this->get_html_tpl = $this->use_template("login")->render_tpl();
+			else
+				$this->get_html_tpl = $this->use_module("home")->render_tpl();
+		}
+		else
+		{
+			//si login perdu on restaure ici 
+			if(isset($post['lost_login_form']))
+				$this->restore_password($post);
+
+			//page de connexion formulaire
+			$this->test_connect_form($post);
+			
 
 
-		//page de connexion formulaire
-		if(isset($post['connect_form'])) {
-			if($res_check_session = $this->check_form_session($post))
-			{
+	        // on set le bread
+			if(isset($_GET['page']) && $_GET['page'] == "login")
+				$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
 
-				if($res_check_session === true){
+			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
 
-					Config::$is_connect = 1;
-				}
-				else if(is_array($res_check_session))
-				{
-					$this->error = $res_check_session["error"];
-					Config::$is_connect = 0;
-					//message perso
-				}
-				else if($res_check_session === false){
-					Config::$is_connect = 0;
-				}
-				
-			}
 		}
 
+	}
 
-        // on set le bread
-		if(isset($_GET['page']) && $_GET['page'] == "login")
-			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
+	private function test_connect_form($post)
+	{
+		if(isset($post['connect_form'])) {
+			if($res_check_session = $this->check_connect_form($post))
+			{
+				if($res_check_session === true)
+					Config::$is_connect = 1;
 
-		$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
-
+				else if(is_array($res_check_session))
+				{
+					//message perso
+					$this->error = $res_check_session["error"];
+					Config::$is_connect = 0;
+				}
+				else if($res_check_session === false)
+					Config::$is_connect = 0;
+			}
+		}
 	}
 
 	
 
-	public function check_form_session($post = array())
+	public function check_connect_form($post = array())
 	{
 		$_SESSION['first_try_pseudo'] = "";
-		$_SESSION['error_login'] = "";
-		$pseudo = "";
-		$password = "";
+		$InputPseudo = "";
+		$InputPassword = "";
 
 
 		if(isset($post['connect_form']))
 		{
 		    if(isset($post["pseudo"]) && isset($post["password"]))
 		    {
-		    	$pseudo = $this->check_post_login($post['pseudo']);
-		    	$password = $this->check_post_password($post['password']);
+		    	$InputPseudo = $this->check_post_login($post['pseudo']);
+		    	$InputPassword = $this->check_post_password($post['password']);
 
-		    	if(!$pseudo || !$password)
+		    	if(!$InputPseudo || !$InputPassword)
 		    	{
 		    		$this->error = "!! Attention votre login ou votre mot de passe est trop court !!";
 		    		return 0;
@@ -83,14 +92,14 @@ Class login extends base_module
 		           	$req_sql = new StdClass();
 		           	$req_sql->table = ["login"];
 		           	$req_sql->var = ["id", "login", "password", "level", "last_connect", "id_utilisateurs"];
-		           	$req_sql->where = ["login = $1", [$pseudo]];
+		           	$req_sql->where = ["login = $1", [$InputPseudo]];
 					$res_sql_login = $this->_app->sql->select($req_sql);
 
 		            if(!empty($res_sql_login))
 		            {
 		            	$res_sql_login = $res_sql_login[0];
 
-		            	if(password_verify($password, $res_sql_login->password))
+		            	if(password_verify($InputPassword, $res_sql_login->password))
 		            	{
 		            		$req_sql = new StdClass();
 				           	$req_sql->table = ["utilisateurs"];
@@ -104,15 +113,13 @@ Class login extends base_module
 			                	return 1;
 							}
 							else
-							{
 	            				return ["error" => "Ce compte n'a pas encore été activé, veuillez vérifier vos Email"];
-								
-							}
 							
 		            	}
 		            	else
 		            	{
-		            		$_SESSION['first_try_pseudo'] = $pseudo;
+		            		//Il a déjà essayer de mettre son pseudo mais le mdp est incorect donc on on le remet dans le input
+		            		$_SESSION['first_try_pseudo'] = $InputPseudo;
 		            		$this->error = 'Mot de passe incorrect';
 		            		return 0;
 		            	}
@@ -199,7 +206,7 @@ Class login extends base_module
 		$text = htmlentities($text);
 		$nb_char = strlen($text);
 
-		$caractere_min = 6;
+		$caractere_min = 4;
 		if($nb_char < $caractere_min)
 			return 0;	
 		else
