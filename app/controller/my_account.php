@@ -14,6 +14,7 @@ Class my_account extends base_module
 		
 		parent::__construct($this->_app);
 
+
 		//je récupère les infos de l'user en cours
 		$this->get_nb_annonces();
 		$this->get_nb_vues_total();

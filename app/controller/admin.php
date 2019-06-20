@@ -37,12 +37,10 @@ Class admin extends base_module
 						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
 					}
 					else if($action == "go_to_no_vip_view"){
-
 						$this->set_status_no_vip();
 						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
 					}
 					else if($action == "go_to_client_view"){
-
 						$this->set_status_client();
 						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
 					}
@@ -83,7 +81,6 @@ Class admin extends base_module
 		$sql->where = "id = ".$this->_app->user->id_utilisateurs;
 
 		$this->_app->sql->update($sql);
-
 
 	}
 

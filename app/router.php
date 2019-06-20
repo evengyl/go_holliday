@@ -127,7 +127,9 @@ Class router
 		{
 			if($this->_app->option_app['app_with_login_option'] == 0){
 				return "home";
-			}	
+			}
+			else 
+				return $module;
 		}
 		else
 			return $module;

@@ -1,23 +1,20 @@
-
 <header id="head" style="background:#181015 url(<?= $slides; ?>) no-repeat center;">
 	<div class="container">
 		<div class="row">
 			<h1 class="lead">Bienvenue sur <?= $_app->site_name; ?></h1>
 			<p class="tagline"><a style="background: #0007; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre site de recherche gratuit pour trouver vos vacances&nbsp;&nbsp;&nbsp;</a></p>
-			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a></p>
-			<?
+			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a></p><?
 			if($_app->option_app['app_with_login_option'])
 			{
 				if(!Config::$is_connect)
 					echo '<p><a class="btn btn-action btn-lg" href="/Inscription" role="button">Vous inscrire</a></p>';
-			}
-			?>
+			}?>
 		</div>
 	</div>
 </header>
 
 <div class="container text-center">
-	<br> <br>
+	<br><br>
 	<h2 class="thin">Nous réalisons vos envies de vacances simple et directement en ligne</h2>
 	<p class="text-muted">
 		Nous vous proposons une interface simple et intuitive pour chercher / trouver / réservez vos vacances en familles ou en couples.</br>
