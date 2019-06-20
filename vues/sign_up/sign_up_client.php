@@ -8,7 +8,8 @@
 				</header><?
 
 				//veux dire qu'il vient tout juste de créer son compte
-				include("sign_up_confirm.php");
+				if($_SESSION['just_sign_up'] == true)
+					include("sign_up_confirm.php");
 				
 				if($_SESSION['just_sign_up'] == false)
 				{?>

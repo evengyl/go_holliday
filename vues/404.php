@@ -14,7 +14,7 @@
 						<?=(isset($_SESSION['error_admin']))?$_SESSION['error_admin']:''; ?><br>
 						<?=(isset($error_code))?$error_code:''; ?>
 						<?=(isset($error_message))?$error_message:''; ?>
-						Retourner à <a href="/home">l'accueil</a>.
+						Retourner à <a href="/Accueil">l'accueil</a>.
 					</p>
 					<hr>
 				</div>
@@ -24,6 +24,5 @@
 </div>
 
 	<?
-	affiche_pre($_GET);
 	unset($_SESSION['error_admin']);
 	?>

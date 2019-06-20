@@ -55,23 +55,3 @@
 		</aside>
 	</div>
 </div>
-
-
-
-<?
-//phase de test style html du mail
-
-
-$subject = "Test HTML";
-
-
-$content = '<html><body>';
-$content .= "<h1>L'adresse E-mail suivante : test@gmail.com Vous à envoyé un message depuis le site go_holliday : </h1>";
-$content .= '</body></html>';
-
-$headers = "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-mail(Config::$mail, $subject, $content, $headers)
-
-?>

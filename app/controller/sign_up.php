@@ -23,15 +23,36 @@ Class sign_up extends base_module
 
 
 		//on génère un nombre aléatoire pour valider un form unique pour creation de compte Client
-		$rand_id_form_sign_up = rand();
+		$rand_id_form_sign_up = date("U");
 		$_SESSION['rand_id_form_sign_up'] = $rand_id_form_sign_up;
 
 		
 
 		if(isset($_GET['option_sign_up']))
 		{
-			if($_GET['option_sign_up'] !== '')
-				$this->get_html_tpl =  $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
+			if($this->_app->route["option_sign_up"] == "Client" || $this->_app->route["option_sign_up"] == "VIP")
+				$this->get_html_tpl = $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
+			else
+			{
+				$this->get_html_tpl = $this->use_template('404')->render_tpl();
+			}	
+
+		}
+		else if(isset($_GET['id_sign_up_confirm']))
+		{
+			if($_GET['id_sign_up_confirm'] !== '')
+			{
+				if($this->update_confirm_account($_GET['id_sign_up_confirm']))
+				{
+					//ok le compte à été activé
+					$this->get_html_tpl = $this->use_template('sign_up_validate_confirm')->render_tpl();
+				}
+				else{
+					//renvoier la 404
+					$this->get_html_tpl = $this->use_template('404')->render_tpl();
+				}
+				//$this->get_html_tpl = $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
+			}
 		}
 		else
 			$this->get_html_tpl =  $this->use_template('sign_up_global')->render_tpl();
@@ -59,6 +80,7 @@ Class sign_up extends base_module
 				$level_client = 0;
 			else if($this->_app->route["option_sign_up"] == "VIP")
 				$level_client = 1;
+
 
 			//check si le login existe déjà dans la bsd
     		$req_sql = new stdClass;
@@ -98,6 +120,7 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->ctx->pays = $post["pays"];
 				$req_sql_utilisateurs->ctx->genre = $post["genre"];
 				$req_sql_utilisateurs->ctx->account_verify = 0;
+				$req_sql_utilisateurs->ctx->id_create_account = $post['rand_id_form_sign_up'];
 				$req_sql_utilisateurs->table = "utilisateurs";
 				$id_utilisateurs = $this->_app->sql->insert_into($req_sql_utilisateurs, $view_sql_prepare = 0, $return_insert_id = 1);
 
@@ -112,6 +135,9 @@ Class sign_up extends base_module
 
 				//sign up ok
 				$_SESSION['just_sign_up'] = true;
+
+				$this->send_confirm_mail($post);
+
 	            unset($_POST); //on vide le post
             }
             else
@@ -119,5 +145,82 @@ Class sign_up extends base_module
 		}
 		else
 			$_SESSION['error_sign_up'] = "Le formulaire n'a pas été rempli correctement.";
+	}
+
+
+	private function send_confirm_mail($post)
+	{
+		if(!$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/confirm_sign_up.html"))
+		{
+			// en cas d'erreur de tpl
+			$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
+
+			mail("info.go.holliday@gmail.com", "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Confirm_sign_up", $headers);
+		}
+		else
+		{
+			//donnée personnel du nouvel utilisateur à envoyer par mail
+			$id = $post['rand_id_form_sign_up'];
+			$name = $post['name'];
+			$last_name = $post['last_name'];
+			$domain = $this->_app->base_dir;
+			$type = $this->_app->route["option_sign_up"];
+			$mail = $post['mail'];
+			$site_name = $this->_app->site_name." - ".date("Y");
+
+			$subject = "Confirmation d'inscription sur le site ".$this->_app->site_name;
+			$headers = "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+			$content_html = str_replace(["##TYPE##", "##NAME##", "##LASTNAME##", "##DOMAIN##", "##ID##", "##SITENAME##"], [$type, $name, $last_name, $domain, $id, $site_name], $content_html);
+
+			if(mail($mail, $subject, $content_html, $headers))
+			{
+				$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
+
+				mail("info.go.holliday@gmail.com", "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de confirmation avec les données suivantes\r\n
+					Nom : ". $name ."\r\n
+					Prénom : ". $last_name ."\r\n
+					ID unique d'enregistrement : ". $id .""
+					, $headers);
+			}
+		}
+	}
+
+	private function update_confirm_account($id_private)
+	{
+		//check si le login existe déjà dans la bsd
+		$req_sql = new stdClass;
+		$req_sql->table = ["utilisateurs"];
+		$req_sql->var = ["account_verify"];
+		$req_sql->where = ["id_create_account = $1", [$id_private]];
+		$res_sql = $this->_app->sql->select($req_sql);
+
+		if(isset($res_sql[0]->account_verify))
+		{
+			if($res_sql[0]->account_verify == 0)
+			{
+				//on update son statut a 1 et on renvoi true sur la fct et renvoi le tempalte qui dis que c'est activé et ok et qu'il peux se co
+				$req_update_verify_account = new stdClass;
+				$req_update_verify_account->ctx = new stdClass;
+				$req_update_verify_account->ctx->account_verify = 1;
+				$req_update_verify_account->table = "utilisateurs";
+				$req_update_verify_account->where = "id_create_account = ".$id_private;
+				$this->_app->sql->update($req_update_verify_account);
+				return true;
+			}
+			else
+			{
+				// ce compte n'existe pas , on renvoi une 404
+				$_SESSION['error_admin'] = "Ce compte à déjà été activé.";
+				return false;
+			}
+		}
+		else
+		{
+			// ce compte est déjà activé renvoyer sur la page 404
+			$_SESSION['error_admin'] = "Ce compte n'existe pas, si un problème survient veuillez prendre contact avec l'administration par la page contact. Merci d'avance.";
+			return false;
+		}
 	}
 }
