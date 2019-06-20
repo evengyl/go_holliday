@@ -145,7 +145,7 @@ CREATE TABLE `login` (
   `level` int(11) NOT NULL,
   `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (17,'sign_up_test','$2y$10$QBU4OrKOjPIZdEF8zoIEQODzksr84AzrXuPHYCTbFrQwUDztCif7C','1560861159','sign_up_test','sign_up_test@gmail.com',0,25),(18,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,26);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `option_app` (
 
 LOCK TABLES `option_app` WRITE;
 /*!40000 ALTER TABLE `option_app` DISABLE KEYS */;
-INSERT INTO `option_app` VALUES (1,'view_time_exec_page',1,'Voir le temps d\'execution de la page'),(2,'get_sql_list',0,'Voir la liste des requète SQL éffectuée'),(3,'view_error_in_index',1,'Voir les Error Session dans l\'index'),(4,'app_with_login_option',1,'Initialiser un module de connection utilisateur ?'),(5,'view_post_in_index',1,'Voir les POST dans l\'index'),(6,'view_tpl_name_in_source_code',0,'Voir les noms des TPL dans le code source de la page'),(7,'translate_site',1,'Utiliser le système de traduction ?'),(8,'view_breadcrumb',0,'Afficher le BreadCrumb?');
+INSERT INTO `option_app` VALUES (1,'view_time_exec_page',0,'Voir le temps d\'execution de la page'),(2,'get_sql_list',0,'Voir la liste des requète SQL éffectuée'),(3,'view_error_in_index',1,'Voir les Error Session dans l\'index'),(4,'app_with_login_option',1,'Initialiser un module de connection utilisateur ?'),(5,'view_post_in_index',1,'Voir les POST dans l\'index'),(6,'view_tpl_name_in_source_code',0,'Voir les noms des TPL dans le code source de la page'),(7,'translate_site',1,'Utiliser le système de traduction ?'),(8,'view_breadcrumb',0,'Afficher le BreadCrumb?');
 /*!40000 ALTER TABLE `option_app` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,8 +348,10 @@ CREATE TABLE `utilisateurs` (
   `date_fin_abonement` date DEFAULT NULL,
   `id_background_profil` tinyint(4) NOT NULL DEFAULT '1',
   `account_verify` tinyint(1) NOT NULL DEFAULT '0',
+  `id_create_account` int(11) NOT NULL,
+  `newsletter` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +360,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,NULL,10,0),(2,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(3,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(4,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(5,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-30',7,0),(6,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-02-20',7,0),(7,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-01',7,0),(8,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(9,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-09',7,0),(10,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-31',7,0),(11,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-28',7,0),(12,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-21',7,0),(13,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-17',7,0),(14,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,'2019-01-18',7,0),(15,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,'2019-01-13',7,0),(16,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',0,NULL,7,0),(17,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(18,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(19,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(20,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(21,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(22,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(23,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(24,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(25,'sign_up_test','sign_up_test',25,'25','sign_up_test','25','sign_up_test','25','Belgique','Monsieur',0,NULL,1,0),(26,'loic','baudoux',28,'0497312523','jean jaures','12','labuissiere','6567','Belgique','Monsieur',2,NULL,1,0);
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,NULL,10,1,0,1);
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -371,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-18 16:06:46
+-- Dump completed on 2019-06-20 14:42:47
