@@ -2,14 +2,6 @@
 <!DOCTYPE html>
 <?
 
-//function de bebug
-function affiche_pre($var_a_print)
-{
-    ?><div class='col-xs-12' style='z-index: 1; margin-bottom:50px;'><pre><?
-        print_r($var_a_print);
-    ?></pre></div><?
-}
-
 
 $_SESSION["base_dir"] = dirname(dirname(__FILE__));
 //require de base avec les fonciton diverse et le loader, la fonction microtime est la uniquement pour le temps d'execution des requete pour optimiser
@@ -29,7 +21,7 @@ ob_start();?>
 		<body class="home">
 			__MOD_header__
 			
-			<? new router($_GET, $_app); ?>
+			<? new router($_GET, $_app, $security); ?>
 			__MOD_footer__
 		</body>
 		__TPL2_bottom_head__
@@ -52,4 +44,4 @@ echo $parser_translate->page;
 
 $_app->admin_tools();
 
-affiche_pre($_app);
+affiche($_app);

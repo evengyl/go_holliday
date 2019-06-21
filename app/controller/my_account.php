@@ -91,7 +91,7 @@ Class my_account extends base_module
 
 		//on reset le user _app pour avoir les bonne infos mise à jour pour le tpl
 		$security = new security($this->_app);
-		$security->set_user_infos_on_app($forced_query = 1);
+		$security->set_user_infos_on_app();
 	}
 
 	public function get_nb_annonces()

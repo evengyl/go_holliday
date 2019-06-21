@@ -16,9 +16,6 @@ function paragraphe_style($txt)
     echo '<div class="col-lg-12" style="margin-top:5px;"><p style="font-size:12px; padding:6px; text-align:center;" class="bg-success">'.$txt.'</p></div>';
 }   
 
-function logout($base_dir)
-{
-    require($base_dir.'/public/logout.php');
-}
+
 
 

@@ -3,6 +3,8 @@ Class security extends base_module
 {
 	public $_app;
 
+	public $ModuleToDoConnectList = ["my_account"];
+
 	public function __construct(&$_app)
 	{
 		$this->_app = $_app;
@@ -31,33 +33,50 @@ Class security extends base_module
 			else
 				Config::$is_connect = 0;
 		}
+		else
+				Config::$is_connect = 0;
 	}
 
-	public function set_user_infos_on_app($forced_query = 0)
+	public function checkIfModuleToDoConnect($module)
 	{
-		$exec = false;
+		if(!Config::$is_connect && in_array($module, $this->ModuleToDoConnectList))
+			return false;
 
+		else
+			return true;
+	}
 
-		if($forced_query)
-			$exec = true;
+	public function set_user_infos_on_app()
+	{
+		$req_sql = new stdClass;
+		$req_sql->table = ["login", "utilisateurs"];
+		$req_sql->var = [
+			"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
+			"utilisateurs" => [
+				"name", 
+				"last_name", 
+				"genre", 
+				"user_type", 
+				"tel", 
+				"address_numero", 
+				"address_rue", 
+				"zip_code", 
+				"address_localite", 
+				"age", 
+				"pays", 
+				"id_background_profil",
+				"account_verify",
+				"id_create_account";
+				"newsletter"],
+		];
+		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
+		$res_fx = $this->_app->sql->select($req_sql);	
+		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
+		$this->_app->user = $merge_array_user;
+	}
 
-		if(empty($this->_app->user))
-			$exec = true;
-
-
-		if($exec)
-		{
-			$req_sql = new stdClass;
-			$req_sql->table = ["login", "utilisateurs"];
-			$req_sql->var = [
-				"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
-				"utilisateurs" => ["name", "last_name", "genre", "user_type", "tel", "address_numero", "address_rue", "zip_code", "address_localite", "age", "pays", "id_background_profil"],
-			];
-			$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-			$res_fx = $this->_app->sql->select($req_sql);	
-			$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
-			$this->_app->user = $merge_array_user;
-		}
-
+	public function logout($base_dir)
+	{
+	    require($base_dir.'/public/logout.php');
 	}
 }

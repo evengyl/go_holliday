@@ -1,4 +1,13 @@
 <?
+
+function affiche($var_a_print)
+{
+    ?><div class='col-xs-12' style='z-index: 1; margin-bottom:50px;'><pre><?
+        print_r($var_a_print);
+    ?></pre></div><?
+}
+
+
 require_once $_SESSION['base_dir']."/app/includes/_app.php";
 //on initialise le app, qui sers d'object général pour l'application
 $_app = new _app();

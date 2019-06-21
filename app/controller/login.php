@@ -11,7 +11,13 @@ Class login extends base_module
 		$this->_app->module_name = __CLASS__;
 		parent::__construct($this->_app);
 
+
 		$post = $_POST;
+
+		// on set le bread
+		if(isset($_GET['page']) && $_GET['page'] == "login")
+			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
+
 
 
 		if($_GET['page'] = 'admin')
@@ -25,33 +31,31 @@ Class login extends base_module
 			else
 				$this->get_html_tpl = $this->use_module("home")->render_tpl();
 		}
-		else
+		else if(isset($post['lost_login_form']))
 		{
 			//si login perdu on restaure ici 
-			if(isset($post['lost_login_form']))
-				$this->restore_password($post);
-
+			$this->restore_password($post);
+			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
+		}
+		else
+		{
 			//page de connexion formulaire
 			$this->test_connect_form($post);
-			
-
-
-	        // on set le bread
-			if(isset($_GET['page']) && $_GET['page'] == "login")
-				$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
-
 			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
 
 		}
 
 	}
 
+
 	private function test_connect_form($post)
 	{
+
 		if(isset($post['connect_form'])) {
 			if($res_check_session = $this->check_connect_form($post))
 			{
-				if($res_check_session === true)
+
+				if($res_check_session == true)
 					Config::$is_connect = 1;
 
 				else if(is_array($res_check_session))
@@ -60,13 +64,13 @@ Class login extends base_module
 					$this->error = $res_check_session["error"];
 					Config::$is_connect = 0;
 				}
-				else if($res_check_session === false)
+				else
 					Config::$is_connect = 0;
 			}
 		}
 	}
 
-	
+
 
 	public function check_connect_form($post = array())
 	{
@@ -79,8 +83,8 @@ Class login extends base_module
 		{
 		    if(isset($post["pseudo"]) && isset($post["password"]))
 		    {
-		    	$InputPseudo = $this->check_post_login($post['pseudo']);
-		    	$InputPassword = $this->check_post_password($post['password']);
+		    	$InputPseudo = $this->check_post_length($post['pseudo'], 4);
+		    	$InputPassword = $this->check_post_length($post['password'], 6);
 
 		    	if(!$InputPseudo || !$InputPassword)
 		    	{
@@ -158,7 +162,7 @@ Class login extends base_module
 	{
 	    if(isset($post["pseudo_mail"]))
 	    {
-	    	$pseudo = $this->check_post_login_login($post['pseudo_mail']);
+	    	$pseudo = $this->check_post_length($post['pseudo_mail'], 4);
 
 	    	if(!$pseudo)
 	    	{
@@ -200,28 +204,14 @@ Class login extends base_module
 	    }
 	}
 
-	private function check_post_login($text)
+	private function check_post_length($text, $minChar = 0)
 	{
 		$text = trim($text);
 		$text = htmlentities($text);
 		$nb_char = strlen($text);
 
-		$caractere_min = 4;
-		if($nb_char < $caractere_min)
+		if($nb_char < $minChar)
 			return 0;	
-		else
-			return $text;
-	}
-
-	private function check_post_password($text)
-	{
-		$text = trim($text);
-		$text = htmlentities($text);
-		$nb_char = strlen($text);
-
-		$caractere_min = 6;
-		if($nb_char < $caractere_min)
-			return 0;		
 		else
 			return $text;
 	}
