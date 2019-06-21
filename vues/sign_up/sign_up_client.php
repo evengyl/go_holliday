@@ -8,10 +8,10 @@
 				</header><?
 
 				//veux dire qu'il vient tout juste de créer son compte
-				if($_SESSION['just_sign_up'] == true)
+				if($validate == true)
 					include("sign_up_confirm.php");
 				
-				if($_SESSION['just_sign_up'] == false)
+				if($validate == false)
 				{?>
 								
 					<div class="col-md-10 col-md-offset-1">

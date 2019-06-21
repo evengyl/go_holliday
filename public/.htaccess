@@ -22,7 +22,7 @@ RewriteRule ^Deconnection$ ?page=logout [L]
 RewriteRule ^Inscription$ ?page=sign_up_global [L]
 RewriteRule ^Inscription/$ ?page=sign_up_global [L]
 RewriteRule ^Inscription/([a-zA-Z]+)$ ?page=sign_up_global&option_sign_up=$1 [L]
-RewriteRule ^ConfirmSignUp/([0-9]{10})$ ?page=sign_up_global&id_sign_up_confirm=$1 [L]
+RewriteRule ^ConfirmSignUp/(CreateAccount[a-zA-Z0-9]{22})$ ?page=sign_up_global&id_sign_up_confirm=$1 [L]
 
 RewriteRule ^Recherche$ ?page=Recherche [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)$ ?page=$1&type=$2 [L]

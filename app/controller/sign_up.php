@@ -3,6 +3,7 @@
 Class sign_up extends base_module
 {
 	public $_app;
+	public $validate = false;
 
 	public function __construct(&$_app)
 	{		
@@ -12,27 +13,30 @@ Class sign_up extends base_module
 		parent::__construct($_app);
 
 
-		//on indique qu'on arrive sur la page sign up
-		$_SESSION['just_sign_up'] = false;
-
 		//on check le form avec la session du random id form pour creation de compte Client
 		if(isset($_SESSION['rand_id_form_sign_up']) && isset($_POST['rand_id_form_sign_up']))
 		{
 			if($_SESSION['rand_id_form_sign_up'] == $_POST['rand_id_form_sign_up'])
-				$this->treatment_sign_up($_POST);
+				$this->validate = $this->treatment_sign_up($_POST);
 		}
 
 
 		//on génère un nombre aléatoire pour valider un form unique pour creation de compte Client
-		$rand_id_form_sign_up = date("U");
+		$rand_id_form_sign_up = str_replace(".", "", uniqid("CreateAccount", true));
+
 		$_SESSION['rand_id_form_sign_up'] = $rand_id_form_sign_up;
 
 		
 
 		if(isset($_GET['option_sign_up']))
 		{
-			if($this->_app->route["option_sign_up"] == "Client" || $this->_app->route["option_sign_up"] == "VIP")
-				$this->get_html_tpl = $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
+			if(in_array($this->_app->route["option_sign_up"], ["Client", "VIP"]))
+				$this->get_html_tpl = $this
+								->assign_var('_app', $this->_app)
+								->assign_var('validate', $this->validate)
+								->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)
+								->use_template('sign_up_'.strtolower($_GET['option_sign_up']))
+							->render_tpl();
 			
 			else
 				$this->get_html_tpl = $this->use_template('404')->render_tpl();
@@ -44,6 +48,7 @@ Class sign_up extends base_module
 			{
 				if($this->update_confirm_account($_GET['id_sign_up_confirm']))
 				{
+
 					//ok le compte à été activé
 					$this->get_html_tpl = $this->use_template('sign_up_validate_confirm')->render_tpl();
 				}
@@ -133,12 +138,10 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->where = "id = ".$id_login;
 				$this->_app->sql->update($req_sql_utilisateurs);
 
-				//sign up ok
-				$_SESSION['just_sign_up'] = true;
-
 				$this->send_confirm_mail($post);
 
 	            unset($_POST); //on vide le post
+	            return true;
             }
             else
             	$_SESSION['error_sign_up'] = 'Ce pseudo est déjà utilisé, veuillez en choisir un autre, Merci.';
@@ -205,7 +208,7 @@ Class sign_up extends base_module
 				$req_update_verify_account->ctx = new stdClass;
 				$req_update_verify_account->ctx->account_verify = 1;
 				$req_update_verify_account->table = "utilisateurs";
-				$req_update_verify_account->where = "id_create_account = ".$id_private;
+				$req_update_verify_account->where = "id_create_account = '".$id_private."'";
 				$this->_app->sql->update($req_update_verify_account);
 				return true;
 			}

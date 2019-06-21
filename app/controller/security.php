@@ -66,8 +66,8 @@ Class security extends base_module
 				"pays", 
 				"id_background_profil",
 				"account_verify",
-				"id_create_account";
-				"newsletter"],
+				"id_create_account",
+				"newsletter"]
 		];
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 		$res_fx = $this->_app->sql->select($req_sql);	
