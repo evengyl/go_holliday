@@ -3,7 +3,7 @@
 Class login extends base_module
 {
 	public $_app;
-	public $error;
+	public $error = "";
 
 	public function __construct(&$_app)
 	{
@@ -162,9 +162,7 @@ Class login extends base_module
 	{
 	    if(isset($post["pseudo_mail"]))
 	    {
-	    	$pseudo = $this->check_post_length($post['pseudo_mail'], 4);
-
-	    	if(!$pseudo)
+	    	if(!$pseudo = $this->check_post_length($post['pseudo_mail'], 4))
 	    	{
 	    		$_SESSION['first_try_pseudo'] = "";
 	    		$this->error = "!! Attention votre login est trop court !!";
@@ -172,33 +170,67 @@ Class login extends base_module
 	    	else
 	    	{	
 	           	$req_sql = new StdClass();
-	           	$req_sql->table = ["login"];
-	           	$req_sql->var = ["login", "password_no_hash", "email"];
+	           	$req_sql->table = ["login", "utilisateurs"];
+	           	$req_sql->var = [
+	           			"login" => ["login", "password_no_hash", "email"],
+	           			"utilisateurs" => ["name", "last_name", "id_create_account"]
+	           		];
 	           	$req_sql->where = ["login = $1 OR email = $2", [$pseudo, $pseudo]];
-				$res_fx = $this->_app->sql->select($req_sql);
+				$res_fx = $this->_app->sql->select($req_sql, 1);
 
 	            if(empty($res_fx))
-	            {
 	                $this->error = 'Login incorrect pour la récupération de mot de passe.';
-	            }
 	            else
 	            {
-	            	require($this->_app->base_path."/vues/tpl_mail.php");
-
-		            $title_mail = "test";
-		            $password_mail = $res_fx[0]->password_no_hash;
+		            $password = $res_fx[0]->password_no_hash;
 		            $email_to_send = $res_fx[0]->email;
 		            $headers[] = "MIME-Version: 1.0";
 		            $headers[] = "Content-type: text/html; charset=iso-8859-1";
 
-		            ob_start();
-		            	get_tpl_mail_password_recover($title_mail, $password_mail);
-		            $tpl = ob_get_clean();
+					if(!$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/lost_password.html"))
+					{
+						// en cas d'erreur de tpl
+						$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
 
-	            	unset($this->error);
+						mail("info.go.holliday@gmail.com", "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Lost_password", $headers);
+					}
+					else
+					{
+						//donnée personnel du nouvel utilisateur à envoyer par mail
+						$id = $res_fx[0]->id_create_account;
+						$name = $res_fx[0]->name;
+						$last_name = $res_fx[0]->last_name;
+						$domain = $this->_app->base_dir;
+						$mail = $res_fx[0]->email;
+						$site_name = $this->_app->site_name." - ".date("Y");
+
+						$subject = "Récupération du Mot de passe sur ".$this->_app->site_name;
+						$headers = "MIME-Version: 1.0\r\n";
+						$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+						$content_html = str_replace(
+								["##NAME##", "##LASTNAME##", "##DOMAIN##", "##ID##", "##SITENAME##", "##PASSWORD##"], 
+								[$name, $last_name, $domain, $id, $site_name, $password],
+							$content_html);
+
+						if(mail($mail, $subject, $content_html, $headers))
+						{
+							$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
+
+							mail("info.go.holliday@gmail.com", "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de recupération de mot de passe avec les données suivantes\r\n
+								Nom : ". $name ."\r\n
+								Prénom : ". $last_name ."\r\n
+								ID unique d'enregistrement : ". $id .""
+								, $headers);
+						}
+					}
+
+
+
+
+		            $this->error = 'Un Email vient de vous être envoyé avec votre mot de passe, n\'hésitez pas à le changer dans votre compte au besoin.';
+
 	            	unset($post);
-	            	
-					mail($email_to_send, "Recupération de mot de passe.", $tpl, implode("\r\n", $headers));
 	            }
 	    	}
 	    }
