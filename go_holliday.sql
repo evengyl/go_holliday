@@ -145,7 +145,7 @@ CREATE TABLE `login` (
   `level` int(11) NOT NULL,
   `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1),(5,'test_uniq_id','$2y$10$2JRjz7CUHGw0xexfharbPeMuQz2C24pHi2WAjppywtsPdw.3v56Vu','1561109072','test_uniq_id','test_uniq_id@gmail.com',0,5);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,10 +348,10 @@ CREATE TABLE `utilisateurs` (
   `date_fin_abonement` date DEFAULT NULL,
   `id_background_profil` tinyint(4) NOT NULL DEFAULT '1',
   `account_verify` tinyint(1) NOT NULL DEFAULT '0',
-  `id_create_account` int(11) NOT NULL,
+  `id_create_account` varchar(35) NOT NULL,
   `newsletter` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,7 +360,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',2,NULL,10,1,0,1);
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,NULL,10,1,'0',1),(5,'test_uniq_id','test_uniq_id',25,'25','test_uniq_id','25','test_uniq_id','25','Belgique','Monsieur',0,NULL,1,0,'CreateAccount5d0ca24028b12222894571',1);
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -373,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-20 14:42:47
+-- Dump completed on 2019-06-21 13:52:57
