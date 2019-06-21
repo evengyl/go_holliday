@@ -2,126 +2,103 @@
 Class router
 {
 	public $_app;
-	private $is_connect = Null;
+
+	public $module_to_disable_without_connect_option = ["my_account", "sign_up"];
 
 	public function __construct($route = "", &$_app, &$security)
 	{
 		$this->_app = $_app;
+		$this->_app->route = htmlentities($route['page']);
 
-		if($security->checkIfModuleToDoConnect($route['page']))
+		if($security->check_if_module_need_to_do_connect())
 		{
-			if($route != "")
+			if($this->_app->route)
 			{
-				$this->_app->route = $route;
-
-				switch($route['page'])
+				switch($this->_app->route)
 				{
 					case 'home':
-						$this->assign_mod('home', '', '', '');
+						$this->assign_mod();
 						break;
 
 					case 'sign_up_global':	
-						$this->assign_mod('sign_up', '', '', '');
+						$this->assign_mod('sign_up');
 						break;
 
 					case 'admin':
-							$this->assign_mod('admin', '', '', '');
+							$this->assign_mod();
 						break;
 				
 					case 'login':
-							$this->assign_mod('login', '', '', '');
+							$this->assign_mod();
 			 			break;
+
+					case 'contact':
+						$this->assign_mod();
+						break;
+
+					case 'my_account':
+							$this->assign_mod();
+						break;
+
+					case 'find_us':
+						$this->assign_mod();
+						break;
 
 					case 'logout':
 		 					$security->logout($_app->base_dir);
 			 			break;
-
-					case 'contact':
-						$this->assign_mod('contact', '', '', '');
-						break;
-
-					case 'my_account':
-							$this->assign_mod('my_account', '', '', '');
-						break;
-
-
-					case 'find_us':
-						$this->assign_mod('find_us', '', '', '');
-						break;
 					
 					case 'Recherche':
 							if(!isset($route['type']) && !isset($route['all_select']))
-								$this->assign_mod('search_type', '', '', '');
+								$this->assign_mod('search_type');
 
 							else if(isset($route['all_select']))
-								$this->assign_mod('search_result', '', 'all', '');
+								$this->assign_mod('search_result', 'all');
 
 							else if(isset($route['type']) && !isset($route['selection_ok']))
-								$this->assign_mod('search_pays_habitat', '', '', '');
+								$this->assign_mod('search_pays_habitat');
 
 							else if(isset($route['selection_ok']) && !isset($route['id_annonce']))
-								$this->assign_mod('search_result', '', '', '');
+								$this->assign_mod('search_result');
 
 							else if(isset($route['selection_ok']) && isset($route['id_annonce']) && !isset($route['all_select']))
-								$this->assign_mod('annonce', '', '', '');
+								$this->assign_mod('annonce');
 						break;
 
 					default:
-						$this->assign_mod('module_404', '', '', '');
+						$this->assign_mod('module_404');
 						unset($route);
 				}	
 			}
 		}
 		else
 		{
-			$this->assign_mod('module_404', '', '', '');
+			$this->assign_mod('module_404');
 		}
 	}
 
 	
-	protected function assign_mod($module = false, $module_secondaire = false, $var_module = false, $tpl = false)
+	protected function assign_mod($module = false, $var_module = false)
 	{
-		$pre_echo_mod = "";
-		
-		//si is connect nous retourne false c'est qu'il n'est pas loggé et donc come on a appeler is_connect c'est pour qu'il soit logger, donc on renvoi vers login.php
-		if($this->is_connect === false)
-			$module = "login";
+		if($module === false){
+			$module = $this->_app->route;
+		}
 
+		$module = $this->test_disable_module_with_option_app($module);
 
-		$module = $this->testDisableModuleWithOptionApp($module);
-
-
-		if($module)
-			$pre_echo_mod = "__MOD";
-
-
-		if($module_secondaire)
-			$pre_echo_mod .= "2_";
-		else
-			$pre_echo_mod .= "_";
-
-
-		if($tpl)
-			$pre_echo_mod = "__TPL_".$tpl;
-
-		if($module)
-			$pre_echo_mod .= $module;
-			
+		$pre_echo_mod = "__MOD_". $module;
 
 		if($var_module)
 			$pre_echo_mod .= "(".$var_module.")";
-
 
 		$pre_echo_mod .= "__";
 
 		echo $pre_echo_mod;
 	}
 
-	private function testDisableModuleWithOptionApp($module)
+	private function test_disable_module_with_option_app($module)
 	{
-		$array_module_to_diable = ["my_account", "sign_up"];
-
-		if(in_array($module, $array_module_to_diable))
+		if(in_array($module, $this->module_to_disable_without_connect_option))
 		{
 			if($this->_app->option_app['app_with_login_option'] == 0){
 				return "home";
@@ -131,8 +108,5 @@ Class router
 		}
 		else
 			return $module;
-		
 	}
-
-
 }

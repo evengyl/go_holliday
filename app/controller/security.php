@@ -3,7 +3,7 @@ Class security extends base_module
 {
 	public $_app;
 
-	public $ModuleToDoConnectList = ["my_account"];
+	public $module_need_to_do_connect_list = ["my_account"];
 
 	public function __construct(&$_app)
 	{
@@ -37,9 +37,9 @@ Class security extends base_module
 				Config::$is_connect = 0;
 	}
 
-	public function checkIfModuleToDoConnect($module)
+	public function check_if_module_need_to_do_connect()
 	{
-		if(!Config::$is_connect && in_array($module, $this->ModuleToDoConnectList))
+		if(!Config::$is_connect && in_array($this->_app->route, $this->module_need_to_do_connect_list))
 			return false;
 
 		else

@@ -22,19 +22,16 @@ Class sign_up extends base_module
 
 
 		//on génère un nombre aléatoire pour valider un form unique pour creation de compte Client
-		$rand_id_form_sign_up = str_replace(".", "", uniqid("CreateAccount", true));
-
-		$_SESSION['rand_id_form_sign_up'] = $rand_id_form_sign_up;
-
+		$_SESSION['rand_id_form_sign_up'] = str_replace(".", "", uniqid("CreateAccount", true));
 		
 
-		if(isset($_GET['option_sign_up']))
+		if(isset($this->_app->route['option_sign_up']))
 		{
 			if(in_array($this->_app->route["option_sign_up"], ["Client", "VIP"]))
 				$this->get_html_tpl = $this
 								->assign_var('_app', $this->_app)
 								->assign_var('validate', $this->validate)
-								->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)
+								->assign_var('rand_id_form_sign_up',$_SESSION['rand_id_form_sign_up'])
 								->use_template('sign_up_'.strtolower($_GET['option_sign_up']))
 							->render_tpl();
 			
@@ -56,7 +53,6 @@ Class sign_up extends base_module
 					//renvoier la 404
 					$this->get_html_tpl = $this->use_template('404')->render_tpl();
 				}
-				//$this->get_html_tpl = $this->assign_var('_app', $this->_app)->assign_var('rand_id_form_sign_up',$rand_id_form_sign_up)->use_template('sign_up_'.strtolower($_GET['option_sign_up']))->render_tpl();
 			}
 		}
 		else
