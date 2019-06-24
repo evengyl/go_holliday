@@ -2,13 +2,13 @@ RewriteEngine on
 AddDefaultCharset utf-8
 
 
-
-
-
-
-RewriteRule ^Connexion$ ?page=login [L]
 RewriteRule ^Contact$ ?page=contact [L]
+
+
+
 RewriteRule ^Accueil$ ?page=home [L]
+
+
 
 RewriteRule ^Mon_compte[/]{0,1}$ ?page=my_account [L]
 RewriteRule ^Mon_compte/Activate/([0-9]+)[/]{0,1}$ ?page=my_account&activate=1&id_annonce=$1 [L]
@@ -17,14 +17,24 @@ RewriteRule ^Mon_compte/Desactivate/([0-9]+)[/]{0,1}$ ?page=my_account&desactiva
 RewriteRule ^Mon_compte/Annonces/([0-9]+)$ ?page=my_account&num_page=$1 [L]
 RewriteRule ^Mon_compte/creation-annonces$ ?page=my_account&create_announce [L]
 
+
+RewriteRule ^Connexion$ ?page=login [L]
 RewriteRule ^Deconnection$ ?page=logout [L]
+RewriteRule ^Deconnection/$ ?page=logout [L]
+
+
 
 RewriteRule ^Inscription$ ?page=sign_up_global [L]
 RewriteRule ^Inscription/$ ?page=sign_up_global [L]
+
 RewriteRule ^Inscription/([a-zA-Z]+)$ ?page=sign_up_global&option_sign_up=$1 [L]
 RewriteRule ^ConfirmSignUp/(CreateAccount[a-zA-Z0-9]{22})$ ?page=sign_up_global&id_sign_up_confirm=$1 [L]
 
+
+
 RewriteRule ^Recherche$ ?page=Recherche [L]
+RewriteRule ^Recherche/$ ?page=Recherche [L]
+
 RewriteRule ^(Recherche)/([a-zA-Z_]+)$ ?page=$1&type=$2 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)$ ?page=$1&type=$2&selection_ok=$3 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Annonces)/([0-9])+$ ?page=$1&type=$2&selection_ok=$3&id_annonce=$4 [L]
