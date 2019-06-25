@@ -5,10 +5,8 @@ Class search_result extends base_module
 
 	public function __construct(&$_app)
 	{	
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 		$pays = array();
 		$habitat = array();
@@ -52,13 +50,11 @@ Class search_result extends base_module
 
 		$annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
 
-		$this->get_html_tpl = $this
-								->assign_var("type_selected", $str_type)
-								->assign_var("pays_selected", $str_pays)
-								->assign_var("habitat_selected", $str_habitat)
-								->assign_var("annonces", $annonces)
-								->assign_var("_app", $this->_app)
-								->render_tpl();
+		$this->assign_var("type_selected", $str_type)
+			->assign_var("pays_selected", $str_pays)
+			->assign_var("habitat_selected", $str_habitat)
+			->assign_var("annonces", $annonces)
+			->render_tpl();
 	}
 
 	private function get_infos_type($type)

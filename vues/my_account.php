@@ -1,4 +1,3 @@
-<header id="head" class="secondary"></header>
 <div class="container-fluid text-center" style="background-color: #f2f2f2;">
     <div class="row">
         <h2 class="thin">Mon compte</h2>

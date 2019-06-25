@@ -7,6 +7,7 @@ Class admin_test_orm extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		
 		$_app->navigation->set_breadcrumb('Test de l\'orm');
 
 		//zone de test pour l'ORM

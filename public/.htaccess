@@ -32,6 +32,7 @@ RewriteRule ^(Recherche)/(Toutes-les-annonces)$ ?page=$1&all_select=$2 [L]
 
 
 RewriteRule ^(admin)$ ?page=$1 [L]
+RewriteRule ^(admin)/$ ?page=$1 [L]
 RewriteRule ^(admin)/([a-z_]+)$ ?page=$1&action=$2 [L]
 
 

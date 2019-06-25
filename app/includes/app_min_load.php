@@ -3,7 +3,7 @@
 function affiche($var_a_print)
 {
     ?><div class='col-xs-12' style='z-index: 1; margin-bottom:50px;'><pre><?
-        print_r($var_a_print);
+         htmlentities(print_r($var_a_print));
     ?></pre></div><?
 }
 

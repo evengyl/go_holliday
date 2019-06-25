@@ -16,18 +16,20 @@ if(!isset($_GET['page']))
 ob_start();?>
 	<html lang="Fr-be">
 		<head>
-			__TPL_top_head__
+			__MOD_top_head__
 		</head>
 		<body class="home">
 			__MOD_header__
-			
-			<? new router($_GET, $_app, $security); ?>
+			<div class="container-fluid">
+					<? new router($_GET, $_app, $security); ?>
+			</div>
 			__MOD_footer__
 		</body>
-		__TPL2_bottom_head__
+		__MOD2_bottom_head__
 	</html><?
 
 $page = ob_get_clean();
+ob_end_clean();
 //appel le parseur qui rendra tous les modules et toutes les vues
 //contiendra tout les modules de l'applications appelé sur la page. apres execution de celui ci, il est placé dans l'app.
 

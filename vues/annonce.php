@@ -1,4 +1,3 @@
-<header id="head" class="secondary"></header>
 <div class="container text-center">
 	<h2 class="thin">Toutes les informations sur : <?= $name_annonce; ?></h2>
 

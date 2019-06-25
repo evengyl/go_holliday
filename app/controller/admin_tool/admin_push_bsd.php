@@ -46,7 +46,9 @@ Class admin_push_bsd extends base_module
 		shell_exec("C:/xampp\mysql\bin\mysql --host=".Config::$hote." --user=".Config::$user." --password=".Config::$Mpass." ".Config::$base." < ".$rec.Config::$base.".sql");
 		$value_return = 1;
 
-		$this->get_html_tpl =  $this->assign_var("value",$value_return)->use_template("admin_action_ok")->render_tpl();
+		$this->assign_var("value",$value_return)
+			->use_template("admin_action_ok")
+			->render_tpl();
 	}
 
 

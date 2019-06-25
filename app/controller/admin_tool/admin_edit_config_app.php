@@ -8,6 +8,7 @@ Class admin_edit_config_app extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		
 		$this->_app->navigation->set_breadcrumb("Modification des option de base de l'application", "edit_config_app");
 
 		$sql = new stdClass();
@@ -20,7 +21,7 @@ Class admin_edit_config_app extends base_module
 		if(isset($_POST["form__config"]))
 			$this->set_config_app($_POST);
 
-		$this->get_html_tpl = $this->assign_var("list_option", $this->list_option)->use_template()->render_tpl();
+		$this->assign_var("list_option", $this->list_option)->render_tpl();
 	}
 
 	private function set_config_app($post)

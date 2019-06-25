@@ -7,6 +7,7 @@ Class admin_pull_bsd extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		
 		$_app->navigation->set_breadcrumb('Pull de la base de donnée', 'pull_bsd');
 		$txt = "";
 
@@ -42,7 +43,7 @@ Class admin_pull_bsd extends base_module
 		else
 			$txt = "le dossier n'existe pas";
 
-		$this->get_html_tpl =  $this->assign_var('reponse', $txt)->render_tpl();
+		$this->assign_var('reponse', $txt)->render_tpl();
 	}
 
 

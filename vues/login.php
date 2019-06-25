@@ -1,5 +1,4 @@
-<header id="head" class="secondary"></header><?
-
+<?
 if(!isset($_SESSION['pseudo'])) //donc il est connecté
 {
 //si la personne a déjà tenter une connexion, sont pseudo qu'il à déjà entré vas se remettre dans le input

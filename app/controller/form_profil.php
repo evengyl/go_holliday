@@ -6,10 +6,8 @@ Class form_profil extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-		
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 				
 		//on check le form avec la session du random id form
@@ -24,11 +22,9 @@ Class form_profil extends base_module
 		$rand_id_form = rand();
 		$_SESSION['rand_id_form_profil'] = $rand_id_form;
 
-		$this->get_html_tpl =  $this
-								->assign_var('_app', $this->_app)
-								->assign_var('infos_user', $this->_app->user)
-								->assign_var('rand_id_update_profil',$rand_id_form)
-							->render_tpl();
+		$this->assign_var('infos_user', $this->_app->user)
+			->assign_var('rand_id_update_profil',$rand_id_form)
+			->render_tpl();
 	}
 
 	public function set_new_infos_profil($post)

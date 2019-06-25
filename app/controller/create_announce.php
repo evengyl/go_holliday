@@ -20,10 +20,8 @@ Class create_announce extends base_module
 		$rand_id_create_annonce = rand();
 		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce;
 		
-		$this->get_html_tpl =  $this
-								->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
-								->assign_var("_app", $_app)
-								->render_tpl();
+		$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
+			->render_tpl();
 	}
 
 	public function treatment_create_annonce($post)

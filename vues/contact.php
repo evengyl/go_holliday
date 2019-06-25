@@ -1,4 +1,3 @@
-<header id="head" class="secondary"></header>
 <div class="container">
 	<div class="row">
 		<article class="col-sm-9 maincontent">

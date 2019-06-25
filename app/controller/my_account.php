@@ -9,10 +9,8 @@ Class my_account extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-		
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 
 		//je récupère les infos de l'user en cours
@@ -48,14 +46,12 @@ Class my_account extends base_module
 		$_SESSION['rand_id_form_change_password'] = $rand_id_form;
 			
 
-		$this->get_html_tpl =  $this->assign_var("nb_page", $this->nb_page)
-									->assign_var("num_page", $this->num_page)
-									->assign_var('_app', $this->_app)
-									->assign_var("annonces", $this->annonces)
-									->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
-									->assign_var("img_back_profil", $array_back_profil_img)
-									
-								->render_tpl();
+		$this->assign_var("nb_page", $this->nb_page)
+			->assign_var("num_page", $this->num_page)
+			->assign_var("annonces", $this->annonces)
+			->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
+			->assign_var("img_back_profil", $array_back_profil_img)
+			->render_tpl();
 	}
 
 	

@@ -5,10 +5,8 @@ Class search_pays_habitat extends base_module
 
 	public function __construct(&$_app)
 	{	
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-		
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 
 
@@ -21,9 +19,7 @@ Class search_pays_habitat extends base_module
 		
 
 		
-		$this->get_html_tpl =  $this
-			->assign_var("_app", $this->_app)
-			->assign_var("array_type", $array_type)
+		$this->assign_var("array_type", $array_type)
 			->assign_var('array_pays', $array_pays)
 			->assign_var('array_habitat', $array_habitat)
 			->render_tpl();	

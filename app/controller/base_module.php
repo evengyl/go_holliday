@@ -5,108 +5,88 @@ Class base_module
 {
 
 	public $get_html_tpl;
-	public $var_to_extract;
+	public $var_in_module;
 	public $template_name;
 	public $template_path;
-	public $user;
-	public $module_name;
 	public $sql;
 	public $_app;
-	public $module_name_secondary;
 	public $var_to_module;
+
+	public $module_secondary = [];
 
 	public function __construct(&$_app)
 	{
 		$this->_app = &$_app;
-		$this->module_name = $this->_app->module_name;
+		$this->var_in_module["_app"] = $this->_app;
 	}
-
-	public function assign_var($var_name , $value)
-	{
-    	$this->var_to_extract[$var_name] = $value;
-        return $this;
-	}
-
 
 	public function render_tpl()
 	{
-		if(!empty($this->module_name_secondary))
-		{
-			//si un module secondaire lui est envoyée il sera renvoyer pour l'execution par apres
-			$get_module_name_exec = "__MOD_".$this->module_name_secondary;
+		$this->set_template_path();
 
-			if($this->var_to_module != "")
-				$get_module_name_exec .= "(".$this->var_to_module.")__";
-			else
-				$get_module_name_exec .= "__";
-
-			return $get_module_name_exec;
-		}
-		else
-		{
-			ob_start();
-			
-				if(!empty($this->var_to_extract))
-					extract($this->var_to_extract);
-			
-				$this->set_template_path();	
-				require($this->template_path);
-
-			$get_html_tpl = ob_get_contents();
-	
-			ob_end_clean();
-			return $get_html_tpl;
-		}
-			
+		ob_start();
 		
+			if(!empty($this->var_in_module))
+				extract($this->var_in_module);
+			
+			require($this->template_path);
+
+			$this->get_html_tpl = ob_get_contents();
+			
+			if(!empty($this->module_secondary))
+			{
+				foreach($this->module_secondary as $row_module_secondary)
+				{
+					$this->get_html_tpl .= $row_module_secondary."&nbsp;";	
+				}
+				
+			}
+
+		ob_end_clean();
 	}
 
+/* faire sauter, préferer utiliser les modules */
 	public function use_template($template_name = "")
 	{
 		$this->template_name = $template_name;
 		$this->set_template_path();
-			
 		return $this;
 	}
+/* */ 
 
-	public function use_module($module_name_secondary = "", $var_to_module = "")
+	public function use_module($module_name = "")
 	{
-		$this->module_name_secondary = $module_name_secondary;
-
-		if($var_to_module != "")
-			$this->var_to_module = $var_to_module;
-
+		$this->module_secondary[] = "__MOD_".$module_name."__";
 		return $this;
 	}
+
+
 
 	public function set_template_path()
 	{
-		if(empty($this->template_name))
-			$this->template_name = $this->module_name;
+		$test_path = '../vues/home.php';
 
-		if(strpos($this->template_name, "admin_") !== false)
-		{
-			if(file_exists('../vues/admin_tool/'.$this->template_name.'.php'))
-				$this->template_path = '../vues/admin_tool/'.$this->template_name.'.php';
-		}
+			if(empty($this->template_name))
+				$this->template_name = $this->_app->module_name;
 
-		else if(strpos($this->template_name, "sign_up") !== false)
-		{
-			if(file_exists('../vues/sign_up/'.$this->template_name.'.php'))
-				$this->template_path = '../vues/sign_up/'.$this->template_name.'.php';
-		}
 
-		else if(strpos($this->template_name, "search") !== false)
-		{
-			if(file_exists('../vues/search/'.$this->template_name.'.php'))
-				$this->template_path = '../vues/search/'.$this->template_name.'.php';
-		}
-			
-		else
-		{
-			if(file_exists('../vues/'.$this->template_name.'.php'))
-				$this->template_path = '../vues/'.$this->template_name.'.php';
-		}
+			if(strpos($this->template_name, "admin_") !== false)
+				$test_path = '../vues/admin_tool/'.$this->template_name.'.php';
 
+			else if(strpos($this->template_name, "sign_up") !== false)
+				$test_path = '../vues/sign_up/'.$this->template_name.'.php';
+
+			else if(strpos($this->template_name, "search") !== false)
+				$test_path = '../vues/search/'.$this->template_name.'.php';
+			else
+				$test_path = '../vues/'.$this->template_name.'.php';	
+
+			$this->template_path = $test_path;
+	}
+
+	public function assign_var($var_name , $value)
+	{
+    	$this->var_in_module[$var_name] = $value;
+        return $this;
 	}
 }

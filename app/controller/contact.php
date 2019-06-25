@@ -9,6 +9,7 @@ Class contact extends base_module
 	{		
 		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		$this->_app->add_view("contact_us");
 
 
 		if(isset($_SESSION['rand_id_form_contact_us']) && isset($_POST['rand_id_form_contact_us']))
@@ -47,7 +48,11 @@ Class contact extends base_module
 		$rand_id_form_contact_us = rand();
 		$_SESSION['rand_id_form_contact_us'] = $rand_id_form_contact_us;	
 
-		$this->get_html_tpl = $this->assign_var('rand_id_form_contact_us',$rand_id_form_contact_us)->assign_var('status_send_mail', $this->status_send_mail)->assign_var("message_send_mail_contact_us", $this->message_send_mail_contact_us)->assign_var("_app", $this->_app)->render_tpl();
+		
+		$this->assign_var('rand_id_form_contact_us',$rand_id_form_contact_us)
+			->assign_var('status_send_mail', $this->status_send_mail)
+			->assign_var("message_send_mail_contact_us", $this->message_send_mail_contact_us)
+			->render_tpl();
 	}
 
 }

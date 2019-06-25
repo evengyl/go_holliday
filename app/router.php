@@ -25,7 +25,7 @@ Class router
 						break;
 
 					case 'admin':
-							$this->assign_mod();
+						$this->assign_mod("admin");
 						break;
 				
 					case 'login':
@@ -78,22 +78,22 @@ Class router
 	}
 
 	
-	protected function assign_mod($module = false, $var_module = false)
+	protected function assign_mod($module = Null, $var_module = Null)
 	{
-		if($module === false){
+		if($module === Null){
 			$module = $this->_app->route;
 		}
 
 		$module = $this->test_disable_module_with_option_app($module);
 
-		$pre_echo_mod = "__MOD_". $module;
+		$module = "__MOD_". $module;
 
 		if($var_module)
-			$pre_echo_mod .= "(".$var_module.")";
+			$module .= "(".$var_module.")";
 
-		$pre_echo_mod .= "__";
+		$module .= "__";
 
-		echo $pre_echo_mod;
+		echo $module;
 	}
 
 	private function test_disable_module_with_option_app($module)

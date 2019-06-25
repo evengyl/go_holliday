@@ -61,7 +61,7 @@ Class _app
 		if($this->option_app['view_post_in_index'])
 		{
 			if(!empty($_POST))
-				affiche_pre($_POST);
+				affiche($_POST);
 		}
 	}
 
@@ -90,5 +90,25 @@ Class _app
 				unset($_SESSION['error']);
 			}	
 		}
+	}
+
+	public function add_view($page)
+	{
+		$req_sql = new stdClass();
+		$req_sql->table = ['vues'];
+		$req_sql->var = ["vue"];
+		$req_sql->where = ["page = $1", [$page]];
+		$res_sql = $this->sql->select($req_sql);
+		$nb_vue = $res_sql[0]->vue;
+
+		$new_nb = (int)$nb_vue +1;
+
+
+		$req_sql = new stdClass;
+		$req_sql->table = "vues";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx->vue = $new_nb;
+		$req_sql->where = "page = '".$page."'";
+		$res_sql = $this->sql->update($req_sql);
 	}
 }

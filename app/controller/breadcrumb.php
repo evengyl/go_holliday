@@ -5,7 +5,8 @@ Class breadcrumb extends base_module
 
 	public function __construct(&$_app)
 	{	
-		$this->_app = $_app;
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 		
 		if(!$this->_app->option_app['view_breadcrumb'])
 			return;
@@ -89,7 +90,7 @@ Class breadcrumb extends base_module
 
 
 
-		$this->get_html_tpl = $this->use_template("breadcrumb")->assign_var("breadcrumb", $breadcrumb_top)->render_tpl();
+		$this->assign_var("breadcrumb", $breadcrumb_top)->render_tpl();
 	}
 
 }

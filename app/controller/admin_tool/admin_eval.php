@@ -9,6 +9,6 @@ Class admin_eval extends base_module
 
 		$this->_app->navigation->set_breadcrumb("Zone de test EVAL attention", "eval");
 
-		$this->get_html_tpl = $this->render_tpl();
+		$this->render_tpl();
 	}
 }

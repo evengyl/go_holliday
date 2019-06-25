@@ -7,18 +7,20 @@ Class annonce extends base_module
 
 	public function __construct(&$_app)
 	{	
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-		
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 
 		$array_img_annonce = $this->get_img_files_by_id();
 
 		if(!$this->error)
-			$this->get_html_tpl =  $this->assign_var("slide_img", $array_img_annonce)->assign_var("name_annonce", $this->name_annonce)->assign_var("_app", $this->_app)->render_tpl();
+		{
+			$this->assign_var("slide_img", $array_img_annonce)
+				->assign_var("name_annonce", $this->name_annonce)
+				->render_tpl();
+		}
 		else
-			$this->get_html_tpl =  $this->use_module('module_404')->render_tpl();
+			$this->use_module('module_404')->render_tpl();
 	}
 
 	public function get_img_files_by_id()

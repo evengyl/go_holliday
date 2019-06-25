@@ -7,10 +7,9 @@ Class sign_up extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$this->_app = $_app;
-		$this->_app->module_name = __CLASS__;
-
+		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
+		$this->_app->add_view("sign_up");
 
 
 		//on check le form avec la session du random id form pour creation de compte Client
@@ -28,15 +27,13 @@ Class sign_up extends base_module
 		if(isset($this->_app->route['option_sign_up']))
 		{
 			if(in_array($this->_app->route["option_sign_up"], ["Client", "VIP"]))
-				$this->get_html_tpl = $this
-								->assign_var('_app', $this->_app)
-								->assign_var('validate', $this->validate)
-								->assign_var('rand_id_form_sign_up',$_SESSION['rand_id_form_sign_up'])
-								->use_template('sign_up_'.strtolower($_GET['option_sign_up']))
-							->render_tpl();
+				$this->assign_var('validate', $this->validate)
+					->assign_var('rand_id_form_sign_up',$_SESSION['rand_id_form_sign_up'])
+					->use_template('sign_up_'.strtolower($_GET['option_sign_up']))
+					->render_tpl();
 			
 			else
-				$this->get_html_tpl = $this->use_template('404')->render_tpl();
+				$this->use_template('404')->render_tpl();
 
 		}
 		else if(isset($_GET['id_sign_up_confirm']))
@@ -47,16 +44,16 @@ Class sign_up extends base_module
 				{
 
 					//ok le compte à été activé
-					$this->get_html_tpl = $this->use_template('sign_up_validate_confirm')->render_tpl();
+					$this->use_template('sign_up_validate_confirm')->render_tpl();
 				}
 				else{
 					//renvoier la 404
-					$this->get_html_tpl = $this->use_template('404')->render_tpl();
+					$this->use_template('404')->render_tpl();
 				}
 			}
 		}
 		else
-			$this->get_html_tpl =  $this->use_template('sign_up_global')->render_tpl();
+			$this->use_template('sign_up_global')->render_tpl();
 		
 	}
 

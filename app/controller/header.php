@@ -7,6 +7,6 @@ Class header extends base_module
 		$_app->module_name = __CLASS__;	
 		parent::__construct($_app);
 
-		$this->get_html_tpl = $this->render_tpl();
+		$this->render_tpl();
 	}
 }

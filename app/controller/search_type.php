@@ -5,16 +5,14 @@ Class search_type extends base_module
 
 	public function __construct(&$_app)
 	{	
-		$this->_app = $_app;	
-		$this->_app->module_name = __CLASS__;
-		
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
 
 
 		$array_type = $this->get_list_type();
 		$array_type = $this->get_count_annonces_by_type($array_type);
 
-		$this->get_html_tpl =  $this->assign_var("_app", $this->_app)->assign_var("array_type", $array_type)->render_tpl();
+		$this->assign_var("array_type", $array_type)->render_tpl();
 	}
 
 	private function get_list_type()

@@ -15,6 +15,9 @@ Class module_404 extends base_module
 		}
 
 
-		$this->get_html_tpl =  $this->assign_var("error_message", $exeption)->assign_var('error_code', $error_code)->use_template("404")->render_tpl();
+		$this->assign_var("error_message", $exeption)
+			->assign_var('error_code', $error_code)
+			->use_template("404")
+			->render_tpl();
 	}
 }

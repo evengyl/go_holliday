@@ -1,4 +1,3 @@
-
 <h4 class="title">Listes de vos annonces</h4><hr>
 <h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
 require("pagination_annonces_profil.php");?>

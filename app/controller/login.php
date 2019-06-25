@@ -7,41 +7,35 @@ Class login extends base_module
 
 	public function __construct(&$_app)
 	{
-		$this->_app = $_app;
-		$this->_app->module_name = __CLASS__;
-		parent::__construct($this->_app);
+		$_app->module_name = __CLASS__;
+		parent::__construct($_app);
+		$this->_app->add_view("login");
 
 
 		$post = $_POST;
+		$get = $_GET;
 
 		// on set le bread
-		if(isset($_GET['page']) && $_GET['page'] == "login")
+		if(isset($get['page']) && $get['page'] == "login")
 			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
 
 
 
-		if($_GET['page'] = 'admin')
+		if($get['page'] = 'admin')
 			$this->test_connect_form($post);
 
 
-		if($this->_app->option_app['app_with_login_option'] == 0)
-		{
-			if(isset($this->_app->var_module['AuthAdmin']))
-				$this->get_html_tpl = $this->use_template("login")->render_tpl();
-			else
-				$this->get_html_tpl = $this->use_module("home")->render_tpl();
-		}
-		else if(isset($post['lost_login_form']))
+		if(isset($post['lost_login_form']))
 		{
 			//si login perdu on restaure ici 
 			$this->restore_password($post);
-			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
+			$this->assign_var("error", $this->error)->render_tpl();
 		}
 		else
 		{
 			//page de connexion formulaire
 			$this->test_connect_form($post);
-			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_template('login')->render_tpl();
+			$this->assign_var("error", $this->error)->render_tpl();
 
 		}
 
@@ -114,6 +108,7 @@ Class login extends base_module
 							if($res_fx_id_user[0]->account_verify == 1)
 							{
 								$this->set_session_login($res_sql_login, $res_fx_id_user);
+								$this->_app->add_view("login_success");
 			                	return 1;
 							}
 							else

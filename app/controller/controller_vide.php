@@ -16,6 +16,6 @@ Class name extends base_module
 
 		//pour assigner des var c'est ->assign_var('nameDansTpl', $var)
 		//pour assigner un tpl spécifique c'est ->use_template('TplName')
-		$this->get_html_tpl = $this->render_tpl();
+		$this->render_tpl();
 	}
 }

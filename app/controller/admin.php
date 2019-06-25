@@ -12,58 +12,61 @@ Class admin extends base_module
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
 		
-		if($this->level = $this->check_level_user(isset($_SESSION['pseudo'])?$_SESSION['pseudo']:0))
+		if(($this->level = $this->check_level_user(isset($_SESSION['pseudo'])?$_SESSION['pseudo']:0)) >= 3)
 		{
 			//ok connecter
 			//verif si on est admin
-			if($this->level >= 3)
-			{
+			
 				
 				if(isset($_GET['action']))
 				{
-					$action = $_GET['action'];
-
-					if($action == "edit_config_app")
-						$this->get_html_tpl = $this->use_module('admin_edit_config_app')->render_tpl();
-					
-					else if($action == "eval")
-						$this->get_html_tpl = $this->use_module('admin_eval')->render_tpl();
-
-					else if($action == "pull_bsd")
-						$this->get_html_tpl = $this->use_module('admin_pull_bsd')->render_tpl();
-
-					else if($action == "go_to_vip_view"){
-						$this->set_status_vip();
-						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
-					}
-					else if($action == "go_to_no_vip_view"){
-						$this->set_status_no_vip();
-						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
-					}
-					else if($action == "go_to_client_view"){
-						$this->set_status_client();
-						$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
-					}
-					else if($action == "verify_status_vip")//si le user n'est plus VIP ont désactive toutes les annonces
+					switch ($_GET['action'])
 					{
-						$this->get_html_tpl = $this->use_module('admin_verify_status_vip')->render_tpl();
+						case "edit_config_app":
+							$this->use_module('admin_edit_config_app');
+						break;
+
+						case "eval":
+							$this->use_module('admin_eval');
+						break;
+
+						case "pull_bsd":
+							$this->use_module('admin_pull_bsd');
+						break;
+
+						case "go_to_vip_view":
+						{
+							$this->set_status_vip();
+							$this->render_tpl(); //on affiche l'administration
+						}
+						break;
+
+						case "go_to_no_vip_view":
+						{
+							$this->set_status_no_vip();
+							$this->render_tpl(); //on affiche l'administration
+						}
+						break;
+
+						case "go_to_client_view":
+						{
+							$this->set_status_client();
+							$this->render_tpl(); //on affiche l'administration
+						}
+						break;
 					}
-						
 				}
-				else{
-					$this->get_html_tpl = $this->assign_var("_app",$_app)->render_tpl(); //on affiche l'administration
-				}
-			}
-			else // il 'agit d'office d'un essaie de piratage car la page admin n'est pas trouvable donc 404
-			{
-				$_SESSION['error_admin'] = "Vous avez tenter de vous connecter à une page non autorisée.";
-				$this->get_html_tpl = $this->use_template('404')->render_tpl();
-			}
+
+				$this->use_module('admin_stats_site');
+				$this->use_module('admin_verify_status_vip');
+				$this->render_tpl(); //on affiche l'administration
 		}
 		else{
 			//go page de connexion
 			$this->error = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
-			$this->get_html_tpl = $this->assign_var("error", $this->error)->use_module('login', $var_to_module = 'AuthAdmin')->render_tpl();
+			$this->assign_var("error", $this->error)
+				->use_module('login')
+				->render_tpl();
 		}
 
 
