@@ -46,4 +46,4 @@ echo $parser_translate->page;
 
 $_app->admin_tools();
 
-affiche($_app);
+//affiche($_app);

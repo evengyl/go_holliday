@@ -19,3 +19,5 @@
 <script src="/js/jquery-3.3.1.js"></script>
 <script src="/js/validator.js"></script>
 <script src="/js/dropzone.js"></script>
+<script src="/js/chart.js"></script>
+<script src="/js/utils.js"></script>

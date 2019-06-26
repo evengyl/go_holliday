@@ -17,7 +17,11 @@ Class _app
 	public $module_name;
 	public $user;
 	public $lang;
-	public $site_name = "Go Hollidays";
+	public $site_name = "Go Holidays";
+	public $month = ['01' => "Janvier", '02' => "Février", '03' => "Mars",
+					 '04' => "Avril", '05' => "Mai", '06' => "Juin",
+					 '07' => "Juillet", '08' => "Aout", '09' => "Septembre", 
+					 '10' =>"Octobre", '11' => "Novembre", '12' => "Décembre"];
 
 	public $time_start = 0;
 	public $time_stop = 0;
@@ -28,6 +32,7 @@ Class _app
 		$this->base_dir = basename($_SESSION['base_dir']);
 		$this->base_path = $_SESSION['base_dir'];
 		$this->path_to_upload_img_annonce = $_SESSION['base_dir']."/public/images/annonces/";
+
 	}
 
 
@@ -94,21 +99,22 @@ Class _app
 
 	public function add_view($page)
 	{
+		$date = Date("m-Y");
+
 		$req_sql = new stdClass();
 		$req_sql->table = ['vues'];
-		$req_sql->var = ["vue"];
-		$req_sql->where = ["page = $1", [$page]];
+		$req_sql->var = ["id", $page, "periode"];
+		$req_sql->where = ["periode LIKE $1", [$date]];
 		$res_sql = $this->sql->select($req_sql);
-		$nb_vue = $res_sql[0]->vue;
+		$res_sql = $res_sql[0];
 
-		$new_nb = (int)$nb_vue +1;
-
+		$res_sql->$page = (int)$res_sql->$page +1;
 
 		$req_sql = new stdClass;
 		$req_sql->table = "vues";
 		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->vue = $new_nb;
-		$req_sql->where = "page = '".$page."'";
+		$req_sql->ctx = $res_sql;
+		$req_sql->where = "id = ".$res_sql->id;
 		$res_sql = $this->sql->update($req_sql);
 	}
 }

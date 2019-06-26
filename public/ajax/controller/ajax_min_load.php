@@ -28,11 +28,8 @@ $_app = new _app();
 
 $_app->user = new stdClass();
 
-
-if(isset($_SESSION['user_type'])){
-	$_app->user->id_utilisateurs = $_SESSION['id_utilisateurs'];
+if(isset($_SESSION['user_type']))
 	$_app->user->user_type = $_SESSION['user_type'];
-}
 else
 	$_app->user->user_type = 1;
 
