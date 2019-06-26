@@ -283,7 +283,7 @@ CREATE TABLE `translate` (
   `name_nl` varchar(255) NOT NULL,
   `name_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,7 +292,7 @@ CREATE TABLE `translate` (
 
 LOCK TABLES `translate` WRITE;
 /*!40000 ALTER TABLE `translate` DISABLE KEYS */;
-INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tous les prix sont TVAC','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone de la maintenance','','','__TRANS_tel_mainteance__'),(16,'Téléphone commercial','','','__TRANS_tel_commercial__'),(17,'','','','__TRANS_204__'),(18,'','','','__TRANS_error_explain__'),(19,'','','','__TRANS_horaire__'),(20,'','','','__TRANS_horaire_list__');
+INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tous les prix sont TVAC','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone de la maintenance','','','__TRANS_tel_mainteance__'),(16,'Téléphone commercial','','','__TRANS_tel_commercial__'),(17,'','','','__TRANS_204__'),(18,'','','','__TRANS_error_explain__'),(19,'','','','__TRANS_horaire__'),(20,'','','','__TRANS_horaire_list__'),(21,'','','','__TRANS_accueil__'),(22,'','','','__TRANS_contact_us__'),(23,'','','','__TRANS__contact_detail__'),(24,'','','','__TRANS_tel_mainteance__'),(25,'','','','__TRANS_tel_commercial__'),(26,'','','','__TRANS_footer_price__'),(27,'','','','__TRANS_accueil__'),(28,'','','','__TRANS_contact_us__'),(29,'','','','__TRANS__contact_detail__'),(30,'','','','__TRANS_tel_mainteance__'),(31,'','','','__TRANS_tel_commercial__'),(32,'','','','__TRANS_footer_price__'),(33,'','','','__TRANS_accueil__'),(34,'','','','__TRANS_contact_us__'),(35,'','','','__TRANS__contact_detail__'),(36,'','','','__TRANS_tel_mainteance__'),(37,'','','','__TRANS_tel_commercial__'),(38,'','','','__TRANS_footer_price__'),(39,'','','','__TRANS_accueil__'),(40,'','','','__TRANS_contact_us__'),(41,'','','','__TRANS__contact_detail__'),(42,'','','','__TRANS_tel_mainteance__'),(43,'','','','__TRANS_tel_commercial__'),(44,'','','','__TRANS_footer_price__'),(45,'','','','__TRANS_accueil__'),(46,'','','','__TRANS_contact_us__'),(47,'','','','__TRANS__contact_detail__'),(48,'','','','__TRANS_tel_mainteance__'),(49,'','','','__TRANS_tel_commercial__'),(50,'','','','__TRANS_footer_price__'),(51,'','','','__TRANS_accueil__'),(52,'','','','__TRANS_contact_us__'),(53,'','','','__TRANS__contact_detail__'),(54,'','','','__TRANS_tel_mainteance__'),(55,'','','','__TRANS_tel_commercial__'),(56,'','','','__TRANS_footer_price__'),(57,'','','','__TRANS_accueil__'),(58,'','','','__TRANS_contact_us__'),(59,'','','','__TRANS__contact_detail__'),(60,'','','','__TRANS_tel_mainteance__'),(61,'','','','__TRANS_tel_commercial__'),(62,'','','','__TRANS_footer_price__'),(63,'','','','__TRANS_accueil__'),(64,'','','','__TRANS_contact_us__'),(65,'','','','__TRANS__contact_detail__'),(66,'','','','__TRANS_tel_mainteance__'),(67,'','','','__TRANS_tel_commercial__'),(68,'','','','__TRANS_footer_price__'),(69,'','','','__TRANS_accueil__'),(70,'','','','__TRANS_contact_us__'),(71,'','','','__TRANS__contact_detail__'),(72,'','','','__TRANS_tel_mainteance__'),(73,'','','','__TRANS_tel_commercial__'),(74,'','','','__TRANS_footer_price__'),(75,'','','','__TRANS_accueil__'),(76,'','','','__TRANS_contact_us__'),(77,'','','','__TRANS__contact_detail__'),(78,'','','','__TRANS_tel_mainteance__'),(79,'','','','__TRANS_tel_commercial__'),(80,'','','','__TRANS_footer_price__'),(81,'','','','__TRANS_accueil__'),(82,'','','','__TRANS_contact_us__'),(83,'','','','__TRANS__contact_detail__'),(84,'','','','__TRANS_tel_mainteance__'),(85,'','','','__TRANS_tel_commercial__'),(86,'','','','__TRANS_footer_price__'),(87,'','','','__TRANS_accueil__'),(88,'','','','__TRANS_contact_us__'),(89,'','','','__TRANS__contact_detail__'),(90,'','','','__TRANS_tel_mainteance__'),(91,'','','','__TRANS_tel_commercial__'),(92,'','','','__TRANS_footer_price__'),(93,'','','','__TRANS_accueil__'),(94,'','','','__TRANS_contact_us__'),(95,'','','','__TRANS__contact_detail__'),(96,'','','','__TRANS_tel_mainteance__'),(97,'','','','__TRANS_tel_commercial__'),(98,'','','','__TRANS_footer_price__');
 /*!40000 ALTER TABLE `translate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -373,10 +373,14 @@ DROP TABLE IF EXISTS `vues`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vues` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `page` varchar(50) NOT NULL,
-  `vue` int(11) DEFAULT '0',
+  `sign_up` int(11) NOT NULL DEFAULT '0',
+  `login` int(11) NOT NULL DEFAULT '0',
+  `login_success` int(11) NOT NULL DEFAULT '0',
+  `accueil` int(11) NOT NULL DEFAULT '0',
+  `contact_us` int(11) NOT NULL DEFAULT '0',
+  `periode` varchar(7) DEFAULT '00-0000',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +389,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,'login',5),(2,'login_success',2),(3,'accueil',5),(4,'contact_us',7),(5,'sign_up',0);
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,1,1,0,0,0,'06-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -398,4 +402,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-25 16:32:00
+-- Dump completed on 2019-06-26 13:37:00
