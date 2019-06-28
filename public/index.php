@@ -14,6 +14,7 @@ if(!isset($_GET['page']))
 
 
 ob_start();?>
+<!DOCTYPE html>
 	<html lang="Fr-be">
 		<head>
 			__MOD_top_head__

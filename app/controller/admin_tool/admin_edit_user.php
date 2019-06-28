@@ -58,7 +58,7 @@ Class admin_edit_user extends base_module
 	{
        	$req_sql = new StdClass();
        	$req_sql->table = ["login"];
-       	$req_sql->var = ["id", "login", "email", "avertissement", "password", "level", "password_no_hash", "last_connect"];
+       	$req_sql->var = ["id", "login", "email", "avertissement", "password", "level_admin", "password_no_hash", "last_connect"];
        	$req_sql->where = ["1"];
 		$res_fx = $this->_app->sql->select($req_sql);
 		return $res_fx;

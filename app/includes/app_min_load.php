@@ -1,30 +1,20 @@
 <?
 
-function affiche($var_a_print)
-{
-    ?><pre><?
-        htmlentities(print_r($var_a_print));
-    ?></pre><?
-}
-
-
-require_once $_SESSION['base_dir']."/app/includes/_app.php";
-//on initialise le app, qui sers d'object général pour l'application
-$_app = new _app();
-
-
-
-$_app->time_start = $_app->microtime_float();
-
-require_once $_app->base_path."/app/includes/tools.php";
-
-require_once $_app->base_path."/app/modele/Config.php";
-
 //Chargement de class concernée pour le sql
-require_once $_app->base_path."/app/includes/load_class.php"; 
+require_once $_SESSION['base_dir']."/app/includes/load_class.php"; 
 
 //mise en route de l'autoload
 Autoloader::register(); 
+
+
+//on initialise le app, qui sers d'object général pour l'application
+$_app = new _app();
+$_app->time_start = $_app->microtime_float();
+
+
+require_once $_app->base_path."/app/modele/Config.php";
+
+
 
 //mise en route du détecteur et assignateur de langue
 $lang_select = new lang_select($_app);

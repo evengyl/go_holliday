@@ -88,7 +88,7 @@ Class login extends base_module
 		    	{	
 		           	$req_sql = new StdClass();
 		           	$req_sql->table = ["login"];
-		           	$req_sql->var = ["id", "login", "password", "level", "last_connect", "id_utilisateurs"];
+		           	$req_sql->var = ["id", "login", "password", "level_admin", "last_connect", "id_utilisateurs"];
 		           	$req_sql->where = ["login = $1", [$InputPseudo]];
 					$res_sql_login = $this->_app->sql->select($req_sql);
 
@@ -146,7 +146,7 @@ Class login extends base_module
     	unset($_SESSION['first_try_pseudo']);
     	unset($post);
         $_SESSION['pseudo'] = $res_sql_login->login;
-        $_SESSION['level'] = $res_sql_login->level;
+        $_SESSION['level_admin'] = $res_sql_login->level_admin;
         $_SESSION['last_connect'] = $res_sql_login->last_connect;
         $_SESSION['user_type'] = $res_fx_id_user[0]->user_type;
 	}

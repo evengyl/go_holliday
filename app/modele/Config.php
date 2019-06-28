@@ -25,7 +25,7 @@ class Config
 
     public static function list_var()
     {
-        affiche_pre(get_class_vars(get_class($this)));
+        affiche(get_class_vars(get_class($this)));
     }
 }
 

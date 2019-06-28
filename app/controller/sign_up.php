@@ -74,9 +74,9 @@ Class sign_up extends base_module
 
 			//on set sont type de sign_up
 			if($this->_app->route["option_sign_up"] == "Client")
-				$level_client = 0;
+				$user_type = 0;
 			else if($this->_app->route["option_sign_up"] == "VIP")
-				$level_client = 1;
+				$user_type = 1;
 
 
 			//check si le login existe déjà dans la bsd
@@ -93,18 +93,19 @@ Class sign_up extends base_module
                 $password_hash = password_hash($post["password"], PASSWORD_DEFAULT);
 
 	    		$req_sql_login = new stdClass;
+	    		$req_sql_login->table = "login";
 				$req_sql_login->ctx = new stdClass;
 				$req_sql_login->ctx->login = $post["login"];
 				$req_sql_login->ctx->password_no_hash = $post["password"];
 				$req_sql_login->ctx->password = $password_hash;
 				$req_sql_login->ctx->email = $post["mail"];
 				$req_sql_login->ctx->last_connect = date("U");
-				$req_sql_login->ctx->level = $level_client;
-				$req_sql_login->table = "login";
+				
 				$id_login = $this->_app->sql->insert_into($req_sql_login, $view_sql_prepare = 0, $return_insert_id = 1);
 
 				//Enregistrement des infos utilisateurs
 	    		$req_sql_utilisateurs = new stdClass;
+	    		$req_sql_utilisateurs->table = "utilisateurs";
 				$req_sql_utilisateurs->ctx = new stdClass;
 				$req_sql_utilisateurs->ctx->name = $post["name"];
 				$req_sql_utilisateurs->ctx->last_name = $post["last_name"];
@@ -117,8 +118,9 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->ctx->pays = $post["pays"];
 				$req_sql_utilisateurs->ctx->genre = $post["genre"];
 				$req_sql_utilisateurs->ctx->account_verify = 0;
+				$req_sql_utilisateurs->ctx->user_type = $user_type;
 				$req_sql_utilisateurs->ctx->id_create_account = $post['rand_id_form_sign_up'];
-				$req_sql_utilisateurs->table = "utilisateurs";
+				
 				$id_utilisateurs = $this->_app->sql->insert_into($req_sql_utilisateurs, $view_sql_prepare = 0, $return_insert_id = 1);
 
 

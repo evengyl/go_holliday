@@ -1,7 +1,7 @@
 <?
 Class admin extends base_module
 {
-	public $level = 0;
+	public $level_admin = 0;
 	public $error;
 
 	public function __construct(&$_app)
@@ -11,7 +11,7 @@ Class admin extends base_module
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
 		
-		if(($this->level = $this->check_level_user(isset($_SESSION['pseudo'])?$_SESSION['pseudo']:0)) == 3)
+		if(($this->level_admin = $this->_app->check_level_user(isset($_SESSION['pseudo'])?$_SESSION['pseudo']:0)) == 3)
 		{
 				
 			if(isset($_GET['action']))
@@ -67,25 +67,11 @@ Class admin extends base_module
 		$sql->where = "id = ".$this->_app->user->id_utilisateurs;
 
 		$this->_app->sql->update($sql);
-
+		$this->_app->set_user_infos_on_app();
 	}
 
 
-	public function check_level_user($login)
-	{
-		if($login)
-		{
-			$req_sql = new stdClass();
-			$req_sql->table = ['login'];
-			$req_sql->var = ["level"];
-			$req_sql->where = ["login = $1", [$login]];
-			$res_sql = $this->_app->sql->select($req_sql);
-			return $res_sql[0]->level;
-		}
-		else
-			return 0;
-		
-	}
+	
 }
 
 

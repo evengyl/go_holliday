@@ -26,7 +26,7 @@ Class security extends base_module
 				//Is_connect permet de voir si on est connecté tout au long des module et des tpl
 				Config::$is_connect = 1;
 				//si connecter, si oui on set les infos user dans le app
-				$this->set_user_infos_on_app();
+				$this->_app->set_user_infos_on_app();
 			}
 			else
 				Config::$is_connect = 0;
@@ -44,34 +44,7 @@ Class security extends base_module
 			return true;
 	}
 
-	public function set_user_infos_on_app()
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = ["login", "utilisateurs"];
-		$req_sql->var = [
-			"login" => ["id", "login", "password", "email", "level", "id_utilisateurs"],
-			"utilisateurs" => [
-				"name", 
-				"last_name", 
-				"genre", 
-				"user_type", 
-				"tel", 
-				"address_numero", 
-				"address_rue", 
-				"zip_code", 
-				"address_localite", 
-				"age", 
-				"pays", 
-				"id_background_profil",
-				"account_verify",
-				"id_create_account",
-				"newsletter"]
-		];
-		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-		$res_fx = $this->_app->sql->select($req_sql);	
-		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
-		$this->_app->user = $merge_array_user;
-	}
+	
 
 	public function logout($base_dir)
 	{

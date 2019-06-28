@@ -1,6 +1,6 @@
 <?
 
-Class _app
+Class _app extends fct_global_website
 {
 
 	public $array_sql_ = [];
@@ -30,6 +30,9 @@ Class _app
 
 	public function __construct()
 	{
+		parent::__construct($this);
+
+
 		$this->base_dir = basename($_SESSION['base_dir']);
 		$this->base_path = $_SESSION['base_dir'];
 		$this->path_to_upload_img_annonce = $_SESSION['base_dir']."/public/images/annonces/";
