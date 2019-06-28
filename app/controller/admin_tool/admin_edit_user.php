@@ -5,7 +5,6 @@ Class admin_edit_user extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
 		if(isset($_POST['id']))
@@ -32,7 +31,7 @@ Class admin_edit_user extends base_module
 			$res_sql_list_user = $this->get_list_user();
 			$this->assign_var('list_user', $res_sql_list_user)
 				->assign_var('var_txt', $var_txt)
-				->use_template('admin_list_user')
+				->use_other_template('admin_list_user')
 				->render_tpl();
 		}
 		else
@@ -42,14 +41,14 @@ Class admin_edit_user extends base_module
 				$html_render_user_id_table = $this->sql->generate_form_unpdate('login', $id);
 				
 				$this->assign_var('user', $html_render_user_id_table)
-					->use_template('admin_edit_user')
+					->use_other_template('admin_edit_user')
 					->render_tpl();
 			}
 			else{
 				$res_sql_list_user = $this->get_list_user();
 				
 				$this->assign_var('list_user', $res_sql_list_user)
-					->use_template('admin_list_user')
+					->use_other_template('admin_list_user')
 					->render_tpl();
 			}
 		}

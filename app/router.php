@@ -10,6 +10,7 @@ Class router
 		$this->_app = $_app;
 		$this->_app->route = htmlentities($route['page']);
 
+
 		if($security->check_if_module_need_to_do_connect())
 		{
 			if($this->_app->route)

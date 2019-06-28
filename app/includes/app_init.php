@@ -32,6 +32,8 @@ class app_init
 		{
 			$array_option[$row_sql->name] = $row_sql->value;
 		}
+		
+		 
 		return $array_option;
 	}
 

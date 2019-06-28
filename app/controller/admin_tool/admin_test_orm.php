@@ -5,7 +5,6 @@ Class admin_test_orm extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 		
 		$_app->navigation->set_breadcrumb('Test de l\'orm');

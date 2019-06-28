@@ -11,7 +11,6 @@ Class _app
 	public $navigation;
 	public $translate = [];
 	public $route = [];
-	public $template = [];
 	public $stack_module = [];
 	public $var_module;
 	public $module_name;
@@ -25,6 +24,8 @@ Class _app
 
 	public $time_start = 0;
 	public $time_stop = 0;
+	public $module_for_exec = [];
+
 
 
 	public function __construct()
@@ -32,6 +33,7 @@ Class _app
 		$this->base_dir = basename($_SESSION['base_dir']);
 		$this->base_path = $_SESSION['base_dir'];
 		$this->path_to_upload_img_annonce = $_SESSION['base_dir']."/public/images/annonces/";
+		$this->option_app["view_time_exec_all_sql"] = false;
 
 	}
 

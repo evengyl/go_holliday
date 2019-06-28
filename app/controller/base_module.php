@@ -18,10 +18,15 @@ Class base_module
 	{
 		$this->_app = &$_app;
 		$this->var_in_module["_app"] = $this->_app;
+
+		$this->_app->module_for_exec[] = get_class($this);
+
 	}
 
 	public function render_tpl()
 	{
+
+
 		$this->set_template_path();
 
 		ob_start();
@@ -45,14 +50,13 @@ Class base_module
 		ob_end_clean();
 	}
 
-/* faire sauter, préferer utiliser les modules */
 	public function use_template($template_name = "")
 	{
 		$this->template_name = $template_name;
 		$this->set_template_path();
 		return $this;
 	}
-/* */ 
+
 
 	public function use_module($module_name = "")
 	{
@@ -64,24 +68,24 @@ Class base_module
 
 	public function set_template_path()
 	{
-		$test_path = '../vues/home.php';
+		$final_path = '../vues/home.php';
 
-			if(empty($this->template_name))
-				$this->template_name = $this->_app->module_name;
+		$this->template_name = end($this->_app->module_for_exec);
 
 
-			if(strpos($this->template_name, "admin_") !== false)
-				$test_path = '../vues/admin_tool/'.$this->template_name.'.php';
+		if(strpos($this->template_name, "admin_") !== false)
+			$final_path = '../vues/admin_tool/'.$this->template_name.'.php';
 
-			else if(strpos($this->template_name, "sign_up") !== false)
-				$test_path = '../vues/sign_up/'.$this->template_name.'.php';
+		else if(strpos($this->template_name, "sign_up") !== false)
+			$final_path = '../vues/sign_up/'.$this->template_name.'.php';
 
-			else if(strpos($this->template_name, "search") !== false)
-				$test_path = '../vues/search/'.$this->template_name.'.php';
-			else
-				$test_path = '../vues/'.$this->template_name.'.php';	
+		else if(strpos($this->template_name, "search") !== false)
+			$final_path = '../vues/search/'.$this->template_name.'.php';
+		else
+			$final_path = '../vues/'.$this->template_name.'.php';	
 
-			$this->template_path = $test_path;
+
+		$this->template_path = $final_path;
 	}
 
 	public function assign_var($var_name , $value)

@@ -5,7 +5,6 @@ Class admin_pull_bsd extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 		
 		$_app->navigation->set_breadcrumb('Pull de la base de donnée', 'pull_bsd');

@@ -16,19 +16,19 @@
 
 
 	<div class="col-xs-12 profil col-without-radius" style="padding:15px;">
-		<a href="/admin/eval" type="button" class="btn btn-primary  btn-block">EVAL</a>
-		<a href="/admin/edit_config_app" type="button" class="btn btn-primary  btn-block">Edit option _APP</a>
-		<a href="/admin/pull_bsd" type="button" class="btn btn-primary  btn-block">Pull BSD</a>
-		<a href="/admin/go_to_client_view" type="button" class="btn btn-info  btn-block">Passer en vue Client simple</a><?
+		<a style="margin-top:5px;" class="btn btn-danger btn-block" href="/Deconnection">Se déconnecter du mode Admin</a>
+		<a style="margin-top:5px;" href="/admin/eval" type="button" class="btn btn-danger  btn-block">EVAL</a>
+		<a style="margin-top:5px;" href="/admin/edit_config_app" type="button" class="btn btn-success  btn-block">Edit option _APP</a>
+		<a style="margin-top:5px; margin-bottom:5px;" href="/admin/pull_bsd" type="button" class="btn btn-info  btn-block">Pull BSD</a>
+
+		<a href="/admin/go_to_client_view" type="button" class="btn btn-info col-xs-6">Vue Client simple</a><?
 		if($_app->user->user_type == 1 || $_app->user->user_type == 0)
-		{?>
-			<a href="/admin/go_to_vip_view" type="button" class="btn btn-success  btn-block">Passer en vues VIP</a><?
-		}
+			echo '<a href="/admin/go_to_vip_view" type="button" class="btn btn-success col-xs-6">Vue VIP</a>';
+		
 		else if($_app->user->user_type == 2 || $_app->user->user_type == 0)
-		{?>
-			<a href="/admin/go_to_no_vip_view" type="button" class="btn btn-success  btn-block">Passer en vues Non VIP</a><?
-		}?>
-		<a class="btn btn-danger  btn-block" href="/Deconnection">Se déconnecter du mode Admin</a>
+			echo '<a href="/admin/go_to_no_vip_view" type="button" class="btn btn-success col-xs-6">Vue Out VIP</a>';?>
+		
+		
 	</div>
 </div>
 

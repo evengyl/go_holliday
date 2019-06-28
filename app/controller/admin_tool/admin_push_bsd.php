@@ -5,7 +5,6 @@ Class admin_push_bsd extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
 		$_app->navigation->_stack_nav[] = 'Push de la base de donnée';
@@ -47,7 +46,7 @@ Class admin_push_bsd extends base_module
 		$value_return = 1;
 
 		$this->assign_var("value",$value_return)
-			->use_template("admin_action_ok")
+			->use_other_template("admin_action_ok")
 			->render_tpl();
 	}
 

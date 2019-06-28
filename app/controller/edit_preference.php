@@ -5,7 +5,6 @@ Class edit_preference extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
 		//ne pas oublier de verifier encore les droit d'edition des preference au cas ou...

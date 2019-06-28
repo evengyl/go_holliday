@@ -40,13 +40,12 @@ class parser
 	private function parse_module($match_module, $page)
 	{
 		$var_in_module_name = array();
-		$this->_app->stack_module[] = $match_module;
 
 		$module_name = trim(preg_replace(array('/__[MOD]*[0-9]*_/', '/[(\"]+[a-zA-Z0-9_éèçàê \']*[\")]+/',  '/__/', '[\(\[]', '[\]\)]', '[=>]'), '', $match_module));
 
 		if(preg_match_all('/[(\"]+([a-zA-Z0-9_éèçàê \']*)[\")]+/', $match_module, $match_var))
 			$var_in_module_name[$match_var[1][0]] = $match_var[1][0];
-			
+
 		if($module_name != "")
 		{
 			$this->_app->var_module = "";
@@ -56,8 +55,9 @@ class parser
 			//On test avec try catch la function test_module_exist pour vérifié que la class exist, si pas message d'exeption crée, si oui la classe est créée directement.
 			//si l'expection est renvoyé, elle est catché par catch et renvoyer avec une erreur 204 au module error qui va les gérér	
 			try{
-				if(class_exists($module_name))
+				if(class_exists($module_name)){
 					$module = new $module_name($this->_app);
+				}
 				else
 					throw new Exception('Erreur Fatal reçue : Le module : <b>'.$module_name.'</b> N\'a pas été trouvé ou n\'existe pas, Veuiller controllez.');
 			}
@@ -67,6 +67,7 @@ class parser
 			
 			//get html tpl est dans le base module.
 			$rendu_module =  $module->get_html_tpl;
+
 
 			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')
 				$rendu_module = "<!-- Début module : ".$module_name."-->".$row_rendu_module."<!-- Fin module : ".$module_name."-->";	

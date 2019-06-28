@@ -2,15 +2,17 @@
 
 function affiche($var_a_print)
 {
-    ?><div class='col-xs-12' style='z-index: 1; margin-bottom:50px;'><pre><?
-         htmlentities(print_r($var_a_print));
-    ?></pre></div><?
+    ?><pre><?
+        htmlentities(print_r($var_a_print));
+    ?></pre><?
 }
 
 
 require_once $_SESSION['base_dir']."/app/includes/_app.php";
 //on initialise le app, qui sers d'object général pour l'application
 $_app = new _app();
+
+
 
 $_app->time_start = $_app->microtime_float();
 

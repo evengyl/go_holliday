@@ -5,7 +5,6 @@ Class admin_verify_status_vip extends base_module
 
 	public function __construct(&$_app)
 	{		
-		$_app->module_name = __CLASS__;
 		parent::__construct($_app);
 
 		$this->get_list_users_vip();
@@ -16,6 +15,8 @@ Class admin_verify_status_vip extends base_module
 
 	public function check_status_vip()
 	{
+		if(empty($this->list_user_vip)) return;
+		
 		foreach($this->list_user_vip as $key_user => $row_user)
 		{
 

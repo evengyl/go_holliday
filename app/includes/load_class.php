@@ -63,7 +63,7 @@ class Autoloader
                 if(file_exists($base_dir."/app/controller/".$class.'.php'))
                     require($base_dir."/app/controller/".$class.'.php');
                 else
-                    require($base_dir."/app/controller/home.php");
+                    require($base_dir."/app/controller/module_404.php");
        }        
     }
 }?>

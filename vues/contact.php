@@ -1,3 +1,4 @@
+<div class="secondary" id="head"></div>
 <div class="container">
 	<div class="row">
 		<article class="col-sm-9 maincontent">

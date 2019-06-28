@@ -7,7 +7,7 @@ if(!isset($_SESSION['pseudo'])) //donc il est connecté
 	else
 		$first_try_pseudo = "";
 	?>
-
+	<div class="secondary" id="head"></div>
 	<div class="container">
 		<div class="row">
 			<article class="col-xs-12 maincontent">
@@ -58,6 +58,7 @@ if(!isset($_SESSION['pseudo'])) //donc il est connecté
 }
 else
 {?>
+	<div class="secondary" id="head"></div>
 	<div class="container">
 		<div class="row">
 			<article class="col-xs-12 maincontent">
