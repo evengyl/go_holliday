@@ -8,6 +8,6 @@ Class view_lateral_profil extends base_module
 		parent::__construct($_app);
 
 		$this->assign_var("infos_user", $this->_app->user)
-			->render_tpl();
+			->use_template('my_account_view_lateral_profil');
 	}		
 }

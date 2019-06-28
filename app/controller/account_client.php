@@ -5,7 +5,7 @@ Class account_client extends base_module
 	{		
 		parent::__construct($_app);
 
-		$this->render_tpl();
+		$this->use_template('my_account_account_client');
 	}
 
 

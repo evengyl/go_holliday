@@ -54,9 +54,11 @@ class parser
 
 			//On test avec try catch la function test_module_exist pour vérifié que la class exist, si pas message d'exeption crée, si oui la classe est créée directement.
 			//si l'expection est renvoyé, elle est catché par catch et renvoyer avec une erreur 204 au module error qui va les gérér	
+
 			try{
 				if(class_exists($module_name)){
 					$module = new $module_name($this->_app);
+					
 				}
 				else
 					throw new Exception('Erreur Fatal reçue : Le module : <b>'.$module_name.'</b> N\'a pas été trouvé ou n\'existe pas, Veuiller controllez.');

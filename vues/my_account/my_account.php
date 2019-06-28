@@ -16,7 +16,7 @@
         </div>
 
         <!-- Modal changement de back profil -->
-        <? require("edit_background_profil.php"); ?>
+        <? require($_app->base_dir.'/vues/my_account/my_account_edit_background_profil.php'); ?>
 
         <div class="col-lg-7 row">
 		    <div class="col-lg-12 annonces_list">
@@ -24,7 +24,7 @@
                 if(isset($_GET['create_announce'])) 
                     echo "__MOD3_create_announce__";
                 else if($_app->can_do_user->view_infos_annonce)
-                    require ($_app->base_dir.'/vues/list_annonces_annonceurs.php');
+                    require ($_app->base_dir.'/vues/my_account/my_account_list_annonces_annonceurs.php');
                 else
                     echo "__MOD3_account_client__";?>
     		</div>
@@ -73,7 +73,7 @@
 
 
 	<!-- Modal Lost login-->
-<? require("modal_lost_password.php"); ?>
+<? require($_app->base_dir.'/vues/modal_lost_password.php'); ?>
 
 __MOD2_form_profil__
 

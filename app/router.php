@@ -67,14 +67,14 @@ Class router
 						break;
 
 					default:
-						$this->assign_mod('module_404');
+						$this->assign_mod('p_404');
 						unset($route);
 				}	
 			}
 		}
 		else
 		{
-			$this->assign_mod('module_404');
+			$this->assign_mod('p_404');
 		}
 	}
 

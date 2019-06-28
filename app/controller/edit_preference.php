@@ -10,6 +10,6 @@ Class edit_preference extends base_module
 		//ne pas oublier de verifier encore les droit d'edition des preference au cas ou...
 
 		$this->assign_var('infos_user', $this->_app->user)
-			->render_tpl();
+			->use_template('my_account_edit_preference');
 	}
 }

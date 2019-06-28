@@ -19,15 +19,32 @@ Class base_module
 		$this->_app = &$_app;
 		$this->var_in_module["_app"] = $this->_app;
 
-		$this->_app->module_for_exec[] = get_class($this);
+		$this->module_name = get_class($this);
 
 	}
 
 	public function render_tpl()
 	{
+		$this->template_name = $this->module_name;
+		$this->template_path = $this->set_template_path();
 
+		ob_start();
+		
+			if(!empty($this->var_in_module))
+				extract($this->var_in_module);
 
-		$this->set_template_path();
+			require($this->template_path);
+
+			$this->get_html_tpl = ob_get_contents();
+			
+		ob_end_clean();
+	}
+
+	public function use_template($template_name = "")
+	{
+		$this->template_name = $template_name;
+
+		$this->template_path = $this->set_template_path($this->template_name);
 
 		ob_start();
 		
@@ -37,31 +54,25 @@ Class base_module
 			require($this->template_path);
 
 			$this->get_html_tpl = ob_get_contents();
-			
-			if(!empty($this->module_secondary))
-			{
-				foreach($this->module_secondary as $row_module_secondary)
-				{
-					$this->get_html_tpl .= $row_module_secondary."&nbsp;";	
-				}
-				
-			}
 
 		ob_end_clean();
-	}
-
-	public function use_template($template_name = "")
-	{
-		$this->template_name = $template_name;
-		$this->set_template_path();
-		return $this;
 	}
 
 
 	public function use_module($module_name = "")
 	{
-		$this->module_secondary[] = "__MOD_".$module_name."__";
-		return $this;
+		$this->module_name = $module_name;
+
+		ob_start();
+		
+			if(!empty($this->var_in_module))
+				$this->_app->var_in_module = $this->var_in_module;
+
+			echo "__MOD_".$this->module_name.'__';
+
+			$this->get_html_tpl = ob_get_contents();
+			
+		ob_end_clean();
 	}
 
 
@@ -70,7 +81,6 @@ Class base_module
 	{
 		$final_path = '../vues/home.php';
 
-		$this->template_name = end($this->_app->module_for_exec);
 
 
 		if(strpos($this->template_name, "admin_") !== false)
@@ -81,11 +91,14 @@ Class base_module
 
 		else if(strpos($this->template_name, "search") !== false)
 			$final_path = '../vues/search/'.$this->template_name.'.php';
+
+		else if(strpos($this->template_name, "my_account") !== false)
+			$final_path = '../vues/my_account/'.$this->template_name.'.php';
+
 		else
 			$final_path = '../vues/'.$this->template_name.'.php';	
 
-
-		$this->template_path = $final_path;
+		return $final_path;
 	}
 
 	public function assign_var($var_name , $value)

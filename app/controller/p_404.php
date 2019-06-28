@@ -1,8 +1,7 @@
 <?php 
 
-Class module_404 extends base_module
+Class p_404 extends base_module
 {
-
 	public function __construct(&$_app, $exeption = "", $error_code = "")
 	{		
 		parent::__construct($_app);
@@ -13,10 +12,9 @@ Class module_404 extends base_module
 				$error_code = $_app->var_module[0];		
 		}
 
-
 		$this->assign_var("error_message", $exeption)
 			->assign_var('error_code', $error_code)
-			->use_other_template("404")
-			->render_tpl();
+			->assign_var('_app', $this->_app)
+			->use_template("p_404");
 	}
 }

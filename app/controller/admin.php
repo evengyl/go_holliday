@@ -1,7 +1,7 @@
 <?
 Class admin extends base_module
 {
-	public $level_admin = 0;
+	public $level_admin;
 	public $error;
 
 	public function __construct(&$_app)
@@ -10,50 +10,61 @@ Class admin extends base_module
 
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
-		
-		if(($this->level_admin = $this->_app->check_level_user(isset($_SESSION['pseudo'])?$_SESSION['pseudo']:0)) == 3)
+		if(isset($_SESSION['pseudo']))
 		{
-				
-			if(isset($_GET['action']))
+			$level_current_user = $this->_app->check_level_user($_SESSION['pseudo']);
+
+			if($level_current_user == 3)
 			{
-				switch ($_GET['action'])
+					
+				if(isset($_GET['action']))
 				{
-					case "edit_config_app":
-						$this->use_module('admin_edit_config_app');
-					break;
+					switch ($_GET['action'])
+					{
+						case "edit_config_app":
+							$this->use_module('admin_edit_config_app');
+						break;
 
-					case "eval":
-						$this->use_module('admin_eval');
-					break;
+						case "eval":
+							$this->use_module('admin_eval');
+						break;
 
-					case "pull_bsd":
-						$this->use_module('admin_pull_bsd');
-					break;
+						case "pull_bsd":
+							$this->use_module('admin_pull_bsd');
+						break;
 
-					case "go_to_vip_view":
-						$this->set_status(2);
-					break;
+						case "go_to_vip_view":
+							$this->set_status(2);
+						break;
 
-					case "go_to_no_vip_view":
-						$this->set_status(1);
-					break;
+						case "go_to_no_vip_view":
+							$this->set_status(1);
+						break;
 
-					case "go_to_client_view":
-						$this->set_status(0);
-					break;
-				}
+						case "go_to_client_view":
+							$this->set_status(0);
+						break;
+					}
+				}/*
+				$this->use_module('admin_stats_site');
+				$this->use_module('admin_verify_status_vip');
+				$this->render_tpl(); //on affiche l'administration*/
 			}
-			$this->use_module('admin_stats_site');
-			$this->use_module('admin_verify_status_vip');
-			$this->render_tpl(); //on affiche l'administration
+			else{
+				//go page de connexion
+				$this->error = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
+				$this->assign_var("error", $this->error)
+					->use_module('login', 'login');
+			}
 		}
-		else{
-			//go page de connexion
+		else 
+		{
 			$this->error = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
-			$this->assign_var("error", $this->error)
-				->use_module('login')
-				->render_tpl();
+			$this->assign_var("error", $this->error)->use_module($specific_module = "p_404");
+				
 		}
+		
+		
 	}
 
 	

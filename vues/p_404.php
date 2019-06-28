@@ -1,3 +1,4 @@
+<div class="secondary" id="head"></div>
 <div class="container">
 	<div class="row">
 		<article class="col-xs-12 maincontent">
@@ -13,6 +14,7 @@
 						<?=(isset($_SESSION['error_admin']))?$_SESSION['error_admin']:''; ?><br>
 						<?=(isset($error_code))?$error_code:''; ?>
 						<?=(isset($error_message))?$error_message:''; ?>
+						<?=(isset($_app->var_in_module['error']))?$_app->var_in_module['error']:''; ?>
 						Retourner à <a href="/Accueil">l'accueil</a>.
 					</p>
 					<hr>

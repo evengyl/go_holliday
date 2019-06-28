@@ -23,7 +23,8 @@ Class form_profil extends base_module
 
 		$this->assign_var('infos_user', $this->_app->user)
 			->assign_var('rand_id_update_profil',$rand_id_form)
-			->render_tpl();
+			->use_template('my_account_form_profil');
+			
 	}
 
 	public function set_new_infos_profil($post)
@@ -63,7 +64,6 @@ Class form_profil extends base_module
 		$res_sql = $this->_app->sql->update($req_sql);
 
 		//on reset le user _app pour avoir les bonne infos mise à jour pour le tpl
-		$security = new security($this->_app);
-		$security->set_user_infos_on_app();
+		$this->_app->set_user_infos_on_app();
 	}
 }
