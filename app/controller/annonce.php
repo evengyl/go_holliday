@@ -19,7 +19,7 @@ Class annonce extends base_module
 				->render_tpl();
 		}
 		else
-			$this->use_module('module_404')->render_tpl();
+			$this->use_module('p_404')->render_tpl();
 	}
 
 	public function get_img_files_by_id()

@@ -5,6 +5,7 @@ Class base_module
 {
 
 	public $get_html_tpl;
+	public $get_html_mod = "";
 	public $var_in_module;
 	public $template_name;
 	public $template_path;
@@ -28,6 +29,7 @@ Class base_module
 		$this->template_name = $this->module_name;
 		$this->template_path = $this->set_template_path();
 
+		
 		ob_start();
 		
 			if(!empty($this->var_in_module))
@@ -35,8 +37,18 @@ Class base_module
 
 			require($this->template_path);
 
+
+			if(isset($this->other_mod_to_exec))
+			{
+				$parser_second = new parser($this->_app);
+
+				foreach($this->other_mod_to_exec as $row_exec_mod)
+				{
+					echo $parser_second->parser_main("__MOD_". $row_exec_mod ."__ ");
+				}
+			}
 			$this->get_html_tpl = ob_get_contents();
-			
+
 		ob_end_clean();
 	}
 
@@ -59,28 +71,11 @@ Class base_module
 	}
 
 
-	public function use_module($module_name = "")
-	{
-		$this->module_name = $module_name;
-
-		ob_start();
-		
-			if(!empty($this->var_in_module))
-				$this->_app->var_in_module = $this->var_in_module;
-
-			echo "__MOD_".$this->module_name.'__';
-
-			$this->get_html_tpl = ob_get_contents();
-			
-		ob_end_clean();
-	}
-
 
 
 	public function set_template_path()
 	{
 		$final_path = '../vues/home.php';
-
 
 
 		if(strpos($this->template_name, "admin_") !== false)

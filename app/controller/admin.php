@@ -3,6 +3,7 @@ Class admin extends base_module
 {
 	public $level_admin;
 	public $error;
+	public $other_mod_to_exec;
 
 	public function __construct(&$_app)
 	{		
@@ -45,10 +46,13 @@ Class admin extends base_module
 							$this->set_status(0);
 						break;
 					}
-				}/*
-				$this->use_module('admin_stats_site');
-				$this->use_module('admin_verify_status_vip');
-				$this->render_tpl(); //on affiche l'administration*/
+				}
+
+				$this->other_mod_to_exec[] = 'admin_stats_site';
+				$this->other_mod_to_exec[] = 'admin_verify_status_vip';
+
+				$this->render_tpl(); //on affiche l'administration
+
 			}
 			else{
 				//go page de connexion
@@ -59,12 +63,11 @@ Class admin extends base_module
 		}
 		else 
 		{
+			affiche("test");
 			$this->error = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
 			$this->assign_var("error", $this->error)->use_module($specific_module = "p_404");
 				
-		}
-		
-		
+		}	
 	}
 
 	
@@ -80,9 +83,5 @@ Class admin extends base_module
 		$this->_app->sql->update($sql);
 		$this->_app->set_user_infos_on_app();
 	}
-
-
 	
 }
-
-

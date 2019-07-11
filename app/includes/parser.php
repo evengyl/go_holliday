@@ -16,22 +16,18 @@ class parser
 	{
 		if(!empty($page))
 		{
-			if(preg_match('/(?!<!--)__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match))
-				$page = $this->parse_module($match[0], $page);	
+			if(preg_match('/__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
+				$page = $this->parse_module($match[0], $page);
+			
 			else
 			{
-				if(preg_match('/(?!<!--)__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match))
+				if(preg_match('/__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
 					$page = $this->parse_module($match[0], $page);
-
-				else
-				{
-					if(preg_match('/(?!<!--)__MOD3_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__(?!-->)/', $page, $match))
-						$page = $this->parse_module($match[0], $page);
-				}
 			}
 		}
-		else
+		else{
 			$_SESSION['error'] = "Problem on Parser_main() parser function, not var page receive";
+		}
 		
 		return $page;
 	}
@@ -45,16 +41,16 @@ class parser
 
 		if(preg_match_all('/[(\"]+([a-zA-Z0-9_éèçàê \']*)[\")]+/', $match_module, $match_var))
 			$var_in_module_name[$match_var[1][0]] = $match_var[1][0];
-
+		
 		if($module_name != "")
 		{
+			
 			$this->_app->var_module = "";
 			if(is_array($var_in_module_name))
 				$this->_app->var_module = $var_in_module_name;
 
 			//On test avec try catch la function test_module_exist pour vérifié que la class exist, si pas message d'exeption crée, si oui la classe est créée directement.
 			//si l'expection est renvoyé, elle est catché par catch et renvoyer avec une erreur 204 au module error qui va les gérér	
-
 			try{
 				if(class_exists($module_name)){
 					$module = new $module_name($this->_app);
@@ -64,11 +60,15 @@ class parser
 					throw new Exception('Erreur Fatal reçue : Le module : <b>'.$module_name.'</b> N\'a pas été trouvé ou n\'existe pas, Veuiller controllez.');
 			}
 			catch(Exception $e){
-				$module = new module_404($this->_app, $e->getMessage(), '204');
+				$module = new p_404($this->_app, $e->getMessage(), '204');
 			}
 			
 			//get html tpl est dans le base module.
-			$rendu_module =  $module->get_html_tpl;
+			if(!empty($get_html_mod))
+				$rendu_module = $module->get_html_mod;	
+			
+			else
+				$rendu_module = $module->get_html_tpl;
 
 
 			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')

@@ -4,9 +4,10 @@ session_start();
 
 $base_dir = dirname(dirname(dirname(dirname(__FILE__))));
 
+
+require $base_dir.'/app/includes/fct_global_website.php';
 require $base_dir.'/app/includes/_app.php';
 require $base_dir.'/app/includes/can_do_user.php';
-require $base_dir.'/app/includes/tools.php';
 require $base_dir.'/app/includes/lang_select.php';
 require $base_dir.'/app/modele/Config.php';
 

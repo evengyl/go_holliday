@@ -64,3 +64,8 @@ function affiche($var_a_print)
         htmlentities(print_r($var_a_print));
     ?></pre><?
 }
+
+function paragraphe_style($text)
+{
+	?><p><?= $text; ?></p><?
+}
