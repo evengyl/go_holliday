@@ -1,5 +1,4 @@
-<?php 
-
+<?
 Class admin_stats_site extends base_module
 {
 	public function __construct(&$_app)

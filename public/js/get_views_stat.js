@@ -55,7 +55,7 @@ $(document).ready(function()
 
                 $.each(array_datasets, function(i , value)
                 {
-                    $('#graphViewsStats').append("<div class='col-xs-3'><canvas class='' id='"+i+"'></canvas></div>")
+                    $('#graphViewsStats').append("<div class='col-xs-4'><canvas class='' id='"+i+"'></canvas></div>")
                     var ctx = $('#'+i);
                     new Chart(ctx, value.config);   
                 });

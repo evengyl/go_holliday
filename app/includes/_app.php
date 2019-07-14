@@ -115,17 +115,28 @@ Class _app extends fct_global_website
 
 		if(empty($res_sql)){
 			//vide il faut créer le nouveau mois de la vues
-		}
-		else{
-			$res_sql = $res_sql[0];
-			$res_sql->$page = (int)$res_sql->$page +1;
-
 			$req_sql = new stdClass;
 			$req_sql->table = "vues";
 			$req_sql->ctx = new stdClass;
-			$req_sql->ctx = $res_sql;
-			$req_sql->where = "id = ".$res_sql->id;
-			$res_sql = $this->sql->update($req_sql);
+			$req_sql->ctx->periode = $date;
+			$res_sql = $this->sql->insert_into($req_sql);
+
+			$req_sql = new stdClass();
+			$req_sql->table = ['vues'];
+			$req_sql->var = ["id", $page, "periode"];
+			$req_sql->where = ["periode LIKE $1", [$date]];
+			$res_sql = $this->sql->select($req_sql);
 		}
+		
+
+		$res_sql = $res_sql[0];
+		$res_sql->$page = (int)$res_sql->$page +1;
+
+		$req_sql = new stdClass;
+		$req_sql->table = "vues";
+		$req_sql->ctx = new stdClass;
+		$req_sql->ctx = $res_sql;
+		$req_sql->where = "id = ".$res_sql->id;
+		$res_sql = $this->sql->update($req_sql);
 	}
 }

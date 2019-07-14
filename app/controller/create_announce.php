@@ -5,6 +5,7 @@ Class create_announce extends base_module
 	{		
 		parent::__construct($_app);
 
+
 		$this->create_temp_id_bsd();
 
 		//on check le form avec la session du random id form
@@ -20,7 +21,7 @@ Class create_announce extends base_module
 		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce;
 		
 		$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
-			->render_tpl();
+			->use_template("my_account_create_announce");
 	}
 
 	public function treatment_create_annonce($post)

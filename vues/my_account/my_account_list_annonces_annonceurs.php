@@ -1,11 +1,14 @@
 <h4 class="title">Listes de vos annonces</h4><hr>
 <h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
-require("pagination_annonces_profil.php");?>
+
+require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
+
 <ul class="list-unstyled list_annonces_max"><?
 
     foreach($annonces as $row_annonce)
     {?>
-        <li><hr>
+        <li class="annonce">
+            <hr>
             <div class="row" style="padding-left:15px; padding-right:15px;">
                 <div class="col-xs-2">
                     <div class="img_annonce">
@@ -48,7 +51,7 @@ require("pagination_annonces_profil.php");?>
         </li>
 
         <!-- Modal Desactivate annonce -->
-        <? require("modal_active_annonce.php"); ?>
+        <? require($_app->base_dir. "/vues/my_account/my_account_modal_active_annonce.php"); ?>
 
 
         <!-- Modal List avis-->
@@ -69,7 +72,7 @@ require("pagination_annonces_profil.php");?>
         <?
     }
 
-    require("pagination_annonces_profil.php");?>
+    require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
 </ul>
     
 <script src="/js/activate_desactivate_annonce.js"></script>

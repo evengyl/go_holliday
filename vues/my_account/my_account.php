@@ -11,7 +11,7 @@
                     <img class="img-responsive" src="/images/background_profil/<?= $_app->user->id_background_profil; ?>.jpg" alt="..."/>
                     <div class="in_top_right"><button data-toggle="modal" data-target="#change_back_profil" class="btn" style=""><i class="fa fa-cog"></i></button></div>
                 </div>
-                __MOD3_view_lateral_profil__
+                __MOD2_view_lateral_profil__
             </div>
         </div>
 
@@ -22,11 +22,11 @@
 		    <div class="col-lg-12 annonces_list">
 				<?
                 if(isset($_GET['create_announce'])) 
-                    echo "__MOD3_create_announce__";
+                    echo "__MOD2_create_announce__";
                 else if($_app->can_do_user->view_infos_annonce)
                     require ($_app->base_dir.'/vues/my_account/my_account_list_annonces_annonceurs.php');
                 else
-                    echo "__MOD3_account_client__";?>
+                    echo "__MOD2_account_client__";?>
     		</div>
 	    </div>
 
@@ -56,7 +56,7 @@
                     <h5 class="sub_title">Partie Annonces</h5>
 
                     <div class="add_annonces">
-                        <a class="btn btn-warning" <?= (!$_app->can_do_user->create_annonce)?"disabled":""; ?> href="/Mon_compte/creation-annonces">Ajouter une annonce</a>
+                        <a class="btn btn-warning" <?= (!$_app->can_do_user->create_annonce)?"disabled":""; ?> href="/Mon_compte/Creation-Annonce">Ajouter une annonce</a>
                     </div>
 
                     <div class="view_annonces">
