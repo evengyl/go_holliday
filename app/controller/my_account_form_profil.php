@@ -1,6 +1,6 @@
 <?
 
-Class form_profil extends base_module
+Class my_account_form_profil extends base_module
 {
 	public $_app;
 
@@ -23,7 +23,7 @@ Class form_profil extends base_module
 
 		$this->assign_var('infos_user', $this->_app->user)
 			->assign_var('rand_id_update_profil',$rand_id_form)
-			->use_template('my_account_form_profil');
+			->render_tpl();
 			
 	}
 

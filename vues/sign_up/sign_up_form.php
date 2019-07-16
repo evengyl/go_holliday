@@ -180,7 +180,7 @@
                 </div>
                 <div class="radio" style="display:inline-block; margin-right:5px; margin-left:10px;">
                     <label>
-                        <input value="Ne se prononce pas" type="radio" name="genre" >
+                        <input value="N/C" type="radio" name="genre" >
                         Ne se prononce pas
                     </label>
                 </div>

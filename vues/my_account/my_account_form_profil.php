@@ -170,7 +170,7 @@
 
                     <div class="text-center col-md-12"><hr>
                     	<input type="hidden" name="rand_id_update_profil" value="<?= $rand_id_update_profil ?>">
-                        <button type="submit" class="btn btn-success btn-fill btn-wd">Sauvegarder le Profile</button>
+                        <button type="submit" class="btn btn-success btn-fill btn-wd">Sauvegarder les modifications</button>
                     </div>
                     <div class="clearfix"></div>
                 </form>

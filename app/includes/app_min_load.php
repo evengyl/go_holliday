@@ -43,4 +43,7 @@ $security = new security($_app);
 $security->check_session(); 
 
 $_app->can_do_user = new can_do_user($_app);
+
+
+
 	
