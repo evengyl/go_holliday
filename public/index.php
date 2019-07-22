@@ -26,7 +26,6 @@ ob_start();?>
 			</div>
 			__MOD_footer__
 		</body>
-		__MOD2_bottom_head__
 	</html><?
 
 $page = ob_get_clean();

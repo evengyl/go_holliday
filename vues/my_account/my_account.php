@@ -38,15 +38,3 @@
 
     </div>
 </div>
-
-
-	<!-- Modal Lost login-->
-<? require($_app->base_dir.'/vues/modal_lost_password.php'); ?>
-
-__MOD2_my_account_form_profil__
-
-__MOD2_edit_preference__
-
-
-        
-<? unset($_SESSION['error_change_password']); ?>

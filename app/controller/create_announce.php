@@ -6,6 +6,8 @@ Class create_announce extends base_module
 		parent::__construct($_app);
 
 
+		$slides = $this->_app->get_slide_home($opacity = true);
+
 		$this->create_temp_id_bsd();
 
 		//on check le form avec la session du random id form
@@ -21,6 +23,7 @@ Class create_announce extends base_module
 		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce;
 		
 		$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
+			->assign_var("slides", $slides[array_rand($slides)])
 			->use_template("my_account_create_announce");
 	}
 

@@ -54,6 +54,30 @@ Class fct_global_website
 			return 0;
 		
 	}
+
+	public function get_slide_home($opacity = false)
+	{
+		$array_slide = array();
+
+		if($dossier = opendir($this->_app->base_dir.'/public/images/slides_home'))
+		{
+			while(false !== ($fichier = readdir($dossier)))
+			{
+				if($fichier != '.' && $fichier != '..')
+					if(strpos($fichier, "_opa") === false)
+						$array_slide[] = "/images/slides_home/".$fichier;
+					else
+						$array_slide_opacity[] = "/images/slides_home/".$fichier;
+			}
+		}
+
+		if($opacity)
+			return $array_slide_opacity;
+		else
+			return $array_slide;
+
+		
+	}
 	
 }
 
