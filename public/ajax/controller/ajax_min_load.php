@@ -24,17 +24,17 @@ require 'Evengyl/core/limit_processing.php';
 
 //mise en route du systeme des query
 $_app = new _app();
+$_app->sql = new all_query($_app);
 
 
+$fct_global_website = new fct_global_website($_app);
+$fct_global_website->set_user_infos_on_app();
+$_app->user = $fct_global_website->_app->user;
 
-$_app->user = new stdClass();
+$_app->can_do_user = new can_do_user($_app);
+
 
 if(isset($_SESSION['user_type']))
 	$_app->user->user_type = $_SESSION['user_type'];
 else
 	$_app->user->user_type = 1;
-
-$_app->can_do_user = new can_do_user($_app);
-
-$_app->sql = new all_query($_app);
-

@@ -4,11 +4,10 @@ require("ajax_min_load.php");
 
 if($_app->can_do_user->create_annonce)
 {
-
 	$req_last_id = new stdClass();
 	$req_last_id->table = ["annonces"];
 	$req_last_id->var = ["id"];
-	$req_last_id->where = ["id_utilisateurs = $1 AND name = $2", [$_SESSION['id_utilisateurs'], ""]];
+	$req_last_id->where = ["id_utilisateurs = $1 AND active = $2", [$_app->user->id_utilisateurs, "0"]];
 	$req_last_id->limit = '1';
 
 	$id_annonce = $_app->sql->select($req_last_id)[0]->id;
@@ -29,20 +28,29 @@ if($_app->can_do_user->create_annonce)
 		{
 			if($dossier = opendir($path_to_upload))
 			{
+				$id_img = 1;
 				while(false !== ($fichier = readdir($dossier)))
 				{
 					if($fichier != '.' && $fichier != '..')
 					{ 
 						echo '<div class="col-xs-6 col-md-3">
-								<a href="#" class="thumbnail deleted_img">
-									<img src="'. $path_to_preview.$fichier .'" alt="...">
-									<div class="delete_img col-xs-12"><button data-toggle="modal" data-target="#" class="btn col-xs-12" style=""><i class="far fa-trash-alt"></i></button></div>
-								</a>
-
+								<img src="'. $path_to_preview.$fichier .'" alt="...">
+								<button type="button" data-id-img="'.$id_img.'" data-option="delete_img" class="btn btn-warning col-xs-12" style="">
+									<i class="far fa-trash-alt"></i>
+								</button>
 							</div>';
-
+						$id_img ++;
 					}
 				}
+			}
+		}
+
+		else if($_GET["option"] == "delete_img")
+		{
+			affiche($_GET);
+			if(file_exists($path_to_upload . "/" . $_GET['id_img'] . ".jpg")){
+				unlink($path_to_upload . "/" . $_GET['id_img'] .".jpg");
+
 			}
 		}
 	}

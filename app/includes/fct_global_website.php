@@ -34,7 +34,8 @@ Class fct_global_website
 				"newsletter"]
 		];
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
-		$res_fx = $this->_app->sql->select($req_sql);	
+		$res_fx = $this->_app->sql->select($req_sql);
+		
 		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
 		$this->_app->user = $merge_array_user;
 	}
