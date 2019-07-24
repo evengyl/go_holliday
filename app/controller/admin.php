@@ -27,11 +27,11 @@ Class admin extends base_module
 						break;
 
 						case "eval":
-							$this->use_module('admin_eval');
+							$this->other_mod_to_exec[] = 'admin_eval';
 						break;
 
 						case "pull_bsd":
-							$this->use_module('admin_pull_bsd');
+							$this->other_mod_to_exec[] = 'admin_pull_bsd';
 						break;
 
 						case "go_to_vip_view":

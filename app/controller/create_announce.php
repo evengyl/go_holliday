@@ -22,14 +22,19 @@ Class create_announce extends base_module
 		"price_one_week" => ""
 	];
 
+	public $id_announce;
+
 
 	public function __construct(&$_app)
 	{		
 		parent::__construct($_app);
 
+		//pour faciliter la manipulation des valeurs on transforme direct en oject pour travailler avec
+		$this->value_form = (object) $this->value_form;
+
 
 		$slides = $this->_app->get_slide_home($opacity = true);
-		$array_type = $this->get_list_type();
+		$array_type_vacances = $this->get_list_type();
 
 		$this->create_temp_id_bsd();
 
@@ -42,21 +47,43 @@ Class create_announce extends base_module
 
 
 		//on génère un nombre aléatoire pour valider un form unique
-		$rand_id_create_annonce = rand();
-		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce;
+		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce = rand();
+
+
+		
+
+		affiche($this->value_form);
+		affiche($this->id_announce);
 		
 		$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
 			->assign_var("slides", $slides[array_rand($slides)])
-			->assign_var("array_type", $array_type)
+			->assign_var("array_type_vacances", $array_type_vacances)
 			->assign_var("value_form", $this->value_form)
 			->use_template("my_account_create_announce");
 	}
 
 	public function treatment_create_annonce($post)
 	{
-		affiche_pre($post);
+		//part type vacances
+		$this->value_form->type_vacances = $this->get_id_type_vacances($post['type_vacances']);
+		affiche($post);
 	}
 
+
+	private function get_id_type_vacances($type_vacances){
+		if(!empty($type_vacances))
+		{
+			$req_sql_verify = new stdClass();
+			$req_sql_verify->table = ['type_vacances'];
+			$req_sql_verify->var = ["id"];
+			$req_sql_verify->where = ["name = $1", [$type_vacances]];
+			$req_sql_verify->limit = "1";
+			$id = $this->_app->sql->select($req_sql_verify);
+			return $id[0]->id;
+		}
+		else
+			return 0;
+	}
 
 	private function get_list_type()
 	{
@@ -87,5 +114,7 @@ Class create_announce extends base_module
 			$req_sql->table = "annonces";
 			$this->_app->sql->insert_into($req_sql);
 		}
+		else
+			$this->id_announce = $id[0];
 	}
 }

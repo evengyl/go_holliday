@@ -4,9 +4,7 @@
 	<div class="row">
 		<h3 class="thin">Création d'une annonce</h3><hr>
 	</div>
-<?
-affiche($value_form);
-?>
+
 	<div class="row page_create_annonce">
 		<div class="col-xs-8 col-xs-offset-2">
 			<form method="post" action="" data-toggle="validator" role="form" >
@@ -24,7 +22,7 @@ affiche($value_form);
 				require($_app->base_path.'/vues/create_announce/complementary_part.php')
 				
 				require($_app->base_path.'/vues/create_announce/price_part.php')*/ ?>
-				
+
 			    <div class="text-center col-xs-12"><hr>
 			    	<input type="hidden" name="rand_id_create_annonce" value="<?= $rand_id_create_annonce ?>">
 			        <button type="submit" class="btn btn-success btn-fill btn-wd">Valider la création de l'annonce</button>
