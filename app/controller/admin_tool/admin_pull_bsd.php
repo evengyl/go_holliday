@@ -21,13 +21,13 @@ Class admin_pull_bsd extends base_module
 			shell_exec("mysqldump --host=".Config::$hote." --user=".Config::$user." --password=".Config::$Mpass." ".Config::$base." > ".$rec.Config::$base.".sql");
 		}
 
-		if($dossier = opendir($_app->base_path))
+		if($dossier = opendir($_app->base_dir))
 		{
 			while(false !== ($fichier = readdir($dossier)))
 			{
 				if($fichier == Config::$base.".sql")
 				{
-					similar_text((date("d-m-Y H\hi", filemtime($_app->base_path."/".Config::$base.".sql"))), date("d-m-Y H\hi", time()), $percent);
+					similar_text((date("d-m-Y H\hi", filemtime($_app->base_dir."/".Config::$base.".sql"))), date("d-m-Y H\hi", time()), $percent);
 
 					if((int)$percent >= 95)
 					{
