@@ -21,21 +21,18 @@
 		                        <h3><?= $row_type_vacances->title; ?></h3>
 		                        <p class="text-muted"><?= $row_type_vacances->text; ?></p>
 		                        <div class="checkbox type_vacances btn <?=(isset($_POST['type_vacances']) && $_POST['type_vacances'] == $row_type_vacances->name)?"btn-info":"btn-primary"; ?>">
-								    <label style="color:white; font-weight: bold; text-shadow: 0 2px 1px rgba(0, 0, 0, .2);">
-								      	<input style="
-									      	position: absolute; 
-									      	top: -4px; 
-									      	left: 20px; 
-									      	height:100%;
-									      	width:100%;
-									      	opacity: 0;"
-											data-name="type_vacances" 
-											name="type_vacances" 
-											type="checkbox" 
-											
-											value="<?= $row_type_vacances->name; ?>">
-								      			Type de vacances "<?= $row_type_vacances->name; ?>"
-								    </label>
+           								<div class="input-group">
+										    <label style="color:white; font-weight: bold; text-shadow: 0 2px 1px rgba(0, 0, 0, .2);">
+										      	<input
+													data-name="type_vacances" 
+													name="type_vacances[]" 
+													type="checkbox" 
+													data-error="Vous devez choisir un type de vacances"
+													value="<?= $row_type_vacances->name; ?>">
+										      			Type de vacances "<?= $row_type_vacances->name; ?>"
+										    </label>
+										</div>
+										<div class="help-block with-errors"></div>
 							    </div>
 		                    </div>
 		                </div>
@@ -47,21 +44,24 @@
 </div>
 
 <script>
-	$(document).ready(function()
+$(document).ready(function()
+{
+	$("input[data-name='type_vacances']").on("click", function()
 	{
-		$("input[data-name='type_vacances']")
-			.click(function(){
+		var button_tested = $(this).parent().parent().parent();
 
-				$('.type_vacances.checkbox')
-					.removeClass('btn-info')
-					.addClass('btn-primary')
+		if($(button_tested).hasClass('btn-info'))
+		{
+			$(button_tested)
+				.removeClass('btn-info')
+				.addClass('btn-primary')
+		}
+		else{
+			$(button_tested)
+				.removeClass('btn-primary')
+				.addClass('btn-info')	
+		}
 
-
-				$(this)
-					.parent()
-					.parent()
-					.removeClass('btn-primary')
-					.addClass('btn-info')
-		})
-	})
+	});
+})
 </script>

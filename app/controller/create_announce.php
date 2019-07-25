@@ -73,16 +73,24 @@ Class create_announce extends base_module
 	private function get_id_type_vacances($type_vacances){
 		if(!empty($type_vacances))
 		{
-			$req_sql_verify = new stdClass();
-			$req_sql_verify->table = ['type_vacances'];
-			$req_sql_verify->var = ["id"];
-			$req_sql_verify->where = ["name = $1", [$type_vacances]];
-			$req_sql_verify->limit = "1";
-			$id = $this->_app->sql->select($req_sql_verify);
-			return $id[0]->id;
+			$id = [];
+			$id_txt = "";
+
+			foreach($type_vacances as $row_type_vacance)
+			{
+				$req_sql_verify = new stdClass();
+				$req_sql_verify->table = ['type_vacances'];
+				$req_sql_verify->var = ["id"];
+				$req_sql_verify->where = ["name = $1", [$row_type_vacance]];
+				$req_sql_verify->limit = "1";
+				$id[] = $this->_app->sql->select($req_sql_verify)[0]->id;
+
+			}
+			$id_txt = implode(",", $id);
+			return $id_txt;
 		}
 		else
-			return 0;
+			return "0";
 	}
 
 	private function get_list_type()

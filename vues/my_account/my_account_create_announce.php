@@ -9,7 +9,9 @@
 		<div class="col-xs-8 col-xs-offset-2">
 			<form method="post" action="" data-toggle="validator" role="form" >
 
-				<? require($_app->base_path.'/vues/create_announce/type_part.php')
+				<? require($_app->base_path.'/vues/create_announce/type_part.php');
+
+				affiche($this->value_form);
 /*
 				require($_app->base_path.'/vues/create_announce/title_part.php')
 				
