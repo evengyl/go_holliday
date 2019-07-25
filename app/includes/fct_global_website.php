@@ -7,10 +7,11 @@ Class fct_global_website
 	public function __construct(&$_app)
 	{
 		$this->_app = $_app;
+
 	}
 
 
-	public function set_user_infos_on_app()
+	protected function set_user_infos_on_app()
 	{
 		$req_sql = new stdClass;
 		$req_sql->table = ["login", "utilisateurs"];
@@ -37,7 +38,7 @@ Class fct_global_website
 		$res_fx = $this->_app->sql->select($req_sql);
 		
 		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
-		$this->_app->user = $merge_array_user;
+		return $merge_array_user;
 	}
 
 	public function check_level_user($login)

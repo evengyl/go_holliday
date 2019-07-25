@@ -20,19 +20,20 @@
 		                    <div class="caption">
 		                        <h3><?= $row_type_vacances->title; ?></h3>
 		                        <p class="text-muted"><?= $row_type_vacances->text; ?></p>
-		                        <div class="checkbox type_vacances btn <?=(isset($_POST['type_vacances']) && $_POST['type_vacances'] == $row_type_vacances->name)?"btn-info":"btn-primary"; ?>">
-           								<div class="input-group">
-										    <label style="color:white; font-weight: bold; text-shadow: 0 2px 1px rgba(0, 0, 0, .2);">
-										      	<input
-													data-name="type_vacances" 
-													name="type_vacances[]" 
-													type="checkbox" 
-													data-error="Vous devez choisir un type de vacances"
-													value="<?= $row_type_vacances->name; ?>">
-										      			Type de vacances "<?= $row_type_vacances->name; ?>"
-										    </label>
-										</div>
-										<div class="help-block with-errors"></div>
+		                        <div style="padding:0;"
+		                        	class="checkbox type_vacances btn <?=(isset($_POST['type_vacances']) && $_POST['type_vacances'] == $row_type_vacances->name)?"btn-info":"btn-primary"; ?>">
+       								<div class="input-group">
+									    <label style="color:white; font-weight: bold; text-shadow: 0 2px 1px rgba(0, 0, 0, .2); padding:10px;">
+									      	<input
+									      		hidden
+												data-name="type_vacances" 
+												name="type_vacances[]" 
+												type="checkbox" 
+												data-error="Vous devez choisir un type de vacances"
+												value="<?= $row_type_vacances->name; ?>">
+									      			Type de vacances "<?= $row_type_vacances->name; ?>"
+									    </label>
+									</div>
 							    </div>
 		                    </div>
 		                </div>

@@ -24,12 +24,11 @@ require 'Evengyl/core/limit_processing.php';
 
 //mise en route du systeme des query
 $_app = new _app();
+$_app->base_dir = $base_dir;
 $_app->sql = new all_query($_app);
 
 
-$fct_global_website = new fct_global_website($_app);
-$fct_global_website->set_user_infos_on_app();
-$_app->user = $fct_global_website->_app->user;
+$_app->set_user_infos_on_app();
 
 $_app->can_do_user = new can_do_user($_app);
 

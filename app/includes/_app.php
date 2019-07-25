@@ -7,7 +7,6 @@ Class _app extends fct_global_website
 	public $sql;
 	public $option_app = [];
 	public $base_dir;
-	public $base_path;
 	public $navigation;
 	public $translate = [];
 	public $route = [];
@@ -25,6 +24,7 @@ Class _app extends fct_global_website
 	public $time_start = 0;
 	public $time_stop = 0;
 	public $module_for_exec = [];
+	public $path_to_upload_img_annonce;
 
 
 
@@ -32,12 +32,13 @@ Class _app extends fct_global_website
 	{
 		parent::__construct($this);
 
-
-		$this->base_dir = basename($_SESSION['base_dir']);
-		$this->base_path = $_SESSION['base_dir'];
-		$this->path_to_upload_img_annonce = $_SESSION['base_dir']."/public/images/annonces/";
 		$this->option_app["view_time_exec_all_sql"] = false;
+	}
 
+
+	public function set_user_infos_on_app()
+	{
+		$this->user = parent::set_user_infos_on_app();
 	}
 
 

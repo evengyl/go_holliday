@@ -1,7 +1,8 @@
 <div class="col-xs-12 panel panel-default" style="margin-top:15px; background:url(<?= $slides; ?>) no-repeat center;">
 	<div class="panel-heading" role="tab" id="headingOne" style="margin-top:15px;">
 		<h4>Ajouter dès à présent vos photos / images (10 Max)<br>
-		<small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small></h4>
+		<small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small>
+		<small class="text-muted thin">(Format supporté : Jpg, Png, Gif)</small></h4>
 	</div>
 	<div class="panel-body">
 		<div class="col-xs-12 dropzone" id="dropzone_img_upload"></div>
@@ -28,7 +29,8 @@ var myDropzone = new Dropzone("#dropzone_img_upload",
     createImageThumbnails: true,
     addRemoveLinks: true,
     maxFiles: 10,
-    success: function(){
+    clickable: true,
+    success: function(data){
     	list_preview();
     }
 
@@ -45,7 +47,7 @@ function list_preview()
 	$.ajax({
 		url: url_uploads,
 		type: 'GET',
-		data: "option=preview",
+		data: "option=preview_img",
 		dataType: "html",
 		success:function(data){
 			$('#list_image_uploaded').html(data);

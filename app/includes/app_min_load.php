@@ -1,19 +1,17 @@
 <?
-
-//Chargement de class concernée pour le sql
-require_once $_SESSION['base_dir']."/app/includes/load_class.php"; 
+$base_dir = dirname(dirname(dirname(__FILE__)));
 
 //mise en route de l'autoload
+require $base_dir."/app/includes/load_class.php"; 
 Autoloader::register(); 
 
 
 //on initialise le app, qui sers d'object général pour l'application
 $_app = new _app();
 $_app->time_start = $_app->microtime_float();
+$_app->base_dir = $base_dir;
 
-
-require_once $_app->base_path."/app/modele/Config.php";
-
+require $base_dir."/app/modele/Config.php";
 
 
 //mise en route du détecteur et assignateur de langue
@@ -26,9 +24,6 @@ $_app->sql = new all_query($_app);
 //initialisation de l'app avec mise en route de la base de données si la base viens d'être crée et si il manque des table
 new app_init($_app);
 
-
-//setting du root_directory
-$_app->base_dir = $_app->base_path;
 
 //setting parse
 $parser = new parser($_app);

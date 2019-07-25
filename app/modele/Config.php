@@ -7,7 +7,7 @@ class Config
     public static $Mpass = "darkevengyl";
 
     //si pas spécifiée elle sera crée avec le nom du dossier parent root général
-    public static $base = "";
+    public static $base = "go_holliday";
     
 
     public static $mail = "info.go.holliday@gmail.com";
@@ -21,11 +21,6 @@ class Config
     public static function set_name_base($base)
     {
         self::$base = $base;
-    }
-
-    public static function list_var()
-    {
-        affiche(get_class_vars(get_class($this)));
     }
 }
 

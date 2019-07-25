@@ -16,7 +16,7 @@
                     class="form-control" 
                     required 
                     data-error="Votre titre est trop court, veuillez entrer au minimum 6 caractères"
-                    value="">
+                    value="<?= (isset($_POST['title']))? $_POST['title'] : ''; ?>">
             </div>
             <div class="help-block with-errors"></div>
         </div>
@@ -33,10 +33,11 @@
                     placeholder="Non obligatoire" 
                     class="form-control" 
                     data-error="Si ce champ n'est pas vide alors il doit comporter au moins 6 lettres / chiffres"
-                    value="">
+                    value="<?= (isset($_POST['sub_title']))? $_POST['sub_title'] : ''; ?>">
             </div>
             <div class="help-block with-errors"></div>
         </div>
 
 	</div>
 </div>
+<? affiche($_POST); ?>
