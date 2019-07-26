@@ -10,7 +10,7 @@
 		        	foreach($slide_img as $row_img)
 		        	{?>
 						<div class="item <?=($active)?'active':''; ?>" style="max-height:450px;">
-		                	<img src="<?= $row_img; ?>" alt="Los Angeles" class="img-responsive">
+		                	<img src="<?= $row_img; ?>" alt="" class="img-responsive">
 		            	</div><?
 		            	$active = false;
 		        	}?>

@@ -7,7 +7,7 @@
 	<div class="panel-body">
 		<div class="col-xs-12 dropzone" id="dropzone_img_upload"></div>
 	    <hr>
-		<div class="row col-xs-12" id="list_image_uploaded"></div>
+		<div class="col-xs-12" id="list_image_uploaded"></div>
 	</div>
 </div>
 

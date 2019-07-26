@@ -13,17 +13,17 @@
 
 				// require($_app->base_dir.'/vues/create_announce/title_part.php'); OK
 				
-				require($_app->base_dir.'/vues/create_announce/image_part.php');
+				// require($_app->base_dir.'/vues/create_announce/image_part.php'); OK
 
-				affiche($this->value_form); 
+				// require($_app->base_dir.'/vues/create_announce/address_part.php'); OK
 
-				// require($_app->base_dir.'/vues/create_announce/address_part.php');
-
-				// require($_app->base_dir.'/vues/create_announce/date_part.php');
+				// require($_app->base_dir.'/vues/create_announce/date_part.php'); OK
 				
-				// require($_app->base_dir.'/vues/create_announce/complementary_part.php');
+				require($_app->base_dir.'/vues/create_announce/complementary_part.php');
 				
-				// require($_app->base_dir.'/vues/create_announce/price_part.php'); ?>
+				// require($_app->base_dir.'/vues/create_announce/price_part.php'); 
+
+				affiche($this->value_form);  ?>
 
 			    <div class="text-center col-xs-12"><hr>
 			    	<input type="hidden" name="rand_id_create_annonce" value="<?= $rand_id_create_annonce ?>">

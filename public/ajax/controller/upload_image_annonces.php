@@ -76,9 +76,11 @@ if($_app->can_do_user->create_annonce)
 					{ 
 						$fichier_name = str_replace(".jpg", "", $fichier);
 
-						echo '<div class="col-xs-6 col-md-3" style="margin-top:15px;">
-								<img src="'. $path_to_preview.$fichier .'" alt="...">
-								<button type="button" data-id-img="'.$fichier_name.'" data-option="delete_img" class="btn btn-warning col-xs-12" style="">
+						echo '<div class="col-xs-4 col-md-3 col-lg-2" style="margin-top:10px;">
+								<a href="'. $path_to_preview.$fichier .'" data-lightbox="image-1" data-title="">
+									<img src="'. $path_to_preview.$fichier .'">
+								</a>
+								<button type="button" data-id-img="'.$fichier_name.'" data-option="delete_img" class="btn btn-warning col-xs-12" style="padding: 5px 20px;">
 									<i class="far fa-trash-alt"></i>
 								</button>
 							</div>';
