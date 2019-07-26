@@ -194,10 +194,11 @@ DROP TABLE IF EXISTS `pays`;
 CREATE TABLE `pays` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
+  `human_name` varchar(50) NOT NULL,
   `img` varchar(50) NOT NULL,
   `text` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,7 +207,7 @@ CREATE TABLE `pays` (
 
 LOCK TABLES `pays` WRITE;
 /*!40000 ALTER TABLE `pays` DISABLE KEYS */;
-INSERT INTO `pays` VALUES (1,'Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'France','drapeau_france.jpg','La France : '),(3,'Italie','drapeau_italie.jpg','L\'Italie : '),(4,'Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : ');
+INSERT INTO `pays` VALUES (1,'belgique','Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'france','France','drapeau_france.jpg','La France : '),(3,'italie','Italie','drapeau_italie.jpg','L\'Italie : '),(4,'espagne','Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'pays_bas','Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : '),(6,'allemagne','Allemagne','drapeau_allemagne.jpg','L\'Allemagne'),(7,'luxembourg','Luxembourg','drapeau_luxembourg.jpg','Le Luxembourg'),(8,'reunion_island','Ile de la Réunion','drapeau_reunion.jpg','L\'Ile de la Réunion'),(9,'united_kingdom','Royaume-Uni','drapeau_uk.jpg','Le Royaume-Uni');
 /*!40000 ALTER TABLE `pays` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +390,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,10,10,65,7,'07-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,14,14,70,7,'07-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -402,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-25 16:58:23
+-- Dump completed on 2019-07-26 14:03:06
