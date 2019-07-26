@@ -62,7 +62,7 @@
 						</p>
 					</div>
 				</div><?
-				if(Config::$is_connect && $_app->user->level_admin >= 3)
+				if(isset($_app->user->level_admin) && Config::$is_connect && $_app->user->level_admin >= 3)
                 {?>
 					<div class="col-xs-12 widget">
 						<div class="widget-body" style="text-align:center; margin-top:15px; font-size:15px;"><?

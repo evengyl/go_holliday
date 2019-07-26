@@ -17,7 +17,7 @@ Class admin_pull_bsd extends base_module
 		}
 		elseif(strstr(php_uname(), "Linux"))
 		{
-			$rec = '/var/www/framework_evengyl/';
+			$rec = '/var/www/go_holliday/';
 			shell_exec("mysqldump --host=".Config::$hote." --user=".Config::$user." --password=".Config::$Mpass." ".Config::$base." > ".$rec.Config::$base.".sql");
 		}
 
