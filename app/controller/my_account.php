@@ -126,9 +126,12 @@ Class my_account extends base_module
 			$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
 			$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
 
-			$count = 0;
-			foreach($res_sql_nb_vues as $row)
-				$count += (int)$row->vues;
+			if(!empty($res_sql_nb_vues)){
+				foreach($res_sql_nb_vues as $row)
+					$count += (int)$row->vues;
+			}
+			else
+				$count = 0;
 
 			$this->_app->user->nb_vues_total = $count;
 		}
@@ -169,17 +172,50 @@ Class my_account extends base_module
 	public function get_list_annonce_user($pagination_limit)
 	{
 		$sql_annonce = new stdClass();
-		$sql_annonce->table = ['annonces', "date_annonces", "type_vacances"];
+		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
 			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active", "create_date", "vues"],
-			"date_annonces" => ["start_date", "end_date", "prix"],
 			"type_vacances" => ["name AS name_type_vacances"]
 		];
 		$sql_annonce->limit = $pagination_limit;
 		$sql_annonce->order = ["id"];
 
-		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
+
+		foreach($res_sql_annonces as $key_annonce => $row_annonce)
+		{
+			$sql_date_announce = new stdClass();
+			$sql_date_announce->table = ['date_annonces'];
+			$sql_date_announce->var = ["*"];
+			$sql_date_announce->order = ["id"];
+			$sql_date_announce->where = ["id_annonces = $1 AND state = $2", [$row_annonce->id, 'waiting'] ];
+			$res_date_announce = $this->_app->sql->select($sql_date_announce);
+			$res_sql_annonces[$key_annonce]->date_waiting = $res_date_announce;
+
+
+			$sql_date_announce = new stdClass();
+			$sql_date_announce->table = ['date_annonces'];
+			$sql_date_announce->var = ["*"];
+			$sql_date_announce->order = ["id"];
+			$sql_date_announce->where = ["id_annonces = $1 AND state = $2", [$row_annonce->id, 'reserved'] ];
+			$res_date_announce = $this->_app->sql->select($sql_date_announce);
+			$res_sql_annonces[$key_annonce]->date_reserved = $res_date_announce;
+
+			if($dossier = opendir($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
+			{
+				while(false !== ($fichier = readdir($dossier)))
+				{
+					if($fichier != '.' && $fichier != '..'){
+						$res_sql_annonces[$key_annonce]->img_principale = $fichier;
+						break;
+					}
+				}
+			}
+		}
+
+
+
 		$this->annonces = $res_sql_annonces;
 		
 	}

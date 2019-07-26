@@ -19,7 +19,7 @@ ob_start();?>
 		</head>
 		<body class="home">
 			__MOD_header__
-			<div class="container-fluid">
+			<div class="container-fluid" style="padding-bottom:60px;">
 					<? new router($_GET, $_app, $security); ?>
 			</div>
 			__MOD_footer__

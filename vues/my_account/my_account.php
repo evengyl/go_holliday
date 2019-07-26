@@ -1,5 +1,5 @@
 <div class="secondary" id="head"></div>
-<div class="container-fluid text-center" style="background-color: #f2f2f2;">
+<div class="container-fluid text-center">
 
     <div class="row">
         <h2 class="thin">Mon compte</h2>
