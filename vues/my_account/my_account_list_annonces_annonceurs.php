@@ -7,8 +7,7 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
 
     foreach($annonces as $row_annonce)
     {?>
-        <li class="annonce">
-            <hr>
+        <li class="annonce" style="padding-top:15px;">
             <div class="row" style="padding-left:15px; padding-right:15px;">
                 <div class="col-xs-2">
                     <div class="img_annonce">
@@ -18,15 +17,17 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <b><?= $row_annonce->name_annonce ?></b>
+                    <b><?= $row_annonce->title ?></b>
                     <br>
                     <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
                     <br>
-                    <span class="text-muted"><small><?= $row_annonce->vues ?> Vues</small></span>
+                    <span class="text-muted"><small style="color:#5bc0de;"><?= $row_annonce->vues ?></small> <small>Vues</small></span>
                     <br>
                     <span class="text-muted"><small>Nombre de Messages : <b style="color:green;"><?= $row_annonce->message ?></b></small></span>
                     <br>
                     <span class="text-muted statut_active"><small>Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
+                    <br>
+                    <span class="text-muted"><small>Validée par l'administration : <?=($row_annonce->admin_validate)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                 </div>
 
                 <div class="col-xs-6 text-right">
@@ -40,70 +41,81 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
 
                     <btn <?= (!$_app->can_do_user->edit_annonce)?"disabled":""; ?> class="opt_annonce btn btn-warning"><small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small></btn>
 
-                    <btn <?= (!$_app->can_do_user->view_private_message)?"disabled":""; ?> class="opt_annonce btn btn-info"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les messages</small></btn>
+                    
                 </div>
 
-                <div class="col-xs-12">
-                    <div class="col-xs-6"><?
+                <div class="col-xs-12" style="border-bottom:1px solid #eeeeee; margin-bottom:20px;"><?
+                    if(!empty($row_annonce->date_waiting))
+                    {
                         foreach($row_annonce->date_waiting as $row_wait)
                         {?>
                             <div class="col-sm-6 col-md-6">
                                 <div class="thumbnail">
                                     <span style="font-size: 30px" class="glyphicon glyphicon-star-empty"></span>
-                                    <hr>
+                                    <hr style="margin-top:5px; margin-bottom:5px;">
                                     <div class="caption">
-                                        <h5>Date d'arrivée : 25/05/2019</h5>
-                                        <h5>Date de départ : 25/05/2019</h5>
-                                        <h6>Prix moyen estimé : 450€</h6>
-                                        <div style="text-align: left">
-                                            <p class="text-muted">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                &nbsp;&nbsp;Jean&nbsp;&nbsp;
-                                                <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>
-                                            </p>
-
-                                            <p class="text-muted">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                &nbsp;&nbsp;Roger&nbsp;&nbsp;
-                                                <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>
-                                            </p>
-
-                                            <p class="text-muted">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                &nbsp;&nbsp;Jacky&nbsp;&nbsp;
-                                                <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;
-                                                <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>
-                                            </p>
-
-                                            <p class="text-muted">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                &nbsp;&nbsp;Michel&nbsp;&nbsp;
-                                                <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;
-                                                <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>
-                                            </p>
-                                        </div>
+                                        <p>
+                                            Date d'arrivée : 25/05/2019
+                                            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            Date de départ : 25/05/2019
+                                        </p>
+                                        
+                                        <p class="text-muted">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            &nbsp;&nbsp;Jean&nbsp;&nbsp;
+                                            <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            Prix moyen estimé : 450€
+                                        </p>
                                     </div>
                                 </div>
                             </div><?
-                        }?>
-                       
-                    </div> 
+                        }
+                    }?> 
+                </div> 
 
+                <div class="col-xs-12"><?
+                    if(!empty($row_annonce->date_reserved))
+                    {
+                        foreach($row_annonce->date_reserved as $row_reserved)
+                        {?>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="thumbnail">
+                                    <span style="font-size: 30px; color:#f0f000;" class="glyphicon glyphicon-star"></span>
+                                    <hr style="margin-top:5px; margin-bottom:5px;">
+                                    <div class="caption">
+                                        <p>
+                                            Date d'arrivée : 25/05/2019
+                                            &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                            Date de départ : 25/05/2019
+                                        </p>
+                                        
+                                        <p class="text-muted">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            &nbsp;&nbsp;Jean&nbsp;&nbsp;
+                                            <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                            Prix moyen estimé : 450€
+                                        </p>
+                                    </div>
+                                </div>
+                            </div><?
+                        }
+                    }?>
                 </div>
+
                 <p class="text-muted col-xs-12" style="margin-top:15px;">
                     <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;Envoyer un message / prendre contact&nbsp;&nbsp;|
                     <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;Accepter la demande directement&nbsp;&nbsp;|
-                    <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>&nbsp;Refuser directement la demande&nbsp;&nbsp;
+                    <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>&nbsp;Refuser directement la demande&nbsp;&nbsp;<br>
+                    <span style="color:#f0f000;" class="glyphicon glyphicon-star"></span>&nbsp;Date déjà réservée&nbsp;&nbsp;|
+                    <span style="" class="glyphicon glyphicon-star"></span>&nbsp;Date encore non traîtée&nbsp;&nbsp;
                 </p> 
+
             </div>
             <hr>
-
         </li>
 
         <!-- Modal Desactivate annonce -->
@@ -123,9 +135,8 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
                     </div>
                 </div>
             </div>
-        </div>
-
-        <?
+        </div><?
+        
     }
 
     require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>

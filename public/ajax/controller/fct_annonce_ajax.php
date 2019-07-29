@@ -19,7 +19,6 @@ if(isset($_POST))
 
 function desactivate_annonce($_app)
 {
-	if(!$_app->can_do_user->edit_active) echo "Sérieusement c'est pas très beau de tricher...";
 
 	if(isset($_POST['id_annonce']))
 	{
@@ -31,10 +30,10 @@ function desactivate_annonce($_app)
 		$res_sql = $_app->sql->update($req_sql);
 
 		if(!$res_sql)
-			echo 'Bizarre votre annonce était déjà inactive !';	
+			echo 'Votre annonce était déjà inactive !';	
 
 		else
-			echo 'Votre annonce à bien été désactivée.';	
+			echo 'Votre annonce à bien été désactivée !';	
 	}
 }
 

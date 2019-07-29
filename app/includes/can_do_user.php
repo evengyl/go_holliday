@@ -29,7 +29,6 @@ Class can_do_user
 				$this->view_nb_vues_total = false;
 				$this->view_annonce_list = false;
 				$this->view_nb_private_message = true;
-				$this->edit_active = false;
 				$this->view_private_message = true;
 				$this->edit_preference = false;
 
@@ -39,23 +38,6 @@ Class can_do_user
 
 			if($_app->user->user_type == 1) //utilisateur annonceurs mais n'ayant plus ou pas d'abonnement
 			{
-				$this->create_annonce = false;
-				$this->view_infos_annonce = true;
-				$this->edit_annonce = false;
-				$this->view_nb_annonce = true;
-				$this->view_nb_vues_total = false;
-				$this->view_annonce_list = true;
-				$this->view_nb_private_message = true;
-				$this->edit_active = false;
-				$this->view_private_message = true;
-				$this->edit_preference = false;
-
-
-				$this->text_user_type = "Vous n'êtes pas annonceur VIP";
-			}
-
-			else if($_app->user->user_type == 2) //utilisateur annonceurs ayant un abonnement
-			{
 				$this->create_annonce = true;
 				$this->view_infos_annonce = true;
 				$this->edit_annonce = true;
@@ -63,12 +45,11 @@ Class can_do_user
 				$this->view_nb_vues_total = true;
 				$this->view_annonce_list = true;
 				$this->view_nb_private_message = true;
-				$this->edit_active = true;
 				$this->view_private_message = true;
 				$this->edit_preference = true;
 
 
-				$this->text_user_type = "Annonceur VIP";
+				$this->text_user_type = "Annonceur";
 			}
 		}
 		return $this;

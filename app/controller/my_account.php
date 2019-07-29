@@ -126,6 +126,7 @@ Class my_account extends base_module
 			$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
 			$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
 
+			$count = 0;
 			if(!empty($res_sql_nb_vues)){
 				foreach($res_sql_nb_vues as $row)
 					$count += (int)$row->vues;
@@ -174,11 +175,11 @@ Class my_account extends base_module
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
-			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active", "create_date", "vues"],
+			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "lieu AS lieu_annonce", "active", "admin_validate", "create_date", "vues"],
 			"type_vacances" => ["name AS name_type_vacances"]
 		];
 		$sql_annonce->limit = $pagination_limit;
-		$sql_annonce->order = ["id"];
+		$sql_annonce->order = ["id DESC"];
 
 		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);

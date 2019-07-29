@@ -63,12 +63,8 @@ class parser
 				$module = new p_404($this->_app, $e->getMessage(), '204');
 			}
 			
-			//get html tpl est dans le base module.
-			if(!empty($get_html_mod))
-				$rendu_module = $module->get_html_mod;	
-			
-			else
-				$rendu_module = $module->get_html_tpl;
+
+			$rendu_module = $module->get_html_tpl;
 
 
 			if($this->_app->option_app['view_tpl_name_in_source_code'] == '1')

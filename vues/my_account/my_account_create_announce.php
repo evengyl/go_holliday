@@ -9,15 +9,15 @@
 		<div class="col-xs-8 col-xs-offset-2">
 			<form method="post" action="" data-toggle="validator" role="form" ><?
 
-				// require($_app->base_dir.'/vues/create_announce/type_part.php'); OK
+				require($_app->base_dir.'/vues/create_announce/type_part.php');
 
-				// require($_app->base_dir.'/vues/create_announce/title_part.php'); OK
+				require($_app->base_dir.'/vues/create_announce/title_part.php');
 				
-				// require($_app->base_dir.'/vues/create_announce/image_part.php'); OK
+				require($_app->base_dir.'/vues/create_announce/image_part.php');
 
-				// require($_app->base_dir.'/vues/create_announce/address_part.php'); OK
+				require($_app->base_dir.'/vues/create_announce/address_part.php');
 
-				// require($_app->base_dir.'/vues/create_announce/date_part.php'); OK
+				require($_app->base_dir.'/vues/create_announce/date_part.php');
 				
 				require($_app->base_dir.'/vues/create_announce/complementary_part.php');
 				

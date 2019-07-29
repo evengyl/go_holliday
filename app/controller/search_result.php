@@ -91,8 +91,8 @@ Class search_result extends base_module
 
 		if(!$all)
 			$sql_annonce->where = [
-						"id_type_vacances = $1 AND active = $2".$str_pays_id.$str_habitat_id."", 
-							[$type_id, "1", (isset($pays[0])?$pays:""), (isset($habitat[0])?$habitat:"")]];
+						"id_type_vacances = $1 AND active = $2".$str_pays_id.$str_habitat_id." AND admin_validate = $5", 
+							[$type_id, "1", (isset($pays[0])?$pays:""), (isset($habitat[0])?$habitat:""), "1"]];
 		else
 			$sql_annonce->where = ["1"];
 

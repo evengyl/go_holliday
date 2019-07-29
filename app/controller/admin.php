@@ -23,7 +23,7 @@ Class admin extends base_module
 					switch ($_GET['action'])
 					{
 						case "edit_config_app":
-							$this->use_module('admin_edit_config_app');
+							$this->other_mod_to_exec[] = 'admin_edit_config_app';
 						break;
 
 						case "eval":
@@ -63,9 +63,8 @@ Class admin extends base_module
 		}
 		else 
 		{
-			affiche("test");
-			$this->error = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
-			$this->assign_var("error", $this->error)->use_module($specific_module = "p_404");
+			$_SESSION["error_admin"] = "Vous n'avez pas accès à cette page.</br>Seul l'administration peux y accéder";
+			$this->use_module("p_404");
 				
 		}	
 	}

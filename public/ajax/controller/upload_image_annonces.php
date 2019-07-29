@@ -1,22 +1,20 @@
 <?
 require("ajax_min_load.php");
-
-
-$nb_img_per_announce_max = 10;
-$path_to_upload_img_annonce = $_app->base_dir."/public/images/annonces/";
-$name_for_thumb = "_thumb.jpg";
-$name_image_rand = str_replace(".", "", uniqid("Image", true));
-
 if($_app->can_do_user->create_annonce)
 {
 
+	$nb_img_per_announce_max = 10;
+	$path_to_upload_img_annonce = $_app->base_dir."/public/images/annonces/";
+
+	$name_image_rand = str_replace(".", "", uniqid("Image", true));
+
+
 	$id_annonce = get_last_id_announce($_app->sql, $_app->user->id_utilisateurs);
-	
 
 	$path_to_upload = $path_to_upload_img_annonce.$id_annonce."/";
 	$path_to_preview = "/images/annonces/".$id_annonce."/";
 
-	$nb_files_uploaded = get_nb_files_uploaded($path_to_upload, $name_for_thumb);
+	$nb_files_uploaded = get_nb_files_uploaded($path_to_upload);
 	
 
 	//si il y a un id_annonce c'est que l'annonce est en train d'être crée ou qu"il y a une annonce pré encodée.
@@ -56,9 +54,13 @@ if($_app->can_do_user->create_annonce)
 				imagejpeg($img_empty_tmp_big, $path_to_upload . $name_image_rand . ".jpg", 100);
 				imagedestroy($img_empty_tmp_big);
 
-
+/*
+Partie Yhumb mais pas besoin pour le moment
+				$name_for_thumb = "_thumb.jpg";
 				require($_app->base_dir."/app/includes/redim_img.php");
 				fct_redim_image(150, 150, $path_to_upload, $name_image_rand . $name_for_thumb, $path_to_upload, $name_image_rand.".jpg");
+
+*/
 
 			}
 		
@@ -72,13 +74,13 @@ if($_app->can_do_user->create_annonce)
 			{
 				while(false !== ($fichier = readdir($dossier)))
 				{
-					if($fichier != '.' && $fichier != '..' && !strpos($fichier, $name_for_thumb))
+					if($fichier != '.' && $fichier != '..')
 					{ 
 						$fichier_name = str_replace(".jpg", "", $fichier);
 
 						echo '<div class="col-xs-4 col-md-3 col-lg-2" style="margin-top:10px;">
 								<a href="'. $path_to_preview.$fichier .'" data-lightbox="image-1" data-title="">
-									<img src="'. $path_to_preview.$fichier .'">
+									<center><img style="height:110px;" class="img-responsive" src="'. $path_to_preview.$fichier .'"></center>
 								</a>
 								<button type="button" data-id-img="'.$fichier_name.'" data-option="delete_img" class="btn btn-warning col-xs-12" style="padding: 5px 20px;">
 									<i class="far fa-trash-alt"></i>
@@ -91,10 +93,9 @@ if($_app->can_do_user->create_annonce)
 
 		else if($_GET["option"] == "delete_img")
 		{
-			affiche($_GET);
 			if(file_exists($path_to_upload . "/" . $_GET['id_img'] . ".jpg")){
 				unlink($path_to_upload . "/" . $_GET['id_img'] .".jpg");
-				unlink($path_to_upload . "/" . $_GET['id_img'] .$name_for_thumb);
+				//unlink($path_to_upload . "/" . $_GET['id_img'] .$name_for_thumb);
 
 			}
 		}
@@ -103,14 +104,18 @@ if($_app->can_do_user->create_annonce)
 
 
 
-function get_nb_files_uploaded($path_to_upload, $name_for_thumb)
+function get_nb_files_uploaded($path_to_upload)
 {
 	$i = 0;
+	if(!file_exists($path_to_upload)){
+		mkdir($path_to_upload);
+	}
+
 	if($dossier = opendir($path_to_upload))
 	{
 		while(false !== ($fichier = readdir($dossier)))
 		{
-			if($fichier != '.' && $fichier != '..' && !strpos($fichier, $name_for_thumb))
+			if($fichier != '.' && $fichier != '..')
 				$i++;
 		}
 	}
@@ -124,8 +129,8 @@ function get_last_id_announce($sql, $id_utilisateurs)
 	$req_last_id = new stdClass();
 	$req_last_id->table = ["annonces"];
 	$req_last_id->var = ["id"];
-	$req_last_id->where = ["id_utilisateurs = $1 AND active = $2", [$id_utilisateurs, "0"]];
+	$req_last_id->where = ["id_utilisateurs = $1 AND title = $2", [$id_utilisateurs, ""]];
 	$req_last_id->limit = '1';
-
-	return $sql->select($req_last_id)[0]->id;
+	$id = $sql->select($req_last_id)[0]->id;
+	return (!empty($id))?$id:0;
 }

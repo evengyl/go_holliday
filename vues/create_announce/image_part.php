@@ -5,10 +5,14 @@
 		<small class="text-muted thin">(Format supporté : Jpg, Png, Gif)</small></h4>
 	</div>
 	<div class="panel-body">
-		<div class="col-xs-12 dropzone" id="dropzone_img_upload"></div>
+		<div class="col-xs-12 dropzone" id="dropzone_img_upload">
+			<div class="col-xs-12"><span class='text-muted thin'>Glisser déposer vos images ici, ou sélectionnez les en cliquant ici</span></div>
+
+		</div>
 	    <hr>
-		<div class="col-xs-12" id="list_image_uploaded"></div>
+
 	</div>
+
 </div>
 
 
@@ -26,8 +30,6 @@ var myDropzone = new Dropzone("#dropzone_img_upload",
 	url: "/ajax/controller/upload_image_annonces.php",
 	paramName: "file",
     acceptedFiles: accept,
-    createImageThumbnails: true,
-    addRemoveLinks: true,
     maxFiles: 10,
     clickable: true,
     success: function(data){
@@ -50,7 +52,7 @@ function list_preview()
 		data: "option=preview_img",
 		dataType: "html",
 		success:function(data){
-			$('#list_image_uploaded').html(data);
+		$('#dropzone_img_upload').append(data);
 
 			$("button[data-option='delete_img']").on('click', function(event){
 				delete_img($(this).data("id-img"))

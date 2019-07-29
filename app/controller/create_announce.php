@@ -201,7 +201,7 @@ Class create_announce extends base_module
 		$req_sql_verify = new stdClass();
 		$req_sql_verify->table = ['annonces'];
 		$req_sql_verify->var = ["id"];
-		$req_sql_verify->where = ["name = $1 AND id_utilisateurs = $2", ["", $this->_app->user->id_utilisateurs]];
+		$req_sql_verify->where = ["title = $1 AND id_utilisateurs = $2", ["", $this->_app->user->id_utilisateurs]];
 		$req_sql_verify->order = ["id DESC"];
 		$req_sql_verify->limit = "1";
 		$id = $this->_app->sql->select($req_sql_verify);
@@ -218,7 +218,7 @@ Class create_announce extends base_module
 			$req_sql_verify = new stdClass();
 			$req_sql_verify->table = ['annonces'];
 			$req_sql_verify->var = ["id"];
-			$req_sql_verify->where = ["name = $1 AND id_utilisateurs = $2", ["", $this->_app->user->id_utilisateurs]];
+			$req_sql_verify->where = ["title = $1 AND id_utilisateurs = $2", ["", $this->_app->user->id_utilisateurs]];
 			$req_sql_verify->order = ["id DESC"];
 			$req_sql_verify->limit = "1";
 			$id = $this->_app->sql->select($req_sql_verify);

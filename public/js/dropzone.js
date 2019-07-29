@@ -421,7 +421,7 @@ var Dropzone = function (_Emitter) {
         /**
          * The text used before any files are dropped.
          */
-        dictDefaultMessage: "Glisser déposer vos images ici, ou sélectionnez les en cliquant ici",
+        dictDefaultMessage: "",
 
         /**
          * The text that replaces the default message text it the browser is not supported.

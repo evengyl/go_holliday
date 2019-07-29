@@ -5,15 +5,15 @@ Class base_module
 {
 
 	public $get_html_tpl;
-	public $get_html_mod = "";
 	public $var_in_module;
 	public $template_name;
 	public $template_path;
-	public $sql;
+	
 	public $_app;
 	public $var_to_module;
 
 	public $module_secondary = [];
+	public $other_mod_to_exec = [];
 
 	public function __construct(&$_app)
 	{
@@ -50,6 +50,14 @@ Class base_module
 			$this->get_html_tpl = ob_get_contents();
 
 		ob_end_clean();
+	}
+
+	public function use_module($module_name)
+	{
+		$this->template_path = $this->set_template_path($template_name = $module_name);
+
+		$module = new $module_name($this->_app);
+		$this->get_html_tpl = $module->get_html_tpl;
 	}
 
 	public function use_template($template_name = "")

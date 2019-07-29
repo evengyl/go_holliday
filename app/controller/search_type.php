@@ -30,7 +30,7 @@ Class search_type extends base_module
 			$sql_count_annonce_by_type = new stdClass();
 			$sql_count_annonce_by_type->table = ["annonces"];
 			$sql_count_annonce_by_type->var = 'COUNT(id) as nb';
-			$sql_count_annonce_by_type->where = ["id_type_vacances = $1", [$type->id]];
+			$sql_count_annonce_by_type->where = ["id_type_vacances = $1 AND admin_validate = $2 AND active = $3", [$type->id, "1", "1"]];
 			$res_sql =  $this->_app->sql->select($sql_count_annonce_by_type);
 			$array_type[$key]->nb_annonces = $res_sql[0]->nb;
 		}

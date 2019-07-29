@@ -60,7 +60,7 @@ Class search_pays_habitat extends base_module
 			$sql_number_annonces_habitat = new stdClass();
 			$sql_number_annonces_habitat->table = ["annonces"];
 			$sql_number_annonces_habitat->var = $var;
-			$sql_number_annonces_habitat->where = ["id_habitat = $1 AND id_type_vacances = $2", [(int)$row_habitat->id, (int)$id_type]];
+			$sql_number_annonces_habitat->where = ["id_habitat = $1 AND id_type_vacances = $2 AND admin_validate = $3", [(int)$row_habitat->id, (int)$id_type, "1"]];
 			$res_sql = $this->_app->sql->select($sql_number_annonces_habitat);
 			$row_habitat->nb_annonces = $res_sql[0]->nb;
 		}
@@ -70,7 +70,7 @@ Class search_pays_habitat extends base_module
 			$sql_number_annonces_pays = new stdClass();
 			$sql_number_annonces_pays->table = ["annonces"];
 			$sql_number_annonces_pays->var = $var;
-			$sql_number_annonces_pays->where = ["id_pays = $1 AND id_type_vacances = $2", [(int)$row_pays->id, (int)$id_type]];
+			$sql_number_annonces_pays->where = ["id_pays = $1 AND id_type_vacances = $2 AND admin_validate = $3", [(int)$row_pays->id, (int)$id_type, "1"]];
 			$res_sql = $this->_app->sql->select($sql_number_annonces_pays);
 			$row_pays->nb_annonces = $res_sql[0]->nb;
 		}
