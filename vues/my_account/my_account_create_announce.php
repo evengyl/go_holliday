@@ -2,7 +2,9 @@
 <div class="container-fluid text-center" style="background-color: white;">
 
 	<div class="row">
-		<h3 class="thin">Création d'une annonce ID : <?= $id_announce; ?></h3><hr>
+		<h3 class="thin">Création d'une annonce de locations <?= $id_announce ?></h3><hr>
+		<h4 class="text-muted thin">Prenez le temps d'être le plus précis possible dans se formulaire, car celui ci vous servira pour générer un maximum de vues et de demandes.<br>
+		ne vous en faites pas il n'est à faire que une fois par bien et par ans techniquement</h4><hr>
 	</div>
 
 	<div class="row page_create_annonce">
@@ -21,7 +23,7 @@
 				
 				require($_app->base_dir.'/vues/create_announce/complementary_part.php');
 				
-				// require($_app->base_dir.'/vues/create_announce/price_part.php'); 
+				require($_app->base_dir.'/vues/create_announce/price_part.php'); 
 
 				affiche($this->value_form);  ?>
 

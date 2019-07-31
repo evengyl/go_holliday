@@ -1,38 +1,9 @@
 <?
 Class annonce extends base_module
 {
-	public $_app;
-	public $error = false;
-	public $name_annonce;
-
 	private $id_annonce;
-
-	public $value_announce = [
-		"type_vacances" => "",
-
-		"title" => "",
-		"sub_title" => "",
-
-		"address_lieux_dit" => "",
-		"address_rue" => "",
-		"address_numero" => "",
-		"address_localite" => "",
-		"address_zip_code" => "",
-		"address_pays" => "",
-
-		"start_saison" => "",
-		"end_saison" => "",
-
-		"max_personn" => "",
-
-		"sport" => "",
-		"activity" =>  "",
-		"other_activity" => "",
-
-		"price_one_night" => "",
-		"price_week_end" => "",
-		"price_one_week" => ""
-	];
+	public $value_announce;
+	
 
 	public function __construct(&$_app)
 	{	
@@ -40,7 +11,9 @@ Class annonce extends base_module
 
 		if($this->id_annonce = $this->verif_if_announce_exist($_GET['id_annonce']))
 		{
+
 			$array_img_annonce = $this->get_img_files_by_id();
+			$this->value_announce = render_annonce_prop();
 			$this->get_infos_announce();
 
 			$this->assign_var("slide_img", $array_img_annonce)

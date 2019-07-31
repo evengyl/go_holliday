@@ -9,7 +9,7 @@
 		<div class="text-center col-xs-12"><hr>
 
 		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Début de saison</div>
+		    	<div class="alert alert-info" role="alert">Date de Début de saison : <?=(isset($_POST['start_saison']))?$_POST['start_saison']:'';?></div>
 			    <div class="input-group">
 					<input 
 						style="cursor:pointer;" 
@@ -25,7 +25,7 @@
 			</div>
 
 		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Fin de saison</div>
+		    	<div class="alert alert-info" role="alert">Date de Fin de saison : <?=(isset($_POST['end_saison']))?$_POST['end_saison']:'';?></div>
 			    <div class="input-group">
 					<input 
 						style="cursor:pointer;" 

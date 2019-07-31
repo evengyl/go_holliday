@@ -1,7 +1,7 @@
-<h4 class="title">Listes de vos annonces</h4><hr>
+<h4 class="title">Listes de mes annonces</h4><hr>
 <h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
 
-require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
+ // require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
 
 <ul class="list-unstyled list_annonces_max"><?
 
@@ -21,6 +21,10 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
                     <br>
                     <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
                     <br>
+                    <span class="text-muted"><small>Nombre de date validées : <b><?=(!empty($row_annonce->date_reserved))?count($row_annonce->date_reserved):0 ?></b></small></span>
+                    <br>
+                    <span class="text-muted"><small>Nombre de demande en cours : <b><?=(!empty($row_annonce->date_waiting))?count($row_annonce->date_waiting):0 ?></b></small></span>
+                    <br>
                     <span class="text-muted"><small style="color:#5bc0de;"><?= $row_annonce->vues ?></small> <small>Vues</small></span>
                     <br>
                     <span class="text-muted"><small>Nombre de Messages : <b style="color:green;"><?= $row_annonce->message ?></b></small></span>
@@ -35,7 +39,7 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
 
                     <btn class="opt_annonce btn btn-info" data-toggle="modal" data-target="#view_avis_<?= $row_annonce->id ?>"><small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small></btn>
                     
-                    <button <?= (!$_app->can_do_user->edit_active)?"disabled":""; ?> data-toggle="modal" data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" data-id="<?= $row_annonce->id; ?>" data-target="#set_active_<?= $row_annonce->id; ?>" class="opt_annonce btn">
+                    <button <?= (!$row_annonce->admin_validate)?"disabled":""; ?> data-toggle="modal" data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" data-id="<?= $row_annonce->id; ?>" data-target="#set_active_<?= $row_annonce->id; ?>" class="opt_annonce btn">
                         <small><i class="fa fa-angle-double-right "></i><span></span></small>
                     </button>
 
@@ -47,6 +51,7 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
                 <div class="col-xs-12" style="border-bottom:1px solid #eeeeee; margin-bottom:20px;"><?
                     if(!empty($row_annonce->date_waiting))
                     {
+
                         foreach($row_annonce->date_waiting as $row_wait)
                         {?>
                             <div class="col-sm-6 col-md-6">
@@ -66,7 +71,12 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
                                             <span style="color:#5bc0de;" class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                                             <span style="color:#5cb85c;" class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                                             <span style="color:#d9534f;" class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                            Prix moyen estimé : 450€
+                                            Prix moyen estimé : 450€<br>
+                                            ici mettre dans un popup ou quoi, le calcul pour cette estimation
+                                            attention mettre un exemple pour que les gens comprenne
+                                            si 11 nuit,
+                                            7 nuit (1 semaine) + 4 * 1 nuit, valeur estimée, a la moitier de la valeur connue 
+                                            donc si pour le propio une semaine c'est entre 301 et 400, on fait 400-301 = 99 /2 = 45 +- donc 301+45 = 346
                                         </p>
                                     </div>
                                 </div>
@@ -139,7 +149,7 @@ require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil
         
     }
 
-    require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
+   // require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
 </ul>
     
 <script src="/js/activate_desactivate_annonce.js"></script>

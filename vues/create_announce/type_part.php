@@ -13,28 +13,20 @@
 		        {?>
 		            <div class="col-sm-6 col-md-4">
 		                <div class="thumbnail"><?
-		                    if(isset($row_type_vacances->icon))
+			                if(isset($row_type_vacances->icon))
 		                        echo $row_type_vacances->icon;?>
 		                    <hr>
-		                    <img src="/images/categories/<?= $row_type_vacances->img; ?>" class="img-responsive" alt="<?= $row_type_vacances->name; ?>">
-		                    <div class="caption">
-		                        <h3><?= $row_type_vacances->title; ?></h3>
+		                    <div class="caption css-label">
+		                        <h3 style="margin-top:0px;"><?= $row_type_vacances->title; ?></h3>
 		                        <p class="text-muted"><?= $row_type_vacances->text; ?></p>
-		                        <div style="padding:0;"
-		                        	class="checkbox type_vacances btn <?=(isset($_POST['type_vacances']) && $_POST['type_vacances'] == $row_type_vacances->name)?"btn-info":"btn-primary"; ?>">
-       								<div class="input-group">
-									    <label style="color:white; font-weight: bold; text-shadow: 0 2px 1px rgba(0, 0, 0, .2); padding:10px;">
-									      	<input
-									      		hidden
-												data-name="type_vacances" 
-												name="type_vacances[]" 
-												type="checkbox" 
-												data-error="Vous devez choisir un type de vacances"
-												value="<?= $row_type_vacances->name; ?>">
-									      			Type de vacances "<?= $row_type_vacances->name; ?>"
-									    </label>
-									</div>
-							    </div>
+						      	<input
+							      	class="test"
+							      	id="toggle_<?=$row_type_vacances->id; ?>"
+									name="type_vacances[]" 
+									type="checkbox" 
+									value="<?= $row_type_vacances->name; ?>">
+
+								<label for="toggle_<?=$row_type_vacances->id; ?>">Ce type me parait approprié</label>
 		                    </div>
 		                </div>
 		            </div><?
@@ -43,26 +35,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-$(document).ready(function()
-{
-	$("input[data-name='type_vacances']").on("click", function()
-	{
-		var button_tested = $(this).parent().parent().parent();
-
-		if($(button_tested).hasClass('btn-info'))
-		{
-			$(button_tested)
-				.removeClass('btn-info')
-				.addClass('btn-primary')
-		}
-		else{
-			$(button_tested)
-				.removeClass('btn-primary')
-				.addClass('btn-info')	
-		}
-
-	});
-})
-</script>

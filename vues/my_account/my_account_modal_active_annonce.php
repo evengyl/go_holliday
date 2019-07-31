@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Désactivation de l'annonce : <?= $row_annonce->name_annonce ?></h4>
+                <h4 class="modal-title">Activation de l'annonce</h4>
             </div>
-            <div class="modal-body" style="height:340px;">
-                <p class="text-center text-muted">Désactivation / Activation : <?= $row_annonce->name_annonce ?></p>
+            <div class="modal-body" style="height:370px;">
+                <p class="text-center text-muted"><?= $row_annonce->title ?></p>
 
                 <button data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" data-toggle="modal" data-id="<?= $row_annonce->id; ?>" class="opt_annonce btn">
                     <small><i class="fa fa-angle-double-right "></i><span></span></small>

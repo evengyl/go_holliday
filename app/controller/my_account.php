@@ -194,7 +194,6 @@ Class my_account extends base_module
 			$res_date_announce = $this->_app->sql->select($sql_date_announce);
 			$res_sql_annonces[$key_annonce]->date_waiting = $res_date_announce;
 
-
 			$sql_date_announce = new stdClass();
 			$sql_date_announce->table = ['date_annonces'];
 			$sql_date_announce->var = ["*"];

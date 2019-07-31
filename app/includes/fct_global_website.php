@@ -80,9 +80,58 @@ Class fct_global_website
 
 		
 	}
+
+
+	public function send_new_request_admin($object = "")
+	{
+		$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/request_admin.html");
+		$content_html = str_replace(
+								["##NAME##", "##ID##", "##SITENAME##", "##OBJECT##"], 
+								[$this->_app->user->name, $this->_app->user->id, $this->_app->site_name, $object],
+							$content_html);
+
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		$subject = "Demande administrative";
+
+		mail("info.go.holliday@gmail.com", $subject, $content_html, $headers);
+	}
 	
 }
 
+
+function render_annonce_prop()
+{
+	return $announce_prop = [
+		"type_vacances" => "",
+
+		"title" => "",
+		"sub_title" => "",
+
+		"address_lieux_dit" => "",
+		"address_rue" => "",
+		"address_numero" => "",
+		"address_localite" => "",
+		"address_zip_code" => "",
+		"address_pays" => "",
+
+		"start_saison" => "",
+		"end_saison" => "",
+
+		"max_personn" => "",
+
+		"sport" => "",
+		"activity" =>  "",
+		"other_activity" => "",
+		"pet" => "",
+		"handicap" => "",
+		"parking" => "",
+		"price_one_night" => "",
+		"price_week_end" => "",
+		"price_one_week" => "",
+		"caution" => ""
+	];
+}
 
 function affiche($var_a_print)
 {

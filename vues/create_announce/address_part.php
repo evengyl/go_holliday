@@ -92,7 +92,7 @@
 		            	name="address_zip_code" 
 		            	type="text" 
 		            	value="<?=(isset($_POST['address_zip_code']))?$_POST['address_zip_code']:'';?>" 
-		            	maxlength="5" 
+		            	maxlength="10" 
 		            	pattern="[0-9]+" 
 		            	class="form-control" 
 		            	data-error="Code postal incorrect" >
