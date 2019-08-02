@@ -137,7 +137,7 @@ Class my_account extends base_module
 			$this->_app->user->nb_vues_total = $count;
 		}
 		else
-			$this->_app->user->nb_vues_total = "Vous n'êtes pas annonceurs VIP";
+			$this->_app->user->nb_vues_total = "Vous n'êtes pas annonceurs";
 
 	}
 
@@ -175,8 +175,8 @@ Class my_account extends base_module
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
-			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "lieu AS lieu_annonce", "active", "admin_validate", "create_date", "vues"],
-			"type_vacances" => ["name AS name_type_vacances"]
+			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "admin_validate", "create_date", "vues"],
+			"type_vacances" => ["name_human AS name_type_vacances"]
 		];
 		$sql_annonce->limit = $pagination_limit;
 		$sql_annonce->order = ["id DESC"];

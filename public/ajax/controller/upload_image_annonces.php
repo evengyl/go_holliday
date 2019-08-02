@@ -9,7 +9,7 @@ if($_app->can_do_user->create_annonce)
 	$name_image_rand = str_replace(".", "", uniqid("Image", true));
 
 
-	$id_annonce = get_last_id_announce($_app->sql, $_app->user->id_utilisateurs);
+	$id_annonce = $_GET["id_annonces"];
 
 	$path_to_upload = $path_to_upload_img_annonce.$id_annonce."/";
 	$path_to_preview = "/images/annonces/".$id_annonce."/";
@@ -124,13 +124,3 @@ function get_nb_files_uploaded($path_to_upload)
 }
 
 
-function get_last_id_announce($sql, $id_utilisateurs)
-{
-	$req_last_id = new stdClass();
-	$req_last_id->table = ["annonces"];
-	$req_last_id->var = ["id"];
-	$req_last_id->where = ["id_utilisateurs = $1 AND title = $2", [$id_utilisateurs, ""]];
-	$req_last_id->limit = '1';
-	$id = $sql->select($req_last_id)[0]->id;
-	return (!empty($id))?$id:0;
-}

@@ -13,7 +13,6 @@ Class annonce extends base_module
 		{
 
 			$array_img_annonce = $this->get_img_files_by_id();
-			$this->value_announce = render_annonce_prop();
 			$this->get_infos_announce();
 
 			$this->assign_var("slide_img", $array_img_annonce)
@@ -65,8 +64,8 @@ Class annonce extends base_module
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
-			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "lieu AS lieu_annonce", "active", "admin_validate", "create_date", "vues"],
-			"type_vacances" => ["name AS name_type_vacances"]
+			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "admin_validate", "create_date", "vues"],
+			"type_vacances" => ["name_human AS name_type_vacances"]
 		];
 		$sql_annonce->where = ["id_utilisateurs = $1 AND id = $2", [$this->_app->user->id_utilisateurs, $this->id_annonce]];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);

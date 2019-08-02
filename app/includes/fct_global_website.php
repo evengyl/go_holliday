@@ -1,6 +1,6 @@
 <?
 
-Class fct_global_website
+Class fct_global_website extends announce_format
 {
 	public $_app;
 
@@ -9,7 +9,6 @@ Class fct_global_website
 		$this->_app = $_app;
 
 	}
-
 
 	protected function set_user_infos_on_app()
 	{
@@ -100,38 +99,6 @@ Class fct_global_website
 }
 
 
-function render_annonce_prop()
-{
-	return $announce_prop = [
-		"type_vacances" => "",
-
-		"title" => "",
-		"sub_title" => "",
-
-		"address_lieux_dit" => "",
-		"address_rue" => "",
-		"address_numero" => "",
-		"address_localite" => "",
-		"address_zip_code" => "",
-		"address_pays" => "",
-
-		"start_saison" => "",
-		"end_saison" => "",
-
-		"max_personn" => "",
-
-		"sport" => "",
-		"activity" =>  "",
-		"other_activity" => "",
-		"pet" => "",
-		"handicap" => "",
-		"parking" => "",
-		"price_one_night" => "",
-		"price_week_end" => "",
-		"price_one_week" => "",
-		"caution" => ""
-	];
-}
 
 function affiche($var_a_print)
 {

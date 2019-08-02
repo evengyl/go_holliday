@@ -17,7 +17,7 @@
 		            	name="address_lieux_dit" 
 		            	type="text" 
 		            	maxlength="100" 
-		            	value="<?=(isset($_POST['address_lieux_dit']))?$_POST['address_lieux_dit']:'';?>" 
+		            	value="<?=(!empty($last_announce->address_lieux_dit))?$last_announce->address_lieux_dit:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -35,7 +35,7 @@
 		            	name="address_rue" 
 		            	maxlength="100" 
 		            	type="text" 
-		            	value="<?=(isset($_POST['address_rue']))?$_POST['address_rue']:'';?>" 
+		            	value="<?=(!empty($last_announce->address_rue))?$last_announce->address_rue:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -54,7 +54,7 @@
 		            	name="address_localite" 
 		            	maxlength="50" 
 		            	type="text" 
-		            	value="<?=(isset($_POST['address_localite']))?$_POST['address_localite']:'';?>" 
+		            	value="<?=(!empty($last_announce->address_localite))?$last_announce->address_localite:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -73,7 +73,7 @@
 		            	name="address_numero" 
 		            	maxlength="15"
 		            	type="text" 
-		            	value="<?=(isset($_POST['address_numero']))?$_POST['address_numero']:'';?>" 
+		            	value="<?=(!empty($last_announce->address_numero))?$last_announce->address_numero:'';?>" 
 		            	class="form-control" >
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -91,7 +91,7 @@
 		            	id="zip_code_form" 
 		            	name="address_zip_code" 
 		            	type="text" 
-		            	value="<?=(isset($_POST['address_zip_code']))?$_POST['address_zip_code']:'';?>" 
+		            	value="<?=(!empty($last_announce->address_zip_code))?$last_announce->address_zip_code:'';?>" 
 		            	maxlength="10" 
 		            	pattern="[0-9]+" 
 		            	class="form-control" 
@@ -109,18 +109,15 @@
 	            	<span class="input-group-addon">Pays</span>
 	            	<select required name="address_pays" id="pays_form" class="form-control">
 	            		<?
-	            		$selected = true;
 	            			foreach($array_list_pays_for_tpl as $row_pays)
 	            			{?>
 								<option 
-									<?=($selected)?'selected':''; ?>
+									<?=($last_announce->id_address_pays == $row_pays->id)?'selected':''; ?>
 									name="address_pays"
-									value="<?= $row_pays->name; ?>"
+									value="<?= $row_pays->id; ?>"
 								>
-									<?= $row_pays->human_name; ?>	
+									<?= $row_pays->name_human; ?>	
 								</option><?
-
-            					$selected = false;
 	            			}
 	            		?>
 	            	</select>

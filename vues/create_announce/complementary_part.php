@@ -55,7 +55,7 @@
 
                 <div class="input-group col-xs-12">
 				    <div class="checkbox"><?
-				    foreach($array_type_sport as $row_sport)
+				    foreach($array_list_sport as $row_sport)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
 				        	<input type="checkbox" <?= (isset($_POST['sport']) && in_array($row_sport->name_sql, $_POST['sport']))? 'checked="true"' : ''; ?> name="sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
@@ -71,7 +71,7 @@
             <div class="form-group">
                 <div class="input-group col-xs-12">
 				    <div class="checkbox"><?
-				    foreach($array_type_activity as $row_activity)
+				    foreach($array_list_activity as $row_activity)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
 				        	<input type="checkbox" <?= (isset($_POST['activity']) && in_array($row_activity->name_sql, $_POST['activity']))? 'checked="true"' : ''; ?> name="activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>

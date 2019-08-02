@@ -1,4 +1,5 @@
 <h4 class="title">Listes de mes annonces</h4><hr>
+<p class="text-muted title"><small>Attention !, une annonce créée mais non validée de votre pars ne vous permettra pas d'en créer une nouvelles, ne de l'activée ni que nous puissions l'autorisée</small></p><hr>
 <h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
 
  // require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
