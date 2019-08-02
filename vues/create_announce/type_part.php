@@ -25,7 +25,7 @@
 									name="type_vacances[]" 
 									type="checkbox" 
 									value="<?= $row_type_vacances->name_sql; ?>"
-									<?= (isset($last_announce->array_type_vacances) && in_array($row_type_vacances->name_sql, $last_announce->array_type_vacances))?'checked':''; ?>
+									<?= (isset($last_announce->type_vacances) && in_array($row_type_vacances->id, $last_announce->array_type_vacances))?'checked':''; ?>
 									>
 
 								<label for="toggle_<?=$row_type_vacances->name_sql; ?>">Ce type me parait approprié</label>

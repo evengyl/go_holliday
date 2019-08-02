@@ -80,6 +80,11 @@ Class announce_format{
 		{
 			foreach($announce as $row_announce)
 			{
+				if(empty($this->array_type_vacances)){
+					$announce[0]->array_type_vacances = explode(",", $row_announce->type_vacances);
+				}
+
+
 				$req_sql_sport = new stdClass();
 				$req_sql_sport->table = ["sport"];
 				$req_sql_sport->var = ["*"];
