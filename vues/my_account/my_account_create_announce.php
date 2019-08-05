@@ -10,7 +10,7 @@
 	<div class="row page_create_annonce">
 		<div class="col-xs-8 col-xs-offset-2">
 			<form method="post" action="" data-toggle="validator" role="form" ><?
-affiche($_POST);
+
 				require($_app->base_dir.'/vues/create_announce/type_part.php');
 
 				require($_app->base_dir.'/vues/create_announce/habitats_part.php'); 
@@ -19,16 +19,14 @@ affiche($_POST);
 				
 				require($_app->base_dir.'/vues/create_announce/image_part.php');
 
-				require($_app->base_dir.'/vues/create_announce/address_part.php');/*//not ok
-
+				require($_app->base_dir.'/vues/create_announce/address_part.php');
 
 				require($_app->base_dir.'/vues/create_announce/date_part.php');
 				
 				require($_app->base_dir.'/vues/create_announce/complementary_part.php');
 				
-				require($_app->base_dir.'/vues/create_announce/price_part.php');*/ 
+				require($_app->base_dir.'/vues/create_announce/price_part.php');
 
-affiche($last_announce);
 				?>
 
 			    <div class="text-center col-xs-12"><hr>

@@ -10,7 +10,7 @@
             <div class="form-group has-feedback">
                 <div class="input-group">
 					<span class="input-group-addon">Nombre de personne maximums acceptées</span>
-					<input type="text" name="max_personn" value="<?= (isset($_POST['max_personn']))? $_POST['max_personn'] : ''; ?>" maxlength="2" pattern="[0-9]{,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
+					<input type="text" name="max_personn" value="<?= (isset($last_announce->max_personn))? $last_announce->max_personn : ''; ?>" maxlength="2" pattern="[0-9]{,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
                 </div>
                 <div class="help-block with-errors"></div>
             </div>
@@ -25,15 +25,15 @@
                 <div class="input-group col-xs-12">
 				    <div class="checkbox">
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($_POST['pet']))? 'checked="true"' : ''; ?> name="pet" value="1">
+				        	<input type="checkbox" <?= (isset($last_announce->pet))? 'checked="true"' : ''; ?> name="pet" value="1">
 				        	Animaux autorisés
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($_POST['handicap']))? 'checked="true"' : ''; ?> name="handicap" value="1">
+				        	<input type="checkbox" <?= (isset($last_announce->handicap))? 'checked="true"' : ''; ?> name="handicap" value="1">
 				        	Accès pour personnes à mobilité réduite
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($_POST['parking']))? 'checked="true"' : ''; ?> name="parking" value="1">
+				        	<input type="checkbox" <?= (isset($last_announce->parking))? 'checked="true"' : ''; ?> name="parking" value="1">
 				        	Parking gratuit à proximité immédiate
 			        	</label>
 				    </div>
@@ -58,10 +58,18 @@
 				    foreach($array_list_sport as $row_sport)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($_POST['sport']) && in_array($row_sport->name_sql, $_POST['sport']))? 'checked="true"' : ''; ?> name="sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
+				        	<input type="checkbox" <?= (isset($last_announce->list_sport) && in_array($row_sport->name_sql, $last_announce->list_sport))? 'checked="true"' : ''; ?> name="list_sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>
+                </div>
+            </div>
+
+            <h6>Si des sports ne figure pas dans ces listes, veuillez nous les fournir ici, nous prendrons le temps de les ajoutées aux listes</h6>
+            <div class="form-group has-feedback">
+                <div class="input-group">
+					<span class="input-group-addon">Autre(s) (séparé d'une virgule)</span>
+					<input type="text" name="other_sport" pattern="[a-zA-Z, -]{2,}" placeholder="exemple, exemple, exemple" value="<?= (isset($_POST['other_sport']))? $_POST['other_sport'] : ''; ?>" class="form-control">
                 </div>
             </div>
 
@@ -74,14 +82,12 @@
 				    foreach($array_list_activity as $row_activity)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($_POST['activity']) && in_array($row_activity->name_sql, $_POST['activity']))? 'checked="true"' : ''; ?> name="activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>
+				        	<input type="checkbox" <?= (isset($last_announce->list_activity) && in_array($row_activity->name_sql, $last_announce->list_activity))? 'checked="true"' : ''; ?> name="list_activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>
                 </div>
             </div>
-
-
 
             <h6>Si des activités ne figure pas dans ces listes, veuillez nous les fournir ici, nous prendrons le temps de les ajoutées aux listes</h6>
             <div class="form-group has-feedback">
