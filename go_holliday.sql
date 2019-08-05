@@ -32,7 +32,7 @@ CREATE TABLE `activity` (
   `bar` tinyint(1) NOT NULL DEFAULT '0',
   `spa` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,0,1,1,1,1,1);
+INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,0,1,1,1,1,1),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +73,7 @@ CREATE TABLE `annonces` (
   `admin_validate` tinyint(1) NOT NULL DEFAULT '0',
   `create_date` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,0,'28/01/2019'),(225,1,2,'2,3',225,225,225,225,225,1,'fesgfghf','atatatatatat','09/08/2019','20/08/2019',0,0,0,0,'02/08/2019');
+INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,1,'28/01/2019'),(225,1,3,'2,3',225,225,225,225,225,1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','09/08/2019','20/08/2019',0,0,1,0,'02/08/2019'),(229,1,5,'1,2,3',229,229,229,229,229,1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,0,0,'05/08/2019');
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `announces_address` (
   `address_localite` varchar(50) NOT NULL,
   `address_zip_code` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `announces_address` (
 
 LOCK TABLES `announces_address` WRITE;
 /*!40000 ALTER TABLE `announces_address` DISABLE KEYS */;
-INSERT INTO `announces_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900');
+INSERT INTO `announces_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','bray-dunes','5900');
 /*!40000 ALTER TABLE `announces_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +157,7 @@ CREATE TABLE `commoditer_announces` (
   `max_personn` tinyint(4) NOT NULL DEFAULT '1',
   `caution` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `commoditer_announces` (
 
 LOCK TABLES `commoditer_announces` WRITE;
 /*!40000 ALTER TABLE `commoditer_announces` DISABLE KEYS */;
-INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500);
+INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,1,1,1,6,300);
 /*!40000 ALTER TABLE `commoditer_announces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Caravane : '),(2,'bungalow','Bungalow','bungalow.jpg','Bungalow : '),(3,'appartements','Appartements','appartement.jpg','Appartements : '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Maisons d\'hôtes : '),(5,'gites','Gites','gite.jpg','Gites : '),(6,'villa','Villa','villa.jpg','Villa : ');
+INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Une Caravane : '),(2,'bungalow','Bungalow','bungalow.jpg','Un Bungalow : '),(3,'appartements','Appartements','appartement.jpg','Un Appartements : '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Une Maisons d\'hôtes : '),(5,'gites','Gites','gite.jpg','Un Gites : '),(6,'villa','Villa','villa.jpg','Une Villa : ');
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +380,7 @@ CREATE TABLE `range_price_announce` (
   `price_week_end` varchar(20) NOT NULL,
   `price_one_week` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,7 +389,7 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'','',''),(227,'','',''),(228,'','',''),(229,'71-100','151-200','301-400');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -413,7 +413,7 @@ CREATE TABLE `sport` (
   `skate` tinyint(1) NOT NULL DEFAULT '0',
   `arc` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=230 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,7 +422,7 @@ CREATE TABLE `sport` (
 
 LOCK TABLES `sport` WRITE;
 /*!40000 ALTER TABLE `sport` DISABLE KEYS */;
-INSERT INTO `sport` VALUES (210,1,0,1,1,1,0,1,0,1,0),(225,1,0,1,1,1,0,1,0,1,0);
+INSERT INTO `sport` VALUES (210,1,0,1,1,1,0,1,0,1,0),(225,1,0,1,1,1,0,1,0,1,0),(226,0,0,0,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0);
 /*!40000 ALTER TABLE `sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,6,6,4,2,'08-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,6,6,13,2,'08-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-05 11:31:35
+-- Dump completed on 2019-08-05 17:01:18
