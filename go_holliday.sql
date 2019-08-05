@@ -41,7 +41,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (1,1,0,1,0,1,0,0),(2,0,1,0,1,0,1,0),(216,0,0,0,0,0,0,0),(217,0,0,0,0,0,0,0),(218,0,0,0,0,0,0,0),(219,0,0,0,0,0,0,0),(220,0,0,0,0,0,0,0),(221,0,0,0,0,0,0,0),(222,0,0,0,0,0,0,0),(223,0,0,0,0,0,0,0),(224,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0);
+INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,0,1,1,1,1,1);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +82,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,2,'3',1,1,1,1,1,1,'test','test sub','02/08/2019','31/09/2019',1526,0,1,0,'28/01/2019'),(225,2,0,'0',225,225,225,225,225,1,'fesgfghf','atatatatatat','','',0,0,0,0,'02/08/2019');
+INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,0,'28/01/2019'),(225,1,2,'2,3',225,225,225,225,225,1,'fesgfghf','atatatatatat','09/08/2019','20/08/2019',0,0,0,0,'02/08/2019');
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `announces_address` (
 
 LOCK TABLES `announces_address` WRITE;
 /*!40000 ALTER TABLE `announces_address` DISABLE KEYS */;
-INSERT INTO `announces_address` VALUES (1,'Camping perroquet','rue des dunes','1','bray-dunes','59123'),(222,'','','','',''),(223,'','','','',''),(224,'','','','',''),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900');
+INSERT INTO `announces_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900');
 /*!40000 ALTER TABLE `announces_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `commoditer_announces` (
 
 LOCK TABLES `commoditer_announces` WRITE;
 /*!40000 ALTER TABLE `commoditer_announces` DISABLE KEYS */;
-INSERT INTO `commoditer_announces` VALUES (1,1,1,1,3,350),(223,0,0,0,1,0),(224,0,0,0,1,0),(225,0,0,0,1,0);
+INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500);
 /*!40000 ALTER TABLE `commoditer_announces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,7 +376,6 @@ DROP TABLE IF EXISTS `range_price_announce`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `range_price_announce` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_annonces` mediumint(9) NOT NULL,
   `price_one_night` varchar(20) NOT NULL,
   `price_week_end` varchar(20) NOT NULL,
   `price_one_week` varchar(20) NOT NULL,
@@ -390,7 +389,7 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (1,210,'0-50','101-150','201-300'),(225,0,'','','');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +422,7 @@ CREATE TABLE `sport` (
 
 LOCK TABLES `sport` WRITE;
 /*!40000 ALTER TABLE `sport` DISABLE KEYS */;
-INSERT INTO `sport` VALUES (1,1,1,0,0,1,0,1,1,0,0),(2,1,0,1,0,1,0,1,0,1,0),(216,0,0,0,0,0,0,0,0,0,0),(217,0,0,0,0,0,0,0,0,0,0),(218,0,0,0,0,0,0,0,0,0,0),(219,0,0,0,0,0,0,0,0,0,0),(220,0,0,0,0,0,0,0,0,0,0),(221,0,0,0,0,0,0,0,0,0,0),(222,0,0,0,0,0,0,0,0,0,0),(223,0,0,0,0,0,0,0,0,0,0),(224,0,0,0,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `sport` VALUES (210,1,0,1,1,1,0,1,0,1,0),(225,1,0,1,1,1,0,1,0,1,0);
 /*!40000 ALTER TABLE `sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,4,4,3,1,'08-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,6,6,4,2,'08-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -586,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-02 14:58:17
+-- Dump completed on 2019-08-05 11:31:35
