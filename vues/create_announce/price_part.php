@@ -129,7 +129,7 @@
 		</h4>
 	</div>
 	<div class="panel-body">
-        <div class="form-group">
+        <div class="form-group has-feedback">
             <div class="input-group">
 				<span class="input-group-addon">Caution (€)</span>
 				<input type="text" name="caution" 

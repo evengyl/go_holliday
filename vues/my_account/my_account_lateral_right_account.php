@@ -31,6 +31,10 @@
 
         <hr><?
     }?>
+
+    <div class="view_annonces">
+        <a class="btn " href="/Mon_compte">Voir les conditions général</a>
+    </div>
 </div>
     
 <!-- Modal Lost login-->

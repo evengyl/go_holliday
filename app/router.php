@@ -42,7 +42,7 @@ Class router
 							$this->assign_mod('my_account');
 
 						else if(isset($route['action']) && $route['action'] == 'create_announce')
-							$this->assign_mod('create_announce');
+							$this->assign_mod('create_edit_announce');
 
 						break;
 

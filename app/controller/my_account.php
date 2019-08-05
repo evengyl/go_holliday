@@ -175,7 +175,7 @@ Class my_account extends base_module
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
-			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "admin_validate", "create_date", "vues"],
+			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "user_validate", "admin_validate", "create_date", "vues"],
 			"type_vacances" => ["name_human AS name_type_vacances"]
 		];
 		$sql_annonce->limit = $pagination_limit;

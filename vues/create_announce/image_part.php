@@ -1,17 +1,18 @@
 <div class="col-xs-12 panel panel-default" style="margin-top:15px; background:url(/images/autres/3_opa.png) no-repeat center;">
 	<div class="panel-heading" role="tab" id="headingOne" style="margin-top:15px;">
-		<h4>Ajouter dès à présent vos photos / images (10 Max)<br>
-		<span style="display:none;" data-id-annonce="<?= $last_announce->id_annonce ?>">
-		<small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small>
-		<small class="text-muted thin">(Format supporté : .png  .jpg  .jpeg  .bnp  .gif  .tif)</small></h4>
+		<h4>
+			Ajouter dès à présent vos photos / images (10 Max)<br>
+		</h4>
+		<small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small><br>
+		<small class="text-muted thin">(Format supporté : .png  .jpg  .jpeg  .bnp  .gif  .tif)</small><br>
+		<small class='text-muted thin'>Glisser / Déposer vos images içi, ou sélectionnez les en cliquant ici</small><br>
+		<span  data-id-annonce="<?= $last_announce->id_annonce; ?>"></span>
+		
 	</div>
 	<div class="panel-body">
 		<div class="col-xs-12 dropzone" id="dropzone_img_upload">
-			<div class="col-xs-12"><span class='text-muted thin'>Glisser / Déposer vos images içi, ou sélectionnez les en cliquant ici</span></div>
-
 		</div>
 	    <hr>
-
 	</div>
 
 </div>

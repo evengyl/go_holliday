@@ -34,11 +34,7 @@ Class admin extends base_module
 							$this->other_mod_to_exec[] = 'admin_pull_bsd';
 						break;
 
-						case "go_to_vip_view":
-							$this->set_status(2);
-						break;
-
-						case "go_to_no_vip_view":
+						case "go_to_annonceur_view":
 							$this->set_status(1);
 						break;
 

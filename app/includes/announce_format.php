@@ -79,25 +79,25 @@ Class announce_format{
 		{
 			foreach($announce as $row_announce)
 			{
-				
-				if(empty($this->id_type_vacances)){
-					$announce[0]->array_type_vacances_id = explode(",", $row_announce->id_type_vacances);
+				if(empty($this->id_type_vacances))
+				{
+					$array_type_vacances_id = explode(",", $row_announce->id_type_vacances);
 
-					foreach($announce[0]->array_type_vacances_id as $row_type_vacances)
-					{						
-						$req_sql_type_vacance = new stdClass();
-						$req_sql_type_vacance->table = ["type_vacances"];
-						$req_sql_type_vacance->var = ["name_sql"];
-						$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
-						$announce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);
+					if(!empty($array_type_vacances_id[0]))
+					{
+						foreach($array_type_vacances_id as $row_type_vacances)
+						{						
+							$req_sql_type_vacance = new stdClass();
+							$req_sql_type_vacance->table = ["type_vacances"];
+							$req_sql_type_vacance->var = ["name_sql"];
+							$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
+							$announce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);
 
-						$announce[0]->array_type_vacances[] = $announce_type_vacances[0]->name_sql;
+							$announce[0]->array_type_vacances[] = $announce_type_vacances[0]->name_sql;
 
+						}
 					}
-					unset($announce[0]->array_type_vacances_id);
 				}
-				
-
 
 				$req_sql_sport = new stdClass();
 				$req_sql_sport->table = ["sport"];

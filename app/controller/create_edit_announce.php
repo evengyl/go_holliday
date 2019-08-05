@@ -8,6 +8,7 @@ Class create_edit_announce extends base_module
 	public $create_announce;
 	public $array_list_sport;
 	public $array_list_activity;
+	public $id_annonce = false;
 
 
 	public function __construct(&$_app)
@@ -21,7 +22,8 @@ Class create_edit_announce extends base_module
 		}
 
 		$this->create_id_bsd(); //ok
-		$this->last_announce = $this->_app->get_last_announce_user();	
+		// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
+		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
 
 		//for form tpl
 		$array_type_vacances = $this->get_list_type(); //ok
@@ -114,7 +116,7 @@ Class create_edit_announce extends base_module
 		$this->last_announce->caution = (int)(isset($_POST['caution'])?$_POST['caution']:0);
 
 		$this->insert_value_form_annonce();
-		$this->last_announce = $this->_app->get_last_announce_user();	
+		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
 		
 	}
 
@@ -272,6 +274,7 @@ Class create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->sub_title = $this->last_announce->sub_title;
 		$req_sql_update_annonce->ctx->start_saison = $this->last_announce->start_saison;
 		$req_sql_update_annonce->ctx->end_saison = $this->last_announce->end_saison;
+		$req_sql_update_annonce->ctx->user_validate = "0";
 		$req_sql_update_annonce->table = "annonces";
 		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
 

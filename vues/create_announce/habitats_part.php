@@ -2,6 +2,7 @@
 	<div style="margin-top:15px;" class="panel-heading" role="tab" id="headingOne">
 		<h4>
 			Type d'habitat
+			<small class="text-muted thin">(Le type de bien que vous proposez à la location)</small>
 		</h4>
 	</div>
 	<div class="panel-body">

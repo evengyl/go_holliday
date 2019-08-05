@@ -21,12 +21,8 @@
 		<a style="margin-top:5px;" href="/admin/edit_config_app" type="button" class="btn btn-success  btn-block">Edit option _APP</a>
 		<a style="margin-top:5px; margin-bottom:5px;" href="/admin/pull_bsd" type="button" class="btn btn-info  btn-block">Pull BSD</a>
 
-		<a href="/admin/go_to_client_view" type="button" class="btn btn-info col-xs-6">Vue Client simple</a><?
-		if($_app->user->user_type == 1 || $_app->user->user_type == 0)
-			echo '<a href="/admin/go_to_vip_view" type="button" class="btn btn-success col-xs-6">Vue VIP</a>';
-		
-		else if($_app->user->user_type == 2 || $_app->user->user_type == 0)
-			echo '<a href="/admin/go_to_no_vip_view" type="button" class="btn btn-success col-xs-6">Vue Out VIP</a>';?>
+		<a href="/admin/go_to_client_view" type="button" class="btn btn-info col-xs-6">Vue Client</a>
+		<a href="/admin/go_to_annonceur_view" type="button" class="btn btn-success col-xs-6">Vue Annonceur</a>
 		
 		
 	</div>
