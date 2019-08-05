@@ -2,7 +2,7 @@
 Class annonce extends base_module
 {
 	private $id_annonce;
-	public $value_announce;
+	public $last_announce;
 	
 
 	public function __construct(&$_app)
@@ -13,10 +13,10 @@ Class annonce extends base_module
 		{
 
 			$array_img_annonce = $this->get_img_files_by_id();
-			$this->get_infos_announce();
+			$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
 
 			$this->assign_var("slide_img", $array_img_annonce)
-			->assign_var("value_announce", $this->value_announce)
+			->assign_var("last_announce", $this->last_announce)
 			->render_tpl();
 			
 		}
@@ -59,22 +59,4 @@ Class annonce extends base_module
 		return $array_slide;
 	}
 
-	private function get_infos_announce()
-	{
-		$sql_annonce = new stdClass();
-		$sql_annonce->table = ['annonces', "type_vacances"];
-		$sql_annonce->var = [
-			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "admin_validate", "create_date", "vues"],
-			"type_vacances" => ["name_human AS name_type_vacances"]
-		];
-		$sql_annonce->where = ["id_utilisateurs = $1 AND id = $2", [$this->_app->user->id_utilisateurs, $this->id_annonce]];
-		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
-
-		$tmp_array = (array) $res_sql_annonces[0];
-
-		$tmp_1 = array_merge($tmp_array, $this->value_announce);
-		$tmp_2 = array_merge($this->value_announce, $tmp_array);
-
-		$this->value_announce = (object) array_merge($tmp_1, $tmp_2);
-	}
 }

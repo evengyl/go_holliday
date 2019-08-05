@@ -13,6 +13,7 @@ Class announce_format{
 		"type_habitat_id" => "",
 		"name_habitat_sql" => "",
 		"name_habitat_human" => "",
+		"text_habitat" => "",
 
 		"title" => "",
 		"sub_title" => "",
@@ -62,7 +63,7 @@ Class announce_format{
 			"annonces" => ["id as id_annonce", "id_type_vacances", "title", "sub_title", "start_saison", "end_saison"],
 			"pays" => ["name_sql AS name_address_pays_sql", "name_human AS name_address_pays_human"],
 			"range_price_announce" => ["price_one_night", "price_week_end", "price_one_week"],
-			"habitat" => ["id AS type_habitat_id", "name_human AS name_habitat_human", "name_sql AS name_habitat_sql"],
+			"habitat" => ["id AS type_habitat_id", "name_human AS name_habitat_human", "name_sql AS name_habitat_sql", "text AS text_habitat"],
 			"sport" => ["id AS id_sport"],
 			"activity" => ["id AS id_activity"],
 			"announces_address" => ["id AS id_announces_address", "*"],
