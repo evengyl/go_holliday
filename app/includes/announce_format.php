@@ -47,7 +47,6 @@ Class announce_format{
 		"price_one_night" => "",
 		"price_week_end" => "",
 		"price_one_week" => "",
-		
 	];
 
 	public function __construct(&$_app)
@@ -76,44 +75,22 @@ Class announce_format{
 		$req_sql_announce->limit = "1";
 		$announce = $this->_app->sql->select($req_sql_announce);
 
+
 		if(!empty($announce[0]))
 		{
-			foreach($announce as $row_announce)
-			{
+			$this->announce = $announce[0];
 
-				$announce[0]->price_one_night_human = "<b class='text-muted'>Prix moyen pour une nuit : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_one_night."&nbsp;€</i>");
-				$announce[0]->price_week_end_human = "<b class='text-muted'>Prix moyen pour un week-end : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_week_end."&nbsp;€</i>");
-				$announce[0]->price_one_week_human = "<b class='text-muted'>Prix moyen pour une semaine : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_one_week."&nbsp;€</i>");
-				$announce[0]->caution_human = "Une caution de <b>".$announce[0]->caution."&nbsp;€</b> est demandée pour garantir le bien.";
+
+				$this->announce = $this->announce;
+				$this->render_human_price_range();
+				$this->render_type_vacances();
+
 				
-
-
-				if(empty($this->id_type_vacances))
-				{
-					$array_type_vacances_id = explode(",", $row_announce->id_type_vacances);
-
-					if(!empty($array_type_vacances_id[0]))
-					{
-						foreach($array_type_vacances_id as $row_type_vacances)
-						{						
-							$req_sql_type_vacance = new stdClass();
-							$req_sql_type_vacance->table = ["type_vacances"];
-							$req_sql_type_vacance->var = ["name_sql", "icon", "title"];
-							$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
-							$announce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);
-
-							$announce[0]->array_type_vacances[] = $announce_type_vacances[0]->name_sql;
-							$announce[0]->array_type_vacances_icon[] = $announce_type_vacances[0]->icon;
-							$announce[0]->array_type_vacances_text[] = $announce_type_vacances[0]->title;
-
-						}
-					}
-				}
 
 				$req_sql_sport = new stdClass();
 				$req_sql_sport->table = ["sport"];
 				$req_sql_sport->var = ["*"];
-				$req_sql_sport->where = ["id = $1", [$row_announce->id_sport]];
+				$req_sql_sport->where = ["id = $1", [$this->announce->id_sport]];
 				$announce_sport = $this->_app->sql->select($req_sql_sport);
 
 				foreach($announce_sport as $keys => $row_sports)
@@ -127,14 +104,14 @@ Class announce_format{
 					{
 						if($row_sport == 1)
 						{
-							$announce[0]->list_sport[] = $key;
+							$this->announce->list_sport[] = $key;
 
 							$req_sql_sport = new stdClass();
 							$req_sql_sport->table = ["text_sql_to_human"];
 							$req_sql_sport->var = ["name_human"];
 							$req_sql_sport->where = ["name_sql = $1", [$key]];
 							$announce_sport = $this->_app->sql->select($req_sql_sport);
-							$announce[0]->list_sport_human[] = $announce_sport[0]->name_human;
+							$this->announce->list_sport_human[] = $announce_sport[0]->name_human;
 						
 						}
 					}
@@ -145,7 +122,7 @@ Class announce_format{
 				$req_sql_activity = new stdClass();
 				$req_sql_activity->table = ["activity"];
 				$req_sql_activity->var = ["*"];
-				$req_sql_activity->where = ["id = $1", [$row_announce->id_activity]];
+				$req_sql_activity->where = ["id = $1", [$this->announce->id_activity]];
 				$announce_activity = $this->_app->sql->select($req_sql_activity);
 
 
@@ -161,29 +138,65 @@ Class announce_format{
 
 						if($row_activity == 1)
 						{
-							$announce[0]->list_activity[] = $key;
+							$this->announce->list_activity[] = $key;
 
 							$req_sql_sport = new stdClass();
 							$req_sql_sport->table = ["text_sql_to_human"];
 							$req_sql_sport->var = ["name_human"];
 							$req_sql_sport->where = ["name_sql = $1", [$key]];
 							$announce_sport = $this->_app->sql->select($req_sql_sport);
-							$announce[0]->list_activity_human[] = $announce_sport[0]->name_human;
+							$this->announce->list_activity_human[] = $announce_sport[0]->name_human;
 						}
 					}
 					
 				}
-			}
 		}
 
-		$announce = (object) array_merge( (array)$this->announce_format, (array)$announce[0]);
-		return $announce;
+		$this->announce = (object) array_merge( (array)$this->announce_format, (array)$this->announce);
+
+		return $this->announce;
 	}
 
 
 	public function convert_range_price($price)
 	{	
 		return $price = "Entre ".str_replace("-",  " et ", $price);
+	}
+
+
+	private function render_human_price_range()
+	{
+		$this->announce->price_one_night_human = "<b class='text-muted'>Prix moyen pour une nuit : </b><br><i style='color:#008000;'>".$this->convert_range_price($this->announce->price_one_night."&nbsp;€</i>");
+
+		$this->announce->price_week_end_human = "<b class='text-muted'>Prix moyen pour un week-end : </b><br><i style='color:#008000;'>".$this->convert_range_price($this->announce->price_week_end."&nbsp;€</i>");
+
+		$this->announce->price_one_week_human = "<b class='text-muted'>Prix moyen pour une semaine : </b><br><i style='color:#008000;'>".$this->convert_range_price($this->announce->price_one_week."&nbsp;€</i>");
+
+		$this->announce->caution_human = "Une caution de <b>".$this->announce->caution."&nbsp;€</b> est demandée pour garantir le bien.";
+	}
+
+	private function render_type_vacances()
+	{
+		if(!empty($this->announce->id_type_vacances))
+		{
+			$array_type_vacances_id = explode(",", $this->announce->id_type_vacances);
+
+			$this->announce->array_type_vacances = new stdClass();
+
+			foreach($array_type_vacances_id as $row_type_vacances)
+			{						
+				$req_sql_type_vacance = new stdClass();
+				$req_sql_type_vacance->table = ["type_vacances"];
+				$req_sql_type_vacance->var = ["name_sql", "icon", "title"];
+				$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
+				$announce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);
+
+				$this->announce->array_type_vacances->id = $array_type_vacances_id;
+				$this->announce->array_type_vacances->text[] = $announce_type_vacances[0]->title;
+				$this->announce->array_type_vacances->icon[] = $announce_type_vacances[0]->icon;
+
+			}
+		}
 	}
 
 

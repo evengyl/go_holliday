@@ -35,11 +35,15 @@ function add_to_favorite($_app)
 		$ctx_id_favorite = "";
 		if(!empty($tmp[0]->id_favorite))
 		{
-			$ctx_id_favorite = $tmp[0]->id_favorite.",".$_POST['id_annonce'];
+			$ctx_id_favorite = explode(",",$tmp[0]->id_favorite);
+			if(!array_search($_POST['id_annonce'], $ctx_id_favorite))
+			{
+				$ctx_id_favorite = $tmp[0]->id_favorite.",".$_POST['id_annonce'];
+			}
 		}
 		else
 			$ctx_id_favorite = $_POST['id_annonce'];
-
+		
 		$req_sql_update_favorite = new stdClass();
 		$req_sql_update_favorite->ctx = new stdClass();
 		$req_sql_update_favorite->ctx->id_favorite = $ctx_id_favorite;
@@ -70,7 +74,6 @@ function del_to_favorite($_app)
 		$tmp = $_app->sql->select($req_sql_verify);
 
 		$ctx_id_favorite = "";
-		affiche($tmp[0]->id_favorite);
 		if(!empty($tmp[0]->id_favorite))
 		{
 			$ctx_id_favorite = explode(",",$tmp[0]->id_favorite);

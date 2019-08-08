@@ -31,11 +31,18 @@ Class fct_global_website extends announce_format
 				"id_background_profil",
 				"account_verify",
 				"id_create_account",
-				"newsletter"]
+				"newsletter",
+				"id_favorite"]
 		];
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 		$res_fx = $this->_app->sql->select($req_sql);
+
+
+		//la liste des annonces favorite est en chaine de caractere on la remet en array
+		$res_fx[0]->id_favorite = explode(",", $res_fx[0]->id_favorite);
 		
+
+		//on ressemble les deux array pour mettre a jour l'_app->user
 		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
 		return $merge_array_user;
 	}
@@ -65,10 +72,7 @@ Class fct_global_website extends announce_format
 			while(false !== ($fichier = readdir($dossier)))
 			{
 				if($fichier != '.' && $fichier != '..')
-					if(strpos($fichier, "_opa") === false)
-						$array_slide[] = "/images/slides_home/".$fichier;
-					else
-						$array_slide_opacity[] = "/images/slides_home/".$fichier;
+					$array_slide[] = "/images/slides_home/".$fichier;
 			}
 		}
 

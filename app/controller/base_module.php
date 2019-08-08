@@ -98,6 +98,9 @@ Class base_module
 		else if(strpos($this->template_name, "my_account") !== false)
 			$final_path = '../vues/my_account/'.$this->template_name.'.php';
 
+		else if(strpos($this->template_name, "annonce") !== false)
+			$final_path = '../vues/annonces/'.$this->template_name.'.php';
+
 		else
 			$final_path = '../vues/'.$this->template_name.'.php';	
 
