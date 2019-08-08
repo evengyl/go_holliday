@@ -93,7 +93,7 @@ Class fct_global_website extends announce_format
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$subject = "Demande administrative";
 
-		mail("info.go.holliday@gmail.com", $subject, $content_html, $headers);
+		mail(Config::$mail, $subject, $content_html, $headers);
 	}
 	
 }

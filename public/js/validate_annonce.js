@@ -1,6 +1,8 @@
 $(document).ready(function()
 {
     $(".modal btn[data-action='validate_announce']").click(function(){
+        $("div.loading_ajax").addClass('loaded');
+
         var btn_clicked = $(this);
         var id_annonce = btn_clicked.attr("data-id");
         var id_user = btn_clicked.attr("data-id-user");
@@ -14,8 +16,19 @@ $(document).ready(function()
             {
                 console.log(data_return);
                 $('#validate_'+id_annonce).modal('hide');
+                
                 $("h4[data-fct='return_fct_annonce']").html("Vous avez bien validé votre annonce, Merci").show(500).delay(3000).hide(500);
+                setTimeout(reload_page, 2000);
+            },
+            complete : function(){
+                $("div.loading_ajax").removeClass('loaded');
             }
         });
     });
+
+
+    function reload_page()
+    {
+        location.reload(); 
+    }
 });

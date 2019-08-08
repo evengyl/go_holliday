@@ -41,7 +41,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,0,1,1,1,1,1),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0);
+INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,1,1,1,1,1,1),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +82,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,1,'28/01/2019'),(225,1,3,'2,3',225,225,225,225,225,1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','09/08/2019','20/08/2019',0,0,1,0,'02/08/2019'),(229,1,5,'1,2,3',229,229,229,229,229,1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,0,0,'05/08/2019');
+INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,0,1,'28/01/2019'),(225,1,3,'2,3',225,225,225,225,225,1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','09/08/2019','20/08/2019',0,0,0,0,'02/08/2019'),(229,1,5,'1,2,3',229,229,229,229,229,1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,1,0,'05/08/2019');
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `commoditer_announces` (
 
 LOCK TABLES `commoditer_announces` WRITE;
 /*!40000 ALTER TABLE `commoditer_announces` DISABLE KEYS */;
-INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,1,1,1,6,300);
+INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300);
 /*!40000 ALTER TABLE `commoditer_announces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `habitat` (
   `name_sql` varchar(20) NOT NULL,
   `name_human` varchar(50) NOT NULL,
   `img` varchar(50) NOT NULL,
-  `text` varchar(255) NOT NULL,
+  `text` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -221,7 +221,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Une Caravane : '),(2,'bungalow','Bungalow','bungalow.jpg','Un Bungalow : '),(3,'appartements','Appartements','appartement.jpg','Un Appartements : '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Une Maisons d\'hôtes : '),(5,'gites','Gites','gite.jpg','Un Gites : '),(6,'villa','Villa','villa.jpg','Une Villa : ');
+INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','<b>Une Caravane</b> :  remorque destiné à être habitée, de manière temporaire (pour du camping, par exemple) ou permanente. Les caravanes peuvent être tractées par des automobiles ou des camionnettes.'),(2,'bungalow','Bungalow','bungalow.jpg','<b>Un Bungalow</b> : habitation de forme rectangulaire pouvant servir de résidence permanente ou secondaire. Elle doit être habitable à longueur d\'année, construite sur un châssis remorquable, non sur fondations permanentes, et destinée à être raccordée aux services publics'),(3,'appartements','Appartements','appartement.jpg','<b>Un Appartements</b> : Bien comportant un certain nombre de pièces et qui n’occupe qu’une partie d’un immeuble, situé généralement dans une ville. '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','<b>Une Maisons d\'hôtes</b> : une chambre chez l’habitant, louée à la nuitée. On partage la maison du propriétaire qui accueille ses hôtes (ou une dépendance sur la propriété, c’est possible) et même si la chambre comporte un coin salon, les pièces à vivre sont communes.'),(5,'gites','Gites','gite.jpg','<b>Un Gites</b> : Le gîte est une location meublée de tourisme ou location saisonnière, généralement à la semaine. Les personnes qui le louent ont la libre disposition d’un appartement ou bâtiment avec au moins une pièce à vivre, une cuisine, une salle d’eau, une ou des chambres… Elles doivent être autonomes, comme chez elles. '),(6,'villa','Villa','villa.jpg','<b>Une Villa</b> : Une villa est à présent une maison d\'habitation de grande taille, souvent de villégiature, de plaisance (villa de bord de mer, de station thermale). ');
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,6,6,13,2,'08-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,12,12,22,3,'08-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-05 17:01:18
+-- Dump completed on 2019-08-08 10:44:40

@@ -63,7 +63,7 @@ Class announce_format{
 			"annonces" => ["id as id_annonce", "id_type_vacances", "title", "sub_title", "start_saison", "end_saison"],
 			"pays" => ["name_sql AS name_address_pays_sql", "name_human AS name_address_pays_human"],
 			"range_price_announce" => ["price_one_night", "price_week_end", "price_one_week"],
-			"habitat" => ["id AS type_habitat_id", "name_human AS name_habitat_human", "name_sql AS name_habitat_sql", "text AS text_habitat"],
+			"habitat" => ["id AS type_habitat_id", "name_human AS name_habitat_human", "name_sql AS name_habitat_sql", "text AS text_habitat", "img AS img_habitat"],
 			"sport" => ["id AS id_sport"],
 			"activity" => ["id AS id_activity"],
 			"announces_address" => ["id AS id_announces_address", "*"],
@@ -80,6 +80,14 @@ Class announce_format{
 		{
 			foreach($announce as $row_announce)
 			{
+
+				$announce[0]->price_one_night_human = "<b class='text-muted'>Prix moyen pour une nuit : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_one_night."&nbsp;€</i>");
+				$announce[0]->price_week_end_human = "<b class='text-muted'>Prix moyen pour un week-end : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_week_end."&nbsp;€</i>");
+				$announce[0]->price_one_week_human = "<b class='text-muted'>Prix moyen pour une semaine : </b><br><i style='color:#008000;'>".$this->convert_range_price($row_announce->price_one_week."&nbsp;€</i>");
+				$announce[0]->caution_human = "Une caution de <b>".$announce[0]->caution."&nbsp;€</b> est demandée pour garantir le bien.";
+				
+
+
 				if(empty($this->id_type_vacances))
 				{
 					$array_type_vacances_id = explode(",", $row_announce->id_type_vacances);
@@ -90,11 +98,13 @@ Class announce_format{
 						{						
 							$req_sql_type_vacance = new stdClass();
 							$req_sql_type_vacance->table = ["type_vacances"];
-							$req_sql_type_vacance->var = ["name_sql"];
+							$req_sql_type_vacance->var = ["name_sql", "icon", "title"];
 							$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
 							$announce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);
 
 							$announce[0]->array_type_vacances[] = $announce_type_vacances[0]->name_sql;
+							$announce[0]->array_type_vacances_icon[] = $announce_type_vacances[0]->icon;
+							$announce[0]->array_type_vacances_text[] = $announce_type_vacances[0]->title;
 
 						}
 					}
@@ -116,7 +126,17 @@ Class announce_format{
 					foreach($tmp_array as $key => $row_sport)
 					{
 						if($row_sport == 1)
-						$announce[0]->list_sport[] = $key;
+						{
+							$announce[0]->list_sport[] = $key;
+
+							$req_sql_sport = new stdClass();
+							$req_sql_sport->table = ["text_sql_to_human"];
+							$req_sql_sport->var = ["name_human"];
+							$req_sql_sport->where = ["name_sql = $1", [$key]];
+							$announce_sport = $this->_app->sql->select($req_sql_sport);
+							$announce[0]->list_sport_human[] = $announce_sport[0]->name_human;
+						
+						}
 					}
 					
 				}
@@ -128,6 +148,7 @@ Class announce_format{
 				$req_sql_activity->where = ["id = $1", [$row_announce->id_activity]];
 				$announce_activity = $this->_app->sql->select($req_sql_activity);
 
+
 				foreach($announce_activity as $keys => $row_activities)
 				{
 					unset($announce_sport[$keys]->id);
@@ -137,8 +158,18 @@ Class announce_format{
 
 					foreach($tmp_array as $key => $row_activity)
 					{
+
 						if($row_activity == 1)
-						$announce[0]->list_activity[] = $key;
+						{
+							$announce[0]->list_activity[] = $key;
+
+							$req_sql_sport = new stdClass();
+							$req_sql_sport->table = ["text_sql_to_human"];
+							$req_sql_sport->var = ["name_human"];
+							$req_sql_sport->where = ["name_sql = $1", [$key]];
+							$announce_sport = $this->_app->sql->select($req_sql_sport);
+							$announce[0]->list_activity_human[] = $announce_sport[0]->name_human;
+						}
 					}
 					
 				}
@@ -148,5 +179,13 @@ Class announce_format{
 		$announce = (object) array_merge( (array)$this->announce_format, (array)$announce[0]);
 		return $announce;
 	}
+
+
+	public function convert_range_price($price)
+	{	
+		return $price = "Entre ".str_replace("-",  " et ", $price);
+	}
+
+
 
 }

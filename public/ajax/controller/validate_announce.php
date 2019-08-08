@@ -24,8 +24,11 @@ require("ajax_min_load.php");
 					$req_sql->where = "id = '".$_POST['id_annonce']."' AND id_utilisateurs = '".$_POST['id_user']."'";
 					$status = $res_sql = $_app->sql->update($req_sql);	
 
-					if($status)
+					if($status){
+						$_app->send_new_request_admin("Une annonce à été crée, avec l'ID : ".$_POST['id_annonce']."<br>"."veuillez aller la vérifier sur l'administration http://goholliday.be/admin");
+						
 						return 1;
+					}
 					else
 						return 0;
 				}

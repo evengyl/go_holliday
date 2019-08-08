@@ -184,10 +184,6 @@ img{
 	}
 }
 
-#map {
-	width:100%;
-	height:280px;
-}
 #social {
 	margin-top:50px;
 	margin-bottom:50px;
@@ -661,3 +657,26 @@ input.test:checked + label::before {
 
 
 }
+
+
+
+ div.loading_ajax{
+ 	display:none;
+ }
+ div.loading_ajax.loaded{
+ 	display:block;
+	position: absolute;
+	width: 100%;
+	opacity: 0.6;
+	z-index: 3;
+	top: 171px;
+	left: 101px;
+	
+ }
+
+ div.loading_ajax.loaded img{
+ 	display:block;
+ 	position: absolute;
+	margin:0;
+ }
+
