@@ -7,17 +7,11 @@
 					<h3 class="widget-title">__TRANS__contact_detail__</h3>
 					<div class="widget-body">
 						<p>
-							Email de contact : <a href="mailto:perroquet484@matedex.be">Holliday simply online</a><br>
+							Email de contact : <a href="mailto:<?= Config::$mail; ?>"><?= $_app->site_name; ?></a><br>
 							<br>
-							<b>__TRANS_tel_mainteance__ : </b> +32 (0)497 31 25 23<br>
-							<b>__TRANS_tel_commercial__ : </b> +32 (0)468 36 17 82<br>
+							<b>__TRANS_tel_mainteance__ : </b><?= Config::$tel_technical ?><br>
+							<b>__TRANS_tel_commercial__ : </b><?= Config::$tel_commercial ?><br>
 						</p>	
-						<!--
-						<div class="hidden-xs col-sm-2" id="" style="color:white;">
-							<?=($_SESSION['lang'] == 'fr')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=fr"><img class="img-responsive" style="height:25px;" src ="/images/fr.png"></a>'; ?>
-							<?=($_SESSION['lang'] == 'en')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=en"><img class="img-responsive" style="height:25px;" src ="/images/en.png"></a>'; ?>
-							<?=($_SESSION['lang'] == 'nl')?'':'<a class="col-lg-2" href="'.$_SERVER["REQUEST_URI"].'&lang=nl"><img class="img-responsive" style="height:25px;" src ="/images/nl.png"></a>'; ?>
-						</div>-->
 					</div>
 				</div>
 
@@ -31,10 +25,11 @@
 				</div>
 
 				<div class="col-lg-5 widget">
-					<h3 class="widget-title">ici texte description</h3>
+					<h3 class="widget-title"><?= $_app->site_name; ?></h3>
 					<div class="widget-body">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-						<p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+						<p>Nous vous proposons une interface simple et intuitive pour chercher / trouver / réservez vos vacances en familles ou en couples.</br>
+		Vous aurez accès a une interface gratuite et sans limite d'utilisation pour gérer vos vacances car :<br> nous vous mettons directement en relation avec un propriétaire 
+		de bungalow, appartement, maison d'hôtes, maison de vacances, caravanes, appartement.</p>
 					</div>
 				</div>
 

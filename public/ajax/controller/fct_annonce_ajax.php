@@ -6,57 +6,85 @@ if(isset($_POST))
 {
 	switch($_POST["app_fct"])
 	{
-	    case 'desactivate_annonce':
-    		desactivate_annonce($_app);
-	        break;
-
-	    case 'activate_annonce':
-	    	activate_annonce($_app);
+        case 'add_to_favorite':
+	        add_to_favorite($_app);
 	        break;
 	}
 }
 
 
-function desactivate_annonce($_app)
+
+
+function add_to_favorite($_app)
 {
+	$req_sql_verify = new stdClass();
+	$req_sql_verify->table = ['annonces'];
+	$req_sql_verify->var = ["id"];
+	$req_sql_verify->where = ["id = $1", [(int)$_POST['id_annonce']]];
+	$tmp = $_app->sql->select($req_sql_verify);
 
-	if(isset($_POST['id_annonce']))
+	if(!empty($tmp[0]->id))
 	{
-		$req_sql = new stdClass;
-		$req_sql->table = "annonces";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->active = "0";
-		$req_sql->where = "id = '".$_POST['id_annonce']."'";
-		$res_sql = $_app->sql->update($req_sql);
+		//ok l'annonce existe bien
+		$req_sql_verify = new stdClass();
+		$req_sql_verify->table = ['utilisateurs'];
+		$req_sql_verify->var = ["id_favorite"];
+		$req_sql_verify->where = ["id = $1", [$_app->user->id_utilisateurs]];
+		$tmp = $_app->sql->select($req_sql_verify);
 
-		if(!$res_sql)
-			echo 'Votre annonce était déjà inactive !';	
-
+		$ctx_id_favorite = "";
+		if(!empty($tmp[0]->id_favorite))
+		{
+			$ctx_id_favorite = $tmp[0]->id_favorite.",".$_POST['id_annonce'];
+		}
 		else
-			echo 'Votre annonce à bien été désactivée !';	
+			$ctx_id_favorite = $_POST['id_annonce'];
+
+		$req_sql_update_favorite = new stdClass();
+		$req_sql_update_favorite->ctx = new stdClass();
+		$req_sql_update_favorite->ctx->id_favorite = $ctx_id_favorite;
+		$req_sql_update_favorite->table = "utilisateurs";
+		$req_sql_update_favorite->where = "id = '".$_app->user->id_utilisateurs."'";
+		$_app->sql->update($req_sql_update_favorite);
 	}
-}
 
-function activate_annonce($_app)
-{
-	if(!$_app->can_do_user->edit_active) echo "Sérieusement c'est pas très beau de tricher...";
-
-	if(isset($_POST['id_annonce']))
-	{
-		$req_sql = new stdClass;
-		$req_sql->table = "annonces";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->active = "1";
-		$req_sql->where = "id = '".$_POST['id_annonce']."'";
-		$res_sql = $_app->sql->update($req_sql);
-
-		if(!$res_sql)
-			echo 'Bizarre votre annonce était déjà active !';	
-
-		else
-			echo 'Votre annonce à bien été activée.';	
-	}
+	
 }
 
 
-?>
+function del_to_favorite($_app)
+{
+	$req_sql_verify = new stdClass();
+	$req_sql_verify->table = ['annonces'];
+	$req_sql_verify->var = ["id"];
+	$req_sql_verify->where = ["id = $1", [(int)$_POST['id_annonce']]];
+	$tmp = $_app->sql->select($req_sql_verify);
+
+	if(!empty($tmp[0]->id))
+	{
+		//ok l'annonce existe bien
+		$req_sql_verify = new stdClass();
+		$req_sql_verify->table = ['utilisateurs'];
+		$req_sql_verify->var = ["id_favorite"];
+		$req_sql_verify->where = ["id = $1", [$_app->user->id_utilisateurs]];
+		$tmp = $_app->sql->select($req_sql_verify);
+
+		$ctx_id_favorite = "";
+		affiche($tmp[0]->id_favorite);
+		if(!empty($tmp[0]->id_favorite))
+		{
+			$ctx_id_favorite = explode(",",$tmp[0]->id_favorite);
+			unset($ctx_id_favorite[array_search($_POST['id_annonce'], $ctx_id_favorite)]);
+			$ctx_id_favorite = implode(",", $ctx_id_favorite);
+		}
+		else
+			$ctx_id_favorite = $_POST['id_annonce'];
+
+		$req_sql_update_favorite = new stdClass();
+		$req_sql_update_favorite->ctx = new stdClass();
+		$req_sql_update_favorite->ctx->id_favorite = $ctx_id_favorite;
+		$req_sql_update_favorite->table = "utilisateurs";
+		$req_sql_update_favorite->where = "id = '".$_app->user->id_utilisateurs."'";
+		$_app->sql->update($req_sql_update_favorite);
+	}
+}

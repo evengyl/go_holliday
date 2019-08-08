@@ -21,7 +21,7 @@
 <script>
 
 	var url_uploads = "/ajax/controller/upload_image_annonces.php";
-	var accept_format = ".png,.jpg,.jpeg,.bnp,.gif,.tif";
+	var accept_format = ".png,.jpg,.jpeg";
 	Dropzone.autoDiscover = false;
 
 	var id_annonces = $("span[data-id-annonce]").attr("data-id-annonce");

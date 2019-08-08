@@ -226,5 +226,5 @@
 </ul>
     
 <script src="/js/validate_annonce.js"></script>
-<script src="/js/activate_desactivate_annonce.js"></script>
+
 

@@ -1,54 +1,63 @@
 <div class="secondary" id="head"></div>
-<? affiche($last_announce); ?>
 <div class="container-fluid text-center page_annonce">
 	
     <div class="container">
-    	<h1 class="thin"><?= $last_announce->title; ?></h1>
-    	<h2 class="text-muted" style="margin-top:0px;"><small class="thin"><?= $last_announce->sub_title; ?></small></h2>
-    </div>
-    <div class="slide_annonce">
-        <div class="container">
-		    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-		        <div class="carousel-inner"><?
-		        	$active = true;
-		        	foreach($slide_img as $row_img)
-		        	{?>
-						<div class="item <?=($active)?'active':''; ?>">
-		                	<center><img src="<?= $row_img; ?>" alt=""  style="max-height:400px;" class="img-responsive"></center>
-		            	</div><?
-		            	$active = false;
-		        	}?>
-		        	
-		         
-		        </div>
-		        
-		        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-		            <span class="glyphicon glyphicon-chevron-left"></span>
-		            <span class="sr-only">Previous</span>
-		        </a>
-		        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-		            <span class="glyphicon glyphicon-chevron-right"></span>
-		            <span class="sr-only">Next</span>
-		        </a>
-		        
-		        <ul class="carousel-indicators"><?
-		        	$i = 0;
-			        foreach($slide_img as $row_img)
-			        {?>
-			        	<li data-target="#myCarousel" data-slide-to="<?= $i; ?>" class="active">
-			        		<a href="<?= $row_img; ?>" data-lightbox="image-1">
-			        			<img src="<?= $row_img; ?>">
-			        		</a>
-		        		</li><?
-			        	$i++;
-			        }?>
-		        </ul>
-		        <hr>
-		    </div>
-		</div>
+    	<h1 class="thin" style="margin-top:0px;"><?= ucfirst($last_announce->title); ?></h1>
+    	<h2 class="text-muted" style="margin-top:0px;"><small class="thin"><?= ucfirst($last_announce->sub_title); ?></small></h2>
+    	<h4 class="text-muted thin" style="margin-top:0px;">
+				<?= ucfirst($last_announce->address_lieux_dit).
+					" à ".$last_announce->address_zip_code.
+					", ".ucfirst($last_announce->address_localite).
+					", ".ucfirst($last_announce->address_rue).
+					" ".$last_announce->address_numero ?></h4>
     </div>
 
-    <div class="jumbotron" style="margin-top:150px;">
+
+<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+    <div class='carousel-outer'>
+        <!-- Wrapper for slides -->
+        <div class='carousel-inner' style="height:500px;"><?
+        	$active = true;
+        	foreach($slide_img as $row_img)
+        	{?>
+				<div class="item <?=($active)?'active':''; ?>">
+                	<center><img style="max-height:500px;" src="<?= $row_img; ?>" alt=""></center>
+            	</div><?
+            	$active = false;
+        	}?>
+        </div>
+            
+        <!-- Controls -->
+        <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+            <span class='glyphicon glyphicon-chevron-left'></span>
+        </a>
+        <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+            <span class='glyphicon glyphicon-chevron-right'></span>
+        </a>
+    </div>
+    
+    <!-- Indicators -->
+    <ol class='carousel-indicators mCustomScrollbar'><?
+    	$i = 0;
+    	$active = true;
+        foreach($slide_img as $row_img)
+        {?>
+        	<li  data-target="#carousel-custom" data-slide-to="<?= $i; ?>" class="active">
+        		<a href="<?= $row_img; ?>" data-lightbox="image-1">
+        			<img style="max-height:100px;" src="<?= $row_img; ?>">
+        		</a>
+    		</li><?
+    		$active = false;
+        	$i++;
+        }?>
+
+    </ol>
+</div>
+
+
+
+
+    <div class="jumbotron" style="margin-top:15px;">
 		<div class="container">
 			
 			<h3 class="text-center thin" style="margin-top:0px;">Vacances orientée pour ?</h3>
@@ -73,6 +82,25 @@
 					</div><?
 					$colonage_type = "col-xs-4";
 				}?>
+				<h3 class="text-center thin col-xs-12" style="margin-top:0px;">C'est un bien pour <b><?= $last_announce->max_personn; ?></b> personne(s) maximum</h3>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="jumbotron" style="margin-top:15px;">
+		<div class="container">
+			<h3 class="text-center thin" style="margin-top:0px;">Elle vous intéresse ? Vous souhaiter aller plus loin ?</h3>
+			<div class="row" style="margin-top:25px;">
+				<div class="col-xs-4">
+			        <button class="btn btn-danger" <?=(isset($_app->user->login))?"":"disabled"; ?> data-action="place_to_fav" data-id="<?= $last_announce->id_annonce?>">Placer cette annonce dans mes favorites</button>
+			    </div>
+			    <div class="col-xs-4">
+			        <button class="btn btn-info" data-toggle="modal" data-target="#col-xs-4">Faire une demande de dates</button>
+			    </div>
+			    <div class="col-xs-4">
+			        <button class="btn btn-info" data-toggle="modal" data-target="#col-xs-4">Prendre contact avec l'annonceur</button>
+			    </div>
 			</div>
 		</div>
 	</div>
@@ -85,7 +113,7 @@
 			<div class="row" style="margin-top:0px;">
 				<div class="col-md-3">
 					<div class="h-caption"><h4><i class="fas fa-home"></i>Habitation</h4></div>
-					<div class="h-body text-left">
+					<div class="h-body text-center">
 						<img src="/images/habitats/<?= $last_announce->img_habitat ?>">
 						<h3 class="text-center" style="margin-top:15px;"><?= $last_announce->name_habitat_human ?></h3>
 					</div>
@@ -152,7 +180,13 @@
 
 	<div class="jumbotron" style="margin-top:15px;">
 		<div class="row">
-			<h3 class="text-center thin" style="margin-top:0px;">Carte</h3>
+			<h3 class="text-center thin" style="margin-top:0px;">Où est-ce ?</h3>
+			<h4 class="text-center " style="margin-top:0px;"><b>
+				<?= ucfirst($last_announce->address_lieux_dit).
+					" à ".$last_announce->address_zip_code.
+					", ".ucfirst($last_announce->address_localite).
+					", ".ucfirst($last_announce->address_rue).
+					" ".$last_announce->address_numero ?></b></h4>
 			<span class="thin text-muted"><small>Liste non exhaustive de proximité immédiate (5 km)</small></span>
 			<span class="thin text-muted"><small>Les cartes Google maps étant devenue payant, nous utilisons un autre fournisseur</small></span>
 			<div id="map" style="margin-top:15px; margin-bottom:15px; height:500px;" class="col-xs-10 col-xs-offset-1"></div><hr>
@@ -208,7 +242,20 @@
 $(document).ready(function()
 {
 	
-
+	$("button[data-action='place_to_fav']").click(function(){
+		var button_clicked = $(this);
+		$.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/fct_annonce_ajax.php',
+            dataType : "HTML",
+            data : {"app_fct" : "add_to_favorite", "id_annonce" : button_clicked.attr("data-id")},
+            success : function(data_return)
+            {
+            	//button_clicked.attr("disabled", true);
+            },
+        });
+	});
+/*
 	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $add_sql->rue; ?>, <?= $add_sql->ville; ?>,<?= $add_sql->code_postal; ?>, <?= $add_sql->pays;?>&format=json&addressdetails=1&extratags=1";
 
 	var settings_localisation = {
@@ -303,7 +350,7 @@ $(document).ready(function()
 		  })(i);
 		};
 
-	});
+	});*/
 });
 </script>
 

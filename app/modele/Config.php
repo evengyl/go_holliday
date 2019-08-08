@@ -18,6 +18,9 @@ class Config
 
     public static $is_connect = 0;
 
+    public static $tel_commercial = "+32 (0)468 36 17 82";
+    public static $tel_technical = "+32 (0)497 31 25 23";
+
     public static function set_name_base($base)
     {
         self::$base = $base;

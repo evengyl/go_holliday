@@ -16,7 +16,6 @@
 		                	<img src="/images/habitats/<?= $row_type_habitat->img; ?>">
 		                    <div class="caption css-label">
 		                        <h3 style="margin-top:0px;"><?= $row_type_habitat->name_human; ?></h3>
-		                        <p class="text-muted"><?= $row_type_habitat->text; ?></p>
 						      	<input
 							      	class="test"
 							      	id="toggle_<?=$row_type_habitat->name_sql; ?>"

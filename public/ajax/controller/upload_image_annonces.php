@@ -49,18 +49,15 @@ if($_app->can_do_user->create_annonce)
 
 
 				//creation de la big
+				
 				$img_empty_tmp_big = imagecreatetruecolor($origin_width, $origin_height);
 				imagecopyresampled($img_empty_tmp_big, $new_img, 0, 0, 0, 0, $origin_width, $origin_height, $origin_width, $origin_height);
 				imagejpeg($img_empty_tmp_big, $path_to_upload . $name_image_rand . ".jpg", 100);
 				imagedestroy($img_empty_tmp_big);
 
-/*
-Partie Yhumb mais pas besoin pour le moment
-				$name_for_thumb = "_thumb.jpg";
 				require($_app->base_dir."/app/includes/redim_img.php");
-				fct_redim_image(150, 150, $path_to_upload, $name_image_rand . $name_for_thumb, $path_to_upload, $name_image_rand.".jpg");
+				fct_redim_image(0, 500, $path_to_upload, $name_image_rand.".jpg", $path_to_upload, $name_image_rand.".jpg");
 
-*/
 
 			}
 		

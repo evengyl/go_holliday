@@ -10,7 +10,7 @@
             <div class="form-group has-feedback">
                 <div class="input-group">
 					<span class="input-group-addon">Nombre de personne maximums acceptées</span>
-					<input type="text" name="max_personn" value="<?= (isset($last_announce->max_personn))? $last_announce->max_personn : ''; ?>" maxlength="2" pattern="[0-9]{,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
+					<input type="text" name="max_personn" value="<?= (isset($last_announce->max_personn))? $last_announce->max_personn : ''; ?>" maxlength="2" pattern="[0-9]{0,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
                 </div>
                 <div class="help-block with-errors"></div>
             </div>
