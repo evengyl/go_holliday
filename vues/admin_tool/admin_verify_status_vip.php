@@ -1,4 +1,4 @@
- <div class="col-lg-9">
+ <div class="col-lg-12">
     <div class="col-lg-12 annonces_list text-center">
 		<h3 class="thin">List des users VIP - NON VIP</h3>
 		<div class="container">
@@ -14,7 +14,7 @@
 							<th>Mail</th>
 							<th>Date de fin d'abonement</th>
 							<th>Temps restant</th>
-						</tr><?
+						</tr><?/*
 						if(!empty($list_user_vip)){
 							foreach($list_user_vip as $row_user_vip)
 							{
@@ -51,7 +51,7 @@
 								</tr><?
 							}
 						}
-						?>
+						*/?>
 					</table>
 				</div>
 			</div>

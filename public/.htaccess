@@ -13,6 +13,7 @@ RewriteRule ^Accueil[/]{0,1}$ ?page=home [L]
 RewriteRule ^Mon_compte[/]{0,1}$ ?page=my_account [L]
 RewriteRule ^Mon_compte/Activate/([0-9]+)[/]{0,1}$ ?page=my_account&activate=1&id_annonce=$1 [L]
 RewriteRule ^Mon_compte/Desactivate/([0-9]+)[/]{0,1}$ ?page=my_account&desactivate=1&id_annonce=$1 [L]
+RewriteRule ^Mon_compte/(Messages)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
 
 RewriteRule ^Mon_compte/Annonces/([0-9]+)[/]{0,1}$ ?page=my_account&num_page=$1 [L]
 RewriteRule ^Mon_compte/Creation-Annonce[/]{0,1}$ ?page=my_account&action=create_announce [L]
@@ -33,6 +34,7 @@ RewriteRule ^(Recherche)/(Toutes-les-annonces)[/]{0,1}$ ?page=$1&all_select=$2 [
 
 RewriteRule ^(admin)[/]{0,1}$ ?page=$1 [L]
 RewriteRule ^(admin)/([a-z_]+)[/]{0,1}$ ?page=$1&action=$2 [L]
+RewriteRule ^(admin)/(validate)/([0-9]+)[/]{0,1}$ ?page=$1&action=$2&id=$3 [L]
 
 
 ErrorDocument 404 /?page=404

@@ -2,9 +2,10 @@
 <div class="container-fluid text-center" style="background-color: white;">
 
 	<div class="row">
-		<h3 class="thin">Création d'une annonce de Locations <?= $last_announce->id_annonce ?></h3><hr>
+		<h3 class="thin">Création / Modification d'une annonce de Locations</h3><hr>
 		<h4 class="text-muted thin">Prenez le temps d'être le plus précis possible dans se formulaire, car celui ci vous servira pour générer un maximum de vues et de demandes.<br>
-		ne vous en faites pas il n'est à faire que une fois par bien et par ans techniquement</h4><hr>
+		ne vous en faites pas il n'est à faire que une fois par bien et par an</h4><hr>
+
 	</div>
 
 	<div class="row page_create_annonce">
@@ -34,7 +35,7 @@
 			        <button type="submit" class="btn btn-success btn-fill btn-wd">Valider la création de l'annonce</button>
 			    </div>
 			    <div class="clearfix"></div>
-
+				<p class="text-muted thin" style="margin-top:15px;">Attention, tant qu'une annonce n'a pas été validée par vos soins, vous ne pourrez pas en créer une nouvelle</p>
 			</form>
 		</div>
 

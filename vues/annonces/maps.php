@@ -12,19 +12,43 @@
 		<div id="map" style="margin-top:15px; margin-bottom:15px; height:500px;" class="col-xs-10 col-xs-offset-1"></div><hr>
 		<h3 class="col-xs-12 text-center thin">Légende de la carte</h3>
 		
+
+
+		
+
+
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="restaurant_map">
-				<li class="list-group-item"><img src="/images/markers/marker-icon-blue.png">&nbsp;&nbsp;Restaurant</li>
+				<a role="button" data-toggle="collapse" href="#collapseRestaurant" aria-expanded="false" aria-controls="collapseRestaurant">
+					<li class="list-group-item"><img src="/images/markers/marker-icon-blue.png">&nbsp;&nbsp;Restaurant</li>
+				</a>
+				<div class="collapse" id="collapseRestaurant">
+					<div class="well">
+					</div>
+				</div>
 			</ul>
 		</span>
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="bar_map">
-				<li class="list-group-item"><img src="/images/markers/marker-icon-green.png">&nbsp;&nbsp;Bar</li>
+				<a role="button" data-toggle="collapse" href="#collapseBar" aria-expanded="false" aria-controls="collapseBar">
+					<li class="list-group-item"><img src="/images/markers/marker-icon-green.png">&nbsp;&nbsp;Bar</li>
+				</a>
+				<div class="collapse" id="collapseBar">
+					<div class="well">
+					</div>
+				</div>
+				
 			</ul>
 		</span>
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="supermarche_map">
-				<li class="list-group-item"><img src="/images/markers/marker-icon-violet.png">&nbsp;&nbsp;Supermarché</li>
+				<a role="button" data-toggle="collapse" href="#collapseSupermarché" aria-expanded="false" aria-controls="collapseSupermarché">
+					<li class="list-group-item"><img src="/images/markers/marker-icon-violet.png">&nbsp;&nbsp;Supermarché</li>
+				</a>
+				<div class="collapse" id="collapseSupermarché">
+					<div class="well">
+					</div>
+				</div>
 			</ul>
 		</span>
 		<span class="col-xs-3 text-muted thin">
@@ -54,9 +78,9 @@
 
 $(document).ready(function()
 {
-
 /*
-	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $add_sql->rue; ?>, <?= $add_sql->ville; ?>,<?= $add_sql->code_postal; ?>, <?= $add_sql->pays;?>&format=json&addressdetails=1&extratags=1";
+
+	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $last_announce->address_rue; ?>, <?= $last_announce->address_localite; ?>,<?= $last_announce->address_zip_code; ?>, <?= $last_announce->name_address_pays_human;?>&format=json&addressdetails=1&extratags=1";
 
 	var settings_localisation = {
 	  "async": true,
@@ -122,7 +146,7 @@ $(document).ready(function()
 									.bindPopup("<b>" + response_interest_point[j].tag_type+ "</b> : <i>" +response_interest_point[j].name+ "</i><br> à "+ (response_interest_point[j].distance)/1000+" Km")
 									.addTo(macarte);
 
-								$("ul#restaurant_map").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
+								$("ul#restaurant_map div.well").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
 							}
 
 							else if(response_interest_point[j].tag_type == "pub")
@@ -131,7 +155,7 @@ $(document).ready(function()
 									.bindPopup("<b>" + response_interest_point[j].tag_type+ "</b> : <i>" +response_interest_point[j].name+ "</i><br> à "+ (response_interest_point[j].distance)/1000+" Km")
 									.addTo(macarte);
 
-								$("ul#bar_map").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
+								$("ul#bar_map div.well").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
 							}
 
 							
@@ -141,7 +165,7 @@ $(document).ready(function()
 									.bindPopup("<b>" + response_interest_point[j].tag_type+ "</b> : <i>" +response_interest_point[j].name+ "</i><br> à "+ (response_interest_point[j].distance)/1000+" Km")
 									.addTo(macarte);
 
-								$("ul#supermarche_map").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
+								$("ul#supermarche_map div.well").append("<li class='list-group-item'><b><i>"+response_interest_point[j].name+"</i></b> - "+(response_interest_point[j].distance)/1000+" Km</li>");
 							}
 						}
 					});

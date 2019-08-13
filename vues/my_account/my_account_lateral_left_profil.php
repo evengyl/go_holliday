@@ -9,38 +9,38 @@
             echo '<i class="fas fa-chess-rook" style="color:#9c7ccf;"></i>';?>
     	</span>
     </div>
-	<h4><?= ucfirst($infos_user->last_name)." ".ucfirst($infos_user->name) ?></h4>
-    <h5><?= ucfirst($infos_user->login) ?></h5>
+	<h4><?= ucfirst($_app->user->last_name)." ".ucfirst($_app->user->name) ?></h4>
+    <h5><?= ucfirst($_app->user->login) ?></h5>
 	<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $_app->can_do_user->text_user_type ?></b></small></p>
 </div>
 
 <p class="text-muted">
-	<small>@Adresse Email : <b><?= $infos_user->email ?></b></small>
+	<small>@Adresse Email : <b><?= $_app->user->email ?></b></small>
 </p>
 <p class="text-muted">
-    @Tel : <b><?= $infos_user->tel ?></b>
+    @Tel : <b><?= $_app->user->tel ?></b>
 </p>
 <p class="text-muted">
-    @Adresse : <b><?= $infos_user->address_numero.", Rue ".ucfirst($infos_user->address_rue)." à ".$infos_user->zip_code." : ".ucfirst($infos_user->address_localite) ?></b>
+    @Adresse : <b><?= $_app->user->address_numero.", Rue ".ucfirst($_app->user->address_rue)." à ".$_app->user->zip_code." : ".ucfirst($_app->user->address_localite) ?></b>
 </p>
 <hr>
 <div class="block_suivis"><?
     if($_app->can_do_user->view_infos_annonce)
     {?>
         <h4>
-            <?= $infos_user->nb_annonces ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-tags"></span><br>
+            <?= $_app->user->nb_annonces ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-tags"></span><br>
             <small>Annonces crées</small><br>
-            <small>Dont <?= $infos_user->nb_annonces_active ?> Active(s)&nbsp;&nbsp;et&nbsp;&nbsp;<?= $infos_user->nb_annonces_inactive ?> Inactive(s)</small>
+            <small>Dont <?= $_app->user->nb_annonces_active ?> Active(s)</small>
         </h4><hr>
     
         <h4>
-        	<?= $infos_user->nb_vues_total ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span><br>
+        	<?= $_app->user->nb_vues_total ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span><br>
         	<small>Vues sur le total de vos annonce, actives ou non</small>
         </h4><hr><?
     }?>
     <h4>
-    	<?= $infos_user->total_private_message; ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span><br>
-    	<small>Message(s) au total</small><br>
-        <small>Dont <?= $infos_user->private_message_not_view; ?> Non lu(s)</small>
+    	<?= $_app->user->total_private_message; ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span><br>
+        <small>Message(s) au total</small><br>
+        <small>Dont <?= ($_app->user->private_message_not_view != 0)?'<b style="color:red;">'.$_app->user->private_message_not_view.'</b>':''; ?> Non lu(s)</small>
     </h4><hr>
 </div>

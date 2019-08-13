@@ -39,3 +39,6 @@
 <script src="/js/datepicker.js"></script>
 
 <script src="/js/datepicker_fr_data.js"></script>
+
+
+<title>Go Holiday</title>

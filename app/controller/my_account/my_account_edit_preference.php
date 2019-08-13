@@ -1,5 +1,5 @@
 <?
-Class edit_preference extends base_module
+Class my_account_edit_preference extends base_module
 {
 	public $_app;
 

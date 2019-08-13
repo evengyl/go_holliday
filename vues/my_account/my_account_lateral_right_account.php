@@ -29,6 +29,9 @@
             <a class="btn btn-success" <?= (!$_app->can_do_user->view_infos_annonce)?"disabled":""; ?> href="/Mon_compte">Voir mes annonces</a>
         </div>
 
+        <div class="view_annonces">
+            <a class="btn btn-info" href="/Mon_compte/Messages">Ma messagerie</a>
+        </div>
         <hr><?
     }?>
 

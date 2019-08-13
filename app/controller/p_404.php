@@ -14,6 +14,6 @@ Class p_404 extends base_module
 		$this->assign_var("error_message", $exeption)
 			->assign_var('error_code', $error_code)
 			->assign_var('_app', $this->_app)
-			->use_template("p_404");
+			->render_tpl();
 	}
 }

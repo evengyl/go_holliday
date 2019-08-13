@@ -1,5 +1,5 @@
 <?
-Class account_client extends base_module
+Class my_account_client extends base_module
 {
 	public function __construct(&$_app)
 	{		

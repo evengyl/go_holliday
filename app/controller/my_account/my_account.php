@@ -13,7 +13,6 @@ Class my_account extends base_module
 
 
 		//je récupère les infos de l'user en cours
-		$this->get_nb_annonces();
 		$this->get_nb_vues_total();
 
 		//va chercher la liste des images dispo pour le changement d'image de back profil
@@ -25,11 +24,7 @@ Class my_account extends base_module
 
 		//récupérations des annonces de l'utilisateur
 		if($this->_app->can_do_user->view_annonce_list)
-		{
-			$limit_pagination = $this->set_limit_pagination((isset($_GET['num_page'])?(int)$_GET['num_page']:1));
-			$this->get_list_annonce_user($limit_pagination);	
-		}
-
+			$this->get_list_annonce_user();	
 		
 
 		$this->get_nb_private_message();
@@ -88,32 +83,6 @@ Class my_account extends base_module
 		$this->_app->set_user_infos_on_app();
 	}
 
-	public function get_nb_annonces()
-	{
-		if($this->_app->can_do_user->view_nb_annonce)
-		{
-			$sql_nb_annonce = new stdClass();
-			$sql_nb_annonce->table = ['annonces'];
-			$sql_nb_annonce->var = "COUNT(id) as nb";
-			$sql_nb_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
-			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
-			$this->_app->user->nb_annonces = $res_sql_nb[0]->nb;
-
-			$sql_nb_annonce = new stdClass();
-			$sql_nb_annonce->table = ['annonces'];
-			$sql_nb_annonce->var = "COUNT(id) as nb";
-			$sql_nb_annonce->where = ["id_utilisateurs = $1 AND active = $2", [$this->_app->user->id_utilisateurs, '1']];
-			$res_sql_nb = $this->_app->sql->select($sql_nb_annonce);
-			$this->_app->user->nb_annonces_active = $res_sql_nb[0]->nb;
-
-			$this->_app->user->nb_annonces_inactive = (int)$this->_app->user->nb_annonces - (int)$this->_app->user->nb_annonces_active;
-		}
-		else{
-			$this->_app->user->nb_annonces_active = "0";
-			$this->_app->user->nb_annonces_inactive = "0";
-			$this->_app->user->nb_annonces = "N/A";
-		}
-	}
 
 	public function get_nb_vues_total()
 	{
@@ -170,22 +139,39 @@ Class my_account extends base_module
 		return $limit;
 	}
 
-	public function get_list_annonce_user($pagination_limit)
+	public function get_list_annonce_user()
 	{
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = ['annonces', "type_vacances"];
 		$sql_annonce->var = [
 			"annonces" => ['id', "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "title", "sub_title", "active", "user_validate", "admin_validate", "create_date", "vues"],
-			"type_vacances" => ["name_human AS name_type_vacances"]
+			"type_vacances" => ["name_human AS name_type_vacances"],
 		];
-		$sql_annonce->limit = $pagination_limit;
 		$sql_annonce->order = ["id DESC"];
 
 		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 
+		$this->_app->user->nb_annonces_active = 0;
+		$this->_app->user->nb_annonces = 0;
+
 		foreach($res_sql_annonces as $key_annonce => $row_annonce)
 		{
+			$this->_app->user->nb_annonces ++;
+
+			if($row_annonce->active)
+				$this->_app->user->nb_annonces_active ++;
+
+			$sql_date_announce = new stdClass();
+			$sql_date_announce->table = ['private_message'];
+			$sql_date_announce->var = ["*"];
+			$sql_date_announce->order = ["id"];
+			$sql_date_announce->where = ["id_annonce = $1", [$row_annonce->id]];
+			$private_message_annonce = $this->_app->sql->select($sql_date_announce);
+			$res_sql_annonces[$key_annonce]->private_message = $private_message_annonce;
+
+
+
 			$sql_date_announce = new stdClass();
 			$sql_date_announce->table = ['date_annonces'];
 			$sql_date_announce->var = ["*"];
@@ -215,42 +201,29 @@ Class my_account extends base_module
 		}
 
 
-
 		$this->annonces = $res_sql_annonces;
 		
 	}
 
 	public function get_nb_private_message()
 	{
-		if($this->_app->can_do_user->view_nb_private_message)
-		{
-			$this->_app->user->total_private_message = 0;
-			$this->_app->user->private_message_not_view = 0;
+		$this->_app->user->total_private_message = 0;
+		$this->_app->user->private_message_not_view = 0;
 
-			if(!empty($this->annonces))
-			{
-				foreach($this->annonces as $key => $row_annonce)
-				{
-					$sql_message = new stdClass();
-					$sql_message->table = ['private_message'];
-					$sql_message->var = "COUNT(id) as nb";
-					$sql_message->where = ["id_annonces_link = $1", [$row_annonce->id]];
-					$res_sql_message = $this->_app->sql->select($sql_message);
-					$this->_app->user->total_private_message += $res_sql_message[0]->nb;
-					$this->annonces[$key]->message = $res_sql_message[0]->nb;
+		$sql_message = new stdClass();
+		$sql_message->table = ['private_message'];
+		$sql_message->var = "COUNT(id) as nb";
+		$sql_message->where = ["id_user_receiver = $1", [$this->_app->user->id]];
+		$res_sql_message = $this->_app->sql->select($sql_message);
+		$this->_app->user->total_private_message += $res_sql_message[0]->nb;
 
 
-					$sql_message = new stdClass();
-					$sql_message->table = ['private_message'];
-					$sql_message->var = "COUNT(id) as nb";
-					$sql_message->where = ["id_annonces_link = $1 AND vu = $2", [$row_annonce->id, '0']];
-					$res_sql_message = $this->_app->sql->select($sql_message);
-					$this->_app->user->private_message_not_view += $res_sql_message[0]->nb;
-				}
-			}
-		}
-		else
-			$this->_app->user->total_private_message = "Vous n'êtes pas annonceurs";
+		$sql_message = new stdClass();
+		$sql_message->table = ['private_message'];
+		$sql_message->var = "COUNT(id) as nb";
+		$sql_message->where = ["id_user_receiver = $1 AND vu = $2", [$this->_app->user->id, '0']];
+		$res_sql_message = $this->_app->sql->select($sql_message);
+		$this->_app->user->private_message_not_view += $res_sql_message[0]->nb;
 	}
 
 

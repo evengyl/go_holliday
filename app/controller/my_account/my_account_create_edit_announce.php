@@ -1,5 +1,5 @@
 <?
-Class create_edit_announce extends base_module
+Class my_account_create_edit_announce extends base_module
 {
 	public $last_announce;
 	private $array_list_pays_for_tpl = [];
@@ -99,9 +99,8 @@ Class create_edit_announce extends base_module
 		$this->last_announce->handicap = (isset($post["handicap"])?"1":"0");
 		$this->last_announce->parking = (isset($post["parking"])?"1":"0");
 
-		
-		$this->last_announce->list_activity = $post['list_activity'];
-		$this->last_announce->list_sport = $post['list_sport'];
+		$this->last_announce->list_activity = (isset($post['list_activity'])?$post['list_activity']:'0');
+		$this->last_announce->list_sport = (isset($post['list_sport'])?$post['list_sport']:'0');
 		
 		
 		if(!empty($post['other_activity']))
@@ -116,7 +115,9 @@ Class create_edit_announce extends base_module
 		$this->last_announce->caution = (int)(isset($_POST['caution'])?$_POST['caution']:0);
 
 		$this->insert_value_form_annonce();
-		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
+		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);
+
+		header('Location: /Mon_compte'); 
 		
 	}
 
@@ -166,12 +167,11 @@ Class create_edit_announce extends base_module
 
 		$req_sql_verify = new stdClass();
 		$req_sql_verify->table = ['activity'];
-		$req_sql_verify->var = [
-			"activity" => ["hiking", "dancing", "disco", "restaurant", "plage", "bar", "spa"]
-		];
+		$req_sql_verify->var = ["*"];
 		$req_sql_verify->where = ["1"];
 		$req_sql_verify->limit = "1";
 		$this->array_list_activity_for_tpl = $this->_app->sql->select($req_sql_verify);
+		unset($this->array_list_activity_for_tpl[0]->id);
 
 		foreach($this->array_list_activity_for_tpl[0] as $key_list_activity => $row_list_activity)
 		{
@@ -196,12 +196,11 @@ Class create_edit_announce extends base_module
 
 		$req_sql_verify = new stdClass();
 		$req_sql_verify->table = ['sport'];
-		$req_sql_verify->var = [
-			"sport" => ["foot", "basket", "tennis", "petanque", "piscine", "aqua_center", "sport", "velos", "skate", "arc"]
-		];
+		$req_sql_verify->var = ["*"];
 		$req_sql_verify->where = ["1"];
 		$req_sql_verify->limit = "1";
 		$this->array_list_sport_for_tpl = $this->_app->sql->select($req_sql_verify);
+		unset($this->array_list_sport_for_tpl[0]->id);
 
 		foreach($this->array_list_sport_for_tpl[0] as $key_list_sport => $row_list_sport)
 		{

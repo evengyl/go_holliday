@@ -60,12 +60,21 @@ class Autoloader
 
             break;
 
+
+            case strpos($class, "my_account") !== false:
+
+                if(file_exists($base_dir."/app/controller/my_account/".$class.".php"))
+                    require($base_dir."/app/controller/my_account/".$class.".php");
+
+            break;
+
             default:
             
                 if(file_exists($base_dir."/app/controller/".$class.'.php'))
                     require($base_dir."/app/controller/".$class.'.php');
                 else
                     require($base_dir."/app/controller/p_404.php");
+
        }        
     }
 }?>

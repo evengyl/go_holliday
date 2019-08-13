@@ -45,7 +45,8 @@ Class admin extends base_module
 				}
 
 				$this->other_mod_to_exec[] = 'admin_stats_site';
-				$this->other_mod_to_exec[] = 'admin_verify_status_vip';
+				$this->other_mod_to_exec[] = 'admin_verify_new_announce';
+				//$this->other_mod_to_exec[] = 'admin_verify_status_vip';
 
 				$this->render_tpl(); //on affiche l'administration
 

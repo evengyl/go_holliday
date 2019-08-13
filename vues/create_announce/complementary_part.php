@@ -25,15 +25,15 @@
                 <div class="input-group col-xs-12">
 				    <div class="checkbox">
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($last_announce->pet))? 'checked="true"' : ''; ?> name="pet" value="1">
+				        	<input type="checkbox" <?= ($last_announce->pet)? 'checked="true"' : ''; ?> name="pet" value="1">
 				        	Animaux autorisés
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($last_announce->handicap))? 'checked="true"' : ''; ?> name="handicap" value="1">
+				        	<input type="checkbox" <?= ($last_announce->handicap)? 'checked="true"' : ''; ?> name="handicap" value="1">
 				        	Accès pour personnes à mobilité réduite
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($last_announce->parking))? 'checked="true"' : ''; ?> name="parking" value="1">
+				        	<input type="checkbox" <?= ($last_announce->parking)? 'checked="true"' : ''; ?> name="parking" value="1">
 				        	Parking gratuit à proximité immédiate
 			        	</label>
 				    </div>

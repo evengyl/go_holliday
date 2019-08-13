@@ -7,7 +7,6 @@ Class my_account_lateral_left_profil extends base_module
 	{
 		parent::__construct($_app);
 
-		$this->assign_var("infos_user", $this->_app->user)
-			->use_template('my_account_lateral_left_profil');
+		$this->render_tpl();
 	}		
 }
