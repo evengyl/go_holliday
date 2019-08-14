@@ -242,7 +242,7 @@ CREATE TABLE `login` (
   `level_admin` tinyint(4) NOT NULL DEFAULT '0',
   `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1),(5,'test_uniq_id','$2y$10$2JRjz7CUHGw0xexfharbPeMuQz2C24pHi2WAjppywtsPdw.3v56Vu','1561109072','test_uniq_id','test_uniq_id@gmail.com',0,5);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1),(8,'client_evengyl','$2y$10$xTPFQQhq2zdX4yH1Y3tF5.EuyUBlB2q8WhmK21cGJ9E2SCx0ZBl2y','1565766971','legends','dark.evengyl@gmail.com',0,4);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,6 +521,7 @@ CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
   `last_name` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `mail` varchar(255) NOT NULL,
   `age` tinyint(4) NOT NULL DEFAULT '0',
   `tel` varchar(13) NOT NULL DEFAULT 'Aucun(e)',
   `address_rue` varchar(100) NOT NULL DEFAULT 'Aucun(e)',
@@ -536,7 +537,7 @@ CREATE TABLE `utilisateurs` (
   `newsletter` tinyint(1) NOT NULL DEFAULT '1',
   `id_favorite` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,7 +546,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,5,1,'0',1,'225,229');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,5,1,'0',1,'225,229'),(4,'loic','baudoux','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -574,7 +575,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,0,21,20,55,4,'08-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,161,31,66,6,'08-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -587,4 +588,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-13 16:40:36
+-- Dump completed on 2019-08-14 10:36:14
