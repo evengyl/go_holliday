@@ -46,6 +46,7 @@ Class my_account extends base_module
 			->assign_var("rand_id_change_password", $_SESSION['rand_id_form_change_password'])
 			->assign_var("img_back_profil", $array_back_profil_img)
 			->render_tpl();
+
 	}
 
 	

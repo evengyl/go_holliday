@@ -5,11 +5,14 @@
 
     <div class="edit_profil">
         <button class="btn btn-info" data-toggle="modal" data-target="#form_profil">Modification de votre profil</button>
-    </div>
+    </div><?
 
-    <div class="edit_profil">
-        <button class="btn btn-info" <?= (!$_app->can_do_user->edit_preference)?"disabled":""; ?> data-toggle="modal" data-target="#form_prefe">Vos préférences</button>
-    </div>
+        if($_app->can_do_user->edit_preference)
+        {?>
+             <div class="edit_profil">
+                <button class="btn btn-info" data-toggle="modal" data-target="#form_prefe">Vos préférences</button>
+            </div><?
+        }?>
 
     <div class="change_password">
         <button class="btn btn-danger" data-toggle="modal" data-target="#change_password">Changer de mot de passe</button>
@@ -46,6 +49,6 @@
 
 __MOD2_my_account_form_profil__
 
-__MOD2_edit_preference__
+__MOD2_my_account_edit_preference__
 
 <? unset($_SESSION['error_change_password']); ?>

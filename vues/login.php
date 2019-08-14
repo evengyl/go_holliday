@@ -30,7 +30,7 @@ if(!isset($_SESSION['pseudo'])) //donc il est connecté
 							<form action="#" method="post">
 								<div class="top-margin">
 									<label>Pseudo<span class="text-danger">*</span></label>
-									<input name="pseudo" type="text" required autofocus value="<?= $first_try_pseudo ?>" placeholder="Pseudo" class="form-control">
+									<input name="pseudo" type="text" required autofocus value="<?=(isset($_POST['pseudo']))?$_POST['pseudo']:''; ?><?= $first_try_pseudo ?>" placeholder="Pseudo" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Mot de passe<span class="text-danger">*</span></label>

@@ -4,6 +4,7 @@ Class sign_up extends base_module
 {
 	public $_app;
 	public $validate = false;
+	public $id_utilisateurs_last_insert;
 
 	public function __construct(&$_app)
 	{		
@@ -28,11 +29,10 @@ Class sign_up extends base_module
 			if(in_array($_GET['option_sign_up'], ["Client", "VIP"]))
 				$this->assign_var('validate', $this->validate)
 					->assign_var('rand_id_form_sign_up',$_SESSION['rand_id_form_sign_up'])
-					->use_other_template('sign_up_'.strtolower($_GET['option_sign_up']))
-					->render_tpl();
+					->use_template('sign_up_'.strtolower($_GET['option_sign_up']));
 			
 			else
-				$this->use_other_template('404')->render_tpl();
+				$this->use_template('404');
 
 		}
 		else if(isset($_GET['id_sign_up_confirm']))
@@ -43,16 +43,16 @@ Class sign_up extends base_module
 				{
 
 					//ok le compte à été activé
-					$this->use_other_template('sign_up_validate_confirm')->render_tpl();
+					$this->use_template('sign_up_validate_confirm');
 				}
 				else{
 					//renvoier la 404
-					$this->use_other_template('404')->render_tpl();
+					$this->use_template('404');
 				}
 			}
 		}
 		else
-			$this->use_other_template('sign_up_global')->render_tpl();
+			$this->render_tpl();
 		
 	}
 
@@ -73,10 +73,12 @@ Class sign_up extends base_module
 		{
 
 			//on set sont type de sign_up
-			if($this->_app->route["option_sign_up"] == "Client")
+			if($_GET["option_sign_up"] == "Client")
 				$user_type = 0;
-			else if($this->_app->route["option_sign_up"] == "VIP")
+			else if($_GET["option_sign_up"] == "VIP")
 				$user_type = 1;
+			else
+				$user_type = 0;
 
 
 			//check si le login existe déjà dans la bsd
@@ -109,6 +111,7 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->ctx = new stdClass;
 				$req_sql_utilisateurs->ctx->name = $post["name"];
 				$req_sql_utilisateurs->ctx->last_name = $post["last_name"];
+				$req_sql_utilisateurs->ctx->mail = $post["mail"];
 				$req_sql_utilisateurs->ctx->age = $post["age"];
 				$req_sql_utilisateurs->ctx->tel = $post["tel"];
 				$req_sql_utilisateurs->ctx->address_rue = $post["address_rue"];
@@ -121,18 +124,18 @@ Class sign_up extends base_module
 				$req_sql_utilisateurs->ctx->user_type = $user_type;
 				$req_sql_utilisateurs->ctx->id_create_account = $post['rand_id_form_sign_up'];
 				
-				$id_utilisateurs = $this->_app->sql->insert_into($req_sql_utilisateurs, $view_sql_prepare = 0, $return_insert_id = 1);
+				$this->id_utilisateurs_last_insert = $this->_app->sql->insert_into($req_sql_utilisateurs, $view_sql_prepare = 0, $return_insert_id = 1);
 
 
 				//mise à jour de l'id user dans la table login pour lié le compte login a l'utilisateur
 				$req_sql_utilisateurs = new stdClass;
 				$req_sql_utilisateurs->ctx = new stdClass;
-				$req_sql_utilisateurs->ctx->id_utilisateurs = $id_utilisateurs;
+				$req_sql_utilisateurs->ctx->id_utilisateurs = $this->id_utilisateurs_last_insert;
 				$req_sql_utilisateurs->table = "login";
 				$req_sql_utilisateurs->where = "id = ".$id_login;
 				$this->_app->sql->update($req_sql_utilisateurs);
 
-				$this->send_confirm_mail($post);
+				$this->_app->send_confirm_create_account_by_mail($post["mail"]);
 
 	            unset($_POST); //on vide le post
 	            return true;
@@ -145,44 +148,7 @@ Class sign_up extends base_module
 	}
 
 
-	private function send_confirm_mail($post)
-	{
-		if(!$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/confirm_sign_up.html"))
-		{
-			// en cas d'erreur de tpl
-			$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
-
-			mail("info.go.holliday@gmail.com", "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Confirm_sign_up", $headers);
-		}
-		else
-		{
-			//donnée personnel du nouvel utilisateur à envoyer par mail
-			$id = $post['rand_id_form_sign_up'];
-			$name = $post['name'];
-			$last_name = $post['last_name'];
-			$domain = $this->_app->base_dir;
-			$type = $this->_app->route["option_sign_up"];
-			$mail = $post['mail'];
-			$site_name = $this->_app->site_name." - ".date("Y");
-
-			$subject = "Confirmation d'inscription sur le site ".$this->_app->site_name;
-			$headers = "MIME-Version: 1.0\r\n";
-			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-			$content_html = str_replace(["##TYPE##", "##NAME##", "##LASTNAME##", "##DOMAIN##", "##ID##", "##SITENAME##"], [$type, $name, $last_name, $domain, $id, $site_name], $content_html);
-
-			if(mail($mail, $subject, $content_html, $headers))
-			{
-				$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
-
-				mail("info.go.holliday@gmail.com", "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de confirmation avec les données suivantes\r\n
-					Nom : ". $name ."\r\n
-					Prénom : ". $last_name ."\r\n
-					ID unique d'enregistrement : ". $id .""
-					, $headers);
-			}
-		}
-	}
+	
 
 	private function update_confirm_account($id_private)
 	{

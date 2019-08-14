@@ -14,13 +14,12 @@ Class login extends base_module
 		$post = $_POST;
 		$get = $_GET;
 
-		// on set le bread
-		if(isset($get['page']) && $get['page'] == "login")
-			$this->_app->navigation->set_breadcrumb('__TRANS_login__'); 
+		//si le client clique sur le lien pour renvoyer l'email de confirmation
+		if(isset($_GET['resend']) && $_GET['resend'] == '1')
+			$this->resend_mail_confirm();
 
 
-
-		if($get['page'] = 'admin')
+		if($get['page'] == 'admin')
 			$this->test_connect_form($post);
 
 
@@ -38,6 +37,25 @@ Class login extends base_module
 
 		}
 
+		
+
+	}
+
+	private function resend_mail_confirm()
+	{
+		$req_sql = new StdClass();
+       	$req_sql->table = ["login"];
+       	$req_sql->var = ["email"];
+       	$req_sql->where = ["login = $1", [$_SESSION['tmp_pseudo']]];
+		$res_sql_login = $this->_app->sql->select($req_sql);
+
+		if(isset($res_sql_login[0]->email))
+			$mail = $res_sql_login[0]->email;
+		else
+			$mail = Config::$mail_spam;
+
+		$this->_app->send_confirm_create_account_by_mail($mail);
+		$this->error = "Un Email vous à été renvoyer, veuillez vérifier votre boite Mail";
 	}
 
 
@@ -76,8 +94,10 @@ Class login extends base_module
 		{
 		    if(isset($post["pseudo"]) && isset($post["password"]))
 		    {
-		    	$InputPseudo = $this->check_post_length($post['pseudo'], 4);
-		    	$InputPassword = $this->check_post_length($post['password'], 6);
+		    	$_SESSION['tmp_pseudo'] = $post["pseudo"];
+
+		    	$InputPseudo = $this->check_post_length($post['pseudo'], Config::$length_pseudo_min);
+		    	$InputPassword = $this->check_post_length($post['password'], Config::$length_password_min);
 
 		    	if(!$InputPseudo || !$InputPassword)
 		    	{
@@ -91,6 +111,7 @@ Class login extends base_module
 		           	$req_sql->var = ["id", "login", "password", "level_admin", "last_connect", "id_utilisateurs"];
 		           	$req_sql->where = ["login = $1", [$InputPseudo]];
 					$res_sql_login = $this->_app->sql->select($req_sql);
+
 
 		            if(!empty($res_sql_login))
 		            {
@@ -110,8 +131,11 @@ Class login extends base_module
 								$this->_app->add_view("login_success");
 			                	return 1;
 							}
-							else
-	            				return ["error" => "Ce compte n'a pas encore été activé, veuillez vérifier vos Email"];
+							else{
+
+	            				$this->error = "Ce compte n'a pas encore été activé, veuillez vérifier vos Email ";
+	            				$this->error .= "<a href='Connexion/Resend' >Renvoyer l'email de confirmation</a>";
+							}
 							
 		            	}
 		            	else

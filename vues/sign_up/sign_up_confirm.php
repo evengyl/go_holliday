@@ -6,7 +6,7 @@
 				Vous êtes désormais inscrit, Merci de votre confiance !
 				Un email de confirmation vous à été envoyé sur votre adresse Mail.
 				Veuillez utiliser le bouton de validation du mail pour terminer votre inscription
-				<br>Vous pourrez ensuite vous <a href="/Connection">Connecter ici</a>.
+				<br>Vous pourrez ensuite vous <a href="/Connexion">Connecter ici</a>.
 			</p>
 			<hr>
 		</div>

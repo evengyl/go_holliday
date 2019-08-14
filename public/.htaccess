@@ -7,6 +7,7 @@ AddDefaultCharset utf-8
 
 
 RewriteRule ^Connexion[/]{0,1}$ ?page=login [L]
+RewriteRule ^Connexion/Resend[/]{0,1}$ ?page=login&resend=1 [L]
 RewriteRule ^Contact[/]{0,1}$ ?page=contact [L]
 RewriteRule ^Accueil[/]{0,1}$ ?page=home [L]
 

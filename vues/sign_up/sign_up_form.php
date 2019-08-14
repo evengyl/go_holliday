@@ -12,7 +12,7 @@
                         type="text" 
                         maxlength="20" 
                         value="<?= isset($_POST['login'])?$_POST['login']:''; ?>"
-                        pattern="[a-zA-Z_]{6,}" 
+                        pattern="[a-zA-Z_]{<?= Config::$length_pseudo_min; ?>,}" 
                         class="form-control" 
                         data-error="Votre login est trop court ou contient des chiffres" >
         	</div>
@@ -29,11 +29,11 @@
                 <input  required 
                         name="password" 
                         type="password" 
-                        data-minlength="6" 
+                        data-minlength="<?= Config::$length_password_min; ?>" 
                         class="form-control" 
                         value="<?= isset($_POST['password'])?$_POST['password']:''; ?>" 
                         id="inputPassword" 
-                        data-error="Votre mot de passe doit contenir au minimum 6 caractères">
+                        data-error="Votre mot de passe doit contenir au minimum <?= Config::$length_password_min; ?> caractères">
             </div>
             <div class="help-block with-errors"></div>
         </div>

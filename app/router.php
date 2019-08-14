@@ -3,12 +3,12 @@ Class router
 {
 	public $_app;
 
-	public $module_to_disable_without_connect_option = ["my_account", "sign_up"];
 
 	public function __construct($route = "", &$_app, &$security)
 	{
 		$this->_app = $_app;
 		$this->_app->route = htmlentities($route['page']);
+
 
 
 		if($security->check_if_module_need_to_do_connect())
@@ -90,7 +90,6 @@ Class router
 			$module = $this->_app->route;
 		}
 
-		$module = $this->test_disable_module_with_option_app($module);
 
 		$module = "__MOD_". $module;
 
@@ -102,17 +101,4 @@ Class router
 		echo $module;
 	}
 
-	private function test_disable_module_with_option_app($module)
-	{
-		if(in_array($module, $this->module_to_disable_without_connect_option))
-		{
-			if($this->_app->option_app['app_with_login_option'] == 0){
-				return "home";
-			}
-			else 
-				return $module;
-		}
-		else
-			return $module;
-	}
 }

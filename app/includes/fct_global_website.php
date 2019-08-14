@@ -10,6 +10,68 @@ Class fct_global_website extends announce_format
 
 	}
 
+	public function send_confirm_create_account_by_mail($mail_user)
+	{
+		$req_sql = new StdClass();
+       	$req_sql->table = ["utilisateurs"];
+       	$req_sql->var = ["id", "mail", "name", "last_name", "user_type", "id_create_account"];
+       	$req_sql->where = ["mail = $1 AND account_verify = $2", [$mail_user, "0"]];
+		$res_fx_id_user = $this->_app->sql->select($req_sql);
+
+		if(isset($res_fx_id_user[0]))
+		{
+			//donnée personnel du nouvel utilisateur à envoyer par mail
+			$user = $res_fx_id_user[0];
+
+			if($content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/confirm_sign_up.html"))
+			{
+				//on set sont type de sign_up
+				if($user->user_type == "0")
+					$user->user_type = "Client";
+
+				else if($user->user_type == "1")
+					$user->user_type = "Annonceur";
+
+				else
+					$user->user_type = "Client";
+
+
+				$id = $user->id_create_account;
+				$name = $user->name;
+				$last_name = $user->last_name;
+				$domain = Config::$base_url;
+				$type = $user->user_type;
+				$mail = $user->mail;
+				$site_name = $this->_app->site_name." - ".date("Y");
+
+				$subject = "Confirmation d'inscription sur le site ".$this->_app->site_name;
+				$headers = "MIME-Version: 1.0\r\n";
+				$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+				$content_html = str_replace(["##TYPE##", "##NAME##", "##LASTNAME##", "##DOMAIN##", "##ID##", "##SITENAME##"], [$type, $name, $last_name, $domain, $id, $site_name], $content_html);
+
+				if(!mail($mail, $subject, $content_html, $headers))
+				{
+					$headers = 'From:"Go Holliday" <'.Config::$mail.'>';
+
+					mail(Config::$mail, "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de confirmation avec les données suivantes\r\n
+						Nom : ". $name ."\r\n
+						Prénom : ". $last_name ."\r\n
+						ID unique d'enregistrement : ". $id .""
+						, $headers);
+				}
+			}
+			else
+			{
+				// en cas d'erreur de tpl
+				$headers = 'From:"Go Holiday" <'.Config::$mail.'>';
+				mail(Config::$mail, "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Confirm_sign_up", $headers);
+			}
+
+			
+		}
+	}
+
 	protected function set_user_infos_on_app()
 	{
 		$req_sql = new stdClass;
