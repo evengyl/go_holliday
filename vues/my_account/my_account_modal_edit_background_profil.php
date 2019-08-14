@@ -7,11 +7,11 @@
                 <p class="text-muted">Cliquez sur le nouveau fond pour l'activer</p>
             </div>
             <div class="modal-body" style="height:540px;"><?
-                foreach($img_back_profil as $row_img)
+                foreach($array_img_back_profil as $row_img)
                 {?>
                     <form method="POST" action="#">
                         <div class="col-xs-4" style="height:130px;">
-                            <input type="hidden" name="id_img_selected" value="<?= $row_img ?>">
+                            <input type="hidden" name="id_img_background_selected" value="<?= $row_img ?>">
                             <button type="submit" class="thumbnail">
                                 <img src='/images/background_profil/<?= $row_img ?>.jpg' class='img-responsive img_modal_back_profil'>
                             </button>

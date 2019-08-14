@@ -20,37 +20,19 @@
                 <li class="<?=($_GET['page'] == 'recherche')?'active':'' ?>"><a href="/Recherche">Recherche de vacances</a></li>
                 <li class="<?=($_GET['page'] == 'contact')?'active':'' ?>"><a href="/Contact">Contactez nous</a></li><?
 
-                if($_app->option_app['app_with_login_option'])
-                {
-                    if(Config::$is_connect)
-                    {
-                        $active = "";
-                        if($_GET['page'] == 'my_account')
-                            $active = "active";
-                        echo '<li class="' . $active . '"><a href="/Mon_compte">Mon Compte</a></li>';
-                    }
-
-                    if(!Config::$is_connect)
-                    {
-                        $active = "";
-                        if($_GET['page'] == 'login')
-                            $active = "active";
-                        echo '<li class="' . $active . '"><a class="btn" href="/Connexion">Se connecter</a></li>';
-                    }
-
-                    if(Config::$is_connect)
-                    {
-                        $active = "";
-                        if($_GET['page'] == 'logout')
-                            $active = "active";
-                        echo '<li class="' . $active . '"><a class="btn" href="/Deconnection">Se déconnecter</a></li>';
-                    }
-
-                    
+                if(Config::$is_connect){
+                    ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a href="/Mon_compte">Mon Compte</a></li><?
                 }
-                ?>
+
+                if(!Config::$is_connect){
+                    ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a class="btn" href="/Connexion">Se connecter</a></li><?
+                }
+
+                if(Config::$is_connect){
+                    ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a class="btn" href="/Deconnection">Se déconnecter</a></li><?
+                }?>
+                
             </ul>
         </div>
-        __MOD2_breadcrumb__
     </div>
 </div> 

@@ -8,17 +8,9 @@
 
     <div class="row page-profil">
         <div class="col-lg-3">
-            <div class="profil">
-                <div class="back_profil">
-                    <img class="img-responsive" src="/images/background_profil/<?= $_app->user->id_background_profil; ?>.jpg" alt="..."/>
-                    <div class="in_top_right"><button data-toggle="modal" data-target="#change_back_profil" class="btn" style=""><i class="fa fa-cog"></i></button></div>
-                </div>
-                __MOD2_my_account_lateral_left_profil__
-            </div>
+            __MOD2_my_account_lateral_left_profil__
         </div>
 
-        <!-- Modal changement de back profil -->
-        <? require($_app->base_dir.'/vues/my_account/my_account_edit_background_profil.php'); ?>
 
         <div class="col-lg-7 row">
 		    <div class="col-lg-12 annonces_list"><?

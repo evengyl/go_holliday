@@ -41,7 +41,7 @@
 		<div class="container">
 			<div class="row">
 				
-				<div class="col-lg-6 widget">
+				<div class="col-xs-6 widget">
 					<div class="widget-body">
 						<p class="simplenav">
 							<a href="#">Acceuil</a> | 
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-6 widget">
+				<div class="col-xs-6 widget">
 					<div class="widget-body">
 						<p class="text-right">
 							<p><?php echo Config::$footer_text." - ".date('Y'); ?> Tous les prix sont TVAC.</p>

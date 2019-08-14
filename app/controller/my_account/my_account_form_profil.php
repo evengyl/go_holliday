@@ -21,9 +21,7 @@ Class my_account_form_profil extends base_module
 		$rand_id_form = rand();
 		$_SESSION['rand_id_form_profil'] = $rand_id_form;
 
-		$this->assign_var('infos_user', $this->_app->user)
-			->assign_var('rand_id_update_profil',$rand_id_form)
-			->render_tpl();
+		$this->assign_var('rand_id_update_profil',$rand_id_form)->render_tpl();
 			
 	}
 
