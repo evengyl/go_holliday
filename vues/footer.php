@@ -4,13 +4,13 @@
 			<div class="row">
 				
 				<div class="col-lg-4 widget">
-					<h3 class="widget-title">__TRANS__contact_detail__</h3>
+					<h3 class="widget-title">Détails de contact</h3>
 					<div class="widget-body">
 						<p>
 							Email de contact : <a href="mailto:<?= Config::$mail; ?>"><?= $_app->site_name; ?></a><br>
 							<br>
-							<b>__TRANS_tel_mainteance__ : </b><?= Config::$tel_technical ?><br>
-							<b>__TRANS_tel_commercial__ : </b><?= Config::$tel_commercial ?><br>
+							<b>Téléphone Administrateur : </b><?= Config::$tel_technical ?><br>
+							<b>Téléphone Commercial : </b><?= Config::$tel_commercial ?><br>
 						</p>	
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 				<div class="col-lg-6 widget">
 					<div class="widget-body">
 						<p class="text-right">
-							<p><?php echo Config::$footer_text." - ".date('Y'); ?> __TRANS_footer_price__.</p>
+							<p><?php echo Config::$footer_text." - ".date('Y'); ?> Tous les prix sont TVAC.</p>
 						</p>
 					</div>
 				</div><?

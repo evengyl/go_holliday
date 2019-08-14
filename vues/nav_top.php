@@ -16,9 +16,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
                 <li class=""><form><input type="text" style="margin-top:8px;" class="form-control" name="search" placeholder="Recherche"></form></li>
-                <li class="<?=($_GET['page'] == 'home')?'active':'' ?>"><a href="/Accueil">__TRANS_accueil__</a></li>
+                <li class="<?=($_GET['page'] == 'home')?'active':'' ?>"><a href="/Accueil">Accueil</a></li>
                 <li class="<?=($_GET['page'] == 'recherche')?'active':'' ?>"><a href="/Recherche">Recherche de vacances</a></li>
-                <li class="<?=($_GET['page'] == 'contact')?'active':'' ?>"><a href="/Contact">__TRANS_contact_us__</a></li><?
+                <li class="<?=($_GET['page'] == 'contact')?'active':'' ?>"><a href="/Contact">Contactez nous</a></li><?
 
                 if($_app->option_app['app_with_login_option'])
                 {

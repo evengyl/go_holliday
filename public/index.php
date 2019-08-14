@@ -39,8 +39,9 @@ $page = $parser->parser_main($page);
 //Fonction principale du site parse le contenu total des modules par ordre chrono TPL MOD TPL2 MOD2 TPL3 MOD3
 
 //va parser les translation du site.
-$parser_translate = new parser_translate($_app, $page);
-echo $parser_translate->page; 
+//$parser_translate = new parser_translate($_app, $page);
+//echo $parser_translate->page; 
+echo $page; 
 
 $_app->admin_tools();
 

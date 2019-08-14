@@ -3,7 +3,7 @@
 	<div class="row">
 		<article class="col-sm-9 maincontent">
 			<header class="page-header">
-				<h1 class="page-title">__TRANS_contact_us__</h1>
+				<h1 class="page-title">Contactez nous</h1>
 			</header><?
 			if($status_send_mail == "form")
 			{?>
@@ -26,7 +26,7 @@
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 text-right">
 							<input type="hidden" name="rand_id_form_contact_us" value="<?= $rand_id_form_contact_us ?>">
-							<input class="btn btn-action" type="submit" value="__TRANS_envoyer__">
+							<input class="btn btn-action" type="submit" value="Envoyer">
 						</div>
 					</div>
 				</form><?
@@ -43,7 +43,7 @@
 
 		<aside class="col-xs-12 col-sm-3 sidebar sidebar-right">
 			<div class="widget">
-				<h4>__TRANS__contact_detail__</h4>
+				<h4>Détails de la page contact</h4>
 				<address>
 					<p class="text-muted">La page de contact est fait pour vous permettre de contacter le services clients et maintenances de <?= $_app->site_name; ?></p>
 					<hr>
