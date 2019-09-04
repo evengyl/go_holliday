@@ -23,7 +23,7 @@ Class my_account_create_edit_announce extends base_module
 
 		$this->create_id_bsd(); //ok
 		// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
-		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
+		$this->last_announce = $this->_app->get_announce_user($this->id_annonce);	
 
 		//for form tpl
 		$array_type_vacances = $this->get_list_type(); //ok
@@ -54,8 +54,8 @@ Class my_account_create_edit_announce extends base_module
 	private function verify_if_id_exist($id)
 	{
 		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = ['annonces'];
-		$req_sql_verify->var = ["id"];
+		$req_sql_verify->table = 'annonces';
+		$req_sql_verify->data = "id";
 		$req_sql_verify->where = ["id = $1 AND id_utilisateurs = $2", [(int)$id, $this->_app->user->id_utilisateurs]];
 		$tmp =$this->_app->sql->select($req_sql_verify);
 
@@ -115,7 +115,7 @@ Class my_account_create_edit_announce extends base_module
 		$this->last_announce->caution = (int)(isset($_POST['caution'])?$_POST['caution']:0);
 
 		$this->insert_value_form_annonce();
-		$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);
+		$this->last_announce = $this->_app->get_announce_user($this->id_annonce);
 
 		header('Location: /Mon_compte'); 
 		
@@ -149,8 +149,8 @@ Class my_account_create_edit_announce extends base_module
 		$tmp_list = [];
 
 		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = ['pays'];
-		$req_sql_verify->var = ["id", "name_sql", "name_human"];
+		$req_sql_verify->table = 'pays';
+		$req_sql_verify->data = "id, name_sql, name_human";
 		$req_sql_verify->where = ["1"];
 		$this->array_list_pays_for_tpl = $this->_app->sql->select($req_sql_verify);
 
@@ -166,8 +166,8 @@ Class my_account_create_edit_announce extends base_module
 		$tmp_list = [];
 
 		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = ['activity'];
-		$req_sql_verify->var = ["*"];
+		$req_sql_verify->table = 'activity';
+		$req_sql_verify->data = "*";
 		$req_sql_verify->where = ["1"];
 		$req_sql_verify->limit = "1";
 		$this->array_list_activity_for_tpl = $this->_app->sql->select($req_sql_verify);
@@ -176,10 +176,8 @@ Class my_account_create_edit_announce extends base_module
 		foreach($this->array_list_activity_for_tpl[0] as $key_list_activity => $row_list_activity)
 		{
 			$req_sql_verify_second = new stdClass();
-			$req_sql_verify_second->table = ['text_sql_to_human'];
-			$req_sql_verify_second->var = [
-				"text_sql_to_human" => ["name_sql", "name_human"]
-			];
+			$req_sql_verify_second->table = 'text_sql_to_human';
+			$req_sql_verify_second->data = "name_sql, name_human";
 			$req_sql_verify_second->where = ["name_sql = $1", [$key_list_activity]];
 			$tmp_list[$key_list_activity] = $this->_app->sql->select($req_sql_verify_second)[0];
 		}
@@ -195,8 +193,8 @@ Class my_account_create_edit_announce extends base_module
 		$tmp_list = [];
 
 		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = ['sport'];
-		$req_sql_verify->var = ["*"];
+		$req_sql_verify->table = 'sport';
+		$req_sql_verify->data = "*";
 		$req_sql_verify->where = ["1"];
 		$req_sql_verify->limit = "1";
 		$this->array_list_sport_for_tpl = $this->_app->sql->select($req_sql_verify);
@@ -205,10 +203,8 @@ Class my_account_create_edit_announce extends base_module
 		foreach($this->array_list_sport_for_tpl[0] as $key_list_sport => $row_list_sport)
 		{
 			$req_sql_verify_second = new stdClass();
-			$req_sql_verify_second->table = ['text_sql_to_human'];
-			$req_sql_verify_second->var = [
-				"text_sql_to_human" => ["name_sql", "name_human"]
-			];
+			$req_sql_verify_second->table = 'text_sql_to_human';
+			$req_sql_verify_second->data = "name_sql, name_human";
 			$req_sql_verify_second->where = ["name_sql = $1", [$key_list_sport]];
 			$tmp_list[$key_list_sport] = $this->_app->sql->select($req_sql_verify_second)[0];
 		}
@@ -226,8 +222,8 @@ Class my_account_create_edit_announce extends base_module
 			foreach($post['type_vacances'] as $row_type_vacance)
 			{
 				$req_sql_verify = new stdClass();
-				$req_sql_verify->table = ['type_vacances'];
-				$req_sql_verify->var = ["id"];
+				$req_sql_verify->table = 'type_vacances';
+				$req_sql_verify->data = "id";
 				$req_sql_verify->where = ["name_sql = $1", [$row_type_vacance]];
 				$req_sql_verify->limit = "1";
 				$id[] = $this->_app->sql->select($req_sql_verify)[0]->id;
@@ -244,8 +240,8 @@ Class my_account_create_edit_announce extends base_module
 	private function get_list_type()
 	{
 		$sql_type = new stdClass();
-		$sql_type->table = ["type_vacances"];
-		$sql_type->var = ["*"];
+		$sql_type->table = "type_vacances";
+		$sql_type->data = "*";
 		$sql_type->where = ["1"];
 		return $this->_app->sql->select($sql_type);
 	}
@@ -253,8 +249,8 @@ Class my_account_create_edit_announce extends base_module
 	private function get_list_habitat()
 	{
 		$sql_type = new stdClass();
-		$sql_type->table = ["habitat"];
-		$sql_type->var = ["*"];
+		$sql_type->table = "habitat";
+		$sql_type->data = "*";
 		$sql_type->where = ["1"];
 		$sql_type->order = ["id DESC"];
 		return $this->_app->sql->select($sql_type);
@@ -287,7 +283,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->address_numero = $this->last_announce->address_numero;
 		$req_sql_update_annonce->ctx->address_localite = $this->last_announce->address_localite;
 		$req_sql_update_annonce->ctx->address_zip_code = $this->last_announce->address_zip_code;
-		$req_sql_update_annonce->table = "announces_address";
+		$req_sql_update_annonce->table = "annonce_address";
 		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
@@ -356,8 +352,8 @@ Class my_account_create_edit_announce extends base_module
 	public function create_id_bsd()
 	{
 		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = ['annonces'];
-		$req_sql_verify->var = ["id"];
+		$req_sql_verify->table = 'annonces';
+		$req_sql_verify->data = "id";
 		$req_sql_verify->where = ["id_utilisateurs = $1 AND user_validate = $2", [$this->_app->user->id_utilisateurs, '0']];
 		$req_sql_verify->order = ["id DESC"];
 		$req_sql_verify->limit = "1";
@@ -392,7 +388,7 @@ Class my_account_create_edit_announce extends base_module
 			$req_sql_insert_address = new stdClass();
 			$req_sql_insert_address->ctx = new stdClass();
 			$req_sql_insert_address->ctx->id = $id_annonce;
-			$req_sql_insert_address->table = "announces_address";
+			$req_sql_insert_address->table = "annonce_address";
 			$id_address = $this->_app->sql->insert_into($req_sql_insert_address, 0 ,1);
 
 
@@ -416,7 +412,7 @@ Class my_account_create_edit_announce extends base_module
 			$req_sql_update_annonce->ctx = new stdClass();
 			$req_sql_update_annonce->ctx->id_sport = $id_sport;
 			$req_sql_update_annonce->ctx->id_activity = $id_activity;
-			$req_sql_update_annonce->ctx->id_announces_address = $id_address;
+			$req_sql_update_annonce->ctx->id_annonce_address = $id_address;
 			$req_sql_update_annonce->ctx->id_commoditer_announces = $id_commoditer;
 			$req_sql_update_annonce->ctx->id_range_price_announce = $id_range_price;
 

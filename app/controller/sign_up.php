@@ -83,8 +83,8 @@ Class sign_up extends base_module
 
 			//check si le login existe déjà dans la bsd
     		$req_sql = new stdClass;
-			$req_sql->table = ["login"];
-			$req_sql->var = ["login"];
+			$req_sql->table = "login";
+			$req_sql->data = "login";
 			$req_sql->where = ["login = $1", [$post['login']]];
 			$res_sql = $this->_app->sql->select($req_sql);
 
@@ -154,8 +154,8 @@ Class sign_up extends base_module
 	{
 		//check si le login existe déjà dans la bsd
 		$req_sql = new stdClass;
-		$req_sql->table = ["utilisateurs"];
-		$req_sql->var = ["account_verify"];
+		$req_sql->table = "utilisateurs";
+		$req_sql->data = "account_verify";
 		$req_sql->where = ["id_create_account = $1", [$id_private]];
 		$res_sql = $this->_app->sql->select($req_sql);
 

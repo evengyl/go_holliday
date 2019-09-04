@@ -10,8 +10,8 @@ require("ajax_min_load.php");
 			{
 
 				$req_sql_verify = new stdClass();
-				$req_sql_verify->table = ['annonces'];
-				$req_sql_verify->var = ["id"];
+				$req_sql_verify->table = 'annonces';
+				$req_sql_verify->data = "id";
 				$req_sql_verify->where = ["id = $1 AND id_utilisateurs = $2", [$_POST['id_annonce'], $_POST['id_user']]];
 				$tmp = $_app->sql->select($req_sql_verify);
 

@@ -11,28 +11,26 @@ Class login extends base_module
 		$this->_app->add_view("login");
 
 
-		$post = $_POST;
-		$get = $_GET;
 
 		//si le client clique sur le lien pour renvoyer l'email de confirmation
 		if(isset($_GET['resend']) && $_GET['resend'] == '1')
 			$this->resend_mail_confirm();
 
 
-		if($get['page'] == 'admin')
-			$this->test_connect_form($post);
+		if($_GET['page'] == 'admin')
+			$this->test_connect_form($_POST);
 
 
-		if(isset($post['lost_login_form']))
+		if(isset($_POST['lost_login_form']))
 		{
 			//si login perdu on restaure ici 
-			$this->restore_password($post);
+			$this->restore_password($_POST);
 			$this->assign_var("error", $this->error)->render_tpl();
 		}
 		else
 		{
 			//page de connexion formulaire
-			$this->test_connect_form($post);
+			$this->test_connect_form($_POST);
 			$this->assign_var("error", $this->error)->render_tpl();
 
 		}
@@ -44,8 +42,8 @@ Class login extends base_module
 	private function resend_mail_confirm()
 	{
 		$req_sql = new StdClass();
-       	$req_sql->table = ["login"];
-       	$req_sql->var = ["email"];
+       	$req_sql->table = "login";
+       	$req_sql->data = "email";
        	$req_sql->where = ["login = $1", [$_SESSION['tmp_pseudo']]];
 		$res_sql_login = $this->_app->sql->select($req_sql);
 
@@ -107,8 +105,8 @@ Class login extends base_module
 		    	else
 		    	{	
 		           	$req_sql = new StdClass();
-		           	$req_sql->table = ["login"];
-		           	$req_sql->var = ["id", "login", "password", "level_admin", "last_connect", "id_utilisateurs"];
+		           	$req_sql->table = "login";
+		           	$req_sql->data = "id, login, password, level_admin, last_connect, id_utilisateurs";
 		           	$req_sql->where = ["login = $1", [$InputPseudo]];
 					$res_sql_login = $this->_app->sql->select($req_sql);
 
@@ -120,8 +118,8 @@ Class login extends base_module
 		            	if(password_verify($InputPassword, $res_sql_login->password))
 		            	{
 		            		$req_sql = new StdClass();
-				           	$req_sql->table = ["utilisateurs"];
-				           	$req_sql->var = ["id","user_type", "account_verify"];
+				           	$req_sql->table = "utilisateurs";
+				           	$req_sql->data = "id, user_type, account_verify";
 				           	$req_sql->where = ["id = $1", [$res_sql_login->id_utilisateurs]];
 							$res_fx_id_user = $this->_app->sql->select($req_sql);
 
@@ -188,11 +186,8 @@ Class login extends base_module
 	    	else
 	    	{	
 	           	$req_sql = new StdClass();
-	           	$req_sql->table = ["login", "utilisateurs"];
-	           	$req_sql->var = [
-	           			"login" => ["login", "password_no_hash", "email"],
-	           			"utilisateurs" => ["name", "last_name", "id_create_account"]
-	           		];
+	           	$req_sql->table = "login";
+	           	$req_sql->data = "login, password_no_hash, email, name, last_name, id_create_account";
 	           	$req_sql->where = ["login = $1 OR email = $2", [$pseudo, $pseudo]];
 				$res_fx = $this->_app->sql->select($req_sql, 1);
 

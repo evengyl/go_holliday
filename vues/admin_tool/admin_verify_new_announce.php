@@ -15,11 +15,12 @@
 						</tr><?
 						if($list_announce_not_validate_by_admin)
 						{
+							affiche($list_announce_not_validate_by_admin);
 							foreach($list_announce_not_validate_by_admin as $announce_not_validate_by_admin)
 							{?>
 								<tr class="warning">
-									<td><?= $announce_not_validate_by_admin->id_announce; ?></td>
-									<td><?= $announce_not_validate_by_admin->name." ".$announce_not_validate_by_admin->last_name ?></td>
+									<td><?= $announce_not_validate_by_admin->id; ?></td>
+									<td><?= $announce_not_validate_by_admin->user_name." ".$announce_not_validate_by_admin->user_last_name ?></td>
 									<td><?= $announce_not_validate_by_admin->id_user; ?></td>
 									<td><?= $announce_not_validate_by_admin->title; ?></td>
 									<td><?= $announce_not_validate_by_admin->sub_title; ?></td>

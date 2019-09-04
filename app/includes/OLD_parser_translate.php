@@ -29,8 +29,8 @@ class parser_translate
 		foreach($this->_app->translate as $row_translate)
 		{
 			$sql = new stdClass();
-			$sql->table = ["translate"];
-			$sql->var = ["id", "name_code"];
+			$sql->table = "translate";
+			$sql->data = "id", "name_code";
 			$sql->var_translate = ["translate" => ["name"]];
 			$sql->where = ["name_code = $1", [$row_translate]];
 			$res_sql = $this->_app->sql->select($sql);

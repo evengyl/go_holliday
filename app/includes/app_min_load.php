@@ -5,12 +5,10 @@ $base_dir = dirname(dirname(dirname(__FILE__)));
 require $base_dir."/app/includes/load_class.php"; 
 Autoloader::register(); 
 
-
 //on initialise le app, qui sers d'object général pour l'application
 $_app = new _app();
 $_app->time_start = $_app->microtime_float();
 $_app->base_dir = $base_dir;
-
 require $base_dir."/app/modele/Config.php";
 
 

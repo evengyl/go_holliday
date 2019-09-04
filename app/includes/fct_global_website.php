@@ -13,8 +13,8 @@ Class fct_global_website extends announce_format
 	public function send_confirm_create_account_by_mail($mail_user)
 	{
 		$req_sql = new StdClass();
-       	$req_sql->table = ["utilisateurs"];
-       	$req_sql->var = ["id", "mail", "name", "last_name", "user_type", "id_create_account"];
+       	$req_sql->table = "utilisateurs";
+       	$req_sql->data = "id, mail, name, last_name, user_type, id_create_account";
        	$req_sql->where = ["mail = $1 AND account_verify = $2", [$mail_user, "0"]];
 		$res_fx_id_user = $this->_app->sql->select($req_sql);
 
@@ -75,27 +75,8 @@ Class fct_global_website extends announce_format
 	protected function set_user_infos_on_app()
 	{
 		$req_sql = new stdClass;
-		$req_sql->table = ["login", "utilisateurs"];
-		$req_sql->var = [
-			"login" => ["id", "login", "password", "email", "level_admin", "id_utilisateurs"],
-			"utilisateurs" => [
-				"name", 
-				"last_name", 
-				"genre", 
-				"user_type", 
-				"tel", 
-				"address_numero", 
-				"address_rue", 
-				"zip_code", 
-				"address_localite", 
-				"age", 
-				"pays", 
-				"id_background_profil",
-				"account_verify",
-				"id_create_account",
-				"newsletter",
-				"id_favorite"]
-		];
+		$req_sql->table = "login";
+		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre";
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 		$res_fx = $this->_app->sql->select($req_sql);
 
@@ -114,8 +95,8 @@ Class fct_global_website extends announce_format
 		if($login)
 		{
 			$req_sql = new stdClass();
-			$req_sql->table = ['login'];
-			$req_sql->var = ["level_admin"];
+			$req_sql->table = 'login';
+			$req_sql->data = "level_admin";
 			$req_sql->where = ["login = $1", [$login]];
 			$res_sql = $this->_app->sql->select($req_sql);
 			return $res_sql[0]->level_admin;

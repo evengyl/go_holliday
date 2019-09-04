@@ -16,8 +16,3 @@
 </div><?
 
 
-$add_sql = new stdClass();
-$add_sql->rue = $last_announce->address_numero." ".$last_announce->address_rue;
-$add_sql->ville = $last_announce->address_localite;
-$add_sql->code_postal = $last_announce->address_zip_code;
-$add_sql->pays = $last_announce->name_address_pays_sql;?>

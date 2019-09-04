@@ -2,11 +2,11 @@
 	<div class="row">
 		<h3 class="text-center thin" style="margin-top:0px;">Où est-ce ?</h3>
 		<h4 class="text-center " style="margin-top:0px;"><b>
-			<?= ucfirst($last_announce->address_lieux_dit).
-				" à ".$last_announce->address_zip_code.
-				", ".ucfirst($last_announce->address_localite).
-				", ".ucfirst($last_announce->address_rue).
-				" ".$last_announce->address_numero ?></b></h4>
+			<?= ucfirst($annonce->address[0]->address_lieux_dit).
+				" à ".$annonce->address[0]->address_zip_code.
+				", ".ucfirst($annonce->address[0]->address_localite).
+				", ".ucfirst($annonce->address[0]->address_rue).
+				" ".$annonce->address[0]->address_numero ?></b></h4>
 		<span class="thin text-muted"><small>Liste non exhaustive de proximité immédiate (5 km)</small></span>
 		<span class="thin text-muted"><small>Les cartes Google maps étant devenue payant, nous utilisons un autre fournisseur</small></span>
 		<div id="map" style="margin-top:15px; margin-bottom:15px; height:500px;" class="col-xs-10 col-xs-offset-1"></div><hr>
@@ -80,7 +80,7 @@ $(document).ready(function()
 {
 /*
 
-	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $last_announce->address_rue; ?>, <?= $last_announce->address_localite; ?>,<?= $last_announce->address_zip_code; ?>, <?= $last_announce->name_address_pays_human;?>&format=json&addressdetails=1&extratags=1";
+	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $annonce->address[0]->address_rue; ?>, <?= $annonce->address[0]->address_localite; ?>,<?= $annonce->address[0]->address_zip_code; ?>, <?= $annonce->address[0]->name_address_pays_human;?>&format=json&addressdetails=1&extratags=1";
 
 	var settings_localisation = {
 	  "async": true,

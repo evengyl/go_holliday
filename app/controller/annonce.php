@@ -2,7 +2,7 @@
 Class annonce extends base_module
 {
 	private $id_annonce;
-	public $last_announce;
+	public $annonce;
 	
 
 	public function __construct(&$_app)
@@ -13,10 +13,10 @@ Class annonce extends base_module
 		{
 
 			$array_img_annonce = $this->get_img_files_by_id();
-			$this->last_announce = $this->_app->get_last_announce_user($this->id_annonce);	
+			$this->annonce = $this->_app->get_announce_user($this->id_annonce);	
 
 			$this->assign_var("slide_img", $array_img_annonce)
-			->assign_var("last_announce", $this->last_announce)
+			->assign_var("annonce", $this->annonce)
 			->render_tpl();
 			
 		}
@@ -33,8 +33,8 @@ Class annonce extends base_module
 	{
 		//anti piratage et plantage vérifier que l'id est bon
 		$sql_verif = new stdClass();
-		$sql_verif->table = ["annonces"];
-		$sql_verif->var = ["*"];
+		$sql_verif->table = "annonces";
+		$sql_verif->data = "*";
 		$sql_verif->where = ["id = $1", [(int) $id]];
 		$res_sql_verif = $this->_app->sql->select($sql_verif);
 

@@ -21,12 +21,8 @@ Class admin_verify_new_announce extends base_module
 	private function get_list_announce_not_validate_by_admin()
 	{
 		$sql_not_validate_announce = new stdClass();
-		$sql_not_validate_announce->table = ['annonces', "utilisateurs"];
-		$sql_not_validate_announce->var = 
-		[
-			"annonces" => ["id AS id_announce", "title", "sub_title", "id_utilisateurs"],
-			"utilisateurs" => ["id AS id_user", "name", "last_name"]
-		];
+		$sql_not_validate_announce->table = 'annonces';
+		$sql_not_validate_announce->data = "id, title, sub_title, id_user, user_name, user_last_name";
 		$sql_not_validate_announce->order = ["id"];
 		$sql_not_validate_announce->where = ["user_validate = $1 AND admin_validate = $2", [0, 0] ];
 		$res_sql_not_validate_announce = $this->_app->sql->select($sql_not_validate_announce);

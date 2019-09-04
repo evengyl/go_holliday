@@ -79,15 +79,8 @@ Class search_result extends base_module
 
 
 		$sql_annonce = new stdClass();
-		$sql_annonce->table = ["annonces", "pays", "habitat", "utilisateurs", "type_vacances", "date_annonces"];
-		$sql_annonce->var = [
-				"annonces" => ["id", "id_pays", "id_habitat", "id_type_vacances", "id_utilisateurs", "name AS name_annonce", "lieu AS lieu_annonce", "active"],
-				"pays" => ["name AS name_pays"],
-				"habitat" => ["name AS name_habitat"],
-				"utilisateurs" => ["name AS name_proprio", "last_name AS lastname_proprio", "genre"],
-				"type_vacances" => ["name AS name_type_vacances"],
-				"date_annonces" => ["start_date", "end_date", "prix"]
-			];
+		$sql_annonce->table = "annonces";
+		$sql_annonce->data = "*";
 
 		if(!$all)
 			$sql_annonce->where = [

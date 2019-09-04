@@ -16,8 +16,8 @@ Class security extends base_module
 		if(isset($_SESSION['pseudo']))
 		{
 			$req_sql = new StdClass();
-           	$req_sql->table = ["login"];
-           	$req_sql->var = ["login"];
+           	$req_sql->table = "login";
+           	$req_sql->data = "login";
            	$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 			$res_fx = $this->_app->sql->select($req_sql);
 

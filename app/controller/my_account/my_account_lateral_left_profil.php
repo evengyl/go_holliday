@@ -35,8 +35,8 @@ Class my_account_lateral_left_profil extends base_module
 	public function get_nb_vues_total()
 	{
 		$sql_vues = new stdClass();
-		$sql_vues->table = ['annonces'];
-		$sql_vues->var = ["vues"];
+		$sql_vues->table = 'annonces';
+		$sql_vues->data = "vues";
 		$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
 		$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
 
@@ -91,18 +91,17 @@ Class my_account_lateral_left_profil extends base_module
 		$this->_app->user->private_message_not_view = 0;
 
 		$sql_message = new stdClass();
-		$sql_message->table = ['private_message'];
-		$sql_message->var = "COUNT(id) as nb";
-		$sql_message->where = ["id_user_receiver = $1", [$this->_app->user->id]];
+		$sql_message->table = 'private_message';
+		$sql_message->data = "vu";
+		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
-		$this->_app->user->total_private_message += $res_sql_message[0]->nb;
 
+		foreach($res_sql_message as $row_message)
+		{
+			$this->_app->user->total_private_message++;
 
-		$sql_message = new stdClass();
-		$sql_message->table = ['private_message'];
-		$sql_message->var = "COUNT(id) as nb";
-		$sql_message->where = ["id_user_receiver = $1 AND vu = $2", [$this->_app->user->id, '0']];
-		$res_sql_message = $this->_app->sql->select($sql_message);
-		$this->_app->user->private_message_not_view += $res_sql_message[0]->nb;
+			if($row_message->vu)
+				$this->_app->user->private_message_not_view++;
+		}
 	}
 }

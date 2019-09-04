@@ -41,11 +41,8 @@ Class admin_verify_status_vip extends base_module
 	public function get_list_users_vip()
 	{
 		$req_sql_get_all_user = new stdClass();
-		$req_sql_get_all_user->table = ["login", "utilisateurs"];
-		$req_sql_get_all_user->var = [
-				"login" => ["id", "email"],
-				"utilisateurs" => ["id", "user_type", "name", "last_name", "tel"]
-			];//je vais indiquer utilisateurs?user_type car cette fois ci on ne cherche pas a avoir login.user_type mais bien le utilisateurs.user_type
+		$req_sql_get_all_user->table = "login";
+		$req_sql_get_all_user->data = "id, email, id_utilisateurs, user_type, name, last_name, tel";
 		$req_sql_get_all_user->where = ["utilisateurs.user_type != $1", ["0"]]; //0 = client sans être annonceurs
 		$res_sql = $this->_app->sql->select($req_sql_get_all_user);
 		

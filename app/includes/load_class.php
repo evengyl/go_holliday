@@ -26,7 +26,10 @@ class Autoloader
             case "parse_table_jointure":
             case "order_processing":
             case "limit_processing":
-            case "var_processing_select_orm":
+            case "NormalType":
+            case "OneToManyType":
+            case "OneToOneType":
+            case "ManyToManyType":
 
                 require("Evengyl/core/".$class.".php");
 
@@ -57,6 +60,14 @@ class Autoloader
 
                 if(file_exists($base_dir."/app/controller/admin_tool/".$class.".php"))
                     require($base_dir."/app/controller/admin_tool/".$class.".php");
+
+            break;
+
+
+            case strpos($class, "Model_") !== false:
+
+                if(file_exists($base_dir."/app/model_table/".$class.".php"))
+                    require($base_dir."/app/model_table/".$class.".php");
 
             break;
 

@@ -8,8 +8,8 @@ $array_views = [];
 $array_color = [];
 
 $req_sql = new stdClass();
-$req_sql->table = ['vues'];
-$req_sql->var = ["id", "sign_up", "login", "login_success", "accueil", "contact_us", "periode"];
+$req_sql->table = 'vues';
+$req_sql->data = "id, sign_up, login, login_success, accueil, contact_us, periode";
 $req_sql->where = ["periode LIKE $1", [$date]];
 $res_sql = $_app->sql->select($req_sql);
 

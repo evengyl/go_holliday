@@ -108,11 +108,11 @@ Class _app extends fct_global_website
 		$date = Date("m-Y");
 
 		$req_sql = new stdClass();
-		$req_sql->table = ['vues'];
-		$req_sql->var = ["id", $page, "periode"];
+		$req_sql->table = 'vues';
+		$req_sql->data = "id, ".$page.", periode";
 		$req_sql->where = ["periode LIKE $1", [$date]];
 		$res_sql = $this->sql->select($req_sql);
-		
+
 
 		if(empty($res_sql)){
 			//vide il faut créer le nouveau mois de la vues
@@ -123,8 +123,8 @@ Class _app extends fct_global_website
 			$res_sql = $this->sql->insert_into($req_sql);
 
 			$req_sql = new stdClass();
-			$req_sql->table = ['vues'];
-			$req_sql->var = ["id", $page, "periode"];
+			$req_sql->table = 'vues';
+			$req_sql->data = "id, ".$page.", periode";
 			$req_sql->where = ["periode LIKE $1", [$date]];
 			$res_sql = $this->sql->select($req_sql);
 		}
