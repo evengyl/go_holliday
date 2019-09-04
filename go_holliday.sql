@@ -46,6 +46,34 @@ INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,1,1,1,1,1,1),(226,0,0,0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `annonce_address`
+--
+
+DROP TABLE IF EXISTS `annonce_address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `address_lieux_dit` varchar(50) NOT NULL,
+  `address_rue` varchar(50) NOT NULL,
+  `address_numero` varchar(20) NOT NULL,
+  `address_localite` varchar(50) NOT NULL,
+  `address_zip_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_address`
+--
+
+LOCK TABLES `annonce_address` WRITE;
+/*!40000 ALTER TABLE `annonce_address` DISABLE KEYS */;
+INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567');
+/*!40000 ALTER TABLE `annonce_address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `annonces`
 --
 
@@ -60,7 +88,7 @@ CREATE TABLE `annonces` (
   `id_range_price_announce` int(11) NOT NULL,
   `id_sport` int(11) NOT NULL,
   `id_activity` int(11) NOT NULL,
-  `id_announces_address` int(11) NOT NULL,
+  `id_annonce_address` int(11) NOT NULL,
   `id_commoditer_announces` int(11) NOT NULL,
   `id_utilisateurs` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
@@ -84,34 +112,6 @@ LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
 INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,0,'28/01/2019'),(225,1,3,'2,3',225,225,225,225,225,1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','09/08/2019','20/08/2019',0,0,1,1,'02/08/2019'),(229,1,5,'1,2,3',229,229,229,229,229,1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,1,0,'05/08/2019'),(232,1,4,'2,3',232,232,232,232,232,1,'testestetes','teststes','14/08/2019','13/09/2019',0,0,0,0,'13/08/2019');
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `announces_address`
---
-
-DROP TABLE IF EXISTS `announces_address`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `announces_address` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address_lieux_dit` varchar(50) NOT NULL,
-  `address_rue` varchar(50) NOT NULL,
-  `address_numero` varchar(20) NOT NULL,
-  `address_localite` varchar(50) NOT NULL,
-  `address_zip_code` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `announces_address`
---
-
-LOCK TABLES `announces_address` WRITE;
-/*!40000 ALTER TABLE `announces_address` DISABLE KEYS */;
-INSERT INTO `announces_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567');
-/*!40000 ALTER TABLE `announces_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -182,7 +182,7 @@ CREATE TABLE `date_annonces` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `prix` smallint(6) NOT NULL DEFAULT '0',
-  `id_annonces` int(11) NOT NULL,
+  `id_annonce` int(11) NOT NULL,
   `state` varchar(20) NOT NULL DEFAULT 'waiting',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
@@ -266,7 +266,7 @@ CREATE TABLE `option_app` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `value` tinyint(1) NOT NULL,
-  `name_human_see` varchar(100) NOT NULL,
+  `name_human` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -318,7 +318,7 @@ DROP TABLE IF EXISTS `private_message`;
 CREATE TABLE `private_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateurs` int(11) NOT NULL,
-  `id_user_receiver` int(11) NOT NULL,
+  `id_user_sender` int(11) NOT NULL,
   `id_annonce` int(11) NOT NULL,
   `message` text NOT NULL,
   `send_date` varchar(20) NOT NULL,
@@ -334,7 +334,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (1,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(2,4,1,225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(3,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(4,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(5,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(6,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(7,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(8,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0);
+INSERT INTO `private_message` VALUES (1,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(2,1,4,225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(3,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(4,1,4,225,'tararat Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(5,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(6,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(7,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(8,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,7 +391,7 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'','',''),(227,'','',''),(228,'','',''),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'','',''),(232,'71-100','151-200','301-400');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +546,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,10,1,'0',1,'225,229'),(4,'loic','baudoux','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'loic','baudoux','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +566,7 @@ CREATE TABLE `vues` (
   `contact_us` int(11) NOT NULL DEFAULT '0',
   `periode` varchar(7) DEFAULT '00-0000',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -575,7 +575,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,161,31,91,10,'08-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,6,3,3,1,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -588,4 +588,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-14 16:34:32
+-- Dump completed on 2019-09-04 16:39:05
