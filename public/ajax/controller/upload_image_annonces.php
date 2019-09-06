@@ -1,5 +1,7 @@
 <?
+
 require("ajax_min_load.php");
+
 if($_app->can_do_user->create_annonce)
 {
 
@@ -13,7 +15,6 @@ if($_app->can_do_user->create_annonce)
 
 	$path_to_upload = $path_to_upload_img_annonce.$id_annonce."/";
 	$path_to_preview = "/images/annonces/".$id_annonce."/";
-
 	$nb_files_uploaded = get_nb_files_uploaded($path_to_upload);
 	
 

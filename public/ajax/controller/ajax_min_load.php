@@ -4,11 +4,7 @@ session_start();
 
 $base_dir = dirname(dirname(dirname(dirname(__FILE__))));
 
-require $base_dir.'/app/includes/announce_format.php';
-require $base_dir.'/app/includes/fct_global_website.php';
-require $base_dir.'/app/includes/_app.php';
-require $base_dir.'/app/includes/can_do_user.php';
-require $base_dir.'/app/includes/lang_select.php';
+
 require $base_dir.'/app/modele/Config.php';
 
 require 'Evengyl/modele/_db_connect.class.php';
@@ -19,6 +15,27 @@ require 'Evengyl/core/parse_table_jointure.php';
 require 'Evengyl/core/where.php';
 require 'Evengyl/core/order_processing.php';
 require 'Evengyl/core/limit_processing.php';
+require 'Evengyl/core/ManyToManyType.php';
+require 'Evengyl/core/OneToOneType.php';
+require 'Evengyl/core/OneToManyType.php';
+require 'Evengyl/core/NormalType.php';
+
+$directory = $base_dir.'/app/model_table/';
+if( is_dir($directory) ){
+	$dossier = opendir($directory);
+	while($fichier = readdir($dossier)){
+		if(is_file($directory.'/'.$fichier) && $fichier !='/' && $fichier !='.' && $fichier != '..' && strtolower(substr($fichier,-4))==".php"){
+			require_once($directory.'/'.$fichier);
+		}
+	}
+	closedir($dossier);
+}
+
+
+require $base_dir.'/app/includes/announce_format.php';
+require $base_dir.'/app/includes/fct_global_website.php';
+require $base_dir.'/app/includes/_app.php';
+require $base_dir.'/app/includes/can_do_user.php';
 
 
 

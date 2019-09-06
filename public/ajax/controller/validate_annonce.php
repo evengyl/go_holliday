@@ -1,10 +1,9 @@
 <?
 require("ajax_min_load.php");
 
-
 	if(isset($_POST['action']))
 	{
-		if($_POST["action"] == "validate_announce")
+		if($_POST["action"] == "validate_annonce")
 		{
 			if(!empty($_POST['id_annonce']) && !empty($_POST['id_user']))
 			{
@@ -25,7 +24,7 @@ require("ajax_min_load.php");
 					$status = $res_sql = $_app->sql->update($req_sql);	
 
 					if($status){
-						$_app->send_new_request_admin("Une annonce à été crée, avec l'ID : ".$_POST['id_annonce']."<br>"."veuillez aller la vérifier sur l'administration http://goholliday.be/admin");
+						$_app->send_new_request_admin("Une annonce à été crée, avec l'ID : ".$_POST['id_annonce']."<br>"."veuillez aller la vérifier sur l'administration http://goholiday.be/admin");
 						
 						return 1;
 					}

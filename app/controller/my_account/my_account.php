@@ -27,7 +27,7 @@ Class my_account extends base_module
 	{
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = 'annonces';
-		$sql_annonce->data = "id, id_utilisateurs, title, sub_title, active, user_validate, admin_validate, create_date, vues, private_message, date_annonces";
+		$sql_annonce->data = "id, id_utilisateurs, title, sub_title, active, user_validate, admin_validate, create_date, vues, private_message, date_annonces, habitat_name_sql";
 		$sql_annonce->order = ["id DESC"];
 		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);

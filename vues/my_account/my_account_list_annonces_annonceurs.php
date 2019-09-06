@@ -68,8 +68,7 @@
                     </div>
                 </div>
                 <div class="col-xs-10"><?
-                    
-                    if(!empty($row_annonce->name_type_vacances) && !empty($row_annonce->title) && !empty($row_annonce->sub_title) && !$row_annonce->user_validate)
+                    if(!empty($row_annonce->habitat_name_sql) && !empty($row_annonce->title) && !empty($row_annonce->sub_title) && !$row_annonce->user_validate)
                     {?>
                         <btn class="opt_annonce btn btn-success" 
                         data-toggle="modal" 

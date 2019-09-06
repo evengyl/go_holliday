@@ -20,16 +20,16 @@
 		                        <p class="text-muted"><?= $row_type_vacances->text; ?></p>
 						      	<input
 							      	class="test"
-							      	id="toggle_<?=$row_type_vacances->name_sql; ?>"
+							      	id="toggle_<?=$row_type_vacances->type_vacances_name_sql; ?>"
 									name="type_vacances[]" 
 									type="checkbox" 
-									value="<?= $row_type_vacances->name_sql; ?>"
+									value="<?= $row_type_vacances->type_vacances_name_sql; ?>"
 									<?= (isset($last_announce->array_type_vacances) && 
 										isset($last_announce->array_type_vacances->id) &&
 										in_array($row_type_vacances->id, $last_announce->array_type_vacances->id))?'checked':''; ?>
 									>
 
-								<label for="toggle_<?=$row_type_vacances->name_sql; ?>">Ce type me parait approprié</label>
+								<label for="toggle_<?=$row_type_vacances->type_vacances_name_sql; ?>">Ce type me parait approprié</label>
 		                    </div>
 		                </div>
 		            </div><?

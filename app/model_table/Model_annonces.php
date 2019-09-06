@@ -9,6 +9,7 @@ class Model_annonces
 		$this->sub_title = new NormalType("sub_title");
 		$this->id_utilisateurs = new NormalType("id_utilisateurs");
 		$this->id_type_vacances = new NormalType("id_type_vacances");
+		$this->pays_name_human = new OneToOneType("pays", "name_human", "id_pays");
 		
 
 		$this->active = new NormalType("active");

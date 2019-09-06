@@ -6,7 +6,7 @@
 		<small class="text-muted thin">(La première sera utilisée comme images principale de votre annonce)</small><br>
 		<small class="text-muted thin">(Format supporté : .png  .jpg  .jpeg  .bnp  .gif  .tif)</small><br>
 		<small class='text-muted thin'>Glisser / Déposer vos images içi, ou sélectionnez les en cliquant ici</small><br>
-		<span  data-id-annonce="<?= $last_announce->id_annonce; ?>"></span>
+		<span  data-id-annonce="<?= $last_announce->id; ?>"></span>
 		
 	</div>
 	<div class="panel-body">

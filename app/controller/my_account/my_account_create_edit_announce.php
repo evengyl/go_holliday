@@ -22,12 +22,14 @@ Class my_account_create_edit_announce extends base_module
 		}
 
 		$this->create_id_bsd(); //ok
+
 		// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
 		$this->last_announce = $this->_app->get_announce_user($this->id_annonce);	
 
 		//for form tpl
 		$array_type_vacances = $this->get_list_type(); //ok
 		$array_type_habitat = $this->get_list_habitat(); //ok
+
 		$this->array_list_activity = $this->get_list_activity(); //ok
 		$this->array_list_sport = $this->get_list_sport(); //ok
 		$array_type_vacances = $this->get_list_type(); //ok
@@ -213,7 +215,8 @@ Class my_account_create_edit_announce extends base_module
 	}
 
 
-	private function get_id_type_vacances($post){
+	private function get_id_type_vacances($post)
+	{
 		if(!empty($post['type_vacances']))
 		{
 			$id = [];
@@ -253,6 +256,7 @@ Class my_account_create_edit_announce extends base_module
 		$sql_type->data = "*";
 		$sql_type->where = ["1"];
 		$sql_type->order = ["id DESC"];
+
 		return $this->_app->sql->select($sql_type);
 	}
 
@@ -271,7 +275,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->end_saison = $this->last_announce->end_saison;
 		$req_sql_update_annonce->ctx->user_validate = "0";
 		$req_sql_update_annonce->table = "annonces";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
@@ -284,7 +288,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->address_localite = $this->last_announce->address_localite;
 		$req_sql_update_annonce->ctx->address_zip_code = $this->last_announce->address_zip_code;
 		$req_sql_update_annonce->table = "annonce_address";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
@@ -295,7 +299,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->price_week_end = $this->last_announce->price_week_end;
 		$req_sql_update_annonce->ctx->price_one_week = $this->last_announce->price_one_week;
 		$req_sql_update_annonce->table = "range_price_announce";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
@@ -308,7 +312,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->parking = $this->last_announce->parking;
 		$req_sql_update_annonce->ctx->caution = $this->last_announce->caution;
 		$req_sql_update_annonce->table = "commoditer_announces";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
@@ -325,7 +329,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx = new stdClass();
 		$req_sql_update_annonce->ctx = $ctx_sport;
 		$req_sql_update_annonce->table = "sport";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 		$this->_app->sql->update($req_sql_update_annonce);
 
 
@@ -341,7 +345,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx = new stdClass();
 		$req_sql_update_annonce->ctx = $ctx_activity;
 		$req_sql_update_annonce->table = "activity";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id_annonce."'";
+		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
 		$this->_app->sql->update($req_sql_update_annonce);
 
 

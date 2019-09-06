@@ -10,8 +10,7 @@ Class my_account_messagery extends base_module
 
 		$this->get_list_message();
 
-		$this->assign_var("message_read", $this->message_read)
-			->assign_var("message_unread", $this->message_unread)
+		$this->assign_var("messages", $this->messages)
 			->render_tpl();
 	}		
 
@@ -21,7 +20,8 @@ Class my_account_messagery extends base_module
 		$sql_private_message = new stdClass();
 		$sql_private_message->table = 'private_message';
 		$sql_private_message->data = "*";
-		$sql_private_message->where = ["id_user_receiver = $1", [$this->_app->user->id_utilisateurs]];
+		$sql_private_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$sql_private_message->order = ["id DESC"];
 		$res_sql_private_message = $this->_app->sql->select($sql_private_message);
 
 		if(!empty($res_sql_private_message))
@@ -30,8 +30,8 @@ Class my_account_messagery extends base_module
 			{
 				$sql_user_sender = new stdClass();
 				$sql_user_sender->table = 'utilisateurs';
-				$sql_user_sender->data = "name", "last_name";
-				$sql_user_sender->where = ["id = $1", [$row_message->id_utilisateurs]];
+				$sql_user_sender->data = "name, last_name";
+				$sql_user_sender->where = ["id = $1", [$row_message->id_user_sender]];
 				$res_sql_user_sender = $this->_app->sql->select($sql_user_sender);
 				$row_message->name_sender = $res_sql_user_sender[0]->name." ".$res_sql_user_sender[0]->last_name;
 
@@ -45,15 +45,17 @@ Class my_account_messagery extends base_module
 				$row_message->name_announce = $res_sql_title_annonce[0]->title;
 
 
-				if($row_message->vu == 1)
-					$this->message_read[] = $row_message;
-
-				else
-					$this->message_unread[] = $row_message;
+				$this->message[] = $row_message;
 			}
+
+
+			$tmp = [];
+			foreach($this->message as $row_message){
+
+				$tmp[$row_message->id_group][] = $row_message;
+			}
+
+			$this->messages = $tmp;
 		}
-		
-
-
 	}
 }

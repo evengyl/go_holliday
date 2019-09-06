@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $(".modal btn[data-action='validate_announce']").click(function(){
+    $(".modal btn[data-action='validate_annonce']").click(function(){
         $("div.loading_ajax").addClass('loaded');
 
         var btn_clicked = $(this);
@@ -9,9 +9,9 @@ $(document).ready(function()
 
         $.ajax({
             type : 'POST',
-            url  : '/ajax/controller/validate_announce.php',
+            url  : '/ajax/controller/validate_annonce.php',
             dataType : "HTML",
-            data : {"action" : "validate_announce", "id_annonce" : id_annonce, "id_user" : id_user},
+            data : {"action" : "validate_annonce", "id_annonce" : id_annonce, "id_user" : id_user},
             success : function(data_return)
             {
                 console.log(data_return);
@@ -29,6 +29,5 @@ $(document).ready(function()
 
     function reload_page()
     {
-        location.reload(); 
     }
 });
