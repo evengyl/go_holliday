@@ -1,4 +1,5 @@
-tata page account client
-ici on aura les messages, 
 les annonces préfées
-et un bouton pour acceder au recheerche directement
+Le systeme de recherche ici aussi
+__MOD2_my_account_messagery__
+
+

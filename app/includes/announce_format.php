@@ -16,8 +16,15 @@ Class announce_format{
 		$req_sql_announce = new stdClass();
 		$req_sql_announce->table = 'annonces';
 		$req_sql_announce->data = "*";
-		$req_sql_announce->where = [($or_id_announce)?"id = $3":""."id_utilisateurs = $1 AND user_validate = $2", 
-			[$this->_app->user->id_utilisateurs, ($or_id_announce)?1:0, ($or_id_announce)?$or_id_announce:0]];
+		$req_sql_announce->where = [($or_id_announce)?"id = $1":""."id_utilisateurs = $2 AND user_validate = $3", 
+										[
+											($or_id_announce)?$or_id_announce:0,
+											$this->_app->user->id_utilisateurs, 
+											($or_id_announce)?1:0
+											
+										]
+								    ];
+
 		$req_sql_announce->order = ["id DESC"];
 		$req_sql_announce->limit = "1";
 		$annonce = $this->_app->sql->select($req_sql_announce);
@@ -46,6 +53,8 @@ Class announce_format{
 			foreach($this->annonce->activity[0] as $key => $row_activity)
 				$tmp[] = (object)["value" => $row_activity, "name_human" => $this->annonce->text_sql_to_human[$key], "name_sql" => $key];
 			$this->annonce->activity[0] = $tmp;
+
+			$this->annonce->url_annonce = "/Recherche/Vues/Annonces/".$this->annonce->id;
 		}
 
 		$this->annonce = (object)$this->annonce;

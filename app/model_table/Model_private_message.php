@@ -14,5 +14,9 @@ class Model_private_message
 		$this->time = new NormalType("time");
 		$this->vu = new NormalType("vu");
 		$this->answer = new NormalType("answer");
+
+		$this->name_sender = new OneToOneType("utilisateurs", "name", "id_user_sender");
+		$this->last_name_sender = new OneToOneType("utilisateurs", "last_name", "id_user_sender");
+		$this->name_announce = new OneToOneType("annonces", "title", "id_annonce");
 	}
 }

@@ -29,7 +29,7 @@
                 }
 
                 if(Config::$is_connect){
-                    ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a class="btn" href="/Deconnection">Se déconnecter</a></li><?
+                    ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a class="btn" href="/Deconnexion">Se déconnecter</a></li><?
                 }?>
                 
             </ul>

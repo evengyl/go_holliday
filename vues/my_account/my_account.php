@@ -7,20 +7,25 @@
     </div>
 
     <div class="row page-profil">
-        <div class="col-lg-3">
+        <div class="col-xs-3">
             __MOD2_my_account_lateral_left_profil__
         </div>
 
 
-        <div class="col-lg-7 row">
-		    <div class="col-lg-12 annonces_list"><?
+        <div class="col-xs-7 row">
+		    <div class="col-xs-12 annonces_list"><?
 
+                if(isset($_GET['second_page']))
+                {
+                    if($_GET['second_page'] == "Messages")
+                        echo "__MOD2_my_account_messagery__";
 
-                if(isset($_GET['second_page']) && $_GET['second_page'] == "Messages")
-                    echo "__MOD2_my_account_messagery__";
+                    if($_GET['second_page'] == "Mes_favoris")
+                        echo "__MOD2_my_account_favorite__";
+                }
 
                 else if($_app->can_do_user->view_infos_annonce)
-                    require ($_app->base_dir.'/vues/my_account/my_account_list_annonces_annonceurs.php');
+                    echo "__MOD2_my_account_list_annonces_annonceur__";
                 
                 else
                     echo "__MOD2_my_account_client__";?>

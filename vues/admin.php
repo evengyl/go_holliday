@@ -16,7 +16,7 @@
 
 
 	<div class="col-xs-12 profil col-without-radius" style="padding:15px;">
-		<a style="margin-top:5px;" class="btn btn-danger btn-block" href="/Deconnection">Se déconnecter du mode Admin</a>
+		<a style="margin-top:5px;" class="btn btn-danger btn-block" href="/Deconnexion">Se déconnecter du mode Admin</a>
 		<a style="margin-top:5px;" href="/admin/eval" type="button" class="btn btn-danger  btn-block">EVAL</a>
 		<a style="margin-top:5px;" href="/admin/edit_config_app" type="button" class="btn btn-success  btn-block">Edit option _APP</a>
 		<a style="margin-top:5px; margin-bottom:5px;" href="/admin/pull_bsd" type="button" class="btn btn-info  btn-block">Pull BSD</a>

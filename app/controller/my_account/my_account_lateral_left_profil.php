@@ -25,10 +25,13 @@ Class my_account_lateral_left_profil extends base_module
 
 		// va récuper les stat des message priver
 		$this->get_nb_private_message();
+		$nb_annonces = $this->get_nb_annonce();
 
 
 
-		$this->assign_var("array_img_back_profil", $array_img_back_profil)->render_tpl();
+		$this->assign_var("array_img_back_profil", $array_img_back_profil)
+				->assign_var("nb_annonce", $nb_annonces)
+				->render_tpl();
 	}		
 
 
@@ -96,12 +99,39 @@ Class my_account_lateral_left_profil extends base_module
 		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
 
-		foreach($res_sql_message as $row_message)
+		if(!empty($res_sql_message))
 		{
-			$this->_app->user->total_private_message++;
+			foreach($res_sql_message as $row_message)
+			{
+				$this->_app->user->total_private_message++;
 
-			if($row_message->vu)
-				$this->_app->user->private_message_not_view++;
+				if($row_message->vu)
+					$this->_app->user->private_message_not_view++;
+			}
 		}
 	}
+
+	public function get_nb_annonce()
+	{
+		$sql_annonce = new stdClass();
+		$sql_annonce->table = 'annonces';
+		$sql_annonce->data = "id, active";
+		$sql_annonce->order = ["id DESC"];
+		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
+		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
+
+
+		$this->_app->user->nb_annonces_active = 0;
+		$this->_app->user->nb_annonces = 0;
+
+		foreach($res_sql_annonces as $key_annonce => $row_annonce)
+		{
+			$this->_app->user->nb_annonces ++;
+
+			if($row_annonce->active)
+				$this->_app->user->nb_annonces_active ++;
+		}
+		return $res_sql_annonces;
+	}
+
 }

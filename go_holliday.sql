@@ -41,7 +41,7 @@ CREATE TABLE `activity` (
 
 LOCK TABLES `activity` WRITE;
 /*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (210,1,0,1,1,1,1,1),(225,1,1,1,1,1,1,1),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(230,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0),(232,0,1,0,0,0,0,0);
+INSERT INTO `activity` VALUES (210,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(230,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0),(232,0,1,0,0,0,0,0);
 /*!40000 ALTER TABLE `activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,11 +85,6 @@ CREATE TABLE `annonces` (
   `id_pays` tinyint(4) NOT NULL,
   `id_habitat` tinyint(4) DEFAULT NULL,
   `id_type_vacances` varchar(20) DEFAULT NULL,
-  `id_range_price_announce` int(11) NOT NULL,
-  `id_sport` int(11) NOT NULL,
-  `id_activity` int(11) NOT NULL,
-  `id_annonce_address` int(11) NOT NULL,
-  `id_commoditer_announces` int(11) NOT NULL,
   `id_utilisateurs` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
   `sub_title` varchar(200) NOT NULL,
@@ -110,7 +105,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,2,'3',210,210,210,210,210,1,'testtata','test sub','02/08/2019','31/09/2019',1526,0,1,0,'28/01/2019'),(225,1,3,'2,3',225,225,225,225,225,1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','09/08/2019','20/08/2019',0,0,1,1,'02/08/2019'),(229,1,5,'1,2,3',229,229,229,229,229,1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,1,0,'05/08/2019'),(232,1,4,'2,3',232,232,232,232,232,1,'testestetes','teststes','14/08/2019','13/09/2019',0,0,0,0,'13/08/2019');
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/10/2019',1526,0,1,0,'28/01/2019'),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','06/09/2019','06/10/2019',0,0,1,1,'02/08/2019'),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,1,0,'05/08/2019'),(232,1,4,'2,3',1,'testestetes','teststes','14/08/2019','13/09/2019',0,0,1,0,'13/08/2019');
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,13 +314,15 @@ CREATE TABLE `private_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateurs` int(11) NOT NULL,
   `id_user_sender` int(11) NOT NULL,
+  `id_group` int(11) NOT NULL,
   `id_annonce` int(11) NOT NULL,
   `message` text NOT NULL,
   `send_date` varchar(20) NOT NULL,
+  `time` varchar(10) NOT NULL,
   `vu` tinyint(1) NOT NULL DEFAULT '0',
   `answer` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +331,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (1,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(2,1,4,225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(3,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(4,1,4,225,'tararat Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(5,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',0,0),(6,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(7,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0),(8,1,4,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018',1,0);
+INSERT INTO `private_message` VALUES (1,1,4,2,210,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','20/12/2018','19h32',0,0),(2,1,1,1,225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','17h48',1,0),(5,1,1,1,225,'LAST Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','5h06',1,1),(6,1,1,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','11h23',0,0),(7,1,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','14h25',1,0),(8,1,4,1,225,'LAST Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','12h45',0,0),(9,1,1,1,225,'sefsefsefsef','19/12/2018','08h36',1,0),(10,1,1,1,225,'sefsefefe','11/09/2019','08:35',1,0),(11,1,1,1,225,'sefsef','11/09/2019','08h36',1,0),(12,1,1,1,225,'test','11/09/2019','12h36',1,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +421,7 @@ CREATE TABLE `sport` (
 
 LOCK TABLES `sport` WRITE;
 /*!40000 ALTER TABLE `sport` DISABLE KEYS */;
-INSERT INTO `sport` VALUES (210,1,0,1,1,1,0,1,0,1,0),(225,1,0,1,1,1,0,1,0,1,0),(226,0,0,0,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(230,0,0,0,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0,0,0,0),(232,0,0,0,0,1,0,0,0,0,0);
+INSERT INTO `sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0,0,0,0),(226,0,0,0,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(230,0,0,0,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0,0,0,0),(232,0,0,0,0,1,0,0,0,0,0);
 /*!40000 ALTER TABLE `sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +543,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'loic','baudoux','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,6,3,3,1,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,8,4,6,1,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -588,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-04 16:39:05
+-- Dump completed on 2019-09-12 14:20:59

@@ -9,6 +9,10 @@ if(isset($_POST))
         case 'add_to_favorite':
 	        add_to_favorite($_app);
 	        break;
+	        
+        case 'del_to_favorite':
+        	del_to_favorite($_app);
+        	break;
 	}
 }
 

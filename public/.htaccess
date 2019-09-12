@@ -15,12 +15,13 @@ RewriteRule ^Mon_compte[/]{0,1}$ ?page=my_account [L]
 RewriteRule ^Mon_compte/Activate/([0-9]+)[/]{0,1}$ ?page=my_account&activate=1&id_annonce=$1 [L]
 RewriteRule ^Mon_compte/Desactivate/([0-9]+)[/]{0,1}$ ?page=my_account&desactivate=1&id_annonce=$1 [L]
 RewriteRule ^Mon_compte/(Messages)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
+RewriteRule ^Mon_compte/(Mes_favoris)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
 
 RewriteRule ^Mon_compte/Annonces/([0-9]+)[/]{0,1}$ ?page=my_account&num_page=$1 [L]
 RewriteRule ^Mon_compte/Creation-Annonce[/]{0,1}$ ?page=my_account&action=create_announce [L]
 RewriteRule ^Mon_compte/Edition-Annonce/([0-9]+)[/]{0,1}$ ?page=my_account&action=create_announce&id_annonce=$1 [L]
 
-RewriteRule ^Deconnection[/]{0,1}$ ?page=logout [L]
+RewriteRule ^Deconnexion[/]{0,1}$ ?page=logout [L]
 
 RewriteRule ^Inscription[/]{0,1}$ ?page=sign_up_global [L]
 RewriteRule ^Inscription/([a-zA-Z]+)[/]{0,1}$ ?page=sign_up_global&option_sign_up=$1 [L]

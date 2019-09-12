@@ -73,7 +73,7 @@ else
 							<p class="text-center text-muted">
 								Vous êtes connecté en tant que <b><?= ucfirst($_SESSION['pseudo']) ?></b><br>
 								Si vous voulez vous déconnecter c'est par ici
-								<a href="/Deconnection">Se déconnecter</a>.
+								<a href="/Deconnexion">Se déconnecter</a>.
 							</p>
 							<hr>
 						</div>

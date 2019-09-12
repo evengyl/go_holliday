@@ -1,12 +1,12 @@
-<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+<div id='carousel-custom' class='carousel slide' style="<?= $width; ?>" data-ride='carousel'>
     <div class='carousel-outer'>
         <!-- Wrapper for slides -->
-        <div class='carousel-inner' style="height:500px;"><?
+        <div class='carousel-inner' style="height:<?= $height; ?>;"><?
         	$active = true;
         	foreach($slide_img as $row_img)
         	{?>
 				<div class="item <?=($active)?'active':''; ?>">
-                	<center><img style="max-height:500px;" src="<?= $row_img; ?>" alt=""></center>
+                	<center><img style="max-height:<?= $height; ?>;" src="<?= $row_img; ?>" alt=""></center>
             	</div><?
             	$active = false;
         	}?>

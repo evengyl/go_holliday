@@ -3,6 +3,7 @@
 
 	require($_app->base_dir."/vues/annonces/title_top.php");
 	
+	$height = "500px";
 	require($_app->base_dir."/vues/annonces/slide_images.php");
 
 	require($_app->base_dir."/vues/annonces/option_annonce.php");
