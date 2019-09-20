@@ -1,6 +1,6 @@
 <?
 
-class Model_sport
+class Model_annonce_sport
 {
 	public function __construct()
 	{

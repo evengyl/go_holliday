@@ -11,7 +11,8 @@ if(!isset($_GET['page']))
 	$_GET['page'] = 'home';
 
 
-ob_start();?>
+ob_start();
+?>
 <!DOCTYPE html>
 	<html lang="Fr-be">
 		<head>

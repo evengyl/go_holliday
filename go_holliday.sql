@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `activity`
+-- Table structure for table `annonce_activity`
 --
 
-DROP TABLE IF EXISTS `activity`;
+DROP TABLE IF EXISTS `annonce_activity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `activity` (
+CREATE TABLE `annonce_activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `hiking` tinyint(1) NOT NULL DEFAULT '0',
   `dancing` tinyint(1) NOT NULL DEFAULT '0',
@@ -32,17 +32,17 @@ CREATE TABLE `activity` (
   `bar` tinyint(1) NOT NULL DEFAULT '0',
   `spa` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `activity`
+-- Dumping data for table `annonce_activity`
 --
 
-LOCK TABLES `activity` WRITE;
-/*!40000 ALTER TABLE `activity` DISABLE KEYS */;
-INSERT INTO `activity` VALUES (210,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0),(226,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(230,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0),(232,0,1,0,0,0,0,0);
-/*!40000 ALTER TABLE `activity` ENABLE KEYS */;
+LOCK TABLES `annonce_activity` WRITE;
+/*!40000 ALTER TABLE `annonce_activity` DISABLE KEYS */;
+INSERT INTO `annonce_activity` VALUES (210,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(232,0,1,0,0,0,0,0),(236,0,0,0,1,0,0,1);
+/*!40000 ALTER TABLE `annonce_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `annonce_address` (
   `address_localite` varchar(50) NOT NULL,
   `address_zip_code` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,8 +69,151 @@ CREATE TABLE `annonce_address` (
 
 LOCK TABLES `annonce_address` WRITE;
 /*!40000 ALTER TABLE `annonce_address` DISABLE KEYS */;
-INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567');
+INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','6567'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567'),(235,'','','','',''),(236,'test','test','test','test','6567');
 /*!40000 ALTER TABLE `annonce_address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_avis`
+--
+
+DROP TABLE IF EXISTS `annonce_avis`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_avis` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_annonces` int(11) NOT NULL,
+  `create_date` varchar(25) NOT NULL,
+  `login_published` varchar(50) NOT NULL,
+  `message` text NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_avis`
+--
+
+LOCK TABLES `annonce_avis` WRITE;
+/*!40000 ALTER TABLE `annonce_avis` DISABLE KEYS */;
+INSERT INTO `annonce_avis` VALUES (1,1,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(2,1,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(3,1,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(4,1,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(5,2,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(6,2,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(7,2,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(8,2,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(9,3,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(10,3,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(11,3,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(12,3,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(13,4,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(14,4,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(15,4,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(16,4,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1);
+/*!40000 ALTER TABLE `annonce_avis` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_commoditer`
+--
+
+DROP TABLE IF EXISTS `annonce_commoditer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_commoditer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pet` tinyint(1) NOT NULL DEFAULT '0',
+  `parking` tinyint(1) NOT NULL DEFAULT '0',
+  `handicap` tinyint(1) NOT NULL DEFAULT '0',
+  `max_personn` tinyint(4) NOT NULL DEFAULT '1',
+  `caution` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_commoditer`
+--
+
+LOCK TABLES `annonce_commoditer` WRITE;
+/*!40000 ALTER TABLE `annonce_commoditer` DISABLE KEYS */;
+INSERT INTO `annonce_commoditer` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0),(235,0,0,0,1,0),(236,1,1,1,15,200);
+/*!40000 ALTER TABLE `annonce_commoditer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_dates`
+--
+
+DROP TABLE IF EXISTS `annonce_dates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_dates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_date` varchar(15) NOT NULL DEFAULT '01/01/1970',
+  `end_date` varchar(15) NOT NULL DEFAULT '01/01/1970',
+  `prix` smallint(6) NOT NULL DEFAULT '0',
+  `id_annonce` int(11) NOT NULL,
+  `state` varchar(20) NOT NULL DEFAULT 'waiting',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_dates`
+--
+
+LOCK TABLES `annonce_dates` WRITE;
+/*!40000 ALTER TABLE `annonce_dates` DISABLE KEYS */;
+INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,'reserved'),(5,'08/04/2019','15/04/2019',250,225,'waiting'),(6,'01/09/2019','22/09/2019',300,225,'reserved'),(7,'23/08/2019','30/08/2019',350,225,'waiting');
+/*!40000 ALTER TABLE `annonce_dates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_pays`
+--
+
+DROP TABLE IF EXISTS `annonce_pays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_pays` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_sql` varchar(20) NOT NULL,
+  `name_human` varchar(50) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_pays`
+--
+
+LOCK TABLES `annonce_pays` WRITE;
+/*!40000 ALTER TABLE `annonce_pays` DISABLE KEYS */;
+INSERT INTO `annonce_pays` VALUES (1,'belgique','Belgique','drapeau_belgique.jpg'),(2,'france','France','drapeau_france.jpg'),(3,'italie','Italie','drapeau_italie.jpg'),(4,'espagne','Espagne','drapeau_espagne.jpg'),(5,'pays_bas','Pays-Bas','drapeau_pays_bas.jpg'),(6,'allemagne','Allemagne','drapeau_allemagne.jpg'),(7,'luxembourg','Luxembourg','drapeau_luxembourg.jpg'),(8,'reunion_island','Ile de la Réunion','drapeau_reunion.jpg'),(9,'united_kingdom','Royaume-Uni','drapeau_uk.jpg');
+/*!40000 ALTER TABLE `annonce_pays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_sport`
+--
+
+DROP TABLE IF EXISTS `annonce_sport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_sport` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foot` tinyint(1) NOT NULL DEFAULT '0',
+  `basket` tinyint(1) NOT NULL DEFAULT '0',
+  `tennis` tinyint(1) NOT NULL DEFAULT '0',
+  `petanque` tinyint(1) NOT NULL DEFAULT '0',
+  `piscine` tinyint(1) NOT NULL DEFAULT '0',
+  `aqua_center` tinyint(1) NOT NULL DEFAULT '0',
+  `sport` tinyint(1) NOT NULL DEFAULT '0',
+  `velos` tinyint(1) NOT NULL DEFAULT '0',
+  `skate` tinyint(1) NOT NULL DEFAULT '0',
+  `arc` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_sport`
+--
+
+LOCK TABLES `annonce_sport` WRITE;
+/*!40000 ALTER TABLE `annonce_sport` DISABLE KEYS */;
+INSERT INTO `annonce_sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(232,0,0,0,0,1,0,0,0,0,0),(236,1,0,0,1,1,1,1,1,1,0);
+/*!40000 ALTER TABLE `annonce_sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -95,8 +238,9 @@ CREATE TABLE `annonces` (
   `user_validate` tinyint(1) NOT NULL DEFAULT '0',
   `admin_validate` tinyint(1) NOT NULL DEFAULT '0',
   `create_date` varchar(20) NOT NULL,
+  `on_off` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,92 +249,8 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/10/2019',1526,0,1,0,'28/01/2019'),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','06/09/2019','06/10/2019',0,0,1,1,'02/08/2019'),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,0,1,0,'05/08/2019'),(232,1,4,'2,3',1,'testestetes','teststes','14/08/2019','13/09/2019',0,0,1,0,'13/08/2019');
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/12/2019',1529,1,1,1,'28/01/2019',1),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',4,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,1,1,1,'05/08/2019',1),(232,1,4,'2,3',1,'testestetes','teststes','14/08/2019','13/09/2019',0,1,1,1,'13/08/2019',1),(236,1,5,'1,2',1,'testtest','testtest','01/09/2019','29/09/2019',0,1,1,1,'13/09/2019',1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `avis_on_annonces`
---
-
-DROP TABLE IF EXISTS `avis_on_annonces`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `avis_on_annonces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_annonces` int(11) NOT NULL,
-  `create_date` varchar(25) NOT NULL,
-  `login_published` varchar(50) NOT NULL,
-  `message` text NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `avis_on_annonces`
---
-
-LOCK TABLES `avis_on_annonces` WRITE;
-/*!40000 ALTER TABLE `avis_on_annonces` DISABLE KEYS */;
-INSERT INTO `avis_on_annonces` VALUES (1,1,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(2,1,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(3,1,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(4,1,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(5,2,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(6,2,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(7,2,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(8,2,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(9,3,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(10,3,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(11,3,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(12,3,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(13,4,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(14,4,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(15,4,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(16,4,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1);
-/*!40000 ALTER TABLE `avis_on_annonces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `commoditer_announces`
---
-
-DROP TABLE IF EXISTS `commoditer_announces`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commoditer_announces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pet` tinyint(1) NOT NULL DEFAULT '0',
-  `parking` tinyint(1) NOT NULL DEFAULT '0',
-  `handicap` tinyint(1) NOT NULL DEFAULT '0',
-  `max_personn` tinyint(4) NOT NULL DEFAULT '1',
-  `caution` smallint(6) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `commoditer_announces`
---
-
-LOCK TABLES `commoditer_announces` WRITE;
-/*!40000 ALTER TABLE `commoditer_announces` DISABLE KEYS */;
-INSERT INTO `commoditer_announces` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0);
-/*!40000 ALTER TABLE `commoditer_announces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `date_annonces`
---
-
-DROP TABLE IF EXISTS `date_annonces`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `date_annonces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `prix` smallint(6) NOT NULL DEFAULT '0',
-  `id_annonce` int(11) NOT NULL,
-  `state` varchar(20) NOT NULL DEFAULT 'waiting',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `date_annonces`
---
-
-LOCK TABLES `date_annonces` WRITE;
-/*!40000 ALTER TABLE `date_annonces` DISABLE KEYS */;
-INSERT INTO `date_annonces` VALUES (1,'2018-11-23','2018-11-30',250,210,'waiting'),(2,'2018-11-01','2018-11-20',300,210,'reserved'),(3,'2018-11-11','2018-11-15',350,210,'waiting'),(4,'2018-11-13','2018-11-14',400,210,'waiting'),(5,'2018-11-23','2018-11-30',250,210,'waiting'),(6,'2018-11-01','2018-11-20',300,210,'reserved'),(7,'2018-11-11','2018-11-15',350,210,'waiting'),(8,'2018-11-13','2018-11-14',400,210,'reserved');
-/*!40000 ALTER TABLE `date_annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -216,7 +276,7 @@ CREATE TABLE `habitat` (
 
 LOCK TABLES `habitat` WRITE;
 /*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','<b>Une Caravane</b> :  remorque destiné à être habitée, de manière temporaire (pour du camping, par exemple) ou permanente. Les caravanes peuvent être tractées par des automobiles ou des camionnettes.'),(2,'bungalow','Bungalow','bungalow.jpg','<b>Un Bungalow</b> : habitation de forme rectangulaire pouvant servir de résidence permanente ou secondaire. Elle doit être habitable à longueur d\'année, construite sur un châssis remorquable, non sur fondations permanentes, et destinée à être raccordée aux services publics'),(3,'appartements','Appartements','appartement.jpg','<b>Un Appartements</b> : Bien comportant un certain nombre de pièces et qui n’occupe qu’une partie d’un immeuble, situé généralement dans une ville. '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','<b>Une Maisons d\'hôtes</b> : une chambre chez l’habitant, louée à la nuitée. On partage la maison du propriétaire qui accueille ses hôtes (ou une dépendance sur la propriété, c’est possible) et même si la chambre comporte un coin salon, les pièces à vivre sont communes.'),(5,'gites','Gites','gite.jpg','<b>Un Gites</b> : Le gîte est une location meublée de tourisme ou location saisonnière, généralement à la semaine. Les personnes qui le louent ont la libre disposition d’un appartement ou bâtiment avec au moins une pièce à vivre, une cuisine, une salle d’eau, une ou des chambres… Elles doivent être autonomes, comme chez elles. '),(6,'villa','Villa','villa.jpg','<b>Une Villa</b> : Une villa est à présent une maison d\'habitation de grande taille, souvent de villégiature, de plaisance (villa de bord de mer, de station thermale). ');
+INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Remorque destiné à être habitée, de manière temporaire (pour du camping, par exemple) ou permanente. Les caravanes peuvent être tractées par des automobiles ou des camionnettes.'),(2,'bungalow','Bungalow','bungalow.jpg','Habitation de forme rectangulaire pouvant servir de résidence permanente ou secondaire. Elle doit être habitable à longueur d\'année, construite sur un châssis remorquable, non sur fondations permanentes, et destinée à être raccordée aux services publics'),(3,'appartements','Appartements','appartement.jpg','Bien comportant un certain nombre de pièces et qui n’occupe qu’une partie d’un immeuble, situé généralement dans une ville. '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Une chambre chez l’habitant, louée à la nuitée. On partage la maison du propriétaire qui accueille ses hôtes (ou une dépendance sur la propriété, c’est possible) et même si la chambre comporte un coin salon, les pièces à vivre sont communes.'),(5,'gites','Gites','gite.jpg','Le gîte est une location meublée de tourisme ou location saisonnière, généralement à la semaine. Les personnes qui le louent ont la libre disposition d’un appartement ou bâtiment avec au moins une pièce à vivre, une cuisine, une salle d’eau, une ou des chambres… Elles doivent être autonomes, comme chez elles. '),(6,'villa','Villa','villa.jpg','Une villa est à présent une maison d\'habitation de grande taille, souvent de villégiature, de plaisance (villa de bord de mer, de station thermale). ');
 /*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,33 +337,6 @@ INSERT INTO `option_app` VALUES (1,'view_time_exec_page',0,'Voir le temps d\'exe
 UNLOCK TABLES;
 
 --
--- Table structure for table `pays`
---
-
-DROP TABLE IF EXISTS `pays`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pays` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_sql` varchar(20) NOT NULL,
-  `name_human` varchar(50) NOT NULL,
-  `img` varchar(50) NOT NULL,
-  `text` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pays`
---
-
-LOCK TABLES `pays` WRITE;
-/*!40000 ALTER TABLE `pays` DISABLE KEYS */;
-INSERT INTO `pays` VALUES (1,'belgique','Belgique','drapeau_belgique.jpg','La Belgique : '),(2,'france','France','drapeau_france.jpg','La France : '),(3,'italie','Italie','drapeau_italie.jpg','L\'Italie : '),(4,'espagne','Espagne','drapeau_espagne.jpg','L\'Espagne : '),(5,'pays_bas','Pays-Bas','drapeau_pays_bas.jpg','Les Pays-Bas : '),(6,'allemagne','Allemagne','drapeau_allemagne.jpg','L\'Allemagne'),(7,'luxembourg','Luxembourg','drapeau_luxembourg.jpg','Le Luxembourg'),(8,'reunion_island','Ile de la Réunion','drapeau_reunion.jpg','L\'Ile de la Réunion'),(9,'united_kingdom','Royaume-Uni','drapeau_uk.jpg','Le Royaume-Uni');
-/*!40000 ALTER TABLE `pays` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `private_message`
 --
 
@@ -314,7 +347,7 @@ CREATE TABLE `private_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateurs` int(11) NOT NULL,
   `id_user_sender` int(11) NOT NULL,
-  `id_group` int(11) NOT NULL,
+  `id_group` varchar(100) NOT NULL,
   `id_annonce` int(11) NOT NULL,
   `message` text NOT NULL,
   `send_date` varchar(20) NOT NULL,
@@ -322,7 +355,7 @@ CREATE TABLE `private_message` (
   `vu` tinyint(1) NOT NULL DEFAULT '0',
   `answer` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +364,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (1,1,4,2,210,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','20/12/2018','19h32',0,0),(2,1,1,1,225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','17h48',1,0),(5,1,1,1,225,'LAST Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','5h06',1,1),(6,1,1,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','11h23',0,0),(7,1,4,1,225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','14h25',1,0),(8,1,4,1,225,'LAST Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','12h45',0,0),(9,1,1,1,225,'sefsefsefsef','19/12/2018','08h36',1,0),(10,1,1,1,225,'sefsefefe','11/09/2019','08:35',1,0),(11,1,1,1,225,'sefsef','11/09/2019','08h36',1,0),(12,1,1,1,225,'test','11/09/2019','12h36',1,0);
+INSERT INTO `private_message` VALUES (23,1,1,'1',225,'sefsefefe','11/09/2019','08:35',1,0),(24,1,1,'1',225,'sefsefsefsef','19/12/2018','08h36',1,0),(25,1,1,'1',225,'sefsef','11/09/2019','08h36',1,0),(26,1,1,'1',225,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','11h23',0,0),(27,1,1,'1',225,'test','11/09/2019','12h36',1,0),(30,1,1,'1',225,'testLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','17h48',1,0),(33,1,1,'1',225,'LAST Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.','19/12/2018','5h06',1,1),(39,1,4,'GroupMessagery5d8475a139698681019336',225,'test','20/09/2019','8h50',0,0),(40,1,4,'GroupMessagery5d8475a139698681019336',225,'test','20/09/2019','8h51',0,0),(41,1,4,'GroupMessagery5d8475a139698681019336',225,'ah ben super j\'esp&amp;egrave;re que tu vas bien de ton cot&amp;eacute;','20/09/2019','10h11',0,0),(42,1,4,'GroupMessagery5d8475a139698681019336',225,'ah ben super j\'espère que tu vas bien de ton coté','20/09/2019','10h13',0,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,7 +412,7 @@ CREATE TABLE `range_price_announce` (
   `price_week_end` varchar(20) NOT NULL,
   `price_one_week` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -388,41 +421,8 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400'),(235,'','',''),(236,'71-100','151-200','301-400');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `sport`
---
-
-DROP TABLE IF EXISTS `sport`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `sport` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `foot` tinyint(1) NOT NULL DEFAULT '0',
-  `basket` tinyint(1) NOT NULL DEFAULT '0',
-  `tennis` tinyint(1) NOT NULL DEFAULT '0',
-  `petanque` tinyint(1) NOT NULL DEFAULT '0',
-  `piscine` tinyint(1) NOT NULL DEFAULT '0',
-  `aqua_center` tinyint(1) NOT NULL DEFAULT '0',
-  `sport` tinyint(1) NOT NULL DEFAULT '0',
-  `velos` tinyint(1) NOT NULL DEFAULT '0',
-  `skate` tinyint(1) NOT NULL DEFAULT '0',
-  `arc` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=233 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sport`
---
-
-LOCK TABLES `sport` WRITE;
-/*!40000 ALTER TABLE `sport` DISABLE KEYS */;
-INSERT INTO `sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,0,0,0,0,0,0,0,0,0,0),(226,0,0,0,0,0,0,0,0,0,0),(227,0,0,0,0,0,0,0,0,0,0),(228,0,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(230,0,0,0,0,0,0,0,0,0,0),(231,0,0,0,0,0,0,0,0,0,0),(232,0,0,0,0,1,0,0,0,0,0);
-/*!40000 ALTER TABLE `sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -543,7 +543,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,8,4,6,1,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,38,18,26,1,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-12 14:20:59
+-- Dump completed on 2019-09-20 14:24:00

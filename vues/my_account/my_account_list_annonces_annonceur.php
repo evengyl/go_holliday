@@ -11,9 +11,20 @@
             <div class="row" style="padding-left:15px; padding-right:15px;">
 
                 <div class="col-xs-2">
-                    <a  href="/Mon_compte/Edition-Annonce/<?= $row_annonce->id ?>" style="<?= (!$_app->can_do_user->edit_annonce)?"display:none;":""; ?>margin-top:0px;" class="opt_annonce btn btn-warning">
-                        <small><i class="fa fa-angle-double-right "></i>&nbsp;Editer</small>
-                    </a><br>
+                    <a title="Voir l'annonce" style="margin-top:0px;" href="/Recherche/Vues/Annonces/<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success">
+                        <small><i class="far fa-eye"></i></small>
+                    </a>
+
+                    <a title="Editer l'annonce" href="/Mon_compte/Edition-Annonce/<?= $row_annonce->id ?>" style="<?= (!$_app->can_do_user->edit_annonce)?"display:none;":""; ?>margin-top:0px;" class="opt_annonce btn btn-warning">
+                        <small><i class="far fa-edit"></i></small>
+                    </a>
+
+                    <button title="Supprimer l'annonce" class="btn btn-danger" style="padding:5px 10px 5px 10px;" data-action="delete_announce" data-id="<?= $row_annonce->id; ?>">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+
+                    
+
                     <div class="img_annonce">
                         <a href="#" disabled class="thumbnail" style="cursor:default;">
                             <img src="/images/annonces/<?= $row_annonce->id; ?>/<?= $row_annonce->img_principale; ?>" class="img-responsive">
@@ -44,14 +55,7 @@
                             data-target="#view_avis_<?= $row_annonce->id ?>"
                         >
                             <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
-                        </a>
-                        <br>
-
-                        <a href="/Recherche/Vues/Annonces/<?= $row_annonce->id; ?>" 
-                        class="opt_annonce"
-                        >
-                            <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir l'annonce</small>
-                        </a>
+                        </a>                        
                     </div>
 
                     <div class="col-xs-6">
@@ -74,11 +78,20 @@
                         data-toggle="modal" 
                         data-target="#validate_<?= $row_annonce->id ?>"
                         >
-                            <small><i class="fa fa-angle-double-right "></i>&nbsp;Valider cette annonce</small>
+                            <small><i class="fas fa-check"></i>&nbsp;Valider cette annonce</small>
                         </btn><?
                     }
+
                     else if($row_annonce->user_validate && !$row_annonce->admin_validate)
-                        echo '<span class="thin text-muted"><small>Cette annonce n\'a pas encore été validée par l\'administration</small></span>';
+                    {
+                        echo '<span  style="color:#d9534f;" class="thin text-muted">
+                                <small>
+                                    <i class="fas fa-exclamation"></i>
+                                    &nbsp;Cette annonce n\'a pas encore été validée par l\'administration&nbsp;
+                                    <i class="fas fa-exclamation"></i>
+                                </small>
+                            </span>';
+                    }
                     
                     else if($row_annonce->admin_validate && $row_annonce->user_validate)
                     {?>
@@ -89,11 +102,20 @@
                             data-target="#set_active_<?= $row_annonce->id; ?>" 
                             class="opt_annonce btn btn-success"
                         >
-                            <small><i class="fa fa-angle-double-right "></i>&nbsp;<span><?=(!$row_annonce->active)?'Mettre en ligne':'Retirer la mise en ligne'; ?></span></small>
+                            <small><span><?=(!$row_annonce->active)?'<i class="fas fa-euro-sign"></i>&nbsp;Mettre en ligne':'<i class="fas fa-times"></i>&nbsp;Retirer la mise en ligne'; ?></span></small>
                         </btn><?
                     }
+
                     else
-                        echo '<span class="thin text-muted"><small>Pour valider l\'annonce vous devez d\'adord la completée</small></span>';?>
+                    {
+                        echo '<span style="color:#f0ad4e;" class="thin text-muted">
+                                <small>
+                                    <i class="fas fa-exclamation"></i>
+                                    &nbsp;Pour valider l\'annonce vous devez d\'adord la completée&nbsp;
+                                    <i class="fas fa-exclamation"></i>
+                                </small>
+                            </span>';
+                    }?>
 
                 </div>
 
@@ -119,6 +141,67 @@
 
 </ul>
     
-<script src="/js/validate_annonce.js"></script>
 
 
+<script>
+$(document).ready(function()
+{
+
+    $(".modal btn[data-action='validate_annonce']").click(function(){
+        $("div.loading_ajax").addClass('loaded');
+
+        var btn_clicked = $(this);
+        var id_annonce = btn_clicked.attr("data-id");
+        var id_user = btn_clicked.attr("data-id-user");
+
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/validate_annonce.php',
+            dataType : "HTML",
+            data : {"action" : "validate_annonce", "id_annonce" : id_annonce, "id_user" : id_user},
+            success : function(data_return)
+            {
+                console.log(data_return);
+                $('#validate_'+id_annonce).modal('hide');
+                
+                $("h4[data-fct='return_fct_annonce']").html("Vous avez bien validé votre annonce, Merci").show(500).delay(3000).hide(500);
+                setTimeout(reload_page, 2000);
+            },
+            complete : function(){
+                $("div.loading_ajax").removeClass('loaded');
+            }
+        });
+    });
+
+
+
+
+    $("button[data-action='delete_announce']").click(function(e)
+    {
+        confirm("Voulez-vous vraiment supprimer cette annonce ?");
+
+        e.stopPropagation()
+
+        var id = $(this).data("id");
+
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/delete_announce.php',
+            dataType : "HTML",
+            data : {"action" : "delete_announce", "id" : id},
+            success : function(data_return)
+            {
+                setTimeout(reload_page,400);
+            },
+        });
+    });
+
+
+    function reload_page()
+    {
+        document.location.reload(true);
+    }
+});
+
+
+</script>

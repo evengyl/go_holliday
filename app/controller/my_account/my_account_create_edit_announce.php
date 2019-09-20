@@ -379,50 +379,35 @@ Class my_account_create_edit_announce extends base_module
 			$req_sql_insert_sport->ctx = new stdClass();
 			$req_sql_insert_sport->ctx->id = $id_annonce;
 			$req_sql_insert_sport->table = "activity";
-			$id_activity = $this->_app->sql->insert_into($req_sql_insert_sport, 0 ,1);
+			$this->_app->sql->insert_into($req_sql_insert_sport);
 
 			
 			$req_sql_insert_activity = new stdClass();
 			$req_sql_insert_activity->ctx = new stdClass();
 			$req_sql_insert_activity->ctx->id = $id_annonce;
 			$req_sql_insert_activity->table = "sport";
-			$id_sport = $this->_app->sql->insert_into($req_sql_insert_activity, 0 ,1);
+			$this->_app->sql->insert_into($req_sql_insert_activity);
 
 
 			$req_sql_insert_address = new stdClass();
 			$req_sql_insert_address->ctx = new stdClass();
 			$req_sql_insert_address->ctx->id = $id_annonce;
 			$req_sql_insert_address->table = "annonce_address";
-			$id_address = $this->_app->sql->insert_into($req_sql_insert_address, 0 ,1);
+			$this->_app->sql->insert_into($req_sql_insert_address);
 
 
 			$req_sql_insert_commoditer = new stdClass();
 			$req_sql_insert_commoditer->ctx = new stdClass();
 			$req_sql_insert_commoditer->ctx->id = $id_annonce;
 			$req_sql_insert_commoditer->table = "commoditer_announces";
-			$id_commoditer = $this->_app->sql->insert_into($req_sql_insert_commoditer, 0 ,1);
+			$this->_app->sql->insert_into($req_sql_insert_commoditer);
 
 
 			$req_sql_insert_range_price = new stdClass();
 			$req_sql_insert_range_price->ctx = new stdClass();
 			$req_sql_insert_range_price->ctx->id = $id_annonce;
 			$req_sql_insert_range_price->table = "range_price_announce";
-			$id_range_price = $this->_app->sql->insert_into($req_sql_insert_range_price, 0 ,1);
-
-
-
-			
-			$req_sql_update_annonce = new stdClass();
-			$req_sql_update_annonce->ctx = new stdClass();
-			$req_sql_update_annonce->ctx->id_sport = $id_sport;
-			$req_sql_update_annonce->ctx->id_activity = $id_activity;
-			$req_sql_update_annonce->ctx->id_annonce_address = $id_address;
-			$req_sql_update_annonce->ctx->id_commoditer_announces = $id_commoditer;
-			$req_sql_update_annonce->ctx->id_range_price_announce = $id_range_price;
-
-			$req_sql_update_annonce->table = "annonces";
-			$req_sql_update_annonce->where = "id = '".$id_annonce."'";
-			$this->_app->sql->update($req_sql_update_annonce);
+			$this->_app->sql->insert_into($req_sql_insert_range_price);
 		}
 	}
 }

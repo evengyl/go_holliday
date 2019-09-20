@@ -4,16 +4,24 @@
 	require($_app->base_dir."/vues/annonces/title_top.php");
 	
 	$height = "500px";
+	$width = "";
 	require($_app->base_dir."/vues/annonces/slide_images.php");
 
 	require($_app->base_dir."/vues/annonces/option_annonce.php");
+
+	require($_app->base_dir."/vues/annonces/modal_date.php");
+	
 	
 	require($_app->base_dir."/vues/annonces/type_vacances.php");
     
 	require($_app->base_dir."/vues/annonces/details_and_price.php");
+
+	if($annonce->pays_name_human = "Belgique")
+		require($_app->base_dir."/vues/annonces/meteo.php"); 
     
-    require($_app->base_dir."/vues/annonces/maps.php"); ?>
-	
+	require($_app->base_dir."/vues/annonces/maps.php");
+
+	?>
 </div><?
 
 

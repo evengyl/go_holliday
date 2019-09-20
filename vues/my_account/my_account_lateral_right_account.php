@@ -35,7 +35,7 @@
     }?>
 
     <div class="view_annonces">
-        <a class="btn btn-info" href="/Mon_compte">Mon compte</a>
+        <a class="btn btn-success" href="/Mon_compte">Retour à Mon compte</a>
     </div>
 
     <div class="view_annonces">

@@ -1,6 +1,6 @@
 <?
 
-class Model_activity
+class Model_annonce_activity
 {
 	public function __construct()
 	{

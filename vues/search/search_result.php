@@ -1,5 +1,4 @@
-<header id="head" class="secondary"></header>
-<?
+<header id="head" class="secondary"></header><?
 
 if(count($annonces) < 1)
 {?>
@@ -22,12 +21,12 @@ else
                 <p class="text-muted">Pays : <?= $pays_selected; ?></p>
                 <p class="text-muted">Habitat(s) : <?= $habitat_selected; ?></p>
                 <p class="text-muted">Nombre d'annonces trouvées : <?= count($annonces); ?></p>
-                <p class="text-center"><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>" class="btn btn-default" role="button" style="padding:10px 17px;">Je veux changer de pays/habitat</a></p>
+                <p class="text-center"><a href="/Recherche/<?= $type_selected; ?>" class="btn btn-default" role="button" style="padding:10px 17px;">Je veux changer de pays/habitat</a></p>
             </div>
         </div>
     </div>
 
-    <? require($_app->base_path."/vues/asset_right.php"); ?>
+    <? require("asset_right.php"); ?>
 
 
     <div class="container text-center">
@@ -36,21 +35,22 @@ else
             <p class="text-muted">
                Voila toutes les annonces que nous avons trouvés dans votre sélection, avec les filtres ci dessous vous pouvez affiner votre recherche par rapport à ces annonces
             </p><br><?
-            foreach($annonces as $row_annonces)
+            affiche($annonces[0]);
+            foreach($annonces as $row_annonce)
             {?>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <h3><?= $row_annonces->name_annonce; ?></h3>
+                        <h3 style="font-size:20px;"><?= $row_annonce->title; ?></h3>
+                        <h4 class="thin text-muted"><?= $row_annonce->sub_title; ?></h4>
                         <hr>
-                        <img src="/images/habitats/bungalow.jpg" class="img-responsive" alt="">
+                        <img src="/images/annonces/<?= $row_annonce->id; ?>/<?= $row_annonce->img_principale; ?>" class="img-responsive" alt="">
                         <div class="caption">
+                            <h5><?= $row_annonce->address[0]->address_lieux_dit; ?>, Pays : <?= $row_annonce->pays_name_human; ?></h5>
+                            <p class="text-muted">Type de résidence : <?= $row_annonce->habitat_name_human; ?></p>
+                            <h5>Pour : <b style="color:#65b45199;"><?= $row_annonce->price_one_night ?>€ par nuit (Moyenne)</b></h5>
+                            <p class="text-muted">Du <?= $row_annonce->date_start_saison .' au '. $row_annonce->date_end_saison ?></p>
                             
-                            <h4>A <?= $row_annonces->lieu_annonce; ?>, Pays : <?= $row_annonces->name_pays; ?></h4>
-                            <p class="text-muted">Type de résidence : <?= $row_annonces->name_habitat; ?></p>
-                            <h5>Pour : <b style="color:#65b45199;"><?= $row_annonces->prix ?>€</b></h5>
-                            <p class="text-muted">Du <?= date("d/n/Y", strtotime($row_annonces->start_date)) .' au '. date("d/n/Y", strtotime($row_annonces->end_date)) ?></p>
-                            
-                            <p><a href="/Recherche/<?= $annonces[0]->name_type_vacances; ?>/Annonces/<?= $row_annonces->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
+                            <p><a href="/Recherche/<?= $type_selected; ?>/Annonces/<?= $row_annonce->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
                         </div>
                     </div>
                 </div><?

@@ -5,8 +5,6 @@ if(isset($_POST['action']))
 {
 	if($_POST["action"] == "delete_group")
 	{
-		affiche($_POST);
-
 		$table = "private_message";
 		$where = "id_group = ".(int)$_POST["id_group"];
 

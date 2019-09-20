@@ -1,6 +1,6 @@
 <?
 
-class Model_date_annonces
+class Model_annonce_dates
 {
 	public function __construct()
 	{

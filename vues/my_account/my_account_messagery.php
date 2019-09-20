@@ -10,7 +10,7 @@
                 <li class="message" style="padding-top:15px;">
                     <div class="row" style="padding-left:15px; padding-right:15px; "><?
                         if($row_last_message->answer == 0){
-                            if($row_last_message->id_user_sender == $_app->user->id)
+                            if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
                                 $tmp = '#5cb85c30';
                             else
                                 $tmp = '#f0ad4e30';
@@ -42,7 +42,7 @@
                             <hr>
                             <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:15px;"><?
                                 if($row_last_message->vu == 0){
-                                    if($row_last_message->id_user_sender == $_app->user->id)
+                                    if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
                                         $tmp = 'Lu';
                                     else
                                         $tmp = 'Non lu';
@@ -52,7 +52,7 @@
                                 ?>
                                 <span class="text-muted"><small><b>Dernier Message : <?= $tmp ?></b></small></span><?
                                 if($row_last_message->answer == 0){
-                                    if($row_last_message->id_user_sender == $_app->user->id)
+                                    if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
                                         $tmp = 'Répondu';
                                     else
                                         $tmp = 'Non répondu';
@@ -66,7 +66,7 @@
                                     <p><?= $row_last_message->message ?></p>
                                     <footer><b><?
                                         if($row_last_message->answer == 0){
-                                            if($row_last_message->id_user_sender == $_app->user->id)
+                                            if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
                                                 $tmp = 'De : Moi';
                                             else
                                                 $tmp = 'De : '.$row_last_message->name_sender;

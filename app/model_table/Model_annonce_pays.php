@@ -1,6 +1,6 @@
 <?
 
-class Model_pays
+class Model_annonce_pays
 {
 	public function __construct()
 	{
@@ -8,7 +8,6 @@ class Model_pays
 		$this->name_sql = new NormalType("name_sql");
 		$this->name_human = new NormalType("name_human");
 		$this->img = new NormalType("img");
-		$this->text = new NormalType("text");
 	}
 
 }

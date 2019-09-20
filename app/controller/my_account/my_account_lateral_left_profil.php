@@ -19,39 +19,40 @@ Class my_account_lateral_left_profil extends base_module
 			$this->set_new_img_back_profil($_POST['id_img_background_selected'], $array_img_back_profil);
 
 
-		if($this->_app->can_do_user->view_infos_annonce)
-			$this->_app->user->nb_vues_total = $this->get_nb_vues_total();
-
-
 		// va récuper les stat des message priver
+		$this->get_infos_nb();
 		$this->get_nb_private_message();
-		$nb_annonces = $this->get_nb_annonce();
 
 
 
 		$this->assign_var("array_img_back_profil", $array_img_back_profil)
-				->assign_var("nb_annonce", $nb_annonces)
 				->render_tpl();
 	}		
 
 
-	public function get_nb_vues_total()
+	public function get_infos_nb()
 	{
 		$sql_vues = new stdClass();
 		$sql_vues->table = 'annonces';
-		$sql_vues->data = "vues";
-		$sql_vues->where = ["id_utilisateurs = $1 AND vues > $2", [$this->_app->user->id_utilisateurs, '0']];
-		$res_sql_nb_vues = $this->_app->sql->select($sql_vues);
+		$sql_vues->data = "vues, id, active";
+		$sql_vues->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$res_sql = $this->_app->sql->select($sql_vues);
 
-		$count = 0;
-		if(!empty($res_sql_nb_vues)){
-			foreach($res_sql_nb_vues as $row)
-				$count += (int)$row->vues;
+		$this->_app->user->nb_vues_total = 0;
+		$this->_app->user->nb_annonces_active = 0;
+		$this->_app->user->nb_annonces = 0;
+
+		if(!empty($res_sql))
+		{
+			foreach($res_sql as $key_annonce => $row_annonce)
+			{
+				$this->_app->user->nb_vues_total += (int)$row_annonce->vues;
+				$this->_app->user->nb_annonces ++;
+
+				if($row_annonce->active)
+					$this->_app->user->nb_annonces_active ++;
+			}
 		}
-		else
-			$count = 0;
-
-		return $count;
 	}
 
 
@@ -79,7 +80,7 @@ Class my_account_lateral_left_profil extends base_module
 			$req_sql->table = "utilisateurs";
 			$req_sql->ctx = new stdClass;
 			$req_sql->ctx->id_background_profil = $id_img;
-			$req_sql->where = "id = '".$this->_app->user->id."'";
+			$req_sql->where = "id = '".$this->_app->user->id_utilisateurs."'";
 			$res_sql = $this->_app->sql->update($req_sql);
 		}
 
@@ -96,7 +97,7 @@ Class my_account_lateral_left_profil extends base_module
 		$sql_message = new stdClass();
 		$sql_message->table = 'private_message';
 		$sql_message->data = "vu";
-		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id]];
+		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
 
 		if(!empty($res_sql_message))
@@ -111,27 +112,6 @@ Class my_account_lateral_left_profil extends base_module
 		}
 	}
 
-	public function get_nb_annonce()
-	{
-		$sql_annonce = new stdClass();
-		$sql_annonce->table = 'annonces';
-		$sql_annonce->data = "id, active";
-		$sql_annonce->order = ["id DESC"];
-		$sql_annonce->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs] ];
-		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
-
-
-		$this->_app->user->nb_annonces_active = 0;
-		$this->_app->user->nb_annonces = 0;
-
-		foreach($res_sql_annonces as $key_annonce => $row_annonce)
-		{
-			$this->_app->user->nb_annonces ++;
-
-			if($row_annonce->active)
-				$this->_app->user->nb_annonces_active ++;
-		}
-		return $res_sql_annonces;
-	}
+	
 
 }

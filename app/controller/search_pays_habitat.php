@@ -8,15 +8,13 @@ Class search_pays_habitat extends base_module
 		parent::__construct($_app);
 
 
-
 		$array_type = $this->get_list_type($this->_app->route['type']);
-
 		$array_pays = $this->get_list_pays();
 		$array_habitat = $this->get_list_habitat();
+
 		list($array_habitat, $array_pays) = $this->get_nb_annonce($array_habitat, $array_pays, $array_type[0]->id);
 		
 		
-
 		
 		$this->assign_var("array_type", $array_type)
 			->assign_var('array_pays', $array_pays)
@@ -27,7 +25,7 @@ Class search_pays_habitat extends base_module
 	private function get_list_pays()
 	{
 		$sql_pays = new stdClass();
-		$sql_pays->table = "pays";
+		$sql_pays->table = "annonce_pays";
 		$sql_pays->data = "*";
 		$sql_pays->where = ["1"];
 		return $this->_app->sql->select($sql_pays);
@@ -39,7 +37,9 @@ Class search_pays_habitat extends base_module
 		$sql_habitat->table = "habitat";
 		$sql_habitat->data = "*";
 		$sql_habitat->where = ["1"];
-		return $this->_app->sql->select($sql_habitat);	
+		$sql_habitat->order = ["id DESC"];
+		return $this->_app->sql->select($sql_habitat);
+
 	}
 
 	private function get_list_type($type)
@@ -60,7 +60,7 @@ Class search_pays_habitat extends base_module
 			$sql_number_annonces_habitat = new stdClass();
 			$sql_number_annonces_habitat->table = "annonces";
 			$sql_number_annonces_habitat->data = $var;
-			$sql_number_annonces_habitat->where = ["id_habitat = $1 AND id_type_vacances = $2 AND admin_validate = $3", [(int)$row_habitat->id, (int)$id_type, "1"]];
+			$sql_number_annonces_habitat->where = ["id_habitat = $1 AND id_type_vacances LIKE($2) AND admin_validate = $3", [(int)$row_habitat->id, (int)$id_type, "1"]];
 			$res_sql = $this->_app->sql->select($sql_number_annonces_habitat);
 			$row_habitat->nb_annonces = $res_sql[0]->nb;
 		}
@@ -70,7 +70,7 @@ Class search_pays_habitat extends base_module
 			$sql_number_annonces_pays = new stdClass();
 			$sql_number_annonces_pays->table = "annonces";
 			$sql_number_annonces_pays->data = $var;
-			$sql_number_annonces_pays->where = ["id_pays = $1 AND id_type_vacances = $2 AND admin_validate = $3", [(int)$row_pays->id, (int)$id_type, "1"]];
+			$sql_number_annonces_pays->where = ["id_pays = $1 AND id_type_vacances LIKE($2) AND admin_validate = $3", [(int)$row_pays->id, (int)$id_type, "1"]];
 			$res_sql = $this->_app->sql->select($sql_number_annonces_pays);
 			$row_pays->nb_annonces = $res_sql[0]->nb;
 		}

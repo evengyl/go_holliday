@@ -13,7 +13,7 @@
                     
                     foreach($row_messages as $row_message)
                     {
-                        if($row_message->id_user_sender == $_app->user->id)
+                        if($row_message->id_user_sender == $_app->user->id_utilisateurs)
                         {?>
                             
                             <div class="col-xs-8 col-xs-offset-4" style="padding:10px; background-color:#5cb85c30; margin-bottom:15px;">
@@ -46,7 +46,7 @@
                     <button 
                         data-id-grp="<?= $id_grp; ?>"
                         data-id-annonce="<?= $row_message->id_annonce; ?>"
-                        data-id-sender="<?= $_app->user->id; ?>" 
+                        data-id-sender="<?= $_app->user->id_utilisateurs; ?>" 
                         data-action="send_message_<?= $id_uniq; ?>"
                         style="margin-top:15px;" class="btn btn-info" type="button">
                         Envoyer

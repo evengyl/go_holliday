@@ -1,6 +1,6 @@
 <?
 
-class Model_commoditer_announces
+class Model_annonce_commoditer
 {
 	public function __construct()
 	{

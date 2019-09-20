@@ -110,12 +110,12 @@
 					si le clients demande une réservation de 11 nuits :<br>
 					Le prix par 7 nuits est de, imaginons entre 401 et 500€ et le prix par nuit est de imaginons, entre 41 et 70€<br>
 					Le calcul ce fait ainsi : 11 nuits<br>
-					7 nuits avec une moyenne de 500€ - 401€ = (99€ / 2) = 50€ <br>
-					Donc 500€ - 50€ = 450€ de moyenne pour une semaine.<br>
-					450€ + (Tarif d'une nuit 70€ - 41€ = (29€ /2) = 15€)<br>
+					7 nuits avec une moyenne de 500€ - 401€ = (99€ / 3)*2 = 66€ <br>
+					Donc 500€ - 66€ = 466€ de moyenne pour une semaine.<br>
+					466€ + (Tarif d'une nuit 70€ - 41€ = (29€ /2) = 15€)<br>
 					Donc 70€ - 15€ = 55€ de moyenne par nuit<br><br>
 
-					Pour un total de 450 + 55 + 55 + 55 + 55 = 670€ pour 12 jours et 11 nuits chez vous.<br>
+					Pour un total de 466 + 55 + 55 + 55 + 55 = 686€ pour 12 jours et 11 nuits chez vous.<br>
 				</small>
 			</h5>
 		</div>

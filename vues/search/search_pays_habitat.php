@@ -1,157 +1,84 @@
 <header id="head" class="secondary"></header>
-<form action="/Recherche/<?= $array_type[0]->name ?>/Selection_destination" method="post">
-     <div class="col-sm-6 col-md-4 col-lg-2 text-center pos_fixed_left">
+<form action="/Recherche/<?= $array_type[0]->type_vacances_name_human ?>/Selection_destination" method="post">
+
+    <h2 class="thin text-center">Il est temps de sélectionner un ou des Pays de destinations</h2>
+    <p class="text-muted text-center">
+       Vous pouvez choisir plusieurs pays sans aucun problèmes.
+    </p><br>
+    
+    <div class="col-xs-2 text-center">
         <div class="thumbnail asset_left">
             <div class="caption">
                 <h4>Type de vacances : </h4>
                 <?if(isset($array_type[0]->icon))
                     echo $array_type[0]->icon;?>
+                <p class="text-muted"><?= $array_type[0]->type_vacances_name_human; ?></p>
                     
-                <p class="text-muted"><?= $array_type[0]->name; ?></p>
             </div>
-             <hr>           
+            <hr>
+            <div class="thumbnail">
+                <div class="caption">
+                    <a href="/Contact" class="btn btn-success btn-xs" style="">Prendre contact<br>avec le service Client</a>
+                    <a href="/Recherche/Toutes-les-annonces" class="btn btn-success btn-xs" style="margin-top:15px;">
+                        Je veux voir<br>toutes les annonce disponible<br>sur <?= $_app->site_name?></a>
+                </div>
+            </div>
+                  
         </div>
         <p class="p_fixed"><center><a href="/Recherche" class="btn btn-default" role="button" style="padding:10px 10px;">Je veux changer de type de Vacances</a></center></p>
     </div>
 
-    <!-- clone -->
-    <div class="clone_caption" data-value="" style="display:none;">
-        <h4></h4>
-    </div> 
-    <!-- end of clone -->
-    <? require($_app->base_path."/vues/asset_right.php"); ?>
-    
 
-    <div class="container text-center">
-        <div class="row">
-            <h2 class="thin">Il est temps de sélectionner un ou des Pays de destinations</h2>
-             <p class="text-muted">
-               Vous pouvez choisir plusieurs pays sans aucun problèmes.
-            </p><br><?
+    <div class="col-xs-10 text-center">
+        <div class="row"><?
+            
             foreach($array_pays as $row_pays)
             {?>
-                <div class="col-sm-6 col-md-3" style="padding-left:7.5px; padding-right:7.5px;">
+                <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
                     <div class="thumbnail">
                         <i style="font-size:25px; color:#737effb3;" class="fas fa-globe"></i>
                         <i style="font-size:25px; color:#737effb3;" class="fas fa-map-marked-alt"></i>
                         <i style="font-size:25px; color:#737effb3;" class="fas fa-map-marker-alt"></i>
                         <hr>
-                        <img src="/images/drapeaux/<?= $row_pays->img; ?>" class="img-responsive" style="max-height:100px;" alt="<?= $row_pays->name; ?>">
+                        <img src="/images/drapeaux/<?= $row_pays->img; ?>" class="img-responsive" style="max-height:100px;" alt="<?= $row_pays->name_human; ?>">
                         <div class="caption">
-                            <h3><?= $row_pays->name; ?></h3>
-                            (<?= $row_pays->nb_annonces ?> Annonces)
-                            <p class="text-muted"><?= $row_pays->text; ?></p>
-                            <a data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name; ?>" class="btn btn-primary">Je sélectionne</a>
+                            <h3 style="margin-top:10px;"><?= $row_pays->name_human; ?></h3>
+                            <small class="thin text-muted">(<?= $row_pays->nb_annonces ?> Annonces)</small>
+                            <a style="margin-top:10px;" data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name; ?>" class="btn btn-primary">Je sélectionne</a>
                         </div>
                     </div>
                 </div><?
             }?>
-                    <!--  test ergonomie -->
-                    <div class="col-lg-12">
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
-                            <div class="thumbnail">
-                                <img src="/images/drapeaux/drapeau_belgique.jpg" class="img-responsive" style="max-height:100px;" alt="">
-                                <div class="caption">
-                                    <h3 style="margin-top:0px;">Belgique</h3>
-                                    (14 Annonces)
-                                    <p class="text-muted">La Belgique : climat tempérés (ici mettre météo actuel)</p>
-                                    <a data-type="pays"  class="btn btn-primary">Je sélectionne</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
         </div>
     </div>
 
 
 
 
-    <div class="container text-center">
+    <div class="col-xs-10 col-xs-offset-2 text-center">
         <div class="row">
             <h2 class="thin">Sélectionner à présent le ou les types de bien que vous chercher</h2>
             <p class="text-muted">
                Le tout n'est pas de savoir avec qui ou pour quoi vous partez, ni dans quel pays, il faut aussi savoir quelle genre de locations de vacances vous voulez
-            </p><br>
-
-            <?  
+            </p><br><?
                 foreach($array_habitat as $row_habitat)
                 {?>
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-2">
                         <div class="thumbnail">
-                            <i style="font-size:30px; color:#65b45199;" class="fas fa-home"></i>
+                            <i style="font-size:25px; color:#65b45199;" class="fas fa-home"></i>
                             <hr>
-                            <img src="/images/habitats/<?= $row_habitat->img; ?>" class="img-responsive" alt="<?= $row_habitat->name; ?>">
+                            <img src="/images/habitats/<?= $row_habitat->habitat_img; ?>" class="img-responsive" alt="<?= $row_habitat->habitat_name_human; ?>">
                             <div class="caption">
-                                <h3><?= $row_habitat->name; ?></h3>
-                                (<?= $row_habitat->nb_annonces ?> Annonces)
-                                <p class="text-muted"><?= $row_habitat->text; ?></p>
-                                <a data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->name; ?>" class="btn btn-primary">Je sélectionne</a>
+                                <h3 style="margin-top:10px;" data-toggle="tooltip" data-placement="top" title="<?= $row_habitat->habitat_text; ?>" ><?= $row_habitat->habitat_name_human; ?></h3>
+                                <small class="thin text-muted">(<?= $row_habitat->nb_annonces ?> Annonces)</small><br>
+                                <a style="margin-top:10px;" data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->habitat_name_sql; ?>" class="btn btn-primary">Je sélectionne</a>
                             </div>
                         </div>
                     </div><?
                 }?>
         </div>
     </div>
+    <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }); </script>
 
 
     <div class="container text-center">

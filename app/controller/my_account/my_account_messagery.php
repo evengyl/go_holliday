@@ -20,7 +20,7 @@ Class my_account_messagery extends base_module
 		$sql_private_message = new stdClass();
 		$sql_private_message->table = 'private_message';
 		$sql_private_message->data = "*";
-		$sql_private_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$sql_private_message->where = ["id_utilisateurs = $1 OR id_user_sender = $2", [$this->_app->user->id_utilisateurs, $this->_app->user->id_utilisateurs]];
 		$sql_private_message->order = ["id DESC"];
 		$res_sql_private_message = $this->_app->sql->select($sql_private_message);
 

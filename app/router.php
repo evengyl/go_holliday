@@ -4,18 +4,19 @@ Class router
 	public $_app;
 
 
-	public function __construct($route = "", &$_app, &$security)
+	public function __construct($route = [], &$_app, &$security)
 	{
+
 		$this->_app = $_app;
-		$this->_app->route = htmlentities($route['page']);
+		$this->_app->route = $route;
 
 
 
 		if($security->check_if_module_need_to_do_connect())
 		{
-			if($this->_app->route)
+			if(!empty($this->_app->route))
 			{
-				switch($this->_app->route)
+				switch($this->_app->route['page'])
 				{
 					case 'home':
 						$this->assign_mod();
