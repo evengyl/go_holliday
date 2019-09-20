@@ -88,7 +88,7 @@ Class router
 	protected function assign_mod($module = Null, $var_module = Null)
 	{
 		if($module === Null){
-			$module = $this->_app->route;
+			$module = $this->_app->route["page"];
 		}
 
 
