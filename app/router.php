@@ -56,11 +56,13 @@ Class router
 			 			break;
 					
 					case 'Recherche':
-							if(!isset($route['type']) && !isset($route['all_select']))
-								$this->assign_mod('search_type');
+							
 
-							else if(isset($route['all_select']))
+							if(isset($route['all_select']))
 								$this->assign_mod('search_result', 'all');
+
+							else if(!isset($route['type']))
+								$this->assign_mod('search_type');
 
 							else if(isset($route['type']) && !isset($route['selection_ok']))
 								$this->assign_mod('search_pays_habitat');
@@ -68,7 +70,7 @@ Class router
 							else if(isset($route['selection_ok']) && !isset($route['id_annonce']))
 								$this->assign_mod('search_result');
 
-							else if(isset($route['selection_ok']) && isset($route['id_annonce']) && !isset($route['all_select']))
+							else if(isset($route['selection_ok']) && isset($route['id_annonce']))
 								$this->assign_mod('annonce');
 						break;
 

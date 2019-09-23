@@ -352,20 +352,12 @@ Class fct_global_website
 	}
 
 
-	public function get_announce_user($or_id_announce = false)
+	public function get_announce_user($or_id_announce)
 	{
 		$req_sql_announce = new stdClass();
 		$req_sql_announce->table = 'annonces';
 		$req_sql_announce->data = "*";
-		$req_sql_announce->where = [($or_id_announce)?"id = $1":""."id_utilisateurs = $2 AND user_validate = $3", 
-										[
-											($or_id_announce)?$or_id_announce:0,
-											$this->_app->user->id_utilisateurs, 
-											($or_id_announce)?1:0
-											
-										]
-								    ];
-
+		$req_sql_announce->where = ["id = $1 AND user_validate = $2 AND admin_validate = $3", [$or_id_announce, 1, 1]];
 		$req_sql_announce->order = ["id DESC"];
 		$req_sql_announce->limit = "1";
 		$annonce = $this->_app->sql->select($req_sql_announce);

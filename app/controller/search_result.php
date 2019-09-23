@@ -17,7 +17,7 @@ Class search_result extends base_module
 		$str_type = "Aucun type sélectioné";
 		$all = false;
 		
-
+affiche($_POST);
 		if(isset($_POST['pays_id']) && isset($_POST['pays_name']))
 		{
 			$pays = $_POST['pays_id'];
@@ -46,9 +46,10 @@ Class search_result extends base_module
 			$type_id = $array_type[0]->id;
 			$str_type = $array_type[0]->type_vacances_name_human;
 		}
+		affiche($pays);
+		affiche($habitat);
 
-
-		$this->annonces = $this->get_annonces($type_id, $str_type, $pays, $habitat, $all);
+		$this->annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
 
 		$this->get_first_image();
 
@@ -89,7 +90,7 @@ Class search_result extends base_module
 
 	}
 
-	private function get_annonces($type_id, $str_type, $pays = array(), $habitat = array(), $all)
+	private function get_annonces($type_id, $pays = array(), $habitat = array(), $all)
 	{
 		$str_pays_id = "";
 		$str_habitat_id = "";
@@ -101,6 +102,8 @@ Class search_result extends base_module
 		{
 			$str_habitat_id = " AND id_habitat IN $4";
 		}
+
+		$where = 
 
 
 		$sql_annonce = new stdClass();
