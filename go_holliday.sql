@@ -32,7 +32,7 @@ CREATE TABLE `annonce_activity` (
   `bar` tinyint(1) NOT NULL DEFAULT '0',
   `spa` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `annonce_activity` (
 
 LOCK TABLES `annonce_activity` WRITE;
 /*!40000 ALTER TABLE `annonce_activity` DISABLE KEYS */;
-INSERT INTO `annonce_activity` VALUES (210,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(232,0,1,0,0,0,0,0),(236,0,0,0,1,0,0,1);
+INSERT INTO `annonce_activity` VALUES (210,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(232,0,1,0,0,0,0,0),(236,0,0,0,1,0,0,1),(238,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0),(243,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `annonce_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `annonce_address` (
   `address_localite` varchar(50) NOT NULL,
   `address_zip_code` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `annonce_address` (
 
 LOCK TABLES `annonce_address` WRITE;
 /*!40000 ALTER TABLE `annonce_address` DISABLE KEYS */;
-INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','6567'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567'),(235,'','','','',''),(236,'test','test','test','test','6567');
+INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','6567'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567'),(235,'','','','',''),(236,'test','test','test','test','6567'),(238,'','','','',''),(239,'','','','',''),(240,'','','','',''),(241,'','','','',''),(242,'','','','',''),(243,'','','','','');
 /*!40000 ALTER TABLE `annonce_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `annonce_commoditer` (
   `max_personn` tinyint(4) NOT NULL DEFAULT '1',
   `caution` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `annonce_commoditer` (
 
 LOCK TABLES `annonce_commoditer` WRITE;
 /*!40000 ALTER TABLE `annonce_commoditer` DISABLE KEYS */;
-INSERT INTO `annonce_commoditer` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0),(235,0,0,0,1,0),(236,1,1,1,15,200);
+INSERT INTO `annonce_commoditer` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0),(235,0,0,0,1,0),(236,1,1,1,15,200),(238,0,0,0,1,0),(239,0,0,0,1,0),(240,0,0,0,1,0),(241,0,0,0,1,0),(242,0,0,0,1,0),(243,0,0,0,1,0);
 /*!40000 ALTER TABLE `annonce_commoditer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,6 +155,33 @@ LOCK TABLES `annonce_dates` WRITE;
 /*!40000 ALTER TABLE `annonce_dates` DISABLE KEYS */;
 INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,'reserved'),(5,'08/04/2019','15/04/2019',250,225,'waiting'),(6,'01/09/2019','22/09/2019',300,225,'reserved'),(7,'23/08/2019','30/08/2019',350,225,'waiting');
 /*!40000 ALTER TABLE `annonce_dates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `annonce_habitat`
+--
+
+DROP TABLE IF EXISTS `annonce_habitat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `annonce_habitat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_sql` varchar(20) NOT NULL,
+  `name_human` varchar(50) NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `text` mediumtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `annonce_habitat`
+--
+
+LOCK TABLES `annonce_habitat` WRITE;
+/*!40000 ALTER TABLE `annonce_habitat` DISABLE KEYS */;
+INSERT INTO `annonce_habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Remorque destiné à être habitée, de manière temporaire (pour du camping, par exemple) ou permanente. Les caravanes peuvent être tractées par des automobiles ou des camionnettes.'),(2,'bungalow','Bungalow','bungalow.jpg','Habitation de forme rectangulaire pouvant servir de résidence permanente ou secondaire. Elle doit être habitable à longueur d\'année, construite sur un châssis remorquable, non sur fondations permanentes, et destinée à être raccordée aux services publics'),(3,'appartements','Appartements','appartement.jpg','Bien comportant un certain nombre de pièces et qui n’occupe qu’une partie d’un immeuble, situé généralement dans une ville. '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Une chambre chez l’habitant, louée à la nuitée. On partage la maison du propriétaire qui accueille ses hôtes (ou une dépendance sur la propriété, c’est possible) et même si la chambre comporte un coin salon, les pièces à vivre sont communes.'),(5,'gites','Gites','gite.jpg','Le gîte est une location meublée de tourisme ou location saisonnière, généralement à la semaine. Les personnes qui le louent ont la libre disposition d’un appartement ou bâtiment avec au moins une pièce à vivre, une cuisine, une salle d’eau, une ou des chambres… Elles doivent être autonomes, comme chez elles. '),(6,'villa','Villa','villa.jpg','Une villa est à présent une maison d\'habitation de grande taille, souvent de villégiature, de plaisance (villa de bord de mer, de station thermale). ');
+/*!40000 ALTER TABLE `annonce_habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -203,7 +230,7 @@ CREATE TABLE `annonce_sport` (
   `skate` tinyint(1) NOT NULL DEFAULT '0',
   `arc` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +239,7 @@ CREATE TABLE `annonce_sport` (
 
 LOCK TABLES `annonce_sport` WRITE;
 /*!40000 ALTER TABLE `annonce_sport` DISABLE KEYS */;
-INSERT INTO `annonce_sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(232,0,0,0,0,1,0,0,0,0,0),(236,1,0,0,1,1,1,1,1,1,0);
+INSERT INTO `annonce_sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(232,0,0,0,0,1,0,0,0,0,0),(236,1,0,0,1,1,1,1,1,1,0),(238,0,0,0,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0,0,0,0),(243,0,0,0,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `annonce_sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,14 +252,14 @@ DROP TABLE IF EXISTS `annonces`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `annonces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_pays` tinyint(4) NOT NULL,
+  `id_pays` tinyint(4) DEFAULT NULL,
   `id_habitat` tinyint(4) DEFAULT NULL,
   `id_type_vacances` varchar(20) DEFAULT NULL,
   `id_utilisateurs` int(11) NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `sub_title` varchar(200) NOT NULL,
-  `start_saison` varchar(15) NOT NULL,
-  `end_saison` varchar(15) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `sub_title` varchar(200) DEFAULT NULL,
+  `start_saison` varchar(15) NOT NULL DEFAULT '00/00/0000',
+  `end_saison` varchar(15) NOT NULL DEFAULT '00/00/0000',
   `vues` int(11) NOT NULL DEFAULT '0',
   `active` tinyint(1) NOT NULL,
   `user_validate` tinyint(1) NOT NULL DEFAULT '0',
@@ -240,7 +267,7 @@ CREATE TABLE `annonces` (
   `create_date` varchar(20) NOT NULL,
   `on_off` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,35 +276,8 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/12/2019',1529,1,1,1,'28/01/2019',1),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',4,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,1,1,1,'05/08/2019',1),(232,1,4,'2,3',1,'testestetes','teststes','14/08/2019','13/09/2019',0,1,1,1,'13/08/2019',1),(236,1,5,'1,2',1,'testtest','testtest','01/09/2019','29/09/2019',0,1,1,1,'13/09/2019',1);
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/12/2019',1529,1,1,1,'28/01/2019',1),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',5,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,1,1,1,'05/08/2019',1),(236,1,5,'1,2',1,'testtest','testtest','01/09/2019','29/09/2019',8,1,1,1,'13/09/2019',1),(243,NULL,NULL,NULL,1,'Votre Titre','Votre sous-titre','00/00/0000','00/00/0000',18,0,0,0,'24/09/2019',1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `habitat`
---
-
-DROP TABLE IF EXISTS `habitat`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `habitat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_sql` varchar(20) NOT NULL,
-  `name_human` varchar(50) NOT NULL,
-  `img` varchar(50) NOT NULL,
-  `text` mediumtext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `habitat`
---
-
-LOCK TABLES `habitat` WRITE;
-/*!40000 ALTER TABLE `habitat` DISABLE KEYS */;
-INSERT INTO `habitat` VALUES (0,'autre','Autre(s)','caravane.jpg','Autres lieux non mentionné'),(1,'caravane','Caravane','caravane.jpg','Remorque destiné à être habitée, de manière temporaire (pour du camping, par exemple) ou permanente. Les caravanes peuvent être tractées par des automobiles ou des camionnettes.'),(2,'bungalow','Bungalow','bungalow.jpg','Habitation de forme rectangulaire pouvant servir de résidence permanente ou secondaire. Elle doit être habitable à longueur d\'année, construite sur un châssis remorquable, non sur fondations permanentes, et destinée à être raccordée aux services publics'),(3,'appartements','Appartements','appartement.jpg','Bien comportant un certain nombre de pièces et qui n’occupe qu’une partie d’un immeuble, situé généralement dans une ville. '),(4,'maison_hotes','Maison d\'hôtes','maison_hote.jpg','Une chambre chez l’habitant, louée à la nuitée. On partage la maison du propriétaire qui accueille ses hôtes (ou une dépendance sur la propriété, c’est possible) et même si la chambre comporte un coin salon, les pièces à vivre sont communes.'),(5,'gites','Gites','gite.jpg','Le gîte est une location meublée de tourisme ou location saisonnière, généralement à la semaine. Les personnes qui le louent ont la libre disposition d’un appartement ou bâtiment avec au moins une pièce à vivre, une cuisine, une salle d’eau, une ou des chambres… Elles doivent être autonomes, comme chez elles. '),(6,'villa','Villa','villa.jpg','Une villa est à présent une maison d\'habitation de grande taille, souvent de villégiature, de plaisance (villa de bord de mer, de station thermale). ');
-/*!40000 ALTER TABLE `habitat` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -412,7 +412,7 @@ CREATE TABLE `range_price_announce` (
   `price_week_end` varchar(20) NOT NULL,
   `price_one_week` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=244 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,7 +421,7 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400'),(235,'','',''),(236,'71-100','151-200','301-400');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400'),(235,'','',''),(236,'71-100','151-200','301-400'),(242,'','',''),(243,'','','');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +572,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,38,18,26,1,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,40,19,34,1,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +585,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-20 14:24:00
+-- Dump completed on 2019-09-24 15:57:23
