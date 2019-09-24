@@ -1,5 +1,5 @@
 <h4 class="title">Mes annonces Favorites</h4><hr>
-<ul class="list-unstyled list_annonces_max"><?
+<ul class="list-unstyled"><?
     foreach($array_annonce_fav as $row_annonce)
     {?>
         <li class="annonce" style="padding-top:15px;">
@@ -37,10 +37,6 @@
                         >
                             <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
                         </a>                        
-                    </div>
-
-                    <div class="col-xs-6">
-                        <span class="text-muted statut_active"><small title="Activer ou désactiver cette annonce, attention tout abonnement non terminé ne prendra ni pause ni fin lors de la désactivation. prenez garde à ce boutton">Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                     </div>
                 </div>
             </div>

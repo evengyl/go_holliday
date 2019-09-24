@@ -21,40 +21,43 @@ else
                 <p class="text-muted">Pays : <?= $pays_selected; ?></p>
                 <p class="text-muted">Habitat(s) : <?= $habitat_selected; ?></p>
                 <p class="text-muted">Nombre d'annonces trouvées : <?= count($annonces); ?></p>
-                <p class="text-center"><a href="/Recherche/<?= $type_selected; ?>" class="btn btn-default" role="button" style="padding:10px 17px;">Je veux changer de pays/habitat</a></p>
+                <?
+                if($type_selected != null)
+                {?>
+                    <p class="text-center">
+                        <a href="/Recherche/<?= $type_selected; ?>" class="btn btn-success" role="button" style="padding:10px 17px;">Changer de pays/habitat</a>
+                    </p><?
+                }?>
+
+                <p class="text-center">
+                    <a href="/Recherche" class="btn btn-success" role="button" style="padding:10px 10px;">Changer de type de Vacances</a>
+                </p>
             </div>
         </div>
     </div>
-
-    <? require("asset_right.php"); ?>
-
 
     <div class="container text-center">
         <div class="row">
             <h2 class="thin">Toutes les annonces selon vos critères de recherche</h2>
             <p class="text-muted">
                Voila toutes les annonces que nous avons trouvés dans votre sélection, avec les filtres ci dessous vous pouvez affiner votre recherche par rapport à ces annonces
-            </p><br><?
-            foreach($annonces as $row_annonce)
-            {?>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <h3 style="font-size:20px;"><?= $row_annonce->title; ?></h3>
-                        <h4 class="thin text-muted"><?= $row_annonce->sub_title; ?></h4>
-                        <hr>
-                        <img src="<?= $row_annonce->img_principale; ?>" class="img-responsive" alt="">
-                        <div class="caption">
-                            <h5><?= $row_annonce->address[0]->address_lieux_dit; ?>, Pays : <?= $row_annonce->pays_name_human; ?></h5>
-                            <p class="text-muted">Type de résidence : <?= $row_annonce->habitat_name_human; ?></p>
-                            <h5>Pour : <b style="color:#65b45199;"><?= $row_annonce->price_one_night ?>€ par nuit (Moyenne)</b></h5>
-                            <p class="text-muted">Du <?= $row_annonce->date_start_saison .' au '. $row_annonce->date_end_saison ?></p>
-                            
-                            <p><a href="/Recherche/<?= $type_selected; ?>/Annonces/<?= $row_annonce->id; ?>" class="btn btn-primary" role="button">Elle m'intéresse !</a></p>
-                        </div>
-                    </div>
-                </div><?
-            }?>
-        </div>
+            </p><?
+            
+            require("bar_view.php");
+
+            if(isset($_GET["type_of_view"]))
+            {
+                $vue_selected = $_GET["type_of_view"];
+
+                if($vue_selected == "large")
+                    require("large_view_annonce.php");
+
+                else if($vue_selected == "inline")
+                    require("inline_view_annonce.php");
+            }
+            else
+                require("large_view_annonce.php");?>
+         </div>
     </div><?
 }?>
 

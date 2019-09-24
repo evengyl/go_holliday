@@ -8,7 +8,7 @@
 
     <div class="row page-profil">
         <div class="col-xs-3">
-            __MOD2_my_account_lateral_left_profil__
+            __MOD3_my_account_lateral_left_profil__
         </div>
 
 

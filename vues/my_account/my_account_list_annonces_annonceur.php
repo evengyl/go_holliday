@@ -11,7 +11,7 @@
             <div class="row" style="padding-left:15px; padding-right:15px;">
 
                 <div class="col-xs-2">
-                    <a title="Voir l'annonce" style="margin-top:0px;" href="/Recherche/Vues/Annonces/<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success">
+                    <a title="Voir l'annonce" style="margin-top:0px;" href="/Annonces/<?= $row_annonce->id; ?>" class="opt_annonce btn btn-success">
                         <small><i class="far fa-eye"></i></small>
                     </a>
 

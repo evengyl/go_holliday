@@ -23,15 +23,19 @@ RewriteRule ^Mon_compte/Edition-Annonce/([0-9]+)[/]{0,1}$ ?page=my_account&actio
 
 RewriteRule ^Deconnexion[/]{0,1}$ ?page=logout [L]
 
-RewriteRule ^Inscription[/]{0,1}$ ?page=sign_up_global [L]
-RewriteRule ^Inscription/([a-zA-Z]+)[/]{0,1}$ ?page=sign_up_global&option_sign_up=$1 [L]
-RewriteRule ^ConfirmSignUp/(CreateAccount[a-zA-Z0-9]{22})[/]{0,1}$ ?page=sign_up_global&id_sign_up_confirm=$1 [L]
+RewriteRule ^Inscription[/]{0,1}$ 		?page=sign_up_global [L]
+RewriteRule ^Inscription/([a-zA-Z]+)[/]{0,1}$ 		?page=sign_up_global&option_sign_up=$1 [L]
+RewriteRule ^ConfirmSignUp/(CreateAccount[a-zA-Z0-9]{22})[/]{0,1}$ 		?page=sign_up_global&id_sign_up_confirm=$1 [L]
 
 RewriteRule ^Recherche[/]{0,1}$ ?page=Recherche [L]
-RewriteRule ^Recherche/([a-zA-Z_]+)[/]{0,1}$ ?page=Recherche&type=$1 [L]
-RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)[/]{0,1}$ ?page=$1&type=$2&selection_ok=$3 [L]
-RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Annonces)/([0-9]+)[/]{0,1}$ ?page=$1&type=$2&selection_ok=$3&id_annonce=$4 [L]
-RewriteRule ^(Recherche)/(Toutes-les-annonces)[/]{0,1}$ ?page=$1&all_select=$2 [L]
+RewriteRule ^Recherche/([a-zA-Z_]+)[/]{0,1}$ 		?page=Recherche&type=$1 [L]
+
+RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)[/]{0,1}$ 		?page=$1&type=$2&selection_ok=$3 [L]
+RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)/vue=([a-zA-Z]+)$ 		?page=$1&type=$2&selection_ok=$3&type_of_view=$4 [L]
+
+RewriteRule ^(Recherche)/(Toutes-les-annonces)[/]{0,1}$		 ?page=$1&all_select=$2 [L]
+
+RewriteRule ^(Annonces)/([0-9]+)[/]{0,1}$ 		?page=$1&id_annonce=$2 [L]
 
 
 RewriteRule ^(admin)[/]{0,1}$ ?page=$1 [L]

@@ -8,7 +8,6 @@
             <div class="modal-body" style="">
                 <form method="post" action="#"  data-toggle="validator" role="form">
 
-                	<h4 class="title col-md-12">Partie personnelle<hr></h4>
                     <div class="col-md-4">
                     	<div class="form-group has-feedback">
                         	<div class="input-group">
@@ -83,25 +82,25 @@
                                 <span class="input-group-addon" style="border:none;">Genre</span>
                                 <div class="radio" style="display:inline-block; margin-right:10px;">
                                     <label>
-                                        <input <?=($_app->user->genre == "Monsieur")?'checked="checked"':''; ?> type="radio" name="genre" required>
+                                        <input <?=($_app->user->genre == "Monsieur")?'checked="checked"':''; ?> type="radio" value="Monsieur" name="genre" required>
                                         Monsieur
                                     </label>
                                 </div>
                                 <div class="radio" style="display:inline-block; margin-right:10px;">
                                     <label>
-                                        <input <?=($_app->user->genre == "Madame")?'checked="checked"':''; ?> type="radio" name="genre" required>
+                                        <input <?=($_app->user->genre == "Madame")?'checked="checked"':''; ?> type="radio" value="Madame" name="genre" required>
                                         Madame
                                     </label>
                                 </div>
                                 <div class="radio" style="display:inline-block; margin-right:10px;">
                                     <label>
-                                        <input <?=($_app->user->genre == "Mademoiselle")?'checked="checked"':''; ?> type="radio" name="genre" required>
+                                        <input <?=($_app->user->genre == "Mademoiselle")?'checked="checked"':''; ?> type="radio" value="Mademoiselle" name="genre" required>
                                         Mademoiselle
                                     </label>
                                 </div>
                                 <div class="radio" style="display:inline-block; margin-right:10px;">
                                     <label>
-                                        <input <?=($_app->user->genre == "N/C")?'checked="checked"':''; ?> type="radio" name="genre" required>
+                                        <input <?=($_app->user->genre == "N/C")?'checked="checked"':''; ?> type="radio" value="N/C" name="genre" required>
                                         Ne se prononce pas
                                     </label>
                                 </div>

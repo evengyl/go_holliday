@@ -23,6 +23,11 @@ class parser
 			{
 				if(preg_match('/__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
 					$page = $this->parse_module($match[0], $page);
+				else
+				{
+					if(preg_match('/__MOD3_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
+						$page = $this->parse_module($match[0], $page);
+				}
 			}
 		}
 		else{

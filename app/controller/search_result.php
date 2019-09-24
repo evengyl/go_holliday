@@ -13,7 +13,7 @@ Class search_result extends base_module
 		$type_id = "";
 		$str_pays = "Aucun sélectionné(s)";
 		$str_habitat = "Aucun sélectionné(s)";
-		$str_type = "Aucun type sélectioné";
+		$str_type = null;
 		$all = false;
 		$error = false;
 		

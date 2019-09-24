@@ -69,10 +69,11 @@ Class router
 
 							else if(isset($route['selection_ok']) && !isset($route['id_annonce']))
 								$this->assign_mod('search_result');
-
-							else if(isset($route['selection_ok']) && isset($route['id_annonce']))
-								$this->assign_mod('annonce');
 						break;
+
+					case 'Annonces':
+							$this->assign_mod('annonce');
+							break;
 
 					default:
 						$this->assign_mod('p_404');
