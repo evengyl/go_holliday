@@ -21,10 +21,10 @@ class Model_annonces
 		$this->vues = new NormalType("vues");
 
 
-		$this->habitat_name_human = new OneToOneType("habitat", "name_human", "id_habitat");
-		$this->habitat_name_sql = new OneToOneType("habitat", "name_sql", "id_habitat");
-		$this->habitat_img = new OneToOneType("habitat", "img", "id_habitat");
-		$this->habitat_text = new OneToOneType("habitat", "text", "id_habitat");
+		$this->habitat_name_human = new OneToOneType("annonce_habitat", "name_human", "id_habitat");
+		$this->habitat_name_sql = new OneToOneType("annonce_habitat", "name_sql", "id_habitat");
+		$this->habitat_img = new OneToOneType("annonce_habitat", "img", "id_habitat");
+		$this->habitat_text = new OneToOneType("annonce_habitat", "text", "id_habitat");
 
 		$this->sport = new ManyToManyType("annonce_sport", "id", "id");
 		$this->activity = new ManyToManyType("annonce_activity", "id", "id");

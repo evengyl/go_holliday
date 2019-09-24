@@ -1,6 +1,6 @@
 <?
 //OneToOne
-class Model_habitat
+class Model_annonce_habitat
 {
 	public function __construct()
 	{

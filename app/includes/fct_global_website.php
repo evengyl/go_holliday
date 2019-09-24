@@ -238,6 +238,8 @@ Class fct_global_website
 		//avant toute chose il nous faut les prix de l'annonce
 		if($this->verif_if_announce_exist($id_annonce))
 		{
+			$moy_price_ = 0;
+
 			//ok l'annone exite je vais chrcher les infos prix
 			$req_sql_price = new stdClass();
 			$req_sql_price->table = "range_price_announce";
@@ -245,16 +247,15 @@ Class fct_global_website
 			$req_sql_price->where = ["id = $1", [$id_annonce]];
 			$res_sql_price = $this->_app->sql->select($req_sql_price)[0];
 
-
-			$price_ = $res_sql_price->$needed;
-
-			$price_ = explode("-", $price_);
-
-			$moy_price_ = $price_[1] - ((($price_[1] - $price_[0]) / 3 ) * 2);
+			if(!empty($res_sql_price->$needed))
+			{
+				$price_ = $res_sql_price->$needed;
+				$price_ = explode("-", $price_);
+				$moy_price_ = $price_[1] - ((($price_[1] - $price_[0]) / 3 ) * 2);
+			}
 
 			return $moy_price_;
 		}
-
 	}
 
 	protected function set_user_infos_on_app()
@@ -348,16 +349,17 @@ Class fct_global_website
 	{
 		$bits = explode('/',$date);
 		$date = $bits[2].'-'.$bits[1].'-'.$bits[0];
+
 		return $date;
 	}
 
 
-	public function get_announce_user($or_id_announce)
+	public function get_announce_user($id_annonce)
 	{
 		$req_sql_announce = new stdClass();
 		$req_sql_announce->table = 'annonces';
 		$req_sql_announce->data = "*";
-		$req_sql_announce->where = ["id = $1 AND user_validate = $2 AND admin_validate = $3", [$or_id_announce, 1, 1]];
+		$req_sql_announce->where = ["id = $1", [$id_annonce]];
 		$req_sql_announce->order = ["id DESC"];
 		$req_sql_announce->limit = "1";
 		$annonce = $this->_app->sql->select($req_sql_announce);

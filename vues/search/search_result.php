@@ -35,7 +35,6 @@ else
             <p class="text-muted">
                Voila toutes les annonces que nous avons trouvés dans votre sélection, avec les filtres ci dessous vous pouvez affiner votre recherche par rapport à ces annonces
             </p><br><?
-            affiche($annonces[0]);
             foreach($annonces as $row_annonce)
             {?>
                 <div class="col-sm-6 col-md-4">

@@ -10,54 +10,55 @@ Class search_result extends base_module
 
 		$pays = array();
 		$habitat = array();
-		$array_type = array();
 		$type_id = "";
 		$str_pays = "Aucun sélectionné(s)";
 		$str_habitat = "Aucun sélectionné(s)";
 		$str_type = "Aucun type sélectioné";
 		$all = false;
+		$error = false;
 		
-affiche($_POST);
 		if(isset($_POST['pays_id']) && isset($_POST['pays_name']))
-		{
-			$pays = $_POST['pays_id'];
-
-			foreach($_POST['pays_name'] as $pays_str)
-				$str_pays .= $pays_str.', ';
-			$str_pays = substr($str_pays, 0, -2);
-		}
-
+			$str_pays = implode(", ", $_POST['pays_id']);
 
 		if(isset($_POST['habitat_id']) && isset($_POST['habitat_name']))
-		{
-			$habitat = $_POST['habitat_id'];
+			$str_abitat = implode(', ', $_POST['habitat_id']);
 
-			foreach($_POST['habitat_name'] as $habitat_str)
-				$str_habitat .= $habitat_str.', ';
-			$str_habitat = substr($str_habitat, 0, -2);
+
+		if(isset($this->_app->route['type']))
+			$array_type = $this->get_infos_type($this->_app->route['type']);
+
+
+
+
+		if(empty($array_type))
+			$error = true;
+		else
+		{
+			$type_id = $array_type[0]->id;
+			$str_type = $array_type[0]->type_vacances_name_human;
 		}
+
 
 
 		if(isset($this->_app->route['all_select'])) //on est face a un click de toute les annonces dispo attention
 			$all = true;
-		else
-		{
-			$array_type = $this->get_infos_type($this->_app->route['type']);
-			$type_id = $array_type[0]->id;
-			$str_type = $array_type[0]->type_vacances_name_human;
-		}
-		affiche($pays);
-		affiche($habitat);
+
 
 		$this->annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
 
 		$this->get_first_image();
 
-		$this->assign_var("type_selected", $str_type)
-			->assign_var("pays_selected", $str_pays)
-			->assign_var("habitat_selected", $str_habitat)
-			->assign_var("annonces", $this->annonces)
-			->render_tpl();
+		if($error)
+			$this->use_module("p_404");
+
+		else
+		{
+			$this->assign_var("type_selected", $str_type)
+				->assign_var("pays_selected", $str_pays)
+				->assign_var("habitat_selected", $str_habitat)
+				->assign_var("annonces", $this->annonces)
+				->render_tpl();
+		}
 	}
 
 	private function get_infos_type($type)
@@ -65,8 +66,19 @@ affiche($_POST);
 		$sql_type = new stdClass();
 		$sql_type->table = "type_vacances";
 		$sql_type->data = "id, type_vacances_name_human";
-		$sql_type->where = ["name_sql = $1", [$type]];
-		return $this->_app->sql->select($sql_type);
+		$sql_type->where = ["name_sql = $1", [strtolower($type)]];
+		$res_sql = $this->_app->sql->select($sql_type);
+
+		if(!empty($res_sql))
+		{
+			if(in_array($type, (array)$res_sql[0]))
+				return $res_sql;
+			else
+				return false;
+		}
+		else
+			return false;
+		
 	}
 
 	private function get_first_image()
@@ -96,14 +108,14 @@ affiche($_POST);
 		$str_habitat_id = "";
 
 		if(isset($pays[0]))
-			$str_pays_id = " AND id_pays IN $3";
+			$str_pays_id = " AND id_pays IN $5";
 
 		if(isset($habitat[0]))
-		{
-			$str_habitat_id = " AND id_habitat IN $4";
-		}
+			$str_habitat_id = " AND id_habitat IN $6";
 
-		$where = 
+
+
+		$where = "admin_validate = $1 AND active = $2 AND on_off = $3 AND id_type_vacances LIKE $4".$str_pays_id.$str_habitat_id;
 
 
 		$sql_annonce = new stdClass();
@@ -111,9 +123,7 @@ affiche($_POST);
 		$sql_annonce->data = "id, title, sub_title, vues, address, pays_name_human, price, habitat_name_human, date_start_saison, date_end_saison";
 
 		if(!$all)
-			$sql_annonce->where = [
-						"id_type_vacances LIKE($1) AND active = $2".$str_pays_id.$str_habitat_id." AND admin_validate = $5", 
-							[$type_id, "1", (isset($pays[0])?$pays:""), (isset($habitat[0])?$habitat:""), "1"]];
+			$sql_annonce->where = [$where, ["1", "1", "1", $type_id, $pays, $habitat]];
 		else
 			$sql_annonce->where = ["1"];
 

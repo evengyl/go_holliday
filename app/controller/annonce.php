@@ -16,8 +16,8 @@ Class annonce extends base_module
 		if($this->id_annonce = $this->_app->verif_if_announce_exist($_GET['id_annonce']))
 		{
 
-			$array_img_annonce = $this->get_img_files_by_id();
-			$this->annonce = $this->_app->get_announce_user($this->id_annonce);	
+			$array_img_annonce = $this->get_img_files();
+			$this->annonce = $this->_app->get_announce_user($this->id_annonce);
 
 			$this->date_work();
 			$this->get_list_date();
@@ -70,19 +70,22 @@ Class annonce extends base_module
 
 	private function add_vues()
 	{
-		$current_vues = (int)$this->annonce->vues;
-		$next_vues = $current_vues+1;
+		if($this->annonce->id_utilisateurs != $this->_app->user->id_utilisateurs)
+		{
+			$current_vues = (int)$this->annonce->vues;
+			$next_vues = $current_vues+1;
 
-		$req_sql = new stdClass;
-		$req_sql->table = "annonces";
-		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->vues = $next_vues;
-		$req_sql->where = "id = '".$this->annonce->id."'";
-		$this->_app->sql->update($req_sql);	
+			$req_sql = new stdClass;
+			$req_sql->table = "annonces";
+			$req_sql->ctx = new stdClass;
+			$req_sql->ctx->vues = $next_vues;
+			$req_sql->where = "id = '".$this->annonce->id."'";
+			$this->_app->sql->update($req_sql);	
+		}
 	}
 
 
-	public function get_img_files_by_id()
+	public function get_img_files()
 	{
 		$array_slide = array();
 

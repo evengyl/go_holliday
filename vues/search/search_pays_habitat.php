@@ -29,6 +29,14 @@
     </div>
 
 
+<!-- clone -->
+    <div class="clone_caption" data-value="" style="display:none;">
+        <h4></h4>
+    </div> 
+    <!-- end of clone -->
+
+
+
     <div class="col-xs-10 text-center">
         <div class="row"><?
             
@@ -44,40 +52,38 @@
                         <div class="caption">
                             <h3 style="margin-top:10px;"><?= $row_pays->name_human; ?></h3>
                             <small class="thin text-muted">(<?= $row_pays->nb_annonces ?> Annonces)</small>
-                            <a style="margin-top:10px;" data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name; ?>" class="btn btn-primary">Je sélectionne</a>
+                            <a style="margin-top:10px;" data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name_human; ?>" class="btn btn-primary">Je sélectionne</a>
                         </div>
                     </div>
                 </div><?
             }?>
         </div>
     </div>
+    
 
 
-
-
-    <div class="col-xs-10 col-xs-offset-2 text-center">
-        <div class="row">
-            <h2 class="thin">Sélectionner à présent le ou les types de bien que vous chercher</h2>
-            <p class="text-muted">
-               Le tout n'est pas de savoir avec qui ou pour quoi vous partez, ni dans quel pays, il faut aussi savoir quelle genre de locations de vacances vous voulez
-            </p><br><?
-                foreach($array_habitat as $row_habitat)
-                {?>
-                    <div class="col-sm-6 col-md-2">
-                        <div class="thumbnail">
-                            <i style="font-size:25px; color:#65b45199;" class="fas fa-home"></i>
-                            <hr>
-                            <img src="/images/habitats/<?= $row_habitat->habitat_img; ?>" class="img-responsive" alt="<?= $row_habitat->habitat_name_human; ?>">
-                            <div class="caption">
-                                <h3 style="margin-top:10px;" data-toggle="tooltip" data-placement="top" title="<?= $row_habitat->habitat_text; ?>" ><?= $row_habitat->habitat_name_human; ?></h3>
-                                <small class="thin text-muted">(<?= $row_habitat->nb_annonces ?> Annonces)</small><br>
-                                <a style="margin-top:10px;" data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->habitat_name_sql; ?>" class="btn btn-primary">Je sélectionne</a>
-                            </div>
-                        </div>
-                    </div><?
-                }?>
-        </div>
+    <div class="container text-center">
+        <h2 class="thin">Sélectionner à présent le ou les types de bien que vous chercher</h2>
+        <p class="text-muted">
+           Le tout n'est pas de savoir avec qui ou pour quoi vous partez, ni dans quel pays, il faut aussi savoir quelle genre de locations de vacances vous voulez
+        </p><br><?
+        foreach($array_habitat as $row_habitat)
+        {?>
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <i style="font-size:25px; color:#65b45199;" class="fas fa-home"></i>
+                    <hr>
+                    <img src="/images/habitats/<?= $row_habitat->habitat_img; ?>" class="img-responsive" alt="<?= $row_habitat->habitat_name_human; ?>">
+                    <div class="caption">
+                        <h3 style="margin-top:10px;" data-toggle="tooltip" data-placement="top" title="<?= $row_habitat->habitat_text; ?>" ><?= $row_habitat->habitat_name_human; ?></h3>
+                        <small class="thin text-muted">(<?= $row_habitat->nb_annonces ?> Annonces)</small><br>
+                        <a style="margin-top:10px;" data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->habitat_name_sql; ?>" class="btn btn-xs btn-primary">Je sélectionne</a>
+                    </div>
+                </div>
+            </div><?
+        }?>
     </div>
+
     <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }); </script>
 
 
