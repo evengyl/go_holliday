@@ -32,22 +32,7 @@ Class my_account_list_annonces_annonceur extends base_module
 		$sql_annonce->where = ["id_utilisateurs = $1 AND on_off = $2", [$this->_app->user->id_utilisateurs, 1] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 
-		foreach($res_sql_annonces as $key_annonce => $row_annonce)
-		{
-			if(file_exists($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
-			{
-				if($dossier = opendir($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
-				{
-					while(false !== ($fichier = readdir($dossier)))
-					{
-						if($fichier != '.' && $fichier != '..'){
-							$res_sql_annonces[$key_annonce]->img_principale = $fichier;
-							break;
-						}
-					}
-				}
-			}
-		}
+		$res_sql_annonces = $this->_app->get_first_image($res_sql_annonces);
 		return $res_sql_annonces;
 	}
 }

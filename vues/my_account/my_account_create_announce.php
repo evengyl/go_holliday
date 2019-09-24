@@ -2,7 +2,7 @@
 <div class="container-fluid text-center" style="background-color: white;">
 
 	<div class="row">
-		<h3 class="thin">Création / Modification d'une annonce de Locations</h3><hr>
+		<h3 class="thin">Création / Modification d'une annonce de Locations <small class='thuin text-muted'>( Numéro : <?= $annonce->id; ?> )</small></h3><hr>
 		<h4 class="text-muted thin">Prenez le temps d'être le plus précis possible dans se formulaire, car celui ci vous servira pour générer un maximum de vues et de demandes.<br>
 		ne vous en faites pas il n'est à faire que une fois par bien et par an</h4><hr>
 

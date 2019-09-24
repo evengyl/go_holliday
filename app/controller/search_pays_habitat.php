@@ -8,17 +8,17 @@ Class search_pays_habitat extends base_module
 		parent::__construct($_app);
 
 
-		$array_type = $this->get_list_type($this->_app->route['type']);
-		$array_pays = $this->get_list_pays();
-		$array_habitat = $this->get_list_habitat();
+		$type_vacances_selected = $this->get_type_vacances($this->_app->route['type']);
+		$list_pays = $this->get_list_pays();
+		$list_habitat = $this->get_list_habitat();
 
-		if($array_type)
+		if($type_vacances_selected)
 		{
-			list($array_habitat, $array_pays) = $this->get_nb_annonce($array_habitat, $array_pays, $array_type[0]->id);
+			list($list_habitat, $list_pays) = $this->get_nb_annonce($list_habitat, $list_pays, $type_vacances_selected->id);
 
-			$this->assign_var("array_type", $array_type)
-				->assign_var('array_pays', $array_pays)
-				->assign_var('array_habitat', $array_habitat)
+			$this->assign_var("type_vacances_selected", $type_vacances_selected)
+				->assign_var('list_pays', $list_pays)
+				->assign_var('list_habitat', $list_habitat)
 				->render_tpl();	
 		}	
 		else
@@ -47,7 +47,7 @@ Class search_pays_habitat extends base_module
 
 	}
 
-	private function get_list_type($type)
+	private function get_type_vacances($type)
 	{
 		$sql_type = new stdClass();
 		$sql_type->table = "type_vacances";
@@ -55,17 +55,21 @@ Class search_pays_habitat extends base_module
 		$sql_type->where = ["1"];
 		$res_sql = $this->_app->sql->select($sql_type);
 
-		if(in_array($type, (array)$res_sql[0]))
-			return $res_sql;
-		else
-			return false;
+		$tmp = false;
+		foreach($res_sql as $row_sql)
+		{
+			if(in_array($type, (array)$row_sql->type_vacances_name_human))
+				$tmp = $row_sql;
+		}
+		
+		return $tmp;
 	}
 
-	private function get_nb_annonce($array_habitat, $array_pays, $id_type)
+	private function get_nb_annonce($list_habitat, $list_pays, $id_type)
 	{
 		$var = 'COUNT(id) as nb';
 
-		foreach($array_habitat as $row_habitat)
+		foreach($list_habitat as $row_habitat)
 		{
 			$sql_number_annonces_habitat = new stdClass();
 			$sql_number_annonces_habitat->table = "annonces";
@@ -75,7 +79,7 @@ Class search_pays_habitat extends base_module
 			$row_habitat->nb_annonces = $res_sql[0]->nb;
 		}
 
-		foreach($array_pays as $row_pays)
+		foreach($list_pays as $row_pays)
 		{
 			$sql_number_annonces_pays = new stdClass();
 			$sql_number_annonces_pays->table = "annonces";
@@ -85,6 +89,6 @@ Class search_pays_habitat extends base_module
 			$row_pays->nb_annonces = $res_sql[0]->nb;
 		}
 
-		return array($array_habitat, $array_pays);
+		return array($list_habitat, $list_pays);
 	}
 }

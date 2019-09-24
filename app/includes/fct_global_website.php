@@ -10,6 +10,32 @@ Class fct_global_website
 
 	}
 
+
+	public function get_first_image($annonces)
+	{
+		foreach($annonces as $key => $row_annonce)
+		{
+			if(file_exists($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
+			{
+				if($dossier = opendir($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
+				{
+					while(false !== ($fichier = readdir($dossier)))
+					{
+						if($fichier != '.' && $fichier != '..')
+						{
+							$annonces[$key]->img_principale = "/images/annonces/".$row_annonce->id."/".$fichier;
+							break;
+						}
+					}
+				}
+			}
+			if(!isset($row_annonce->img_principale))
+				$annonces[$key]->img_principale = "images/No_Image.jpg";
+		}
+		return $annonces;
+	}
+
+
 	public function send_confirm_create_account_by_mail($mail_user)
 	{
 		$req_sql = new StdClass();

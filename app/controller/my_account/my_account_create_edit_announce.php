@@ -1,7 +1,7 @@
 <?
 Class my_account_create_edit_announce extends base_module
 {
-	public $last_announce;
+	public $annonce;
 	private $array_list_pays_for_tpl = [];
 	private $list_pays_for_compar = [];
 	public $value_form_completed;
@@ -28,7 +28,7 @@ Class my_account_create_edit_announce extends base_module
 		
 
 		// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
-		$this->last_announce = $this->_app->get_announce_user($this->id_annonce);	
+		$this->annonce = $this->_app->get_announce_user($this->id_annonce);	
 
 		//for form tpl
 		$array_type_vacances = $this->get_list_type(); //ok
@@ -52,7 +52,7 @@ Class my_account_create_edit_announce extends base_module
 			->assign_var("array_list_pays_for_tpl", $this->array_list_pays_for_tpl)
 			->assign_var("array_list_activity", $this->array_list_activity)
 			->assign_var("array_list_sport", $this->array_list_sport)
-			->assign_var("last_announce", $this->last_announce)
+			->assign_var("annonce", $this->annonce)
 			->use_template("my_account_create_announce");
 	}
 
@@ -76,37 +76,37 @@ Class my_account_create_edit_announce extends base_module
 	public function treatment_create_annonce($post)
 	{
 		
-		$this->last_announce->type_vacances = $this->get_id_type_vacances($post);
-		$this->last_announce->array_type_vacances = (isset($post['type_vacances'])?$post["type_vacances"]:Null);
+		$this->annonce->type_vacances = $this->get_id_type_vacances($post);
+		$this->annonce->array_type_vacances = (isset($post['type_vacances'])?$post["type_vacances"]:Null);
 
-		$this->last_announce->type_habitat = (isset($post['type_habitat'])?$post["type_habitat"]:0);
+		$this->annonce->type_habitat = (isset($post['type_habitat'])?$post["type_habitat"]:0);
 
-		$this->last_announce->title = $this->render_text((isset($post['title']))?$post['title']:'');
-		$this->last_announce->sub_title = $this->render_text((isset($post['sub_title']))?$post['sub_title']:'');
+		$this->annonce->title = $this->render_text((isset($post['title']))?$post['title']:'');
+		$this->annonce->sub_title = $this->render_text((isset($post['sub_title']))?$post['sub_title']:'');
 
-		$this->last_announce->address_lieux_dit = $this->render_text((isset($post['address_lieux_dit']))?$post['address_lieux_dit']:'');
-		$this->last_announce->address_rue = $this->render_text((isset($post['address_rue']))?$post['address_rue']:'');
-		$this->last_announce->address_numero = $this->render_text((isset($post['address_numero']))?$post['address_numero']:'');
-		$this->last_announce->address_localite = $this->render_text((isset($post['address_localite']))?$post['address_localite']:'');
-		$this->last_announce->address_zip_code = $this->render_text((isset($post['address_zip_code']))?$post['address_zip_code']:'');
-		$this->last_announce->id_address_pays = $this->render_pays_id((isset($post['address_pays']))?$post['address_pays']:'');
+		$this->annonce->address_lieux_dit = $this->render_text((isset($post['address_lieux_dit']))?$post['address_lieux_dit']:'');
+		$this->annonce->address_rue = $this->render_text((isset($post['address_rue']))?$post['address_rue']:'');
+		$this->annonce->address_numero = $this->render_text((isset($post['address_numero']))?$post['address_numero']:'');
+		$this->annonce->address_localite = $this->render_text((isset($post['address_localite']))?$post['address_localite']:'');
+		$this->annonce->address_zip_code = $this->render_text((isset($post['address_zip_code']))?$post['address_zip_code']:'');
+		$this->annonce->id_address_pays = $this->render_pays_id((isset($post['address_pays']))?$post['address_pays']:'');
 	
 
 		$current_date = date("Y-m-d");
 		$current_date_plus_1 = (date('d/m/Y', strtotime($current_date. ' + 1 days'))); // On ajoute 1 jour
 		$current_date_plus_10 = (date('d/m/Y', strtotime($current_date. ' + 31 days'))); // On ajoute 31 jour
-		$this->last_announce->start_saison = (isset($post['start_saison']) && !empty($post['start_saison']))?$post['start_saison']:$current_date_plus_1;
-		$this->last_announce->end_saison = (isset($post['end_saison']) && !empty($post['end_saison']))?$post['end_saison']:$current_date_plus_10;
+		$this->annonce->start_saison = (isset($post['start_saison']) && !empty($post['start_saison']))?$post['start_saison']:$current_date_plus_1;
+		$this->annonce->end_saison = (isset($post['end_saison']) && !empty($post['end_saison']))?$post['end_saison']:$current_date_plus_10;
 
 
 
-		$this->last_announce->max_personn = $this->render_text((isset($post['max_personn']))?$post['max_personn']:'0');
-		$this->last_announce->pet = (isset($post["pet"])?"1":"0");
-		$this->last_announce->handicap = (isset($post["handicap"])?"1":"0");
-		$this->last_announce->parking = (isset($post["parking"])?"1":"0");
+		$this->annonce->max_personn = $this->render_text((isset($post['max_personn']))?$post['max_personn']:'0');
+		$this->annonce->pet = (isset($post["pet"])?"1":"0");
+		$this->annonce->handicap = (isset($post["handicap"])?"1":"0");
+		$this->annonce->parking = (isset($post["parking"])?"1":"0");
 
-		$this->last_announce->list_activity = (isset($post['list_activity'])?$post['list_activity']:'0');
-		$this->last_announce->list_sport = (isset($post['list_sport'])?$post['list_sport']:'0');
+		$this->annonce->list_activity = (isset($post['list_activity'])?$post['list_activity']:'0');
+		$this->annonce->list_sport = (isset($post['list_sport'])?$post['list_sport']:'0');
 		
 		
 		if(!empty($post['other_activity']))
@@ -115,13 +115,13 @@ Class my_account_create_edit_announce extends base_module
 		if(!empty($post['other_sport']))
 			$this->_app->send_new_request_admin("Demande de sport non renseigné : ".$post['other_sport']);
 
-		$this->last_announce->price_one_night = (isset($_POST['price_one_night'])?$_POST['price_one_night']:0);
-		$this->last_announce->price_week_end = (isset($_POST['price_week_end'])?$_POST['price_week_end']:0);
-		$this->last_announce->price_one_week = (isset($_POST['price_one_week'])?$_POST['price_one_week']:0);
-		$this->last_announce->caution = (int)(isset($_POST['caution'])?$_POST['caution']:0);
+		$this->annonce->price_one_night = (isset($_POST['price_one_night'])?$_POST['price_one_night']:0);
+		$this->annonce->price_week_end = (isset($_POST['price_week_end'])?$_POST['price_week_end']:0);
+		$this->annonce->price_one_week = (isset($_POST['price_one_week'])?$_POST['price_one_week']:0);
+		$this->annonce->caution = (int)(isset($_POST['caution'])?$_POST['caution']:0);
 
 		$this->insert_value_form_annonce();
-		$this->last_announce = $this->_app->get_announce_user($this->id_annonce);
+		$this->annonce = $this->_app->get_announce_user($this->id_annonce);
 
 		header('Location: /Mon_compte'); 
 		
@@ -270,53 +270,53 @@ Class my_account_create_edit_announce extends base_module
 
 		$req_sql_update_annonce = new stdClass();
 		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx->id_pays = $this->last_announce->id_address_pays;
-		$req_sql_update_annonce->ctx->id_habitat = $this->last_announce->type_habitat;
-		$req_sql_update_annonce->ctx->id_type_vacances = $this->last_announce->type_vacances;
-		$req_sql_update_annonce->ctx->title = $this->last_announce->title;
-		$req_sql_update_annonce->ctx->sub_title = $this->last_announce->sub_title;
-		$req_sql_update_annonce->ctx->start_saison = $this->last_announce->start_saison;
-		$req_sql_update_annonce->ctx->end_saison = $this->last_announce->end_saison;
+		$req_sql_update_annonce->ctx->id_pays = $this->annonce->id_address_pays;
+		$req_sql_update_annonce->ctx->id_habitat = $this->annonce->type_habitat;
+		$req_sql_update_annonce->ctx->id_type_vacances = $this->annonce->type_vacances;
+		$req_sql_update_annonce->ctx->title = $this->annonce->title;
+		$req_sql_update_annonce->ctx->sub_title = $this->annonce->sub_title;
+		$req_sql_update_annonce->ctx->start_saison = $this->annonce->start_saison;
+		$req_sql_update_annonce->ctx->end_saison = $this->annonce->end_saison;
 		$req_sql_update_annonce->ctx->user_validate = "0";
 		$req_sql_update_annonce->table = "annonces";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
 		
 		$req_sql_update_annonce = new stdClass();
 		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx->address_lieux_dit = $this->last_announce->address_lieux_dit;
-		$req_sql_update_annonce->ctx->address_rue = $this->last_announce->address_rue;
-		$req_sql_update_annonce->ctx->address_numero = $this->last_announce->address_numero;
-		$req_sql_update_annonce->ctx->address_localite = $this->last_announce->address_localite;
-		$req_sql_update_annonce->ctx->address_zip_code = $this->last_announce->address_zip_code;
+		$req_sql_update_annonce->ctx->address_lieux_dit = $this->annonce->address_lieux_dit;
+		$req_sql_update_annonce->ctx->address_rue = $this->annonce->address_rue;
+		$req_sql_update_annonce->ctx->address_numero = $this->annonce->address_numero;
+		$req_sql_update_annonce->ctx->address_localite = $this->annonce->address_localite;
+		$req_sql_update_annonce->ctx->address_zip_code = $this->annonce->address_zip_code;
 		$req_sql_update_annonce->table = "annonce_address";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
 
 		$req_sql_update_annonce = new stdClass();
 		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx->price_one_night = $this->last_announce->price_one_night;
-		$req_sql_update_annonce->ctx->price_week_end = $this->last_announce->price_week_end;
-		$req_sql_update_annonce->ctx->price_one_week = $this->last_announce->price_one_week;
+		$req_sql_update_annonce->ctx->price_one_night = $this->annonce->price_one_night;
+		$req_sql_update_annonce->ctx->price_week_end = $this->annonce->price_week_end;
+		$req_sql_update_annonce->ctx->price_one_week = $this->annonce->price_one_week;
 		$req_sql_update_annonce->table = "range_price_announce";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
 
 		$req_sql_update_annonce = new stdClass();
 		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx->max_personn = $this->last_announce->max_personn;
-		$req_sql_update_annonce->ctx->pet = $this->last_announce->pet;
-		$req_sql_update_annonce->ctx->handicap = $this->last_announce->handicap;
-		$req_sql_update_annonce->ctx->parking = $this->last_announce->parking;
-		$req_sql_update_annonce->ctx->caution = $this->last_announce->caution;
+		$req_sql_update_annonce->ctx->max_personn = $this->annonce->max_personn;
+		$req_sql_update_annonce->ctx->pet = $this->annonce->pet;
+		$req_sql_update_annonce->ctx->handicap = $this->annonce->handicap;
+		$req_sql_update_annonce->ctx->parking = $this->annonce->parking;
+		$req_sql_update_annonce->ctx->caution = $this->annonce->caution;
 		$req_sql_update_annonce->table = "annonce_commoditer";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 
 		$this->_app->sql->update($req_sql_update_annonce);
 
@@ -324,7 +324,7 @@ Class my_account_create_edit_announce extends base_module
 
 		foreach($this->array_list_sport as $row_sport)
 		{
-			if(in_array($row_sport->name_sql, (array)$this->last_announce->list_sport))
+			if(in_array($row_sport->name_sql, (array)$this->annonce->list_sport))
 				$ctx_sport[$row_sport->name_sql] = 1;
 			else
 				$ctx_sport[$row_sport->name_sql] = 0;
@@ -333,14 +333,14 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx = new stdClass();
 		$req_sql_update_annonce->ctx = $ctx_sport;
 		$req_sql_update_annonce->table = "annonce_sport";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 		$this->_app->sql->update($req_sql_update_annonce);
 
 
 
 		foreach($this->array_list_activity as $row_activity)
 		{
-			if(in_array($row_activity->name_sql, (array)$this->last_announce->list_activity))
+			if(in_array($row_activity->name_sql, (array)$this->annonce->list_activity))
 				$ctx_activity[$row_activity->name_sql] = 1;
 			else
 				$ctx_activity[$row_activity->name_sql] = 0;
@@ -349,7 +349,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx = new stdClass();
 		$req_sql_update_annonce->ctx = $ctx_activity;
 		$req_sql_update_annonce->table = "annonce_activity";
-		$req_sql_update_annonce->where = "id = '".$this->last_announce->id."'";
+		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 		$this->_app->sql->update($req_sql_update_annonce);
 
 

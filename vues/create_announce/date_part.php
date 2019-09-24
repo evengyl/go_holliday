@@ -9,7 +9,7 @@
 		<div class="text-center col-xs-12"><hr>
 
 		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Début de saison : <?=(isset($last_announce->start_saison))?$last_announce->start_saison:'';?></div>
+		    	<div class="alert alert-info" role="alert">Date de Début de saison : <?=(isset($annonce->start_saison))?$annonce->start_saison:'';?></div>
 			    <div class="input-group">
 					<input 
 						style="cursor:pointer;" 
@@ -19,13 +19,13 @@
 						data-inline="true"
 						type="hidden" 
 						name="start_saison" 
-						value="<?=(isset($last_announce->start_saison))?$last_announce->start_saison:'';?>"
+						value="<?=(isset($annonce->start_saison))?$annonce->start_saison:'';?>"
 						data-language='fr'>
 			    </div>
 			</div>
 
 		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Fin de saison : <?=(isset($last_announce->end_saison))?$last_announce->end_saison:'';?></div>
+		    	<div class="alert alert-info" role="alert">Date de Fin de saison : <?=(isset($annonce->end_saison))?$annonce->end_saison:'';?></div>
 			    <div class="input-group">
 					<input 
 						style="cursor:pointer;" 
@@ -35,7 +35,7 @@
 						data-inline="true"
 						type="hidden" 
 						name="end_saison" 
-						value="<?=(isset($last_announce->end_saison))?$last_announce->end_saison:'';?>"
+						value="<?=(isset($annonce->end_saison))?$annonce->end_saison:'';?>"
 						data-language='fr'>
 			    </div>
 			</div>

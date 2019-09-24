@@ -11,27 +11,27 @@
 				<span class="input-group-addon" style="border-radius:4px; border-right:1px solid #ccc;">Tranche tarrifaire pour 1 Nuit</span>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_night" 
-						<?= (isset($last_announce->price_one_night) && $last_announce->price_one_night == '0-40')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_night) && $annonce->price_one_night == '0-40')? 'checked="true"' : ''; ?> 
 						value="0-40" required>0€ - 40€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_night" 
-						<?= (isset($last_announce->price_one_night) && $last_announce->price_one_night == '41-70')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_night) && $annonce->price_one_night == '41-70')? 'checked="true"' : ''; ?> 
 						value="41-70" required>41€ - 70€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_night" 
-						<?= (isset($last_announce->price_one_night) && $last_announce->price_one_night == '71-100')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_night) && $annonce->price_one_night == '71-100')? 'checked="true"' : ''; ?> 
 						value="71-100" required>71€ - 100€&nbsp;&nbsp;
 				</label>				
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_night" 
-						<?= (isset($last_announce->price_one_night) && $last_announce->price_one_night == '101-150')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_night) && $annonce->price_one_night == '101-150')? 'checked="true"' : ''; ?> 
 						value="101-150" required>101€ - 150€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_night" 
-						<?= (isset($last_announce->price_one_night) && $last_announce->price_one_night == '151-200')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_night) && $annonce->price_one_night == '151-200')? 'checked="true"' : ''; ?> 
 						value="151-200" required>151€ - 200€&nbsp;&nbsp;
 				</label><hr>
 			</div>
@@ -40,27 +40,27 @@
 				<span class="input-group-addon" style="border-radius:4px; border-right:1px solid #ccc;">Tranche tarrifaire pour 1 Week-end</span>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_week_end" 
-						<?= (isset($last_announce->price_week_end) && $last_announce->price_week_end == '101-200')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_week_end) && $annonce->price_week_end == '101-200')? 'checked="true"' : ''; ?> 
 						value="0-100" required>0€ - 100€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_week_end" 
-						<?= (isset($last_announce->price_week_end) && $last_announce->price_week_end == '101-150')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_week_end) && $annonce->price_week_end == '101-150')? 'checked="true"' : ''; ?> 
 						value="101-150" required>101€ - 150€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_week_end" 
-						<?= (isset($last_announce->price_week_end) && $last_announce->price_week_end == '151-200')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_week_end) && $annonce->price_week_end == '151-200')? 'checked="true"' : ''; ?> 
 						value="151-200" required>151€ - 200€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_week_end" 
-						<?= (isset($last_announce->price_week_end) && $last_announce->price_week_end == '201-250')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_week_end) && $annonce->price_week_end == '201-250')? 'checked="true"' : ''; ?> 
 						value="201-250" required>201€ - 250€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_week_end" 
-						<?= (isset($last_announce->price_week_end) && $last_announce->price_week_end == '251-350')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_week_end) && $annonce->price_week_end == '251-350')? 'checked="true"' : ''; ?> 
 						value="251-350" required>251€ - 350€&nbsp;&nbsp;
 				</label><hr>
 			</div>
@@ -69,37 +69,37 @@
 				<span class="input-group-addon" style="border-radius:4px; border-right:1px solid #ccc;">Tranche tarrifaire pour 1 Semaine</span>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '0-100')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '0-100')? 'checked="true"' : ''; ?> 
 						value="0-100" required>0€ - 100€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '101-200')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '101-200')? 'checked="true"' : ''; ?> 
 						value="101-200" required>101€ - 200€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '201-300')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '201-300')? 'checked="true"' : ''; ?> 
 						value="201-300" required>201€ - 300€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '301-400')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '301-400')? 'checked="true"' : ''; ?> 
 						value="301-400" required>301€ - 400€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '401-500')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '401-500')? 'checked="true"' : ''; ?> 
 						value="401-500" required>401€ - 500€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '501-600')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '501-600')? 'checked="true"' : ''; ?> 
 						value="501-1000" required>501€ - 1000€&nbsp;&nbsp;
 				</label>
 				<label class="checkbox-inline">
 					<input required type="radio" name="price_one_week" 
-						<?= (isset($last_announce->price_one_week) && $last_announce->price_one_week == '601-800')? 'checked="true"' : ''; ?> 
+						<?= (isset($annonce->price_one_week) && $annonce->price_one_week == '601-800')? 'checked="true"' : ''; ?> 
 						value="601-800" required>601€ - 800€&nbsp;&nbsp;
 				</label><hr>
 			</div>
@@ -133,7 +133,7 @@
             <div class="input-group">
 				<span class="input-group-addon">Caution (€)</span>
 				<input type="text" name="caution" 
-					value="<?= (isset($last_announce->caution))? $last_announce->caution : ''; ?>" 
+					value="<?= (isset($annonce->caution))? $annonce->caution : ''; ?>" 
 					pattern="[0-9,.€]{1,}" placeholder="300" class="form-control">
             </div>
         </div>

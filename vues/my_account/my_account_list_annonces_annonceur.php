@@ -27,7 +27,7 @@
 
                     <div class="img_annonce">
                         <a href="#" disabled class="thumbnail" style="cursor:default;">
-                            <img src="/images/annonces/<?= $row_annonce->id; ?>/<?= $row_annonce->img_principale; ?>" class="img-responsive">
+                            <img src="<?= $row_annonce->img_principale; ?>" class="img-responsive">
                         </a>
                     </div>
                 </div>

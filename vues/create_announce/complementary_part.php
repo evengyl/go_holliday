@@ -10,7 +10,7 @@
             <div class="form-group has-feedback">
                 <div class="input-group">
 					<span class="input-group-addon">Nombre de personne maximums acceptées</span>
-					<input type="text" name="max_personn" value="<?= (isset($last_announce->max_personn))? $last_announce->max_personn : ''; ?>" maxlength="2" pattern="[0-9]{0,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
+					<input type="text" name="max_personn" value="<?= (isset($annonce->max_personn))? $annonce->max_personn : ''; ?>" maxlength="2" pattern="[0-9]{0,2}" class="form-control" data-error="Le nombre de personnes s'écrit avec des chiffres.">
                 </div>
                 <div class="help-block with-errors"></div>
             </div>
@@ -25,15 +25,15 @@
                 <div class="input-group col-xs-12">
 				    <div class="checkbox">
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= ($last_announce->pet)? 'checked="true"' : ''; ?> name="pet" value="1">
+				        	<input type="checkbox" <?= ($annonce->pet)? 'checked="true"' : ''; ?> name="pet" value="1">
 				        	Animaux autorisés
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= ($last_announce->handicap)? 'checked="true"' : ''; ?> name="handicap" value="1">
+				        	<input type="checkbox" <?= ($annonce->handicap)? 'checked="true"' : ''; ?> name="handicap" value="1">
 				        	Accès pour personnes à mobilité réduite
 			        	</label>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= ($last_announce->parking)? 'checked="true"' : ''; ?> name="parking" value="1">
+				        	<input type="checkbox" <?= ($annonce->parking)? 'checked="true"' : ''; ?> name="parking" value="1">
 				        	Parking gratuit à proximité immédiate
 			        	</label>
 				    </div>
@@ -58,7 +58,7 @@
 				    foreach($array_list_sport as $row_sport)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($last_announce->list_sport) && in_array($row_sport->name_sql, $last_announce->list_sport))? 'checked="true"' : ''; ?> name="list_sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
+				        	<input type="checkbox" <?= (isset($annonce->list_sport) && in_array($row_sport->name_sql, $annonce->list_sport))? 'checked="true"' : ''; ?> name="list_sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>
@@ -82,7 +82,7 @@
 				    foreach($array_list_activity as $row_activity)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($last_announce->list_activity) && in_array($row_activity->name_sql, $last_announce->list_activity))? 'checked="true"' : ''; ?> name="list_activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>
+				        	<input type="checkbox" <?= (isset($annonce->list_activity) && in_array($row_activity->name_sql, $annonce->list_activity))? 'checked="true"' : ''; ?> name="list_activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>

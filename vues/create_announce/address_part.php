@@ -17,7 +17,7 @@
 		            	name="address_lieux_dit" 
 		            	type="text" 
 		            	maxlength="100" 
-		            	value="<?=(!empty($last_announce->address[0]->address_lieux_dit))?$last_announce->address[0]->address_lieux_dit:'';?>" 
+		            	value="<?=(!empty($annonce->address[0]->address_lieux_dit))?$annonce->address[0]->address_lieux_dit:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -35,7 +35,7 @@
 		            	name="address_rue" 
 		            	maxlength="100" 
 		            	type="text" 
-		            	value="<?=(!empty($last_announce->address[0]->address_rue))?$last_announce->address[0]->address_rue:'';?>" 
+		            	value="<?=(!empty($annonce->address[0]->address_rue))?$annonce->address[0]->address_rue:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -54,7 +54,7 @@
 		            	name="address_localite" 
 		            	maxlength="50" 
 		            	type="text" 
-		            	value="<?=(!empty($last_announce->address[0]->address_localite))?$last_announce->address[0]->address_localite:'';?>" 
+		            	value="<?=(!empty($annonce->address[0]->address_localite))?$annonce->address[0]->address_localite:'';?>" 
 		            	class="form-control">
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -73,7 +73,7 @@
 		            	name="address_numero" 
 		            	maxlength="15"
 		            	type="text" 
-		            	value="<?=(!empty($last_announce->address[0]->address_numero))?$last_announce->address[0]->address_numero:'';?>" 
+		            	value="<?=(!empty($annonce->address[0]->address_numero))?$annonce->address[0]->address_numero:'';?>" 
 		            	class="form-control" >
 	        	</div>
 	        	<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -91,7 +91,7 @@
 		            	id="zip_code_form" 
 		            	name="address_zip_code" 
 		            	type="text" 
-		            	value="<?=(!empty($last_announce->address[0]->address_zip_code))?$last_announce->address[0]->address_zip_code:'';?>" 
+		            	value="<?=(!empty($annonce->address[0]->address_zip_code))?$annonce->address[0]->address_zip_code:'';?>" 
 		            	maxlength="10" 
 		            	pattern="[0-9]+" 
 		            	class="form-control" 
@@ -110,7 +110,7 @@
 	            			foreach($array_list_pays_for_tpl as $row_pays)
 	            			{?>
 								<option 
-									<?=($last_announce->pays_name_human == $row_pays->name_human)?'selected':''; ?>
+									<?=($annonce->pays_name_human == $row_pays->name_human)?'selected':''; ?>
 									name="address_pays"
 									value="<?= $row_pays->id; ?>"
 								>

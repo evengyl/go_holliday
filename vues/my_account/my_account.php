@@ -12,7 +12,7 @@
         </div>
 
 
-        <div class="col-xs-7 row">
+        <div class="col-xs-7">
 		    <div class="col-xs-12 annonces_list"><?
 
                 if(isset($_GET['second_page']))

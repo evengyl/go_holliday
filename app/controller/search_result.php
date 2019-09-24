@@ -46,9 +46,9 @@ Class search_result extends base_module
 
 		$this->annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
 
-		$this->get_first_image();
+		$this->annonces = $this->_app->get_first_image($this->annonces);
 
-		if($error)
+		if($error && !$all)
 			$this->use_module("p_404");
 
 		else
@@ -81,26 +81,7 @@ Class search_result extends base_module
 		
 	}
 
-	private function get_first_image()
-	{
-		foreach($this->annonces as $key => $row_annonce)
-		{
-			if(file_exists($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
-			{
-				if($dossier = opendir($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
-				{
-					while(false !== ($fichier = readdir($dossier)))
-					{
-						if($fichier != '.' && $fichier != '..'){
-							$this->annonces[$key]->img_principale = $fichier;
-							break;
-						}
-					}
-				}
-			}
-		}
 
-	}
 
 	private function get_annonces($type_id, $pays = array(), $habitat = array(), $all)
 	{
@@ -125,7 +106,7 @@ Class search_result extends base_module
 		if(!$all)
 			$sql_annonce->where = [$where, ["1", "1", "1", $type_id, $pays, $habitat]];
 		else
-			$sql_annonce->where = ["1"];
+			$sql_annonce->where = ["admin_validate = $1 AND active = $2 AND on_off = $3", ['1','1','1']];
 
 
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);

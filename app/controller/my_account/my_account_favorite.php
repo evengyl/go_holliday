@@ -21,6 +21,7 @@ Class my_account_favorite extends base_module
 		$req_sql->where = ["id IN $1",[$array_id_fav]];
 		$array_annonce_fav = $this->_app->sql->select($req_sql);
 
+		$array_annonce_fav = $this->_app->get_first_image($array_annonce_fav);
 		return $array_annonce_fav;
 	}
 

@@ -1,5 +1,5 @@
 <header id="head" class="secondary"></header>
-<form action="/Recherche/<?= $array_type[0]->type_vacances_name_human ?>/Selection_destination" method="post">
+<form action="/Recherche/<?= $type_vacances_selected->type_vacances_name_human ?>/Selection_destination" method="post">
 
     <h2 class="thin text-center">Il est temps de sélectionner un ou des Pays de destinations</h2>
     <p class="text-muted text-center">
@@ -10,9 +10,9 @@
         <div class="thumbnail asset_left">
             <div class="caption">
                 <h4>Type de vacances : </h4>
-                <?if(isset($array_type[0]->icon))
-                    echo $array_type[0]->icon;?>
-                <p class="text-muted"><?= $array_type[0]->type_vacances_name_human; ?></p>
+                <?if(isset($type_vacances_selected->icon))
+                    echo $type_vacances_selected->icon;?>
+                <p class="text-muted"><?= $type_vacances_selected->type_vacances_name_human; ?></p>
                     
             </div>
             <hr>
@@ -37,22 +37,26 @@
 
 
 
-    <div class="col-xs-10 text-center">
+    <div class="col-xs-8 text-center">
         <div class="row"><?
             
-            foreach($array_pays as $row_pays)
-            {?>
-                <div class="col-sm-6 col-md-2" style="padding-left:7.5px; padding-right:7.5px;">
+            foreach($list_pays as $row_pays)
+            {
+                if($row_pays->nb_annonces == 0) continue;?>
+                <div class="col-sm-6 col-md-3" style="padding-left:7.5px; padding-right:7.5px;">
                     <div class="thumbnail">
-                        <i style="font-size:25px; color:#737effb3;" class="fas fa-globe"></i>
-                        <i style="font-size:25px; color:#737effb3;" class="fas fa-map-marked-alt"></i>
-                        <i style="font-size:25px; color:#737effb3;" class="fas fa-map-marker-alt"></i>
-                        <hr>
                         <img src="/images/drapeaux/<?= $row_pays->img; ?>" class="img-responsive" style="max-height:100px;" alt="<?= $row_pays->name_human; ?>">
                         <div class="caption">
-                            <h3 style="margin-top:10px;"><?= $row_pays->name_human; ?></h3>
-                            <small class="thin text-muted">(<?= $row_pays->nb_annonces ?> Annonces)</small>
-                            <a style="margin-top:10px;" data-type="pays" data-etat="inactive" data-id="<?= $row_pays->id; ?>" data-name="<?= $row_pays->name_human; ?>" class="btn btn-primary">Je sélectionne</a>
+                            <h3 style="margin-top:5px;"><?= $row_pays->name_human; ?></h3>
+                            <small class="thin text-muted">(<?= $row_pays->nb_annonces ?> Annonces)</small><br>
+                            <a style="margin-top:5px;" 
+                                data-type="pays" 
+                                data-etat="inactive" 
+                                data-id="<?= $row_pays->id; ?>" 
+                                data-name="<?= $row_pays->name_human; ?>" 
+                                class="btn btn-primary">
+                                    Je sélectionne
+                            </a>
                         </div>
                     </div>
                 </div><?
@@ -62,22 +66,28 @@
     
 
 
-    <div class="container text-center">
+    <div class="col-xs-8 text-center">
         <h2 class="thin">Sélectionner à présent le ou les types de bien que vous chercher</h2>
         <p class="text-muted">
-           Le tout n'est pas de savoir avec qui ou pour quoi vous partez, ni dans quel pays, il faut aussi savoir quelle genre de locations de vacances vous voulez
+           Le tout n'est pas de savoir avec qui ou pour quoi vous partez, ni dans quel pays, il faut aussi savoir quelle genre de locations de vacances vous voulez.
         </p><br><?
-        foreach($array_habitat as $row_habitat)
-        {?>
+        foreach($list_habitat as $row_habitat)
+        {
+            if($row_habitat->nb_annonces == 0) continue;?>
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
-                    <i style="font-size:25px; color:#65b45199;" class="fas fa-home"></i>
-                    <hr>
                     <img src="/images/habitats/<?= $row_habitat->habitat_img; ?>" class="img-responsive" alt="<?= $row_habitat->habitat_name_human; ?>">
                     <div class="caption">
                         <h3 style="margin-top:10px;" data-toggle="tooltip" data-placement="top" title="<?= $row_habitat->habitat_text; ?>" ><?= $row_habitat->habitat_name_human; ?></h3>
                         <small class="thin text-muted">(<?= $row_habitat->nb_annonces ?> Annonces)</small><br>
-                        <a style="margin-top:10px;" data-type="habitat" data-etat="inactive" data-id="<?= $row_habitat->id; ?>" data-name="<?= $row_habitat->habitat_name_sql; ?>" class="btn btn-xs btn-primary">Je sélectionne</a>
+                        <a style="margin-top:10px;" 
+                            data-type="habitat" 
+                            data-etat="inactive" 
+                            data-id="<?= $row_habitat->id; ?>" 
+                            data-name="<?= $row_habitat->habitat_name_sql; ?>" 
+                            class="btn btn-primary">
+                                Je sélectionne
+                        </a>
                     </div>
                 </div>
             </div><?
@@ -90,7 +100,7 @@
     <div class="container text-center">
         <div class="row">
             <p class="text-muted">
-               Et voilà nous y somme déjà, vous n'avez plus qu'à valider et voir ce que l'on vous propose
+               Et voilà nous y somme déjà, vous n'avez plus qu'à valider et voir ce que <?= $_app->site_name ?> vous propose.
             </p><br>
             <p><button type="submit" class="btn btn-primary" role="button">Je veux voir ce qu'il s'offre à moi</button></p>
         </div>

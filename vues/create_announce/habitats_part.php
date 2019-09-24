@@ -21,7 +21,7 @@
 									name="type_habitat" 
 									type="radio" 
 									value="<?= $row_type_habitat->id; ?>"
-									<?= (!empty($last_announce->habitat_name_sql) && $last_announce->habitat_name_sql == $row_type_habitat->habitat_name_sql)?'checked':''; ?>
+									<?= (!empty($annonce->habitat_name_sql) && $annonce->habitat_name_sql == $row_type_habitat->habitat_name_sql)?'checked':''; ?>
 									>
 
 								<label style="padding: 7px 30px 7px 45px;  margin:0; left:-39px;" for="toggle_<?=$row_type_habitat->habitat_name_sql; ?>">Je loue ceci</label>
