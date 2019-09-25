@@ -24,7 +24,7 @@ Class admin_verify_new_announce extends base_module
 		$sql_not_validate_announce->table = 'annonces';
 		$sql_not_validate_announce->data = "id, title, sub_title, id_user, user_name, user_last_name";
 		$sql_not_validate_announce->order = ["id"];
-		$sql_not_validate_announce->where = ["user_validate = $1 AND admin_validate = $2", [0, 0] ];
+		$sql_not_validate_announce->where = ["user_validate = $1 AND admin_validate = $2", [1, 0] ];
 		$res_sql_not_validate_announce = $this->_app->sql->select($sql_not_validate_announce);
 
 		if(!empty($res_sql_not_validate_announce))

@@ -22,6 +22,7 @@ class Model_utilisateurs
 		$this->id_create_account = new NormalType("id_create_account");
 		$this->newsletter = new NormalType("newsletter");
 		$this->id_favorite = new NormalType("id_favorite");
+		$this->date_create = new NormalType("date_create");
 	}
 
 }
