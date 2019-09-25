@@ -276,7 +276,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',1,'testtata','test sub','06/09/2019','06/12/2019',1529,1,1,1,'28/01/2019',1),(225,1,3,'2,3',1,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',5,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',1,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,1,1,1,'05/08/2019',1),(236,1,5,'1,2',1,'testtest','testtest','01/09/2019','29/09/2019',8,1,1,1,'13/09/2019',1),(243,NULL,NULL,NULL,1,'Votre Titre','Votre sous-titre','00/00/0000','00/00/0000',18,0,0,0,'24/09/2019',1);
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','06/09/2019','06/12/2019',1530,1,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',5,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',0,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',8,1,1,1,'13/09/2019',1),(243,NULL,NULL,NULL,4,'Votre Titre','Votre sous-titre','00/00/0000','00/00/0000',18,0,1,0,'24/09/2019',1);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +297,7 @@ CREATE TABLE `login` (
   `level_admin` tinyint(4) NOT NULL DEFAULT '0',
   `id_utilisateurs` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +306,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1),(8,'client_evengyl','$2y$10$xTPFQQhq2zdX4yH1Y3tF5.EuyUBlB2q8WhmK21cGJ9E2SCx0ZBl2y','1565766971','legends','dark.evengyl@gmail.com',0,4);
+INSERT INTO `login` VALUES (1,'evengyl','$2y$10$IqgJEZtcfsUxrE1NJj27Y.Jfn1uG6DAu0QOW/KMN1kjtN/tO2db9W','1560861924','legends','dark.evengyl@gmail.com',3,1),(8,'client_evengyl','$2y$10$xTPFQQhq2zdX4yH1Y3tF5.EuyUBlB2q8WhmK21cGJ9E2SCx0ZBl2y','1565766971','legends','dark.evengyl@gmail.com',0,4),(9,'other_evengyl','$2y$10$DJYMNbdShbYLV.SfD0Dc.O6xFRNYOS/KJqWo1wou2Clc.0u8mfO5S','1569423660','legends','dark.evengyl@gmail.com',0,5);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,8 +533,9 @@ CREATE TABLE `utilisateurs` (
   `id_create_account` varchar(35) NOT NULL,
   `newsletter` tinyint(1) NOT NULL DEFAULT '1',
   `id_favorite` text NOT NULL,
+  `date_create` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -543,7 +544,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'225,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'loic','baudoux','dark.evengyl@gmail.com',28,'0497312523','jean jaures','59','lablab','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d8b810608e63497485790',1,'','');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,7 +573,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,0,40,19,34,1,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,53,24,40,4,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -585,4 +586,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-24 15:57:23
+-- Dump completed on 2019-09-25 17:02:23
