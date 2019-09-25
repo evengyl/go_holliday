@@ -43,6 +43,5 @@ class Model_annonces
 		$this->id_user = new OneToOneType("utilisateurs", "id", "id_utilisateurs");
 		$this->user_name = new OneToOneType("utilisateurs", "name", "id_utilisateurs");
 		$this->user_last_name = new OneToOneType("utilisateurs", "last_name", "id_utilisateurs");
-
 	}
 }

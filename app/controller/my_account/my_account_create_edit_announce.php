@@ -19,7 +19,7 @@ Class my_account_create_edit_announce extends base_module
 		{
 			if(isset($_GET['id_annonce']) && !empty($_GET['id_annonce']))
 			{
-				if($this->verify_if_id_exist($_GET['id_annonce']))
+				if($this->verify_if_id_exist($_GET['id_annonce']) || $this->_app->user->level_admin == 3)
 					$this->id_annonce = $_GET['id_annonce'];
 			}
 			else
@@ -72,7 +72,7 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_verify->table = 'annonces';
 		$req_sql_verify->data = "id";
 		$req_sql_verify->where = ["id = $1 AND id_utilisateurs = $2", [(int)$id, $this->_app->user->id_utilisateurs]];
-		$tmp =$this->_app->sql->select($req_sql_verify);
+		$tmp = $this->_app->sql->select($req_sql_verify);
 
 		if($tmp)
 			return true;

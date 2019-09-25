@@ -48,16 +48,15 @@
 
 								<div class="collapse" id="collapse_annonce_<?= $row_annonceurs->id; ?>">
 									<div class="well">
-										<div class="btn-group btn-group-justified" role="group"><?
+										<?
 											
 											foreach($row_annonceurs->annonces as $row_annonces)
 											{?>
-												<div class="btn-group" role="group">
-	    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:3px 15px;"  class="btn btn-default btn-xs">ID : <?= $row_annonces->id ?></a>
-										        </div><?
+
+	    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:5px 20px;"  class="btn btn-info btn-xs">Voir / Editer : Id-<?= $row_annonces->id ?></a>
+										        <?
 											}
 											?>
-										</div>
 									</div>
 								</div>
 
