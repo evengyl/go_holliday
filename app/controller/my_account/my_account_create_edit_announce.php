@@ -15,45 +15,54 @@ Class my_account_create_edit_announce extends base_module
 	{		
 		parent::__construct($_app);
 
-		if(isset($_GET['id_annonce']) && !empty($_GET['id_annonce']))
+		if(Config::$is_connect)
 		{
-			if($this->verify_if_id_exist($_GET['id_annonce']))
-				$this->id_annonce = $_GET['id_annonce'];
+			if(isset($_GET['id_annonce']) && !empty($_GET['id_annonce']))
+			{
+				if($this->verify_if_id_exist($_GET['id_annonce']))
+					$this->id_annonce = $_GET['id_annonce'];
+			}
+			else
+			{
+				$this->id_annonce = $this->create_id_bsd(); //ok
+			}
+
+			
+
+			// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
+			$this->annonce = $this->_app->get_announce_user($this->id_annonce);	
+
+			//for form tpl
+			$array_type_vacances = $this->get_list_type(); //ok
+			$array_type_habitat = $this->get_list_habitat(); //ok
+
+			$this->array_list_activity = $this->get_list_activity(); //ok
+			$this->array_list_sport = $this->get_list_sport(); //ok
+			$array_type_vacances = $this->get_list_type(); //ok
+			$this->list_pays_for_compar = $this->get_list_pays(); // OK
+
+			
+			if(!empty($_POST))
+				$this->treatment_create_annonce($_POST);
+
+			//on génère un nombre aléatoire pour valider un form unique
+			$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce = rand();
+
+			$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
+				->assign_var("array_type_vacances", $array_type_vacances)
+				->assign_var("array_type_habitat", $array_type_habitat)
+				->assign_var("array_list_pays_for_tpl", $this->array_list_pays_for_tpl)
+				->assign_var("array_list_activity", $this->array_list_activity)
+				->assign_var("array_list_sport", $this->array_list_sport)
+				->assign_var("annonce", $this->annonce)
+				->use_template("my_account_create_announce");
+
 		}
 		else
 		{
-			$this->id_annonce = $this->create_id_bsd(); //ok
+			$_SESSION["error_admin"] = "Vous n'avez pas accès à cette page.</br>Vous devez d'abord vous connecter";
+			$this->use_module("p_404");
 		}
-
-		
-
-		// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
-		$this->annonce = $this->_app->get_announce_user($this->id_annonce);	
-
-		//for form tpl
-		$array_type_vacances = $this->get_list_type(); //ok
-		$array_type_habitat = $this->get_list_habitat(); //ok
-
-		$this->array_list_activity = $this->get_list_activity(); //ok
-		$this->array_list_sport = $this->get_list_sport(); //ok
-		$array_type_vacances = $this->get_list_type(); //ok
-		$this->list_pays_for_compar = $this->get_list_pays(); // OK
-
-		
-		if(!empty($_POST))
-			$this->treatment_create_annonce($_POST);
-
-		//on génère un nombre aléatoire pour valider un form unique
-		$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce = rand();
-
-		$this->assign_var("rand_id_create_annonce", $rand_id_create_annonce)
-			->assign_var("array_type_vacances", $array_type_vacances)
-			->assign_var("array_type_habitat", $array_type_habitat)
-			->assign_var("array_list_pays_for_tpl", $this->array_list_pays_for_tpl)
-			->assign_var("array_list_activity", $this->array_list_activity)
-			->assign_var("array_list_sport", $this->array_list_sport)
-			->assign_var("annonce", $this->annonce)
-			->use_template("my_account_create_announce");
 	}
 
 
