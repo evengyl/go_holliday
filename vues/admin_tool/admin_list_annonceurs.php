@@ -1,6 +1,12 @@
  <div class="col-lg-12">
     <div class="col-lg-12 annonces_list text-center">
 		<h3 class="thin">Liste des Annonceurs</h3>
+
+		<button disabled class="btn btn-info">Total des Annonces : <?= $total_annonce ?></button>
+		<button disabled class="btn btn-success">Annonce Active : <?= $total_annonce_active ?></button>
+		<button disabled class="btn btn-warning">Annonce Inactive : <?= $total_annonce_inactive ?></button>
+		<hr>
+
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-without-padding col-without-radius">
@@ -29,9 +35,55 @@
 									<td><?= $row_annonceurs->nb_annonces; ?></td>
 									<td><?= $row_annonceurs->vues; ?></td>
 									<td>
-										<a class="btn btn-info btn-sm" href="/Recherche/Validation/Annonces/<?= $row_client->id_announce; ?>">Contacter</a>
+										<a data-toggle="modal" style="padding:3px 15px;" data-target="#Mesage_to_annonceur_<?= $row_annonceurs->id; ?>" class="btn btn-info btn-xs">Contacter
+										</a>
+										<a class="btn btn-primary btn-xs" style="padding:3px 15px;" role="button" data-toggle="collapse" href="#collapse_annonce_<?= $row_annonceurs->id; ?>" aria-expanded="false" aria-controls="collapseExample">
+											Voir ses annonces	
+										</a>
 									</td>
-								</tr><?
+
+
+
+								</tr>
+
+								<div class="collapse" id="collapse_annonce_<?= $row_annonceurs->id; ?>">
+									<div class="well">
+										<div class="btn-group btn-group-justified" role="group"><?
+											
+											foreach($row_annonceurs->annonces as $row_annonces)
+											{?>
+												<div class="btn-group" role="group">
+	    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:3px 15px;"  class="btn btn-default btn-xs">ID : <?= $row_annonces->id ?></a>
+										        </div><?
+											}
+											?>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="modal fade" id="Mesage_to_annonceur_<?= $row_annonceurs->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								    <div class="modal-dialog modal-lg" role="document">
+								        <div class="modal-content">
+								            <div class="modal-header">
+								                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								                <h4 class="modal-title">Enoyer un mail à <?= $row_annonceurs->name." ".$row_annonceurs->last_name ?></h4>
+								            </div>
+								            <div class="modal-body">
+								            	<form action="#" method="post">
+								            		<input type="hidden" name="send_message_annonceur">
+								            		<input type="hidden" name="email_annonceur" value="<?= $row_annonceurs->mail; ?>">
+								            		<input type="hidden" name="name_annonceur" value="<?= $row_annonceurs->name." ".$row_annonceurs->last_name ?>">
+								                    <textarea rows="3" name="message" class="form-control" placeholder=""></textarea>
+								                    <button style="margin-top:15px;" class="btn btn-info" type="submit" role="button">
+								                        Envoyer
+								                    </button>
+							                    </form>
+								            </div>
+								        </div>
+								    </div>
+								</div><?
+								
 							}
 						}?>
 					</table>

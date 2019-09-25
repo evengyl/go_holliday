@@ -371,6 +371,30 @@ Class fct_global_website
 		mail(Config::$mail, $subject, $content_html, $headers);
 	}
 
+
+	public function send_new_mail_client($object = "", $mail = "", $reason_why = "")
+	{
+		if($reason_why == "new_message" || $reason_why == "new_demand" || $reason_why == "admin_say")
+		{
+			$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/mail_client.html");
+			$content_html = str_replace(
+									["##SITENAME##", "##OBJECT##"], 
+									[$this->_app->site_name, $object],
+								$content_html);
+
+			$headers = "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			$subject = "Demande administrative";
+
+			mail($mail, $subject, $content_html, $headers);
+		}
+		else{
+			return false;
+		}
+		
+	}
+
+
 	public function convert_date_to_uk($date)
 	{
 		$bits = explode('/',$date);

@@ -9,6 +9,10 @@ Class admin_list_clients extends base_module
 		$res_sql_list_clients = $this->get_list_clients();
 
 
+		if(isset($_POST["send_message_client"]))
+			$this->_app->send_new_mail_client("Bonjour chère client ".$_POST["name_client"]." : <br>".$_POST["message"], $_POST["email_client"], "admin_say");
+
+
 		$this->assign_var("list_clients", $res_sql_list_clients)->render_tpl();
 	}
 

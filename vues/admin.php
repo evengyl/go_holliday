@@ -1,10 +1,6 @@
 <div class="secondary" id="head"></div>
 <div class="col-xs-12 text-center">
     <h2 class="thin">Administration</h2>
-    <p class="text-muted thin">Liste des function a mettre dans le cron : 
-		<br>purge des user vip, 1 fois par jour à minuit
-		<br>Pull de la bsd toutes les heures
-	</p>
 </div>
 
 <div class="col-xs-3">
