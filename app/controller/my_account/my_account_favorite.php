@@ -4,6 +4,7 @@ Class my_account_favorite extends base_module
 	public function __construct(&$_app)
 	{		
 		parent::__construct($_app);
+		$this->_app->title_page .= " - Mes annonces favorites";
 
 		$array_annonce_fav = $this->get_annonce_fav();
 

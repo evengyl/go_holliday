@@ -14,6 +14,7 @@ Class my_account_create_edit_announce extends base_module
 	public function __construct(&$_app)
 	{		
 		parent::__construct($_app);
+		$this->_app->title_page = "Je crée mon annonce";
 
 		if(Config::$is_connect)
 		{
@@ -23,10 +24,7 @@ Class my_account_create_edit_announce extends base_module
 					$this->id_annonce = $_GET['id_annonce'];
 			}
 			else
-			{
 				$this->id_annonce = $this->create_id_bsd(); //ok
-			}
-
 			
 
 			// on va récupérer la derniere annonce crée pour l'éditée ou la remplir
@@ -43,7 +41,7 @@ Class my_account_create_edit_announce extends base_module
 
 			
 			if(!empty($_POST))
-				$this->treatment_create_annonce($_POST);
+				$this->treatment_create_edit_annonce($_POST);
 
 			//on génère un nombre aléatoire pour valider un form unique
 			$_SESSION['rand_id_form_create_annonce'] = $rand_id_create_annonce = rand();
@@ -82,7 +80,7 @@ Class my_account_create_edit_announce extends base_module
 
 
 
-	public function treatment_create_annonce($post)
+	public function treatment_create_edit_annonce($post)
 	{
 		
 		$this->annonce->type_vacances = $this->get_id_type_vacances($post);
@@ -119,10 +117,10 @@ Class my_account_create_edit_announce extends base_module
 		
 		
 		if(!empty($post['other_activity']))
-			$this->_app->send_new_request_admin("Demande d'activité non renseignée : ".$post['other_activity']);
+			$this->_app->send_new_request_admin($post['other_activity'], "Demande d'activité non renseignée");
 
 		if(!empty($post['other_sport']))
-			$this->_app->send_new_request_admin("Demande de sport non renseigné : ".$post['other_sport']);
+			$this->_app->send_new_request_admin($post['other_sport'], "Demande de sport non renseigné");
 
 		$this->annonce->price_one_night = (isset($_POST['price_one_night'])?$_POST['price_one_night']:0);
 		$this->annonce->price_week_end = (isset($_POST['price_week_end'])?$_POST['price_week_end']:0);
@@ -238,7 +236,7 @@ Class my_account_create_edit_announce extends base_module
 			foreach($post['type_vacances'] as $row_type_vacance)
 			{
 				$req_sql_verify = new stdClass();
-				$req_sql_verify->table = 'type_vacances';
+				$req_sql_verify->table = 'annonce_type_vacances';
 				$req_sql_verify->data = "id";
 				$req_sql_verify->where = ["name_sql = $1", [$row_type_vacance]];
 				$req_sql_verify->limit = "1";
@@ -256,7 +254,7 @@ Class my_account_create_edit_announce extends base_module
 	private function get_list_type()
 	{
 		$sql_type = new stdClass();
-		$sql_type->table = "type_vacances";
+		$sql_type->table = "annonce_type_vacances";
 		$sql_type->data = "*";
 		$sql_type->where = ["1"];
 		return $this->_app->sql->select($sql_type);
@@ -287,6 +285,8 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->start_saison = $this->annonce->start_saison;
 		$req_sql_update_annonce->ctx->end_saison = $this->annonce->end_saison;
 		$req_sql_update_annonce->ctx->user_validate = "0";
+		$req_sql_update_annonce->ctx->admin_validate = "0";
+		$req_sql_update_annonce->ctx->active = "0";
 		$req_sql_update_annonce->table = "annonces";
 		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
 

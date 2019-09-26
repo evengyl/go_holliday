@@ -1,12 +1,11 @@
 <header id="head" class="secondary"></header><?
-
-if(count($annonces) < 1)
+if(empty($annonces))
 {?>
     <div class="container text-center">
         <div class="row">
             <h1 class="thin">Oups!... </h1>
-            <h3 class="thin">Aucune annonces ne corresponds exatcement à ce que vous cherchez, essayer peux être d\'élargir vos horizons ?</h3>
-            <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer de type</a></p>
+            <h3 class="thin">Aucune annonces ne corresponds exactement à ce que vous cherchez, essayer peux être d'élargir vos horizons ?</h3>
+            <p class="text-center"><a href="/Recherche" class="btn btn-default" role="button">Je veux changer de type de vacances</a></p>
         </div>
     </div><?
 }

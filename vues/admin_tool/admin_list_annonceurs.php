@@ -1,10 +1,12 @@
  <div class="col-lg-12">
     <div class="col-lg-12 annonces_list text-center">
-		<h3 class="thin">Liste des Annonceurs</h3>
-
+    	<hr>
+		<button disabled class="btn btn-info">Nb Annonceurs : <?= $total_annonceurs ?></button>
+		<button disabled class="btn btn-info">Nb Clients : <?= $total_users ?></button>
 		<button disabled class="btn btn-info">Total des Annonces : <?= $total_annonce ?></button>
 		<button disabled class="btn btn-success">Annonce Active : <?= $total_annonce_active ?></button>
 		<button disabled class="btn btn-warning">Annonce Inactive : <?= $total_annonce_inactive ?></button>
+		<h3 class="thin">Liste des Annonceurs</h3>
 		<hr>
 
 		<div class="container">
@@ -41,22 +43,19 @@
 											Voir ses annonces	
 										</a>
 									</td>
-
-
-
 								</tr>
 
 								<div class="collapse" id="collapse_annonce_<?= $row_annonceurs->id; ?>">
-									<div class="well">
-										<?
-											
+									<div class="well"><?
+										if(!empty($row_annonceurs->annonces))
+										{
 											foreach($row_annonceurs->annonces as $row_annonces)
 											{?>
-
-	    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:5px 20px;"  class="btn btn-info btn-xs">Voir / Editer : Id-<?= $row_annonces->id ?></a>
-										        <?
+    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:5px 20px;"  class="btn btn-info btn-xs">
+    												Voir / Editer : Id-<?= $row_annonces->id ?>
+    											</a><?
 											}
-											?>
+										}?>
 									</div>
 								</div>
 

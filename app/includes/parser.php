@@ -65,7 +65,7 @@ class parser
 					throw new Exception('Erreur Fatal reçue : Le module : <b>'.$module_name.'</b> N\'a pas été trouvé ou n\'existe pas, Veuiller controllez.');
 			}
 			catch(Exception $e){
-				// geneere : Fatal error: Cannot declare class p_404, because the name is already in use in C:\xampp\htdocs\go_holliday\app\controller\p_404.php on line 19 crriger
+
 				$module = new p_404($this->_app, $e->getMessage(), '204');
 			}
 			

@@ -7,6 +7,7 @@ Class my_account extends base_module
 	public function __construct(&$_app)
 	{		
 		parent::__construct($_app);
+		$this->_app->title_page = "Mon compte";
 
 		if(Config::$is_connect)
 		{

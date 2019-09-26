@@ -15,7 +15,7 @@ if(Config::$is_connect)
 				        	<?=(in_array($annonce->id, $_app->user->id_favorite))?"disabled":""; ?> 
 
 				        	data-action="place_to_fav" data-id="<?= $annonce->id?>">
-				        	<i class="far fa-heart"></i>
+				        	<i class="far fa-heart"></i>&nbsp;
 				        	<?=(in_array($annonce->id, $_app->user->id_favorite))?"Cette annonce est déjà dans vos favorites":"Placer cette annonce dans mes favorites"; ?>
 			        		</button>
 			        	</div>
@@ -33,3 +33,24 @@ if(Config::$is_connect)
 		require($_app->base_dir."/vues/annonces/modal_messagery.php");
 	}
 }?>
+
+
+<script>
+    $(document).ready(function()
+    {
+        $("button[data-action='place_to_fav']").click(function(){
+            var button_clicked = $(this);
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/add_del_announce_favorite.php',
+                dataType : "HTML",
+                data : {"app_fct" : "add_to_favorite", "id_annonce" : button_clicked.attr("data-id")},
+                success : function(data_return)
+                {
+                    button_clicked.attr("disabled", true).html("<i class='far fa-heart'></i>&nbsp;Cette annonce est déjà dans vos favorites");
+                },
+            });
+        });
+        
+    });
+</script>

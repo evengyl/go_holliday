@@ -7,6 +7,7 @@ Class my_account_messagery extends base_module
 	public function __construct(&$_app)
 	{
 		parent::__construct($_app);
+		$this->_app->title_page .= " - Ma messagerie";
 
 		$this->get_list_message();
 

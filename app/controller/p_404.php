@@ -5,6 +5,7 @@ Class p_404 extends base_module
 	public function __construct(&$_app, $exeption = "", $error_code = "")
 	{		
 		parent::__construct($_app);
+		$this->_app->title_page = "404 page introuvable";
 
 		if($_app->var_module)
 		{

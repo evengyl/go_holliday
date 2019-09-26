@@ -6,6 +6,7 @@ Class search_pays_habitat extends base_module
 	public function __construct(&$_app)
 	{	
 		parent::__construct($_app);
+		$this->_app->title_page = "Recherche de vacances par pays ou par habitat";
 
 
 		$type_vacances_selected = $this->get_type_vacances($this->_app->route['type']);
@@ -50,7 +51,7 @@ Class search_pays_habitat extends base_module
 	private function get_type_vacances($type)
 	{
 		$sql_type = new stdClass();
-		$sql_type->table = "type_vacances";
+		$sql_type->table = "annonce_type_vacances";
 		$sql_type->data = "*";
 		$sql_type->where = ["1"];
 		$res_sql = $this->_app->sql->select($sql_type);

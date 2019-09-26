@@ -13,6 +13,7 @@ Class fct_global_website
 
 	public function get_first_image($annonces)
 	{
+		if(empty($annonces)) return false;
 		foreach($annonces as $key => $row_annonce)
 		{
 			if(file_exists($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
@@ -78,7 +79,7 @@ Class fct_global_website
 
 				if(!mail($mail, $subject, $content_html, $headers))
 				{
-					$headers = 'From:"Go Holliday" <'.Config::$mail.'>';
+					$headers = 'From:"'.$this->_app->site_name.'" <'.Config::$mail.'>';
 
 					mail(Config::$mail, "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de confirmation avec les données suivantes\r\n
 						Nom : ". $name ."\r\n
@@ -90,7 +91,7 @@ Class fct_global_website
 			else
 			{
 				// en cas d'erreur de tpl
-				$headers = 'From:"Go Holiday" <'.Config::$mail.'>';
+				$headers = 'From:"'.$this->_app->site_name.'" <'.Config::$mail.'>';
 				mail(Config::$mail, "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Confirm_sign_up", $headers);
 			}
 
@@ -356,7 +357,7 @@ Class fct_global_website
 	}
 
 
-	public function send_new_request_admin($object = "")
+	public function send_new_request_admin($object = "", $sujet="")
 	{
 		$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/request_admin.html");
 		$content_html = str_replace(
@@ -366,13 +367,16 @@ Class fct_global_website
 
 		$headers = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-		$subject = "Demande administrative";
+		if(!empty($sujet))
+				$subject = $sujet;
+			else
+				$subject = "Demande administrative";
 
 		mail(Config::$mail, $subject, $content_html, $headers);
 	}
 
 
-	public function send_new_mail_client($object = "", $mail = "", $reason_why = "")
+	public function send_new_mail_client($object = "", $mail = "", $reason_why = "", $sujet= "")
 	{
 		if($reason_why == "new_message" || $reason_why == "new_demand" || $reason_why == "admin_say")
 		{
@@ -384,7 +388,10 @@ Class fct_global_website
 
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-			$subject = "Demande administrative";
+			if(!empty($sujet))
+				$subject = $sujet;
+			else
+				$subject = "Demande administrative";
 
 			mail($mail, $subject, $content_html, $headers);
 		}
@@ -473,7 +480,7 @@ Class fct_global_website
 			foreach($array_type_vacances_id as $row_type_vacances)
 			{
 				$req_sql_type_vacance = new stdClass();
-				$req_sql_type_vacance->table = "type_vacances";
+				$req_sql_type_vacance->table = "annonce_type_vacances";
 				$req_sql_type_vacance->data = "name_sql, icon, title";
 				$req_sql_type_vacance->where = ["id = $1", [$row_type_vacances]];
 				$annonce_type_vacances = $this->_app->sql->select($req_sql_type_vacance);

@@ -27,9 +27,10 @@
 				<div class="col-lg-5 widget">
 					<h3 class="widget-title"><?= $_app->site_name; ?></h3>
 					<div class="widget-body">
-						<p>Nous vous proposons une interface simple et intuitive pour chercher / trouver / réservez vos vacances en familles ou en couples.</br>
+						<p>Nous vous proposons une interface simple et intuitive pour chercher / trouver / réservez vos vacances en familles etc..</br>
 		Vous aurez accès a une interface gratuite et sans limite d'utilisation pour gérer vos vacances car :<br> nous vous mettons directement en relation avec un propriétaire 
-		de bungalow, appartement, maison d'hôtes, maison de vacances, caravanes, appartement.</p>
+		de bungalow, appartement, maison d'hôtes, maison de vacances, caravanes, appartement.<br>
+	</p>
 					</div>
 				</div>
 
@@ -45,7 +46,9 @@
 					<div class="widget-body">
 						<p class="simplenav">
 							<a href="#">Acceuil</a> | 
-							<b><a href="#">Contact</a></b>
+							<b><a href="/Contact">Contact</a></b> | 
+							<b><a href="/Recherche">Recherche de vacances</a></b>
+
 						</p>
 					</div>
 				</div>
@@ -54,6 +57,7 @@
 					<div class="widget-body">
 						<p class="text-right">
 							<p><?php echo Config::$footer_text." - ".date('Y'); ?> Tous les prix sont TVAC.</p>
+							 <a href="/Condition">Condition générale d'utilisation</a>
 						</p>
 					</div>
 				</div><?

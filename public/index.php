@@ -16,7 +16,7 @@ ob_start();
 <!DOCTYPE html>
 	<html lang="Fr-be">
 		<head>
-			__MOD_top_head__
+			__MOD3_top_head__
 		</head>
 		<body class="home">
 			__MOD_header__

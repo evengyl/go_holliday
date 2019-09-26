@@ -22,7 +22,7 @@
                 </div>
             </div><?
         }?>
-        <a href="/Recherche/Toutes-les-annonces" class="btn btn-success" style="margin-top:15px;">
+        <a href="/Recherche/Toutes-les-annonces" class="btn btn-success" style="margin-top:15px; margin-bottom:15px;">
             Je veux voir toutes les annonce disponible sur <?= $_app->site_name?>
         </a>
     </div>

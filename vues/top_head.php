@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="/css/dropzone.css" type="text/css">
 <link rel="stylesheet" href="/css/lightbox.css" type="text/css">
-<link rel="stylesheet" href="/css/datepicker.css" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/bootstrap-theme.css" media="screen" >
 <link rel="stylesheet/less" type="text/css" href="/css/main.less" >
@@ -36,9 +35,9 @@
 
 <script src="/js/lightbox.js"></script>
 
-<script src="/js/datepicker.js"></script>
 
-<script src="/js/datepicker_fr_data.js"></script>
+<?
+if(isset($_app->title_page))
+	echo "<title>Go Holiday : ".$_app->title_page."</title>"
+?>
 
-
-<title>Go Holiday</title>

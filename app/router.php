@@ -26,6 +26,10 @@ Class router
 						$this->assign_mod('sign_up');
 						break;
 
+					case 'condition':	
+						$this->assign_mod('condition_general');
+						break;
+
 					case 'admin':
 						$this->assign_mod("admin");
 						break;

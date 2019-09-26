@@ -10,6 +10,7 @@ Class sign_up extends base_module
 	{		
 		parent::__construct($_app);
 		$this->_app->add_view("sign_up");
+		$this->_app->title_page = "Page d'inscription";
 
 
 		//on check le form avec la session du random id form pour creation de compte Client

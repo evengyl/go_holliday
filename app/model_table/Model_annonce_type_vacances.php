@@ -1,6 +1,6 @@
 <?
 
-class Model_type_vacances
+class Model_annonce_type_vacances
 {
 	public function __construct()
 	{

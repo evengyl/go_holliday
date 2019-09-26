@@ -7,6 +7,7 @@ Class search_result extends base_module
 	public function __construct(&$_app)
 	{	
 		parent::__construct($_app);
+		$this->_app->title_page = "Résultat de la recherche";
 
 		$pays = array();
 		$habitat = array();
@@ -44,7 +45,7 @@ Class search_result extends base_module
 			$all = true;
 
 
-		$this->annonces = $this->get_annonces($type_id, $pays, $habitat, $all);
+		$this->annonces = $this->get_list_annonces_search($type_id, $pays, $habitat, $all);
 
 		$this->annonces = $this->_app->get_first_image($this->annonces);
 
@@ -64,7 +65,7 @@ Class search_result extends base_module
 	private function get_infos_type($type)
 	{
 		$sql_type = new stdClass();
-		$sql_type->table = "type_vacances";
+		$sql_type->table = "annonce_type_vacances";
 		$sql_type->data = "id, type_vacances_name_human";
 		$sql_type->where = ["name_sql = $1", [strtolower($type)]];
 		$res_sql = $this->_app->sql->select($sql_type);
@@ -83,7 +84,7 @@ Class search_result extends base_module
 
 
 
-	private function get_annonces($type_id, $pays = array(), $habitat = array(), $all)
+	private function get_list_annonces_search($type_id, $pays = array(), $habitat = array(), $all)
 	{
 		$str_pays_id = "";
 		$str_habitat_id = "";
@@ -107,7 +108,6 @@ Class search_result extends base_module
 			$sql_annonce->where = [$where, ["1", "1", "1", $type_id, $pays, $habitat]];
 		else
 			$sql_annonce->where = ["admin_validate = $1 AND active = $2 AND on_off = $3", ['1','1','1']];
-
 
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 

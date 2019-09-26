@@ -1,7 +1,13 @@
-Conditions d'utilisation
-Le site Immoweb.be et l’application Immoweb (ci-après la plateforme Immoweb) sont gérés par la société anonyme Immoweb (membre du groupe Axel Springer Digital Classifieds), dont le siège social est établi en Belgique à 1190 Bruxelles Avenue Général Dumonceau 56/1. La société porte le numéro de TVA 429.223.614.
+<div class="secondary" id="head"></div>
+<div class="col-xs-12 text-center">
+    <h2 class="thin">Administration</h2>
+</div>
+<div class="col-xs-12 profil col-without-radius" style="padding:15px;">
 
-Le seul fait de votre utilisation du site Immoweb.be implique que vous acceptiez dans leur intégralité et de façon irrévocable, les Conditions d’Utilisation reprises ci-après.
+Conditions d'utilisation
+Le site Go Holiday sont gérés par des privés, Baudoux Loic et Sarah debève, dont le siège social est établi en Belgique.<br>
+
+Le seul fait de votre utilisation du site goholiday.be implique que vous acceptiez dans leur intégralité et de façon irrévocable, les Conditions d’Utilisation reprises ci-après.<br>
 
 Immoweb S.A. se réserve le droit de modifier à tout moment, et sans préavis, les présentes conditions. Nous vous recommandons dès lors de les consulter régulièrement. 
 
@@ -104,3 +110,7 @@ Dispositions diverses, droit applicable et juridiction
 La nullité, la caducité ou le caractère non exécutoire de tout ou partie d'une des dispositions précédentes n'entraînera pas la nullité de l'ensemble des présentes Conditions d'utilisation. La disposition en question sera réputée non écrite et l'utilisateur accepte que la S.A. Immoweb substitue cette disposition par une autre qui remplira, dans la mesure du possible, la même fonction.
 
 Pour tout litige éventuel qui résulterait de l'usage du site Immoweb.be et/ou de l’application Immoweb, le droit belge sera applicable et seuls les tribunaux de Bruxelles seront compétents. 
+
+		
+</div>
+

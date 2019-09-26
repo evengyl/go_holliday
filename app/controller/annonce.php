@@ -13,11 +13,13 @@ Class annonce extends base_module
 	{	
 		parent::__construct($_app);
 
+
 		if($this->id_annonce = $this->_app->verif_if_announce_exist($_GET['id_annonce']))
 		{
 
 			$array_img_annonce = $this->get_img_files();
 			$this->annonce = $this->_app->get_announce_user($this->id_annonce);
+			$this->_app->title_page = $this->annonce->title.", ".$this->annonce->sub_title;
 
 			$this->date_work();
 			$this->get_list_date();

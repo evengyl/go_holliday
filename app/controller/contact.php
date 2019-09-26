@@ -9,6 +9,7 @@ Class contact extends base_module
 	{		
 		parent::__construct($_app);
 		$this->_app->add_view("contact_us");
+		$this->_app->title_page = "Page de contact";
 
 
 		if(isset($_SESSION['rand_id_form_contact_us']) && isset($_POST['rand_id_form_contact_us']))

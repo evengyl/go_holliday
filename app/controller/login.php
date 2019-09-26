@@ -9,6 +9,7 @@ Class login extends base_module
 	{
 		parent::__construct($_app);
 		$this->_app->add_view("login");
+		$this->_app->title_page = "Page de connexion";
 
 
 
@@ -203,9 +204,9 @@ Class login extends base_module
 					if(!$content_html = file_get_contents($this->_app->base_dir."/vues/mail_tpl/lost_password.html"))
 					{
 						// en cas d'erreur de tpl
-						$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
+						$headers = 'From:"'.$this->_app->site_name.'" <'.Config::$mail.'>';
 
-						mail("info.go.holliday@gmail.com", "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Lost_password", $headers);
+						mail(Config::$mail, "Erreur de TPL", "Une erreur est survenue avec la lecture du template de mail Lost_password", $headers);
 					}
 					else
 					{
@@ -228,9 +229,9 @@ Class login extends base_module
 
 						if(mail($mail, $subject, $content_html, $headers))
 						{
-							$headers = 'From:"Go Holliday" <info.go.holliday@gmail.com>';
+							$headers = 'From:"'.$this->_app->site_name.'" <'.Config::$mail.'>';
 
-							mail("info.go.holliday@gmail.com", "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de recupération de mot de passe avec les données suivantes\r\n
+							mail(Config::$mail, "Erreur de MAIL", "Une erreur est survenue avec l'envoi du mail de recupération de mot de passe avec les données suivantes\r\n
 								Nom : ". $name ."\r\n
 								Prénom : ". $last_name ."\r\n
 								ID unique d'enregistrement : ". $id .""

@@ -34,7 +34,7 @@
 <script>
     function reload_page()
     {
-       // document.location.reload(true);
+       document.location.reload(true);
     }
 
     $(document).ready(function()
@@ -73,21 +73,5 @@
 	            }
 	        });
 	    });
-
-		
-		$("button[data-action='place_to_fav']").click(function(){
-			var button_clicked = $(this);
-			$.ajax({
-	            type : 'POST',
-	            url  : '/ajax/controller/add_del_announce_favorite.php',
-	            dataType : "HTML",
-	            data : {"app_fct" : "add_to_favorite", "id" : button_clicked.attr("data-id")},
-	            success : function(data_return)
-	            {
-	            	button_clicked.attr("disabled", true);
-	            },
-	        });
-		});
-		
 	});
 </script>

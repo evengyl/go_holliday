@@ -23,10 +23,7 @@
 									<td><?= $announce_not_validate_by_admin->id_user; ?></td>
 									<td><?= $announce_not_validate_by_admin->title; ?></td>
 									<td><?= $announce_not_validate_by_admin->sub_title; ?></td>
-									<td>
-										<a class="btn btn-info btn-sm" href="/Annonces/<?= $announce_not_validate_by_admin->id; ?>">Voir</a>
-										<a onclick="return confirm('Etes-vous sur de vouloir valider cette annonce ?')" class="btn btn-success btn-sm" href="/admin/validate/<?= $announce_not_validate_by_admin->id; ?>">Valider</a>
-									</td>
+									<td><a class="btn btn-info btn-sm" href="/Annonces/<?= $announce_not_validate_by_admin->id; ?>">Voir</a></td>
 								</tr><?
 							}
 						}?>

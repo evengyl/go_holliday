@@ -1,3 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/fr.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/lightpick.css">
+<script src="/js/lightpick.js"></script>
+
+
 <div style="margin-top:15px; background:url('/images/autres/back_part_date_create_announce.png') no-repeat center;" class="col-xs-12 panel panel-default">
 	<div class="panel-heading" role="tab" id="headingOne" style="margin-top:15px;">
 		<h4>Ajotuer une période de location pour cette annonce</h4>
@@ -7,55 +14,64 @@
 	<!-- Partie date des annonce MODAL-->
 	<div class="panel-body">
 		<div class="text-center col-xs-12"><hr>
-
-		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Début de saison : <?=(isset($annonce->start_saison))?$annonce->start_saison:'';?></div>
-			    <div class="input-group">
-					<input 
-						style="cursor:pointer;" 
-						class="form-control datepicker-here" 
-						id="start_saison_" 
-						data-position="bottom right" 
-						data-inline="true"
-						type="hidden" 
-						name="start_saison" 
-						value="<?=(isset($annonce->start_saison))?$annonce->start_saison:'';?>"
-						data-language='fr'>
-			    </div>
+			<div class="form-group has-feedback">
+				<div class="col-xs-6">
+					<div class="input-group">
+						<div id="at" class="input-group-addon">Du : <?=(isset($annonce->date_start_saison))?$annonce->date_start_saison:'';?></div>
+						<input value="<?=(isset($annonce->date_start_saison))?$annonce->date_start_saison:'';?>" name="start_saison" required class="form-control" type="text" id="start_datepicker" placeholder="Date de début de saison" />
+					</div>
+				</div>
 			</div>
 
-		    <div class="form-group has-success col-lg-6">
-		    	<div class="alert alert-info" role="alert">Date de Fin de saison : <?=(isset($annonce->end_saison))?$annonce->end_saison:'';?></div>
-			    <div class="input-group">
-					<input 
-						style="cursor:pointer;" 
-						class="form-control datepicker-here" 
-						id="end_saison_" 
-						data-position="bottom right"
-						data-inline="true"
-						type="hidden" 
-						name="end_saison" 
-						value="<?=(isset($annonce->end_saison))?$annonce->end_saison:'';?>"
-						data-language='fr'>
-			    </div>
+			<div class="form-group has-feedback">
+				<div class="col-xs-6">
+					<div class="input-group">
+						<div id="to" class="input-group-addon">Au : <?=(isset($annonce->date_end_saison))?$annonce->date_end_saison:'';?></div>
+						<input value="<?=(isset($annonce->date_end_saison))?$annonce->date_end_saison:'';?>" required name="end_saison" class="form-control" type="text" id="end_datepicker" placeholder="Date de fin de saison"/>
+					</div>
+				</div>
 			</div>
-
 	    </div>
 	</div>
 </div>
 
-
 <script>
 $(document).ready(function()
 {
-	// Initialization
-	$('#start_saison_ #end_saison_').datepicker(
-	{
-    	todayButton: new Date()
-	})
+    var picker_start = new Lightpick(
+	{ 
+		field: document.getElementById('start_datepicker'),
+		singleDate: true,
+		minDays: 2,
+		autoclose : true,
+		numberOfMonths:3,
+		numberOfColumns:6,
+		colPerMonth:4,
+		lang: 'fr',
+		onSelect: function(start){
+	        var str = 'Du : ';
+	        str += start ? start.format('Do MMMM YYYY') + ' ' : '';
+			$('#at').html(str);
+	    }
+	});
 
-	// Access instance of plugin
-	$('#start_saison_ #end_saison_').data('datepicker');
 
+	var picker_end = new Lightpick(
+	{ 
+		field: document.getElementById('end_datepicker'),
+		singleDate: true,
+		minDays: 2,
+		autoclose : true,
+		numberOfMonths:3,
+		numberOfColumns:6,
+		colPerMonth:4,
+		lang: 'fr',
+		onSelect: function(end){
+	        var str = 'Au : ';
+	        str += end ? end.format('Do MMMM YYYY') : '...';
+	        $('#to').html(str);
+	    }
+	});
 });
+
 </script>
