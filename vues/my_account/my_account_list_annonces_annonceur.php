@@ -1,8 +1,6 @@
 <h4 class="title">Listes de mes annonces</h4><hr>
 <p class="text-muted title"><small>Attention !, une annonce créée mais non validée de votre pars ne vous permettra pas d'en créer une nouvelles, ni de l'activée ni que nous puissions l'autorisée</small></p><hr>
-<h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4><?
-
- // require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");?>
+<h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4>
 
 <ul class="list-unstyled list_annonces_max"><?
     if(!empty($annonces))
@@ -95,16 +93,27 @@
                                 </span>';
                         }
                         
-                        else if($row_annonce->admin_validate && $row_annonce->user_validate)
+                        else if($row_annonce->admin_validate && $row_annonce->user_validate && $row_annonce->active == 0)
                         {?>
                             <btn 
                                 data-toggle="modal" 
-                                data-current-status="<?=($row_annonce->active)?'activate':'desactivate'; ?>" 
                                 data-id="<?= $row_annonce->id; ?>" 
                                 data-target="#set_active_<?= $row_annonce->id; ?>" 
                                 class="opt_annonce btn btn-success"
                             >
-                                <small><span><?=(!$row_annonce->active)?'<i class="fas fa-euro-sign"></i>&nbsp;Mettre en ligne':'<i class="fas fa-times"></i>&nbsp;Retirer la mise en ligne'; ?></span></small>
+                                <small><span><i class="fas fa-euro-sign"></i>&nbsp;Mettre en ligne</span></small>
+                            </btn><?
+                        }
+
+                        else if($row_annonce->active == 1)
+                        {?>
+                            <btn 
+                                data-toggle="modal" 
+                                data-id="<?= $row_annonce->id; ?>" 
+                                data-target="#set_desactive_<?= $row_annonce->id; ?>" 
+                                class="opt_annonce btn btn-danger"
+                            >
+                                <small><span><i class="fas fa-times"></i>&nbsp;Retirer la mise en ligne</span></small>
                             </btn><?
                         }
 
@@ -126,8 +135,9 @@
                 </div>
             </li>
 
-            <!-- Modal Desactivate annonce -->
+            <!-- Modal activate annonce -->
             <? require($_app->base_dir. "/vues/my_account/my_account_modal_active_annonce.php"); ?>
+            <? require($_app->base_dir. "/vues/my_account/my_account_modal_desactive_annonce.php"); ?>
 
 
             <!-- Modal List avis-->
@@ -140,7 +150,6 @@
 
     }
 
-   // require($_app->base_dir. "/vues/my_account/my_account_pagination_annonces_profil.php");
     require($_app->base_dir. "/vues/my_account/my_account_legend_annonce.php");?>
 
 </ul>
@@ -150,6 +159,58 @@
 <script>
 $(document).ready(function()
 {
+
+    $("button[data-action='activate_annonce']").click(function(e){
+        $("div.loading_ajax").show();
+
+        e.stopPropagation()
+
+        var btn_clicked = $(this);
+        var id_annonce = btn_clicked.attr("data-id");
+
+
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/activate_desactivate_annonce.php',
+            dataType : "HTML",
+            data : {"action" : "activate", "id_annonce": id_annonce},
+            success : function(){
+                reload_page()
+            },
+            complete : function(){
+                $("div.loading_ajax").hide();
+            }
+        });
+    });
+
+
+    $("button[data-action='desactivate_annonce']").click(function(e){
+        confirm("Voulez-vous vraiment désactiver cette annonce ?");
+
+        $("div.loading_ajax").show();
+
+        e.stopPropagation()
+
+        var btn_clicked = $(this);
+        var id_annonce = btn_clicked.attr("data-id");
+
+        
+
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/activate_desactivate_annonce.php',
+            dataType : "HTML",
+            data : {"action" : "desactivate", "id_annonce": id_annonce},
+            success : function(){
+                reload_page()
+            },
+            complete : function(){
+                $("div.loading_ajax").hide();
+            }
+        });
+    });
+
+
 
     $(".modal btn[data-action='validate_annonce']").click(function(){
         $("div.loading_ajax").addClass('loaded');
@@ -165,7 +226,6 @@ $(document).ready(function()
             data : {"action" : "validate_annonce", "id_annonce" : id_annonce, "id_user" : id_user},
             success : function(data_return)
             {
-                console.log(data_return);
                 $('#validate_'+id_annonce).modal('hide');
                 
                 $("h4[data-fct='return_fct_annonce']").html("Vous avez bien validé votre annonce, Merci").show(500).delay(3000).hide(500);
