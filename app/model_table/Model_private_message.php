@@ -5,7 +5,7 @@ class Model_private_message
 	public function __construct()
 	{
 		$this->id = new NormalType("id");
-		$this->id_utilisateurs = new NormalType("id_utilisateurs");
+		$this->id_utilisateurs  = new NormalType("id_utilisateurs");
 		$this->id_user_sender = new NormalType("id_user_sender");
 		$this->id_group = new NormalType("id_group");
 		$this->id_annonce = new NormalType("id_annonce");

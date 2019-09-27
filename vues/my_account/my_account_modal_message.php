@@ -1,4 +1,4 @@
-<div class="modal fade" id="<?= $id_uniq; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="<?= $id_group; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,10 +10,19 @@
 
                     $row_messages = array_reverse($row_messages);
                     $id_grp = $row_messages[0]->id_group;
+
+                    $list_user = explode(",", $row_messages[0]->id_user_sender);
                     
+                    $list_user = array_flip($list_user);
+                    unset($list_user[$_app->user->id_utilisateurs]);
+                    $list_user = array_flip($list_user);
+                    $list_user = array_values($list_user);
+                    $id_user_receiver = $list_user[0];
+
                     foreach($row_messages as $row_message)
                     {
-                        if($row_message->id_user_sender == $_app->user->id_utilisateurs)
+                        $split_user = explode(",", $row_message->id_user_sender);
+                        if($split_user[0] == $_app->user->id_utilisateurs)
                         {?>
                             
                             <div class="col-xs-8 col-xs-offset-4" style="padding:10px; background-color:#5cb85c30; margin-bottom:15px;">
@@ -47,7 +56,8 @@
                         data-id-grp="<?= $id_grp; ?>"
                         data-id-annonce="<?= $row_message->id_annonce; ?>"
                         data-id-sender="<?= $_app->user->id_utilisateurs; ?>" 
-                        data-action="send_message_<?= $id_uniq; ?>"
+                        data-id-receiver="<?= $id_user_receiver; ?>" 
+                        data-action="send_message_<?= $id_group; ?>"
                         style="margin-top:15px;" class="btn btn-info" type="button">
                         Envoyer
                     </button>
@@ -61,20 +71,22 @@
 <script>
 $(document).ready(function()
 {
-    $(".modal button[data-action='send_message_<?= $id_uniq; ?>']").click(function(e)
+    $(".modal button[data-action='send_message_<?= $id_group; ?>']").click(function(e)
     {
         e.stopPropagation()
 
         var id_annonce = $(this).data("id-annonce");
-        var id_sender = $(this).data("id-sender");
+        var id_user_sender = $(this).data("id-sender");
+        var id_user_receiver = $(this).data("id-receiver");
         var id_group = $(this).data("id-grp");
         var message = $(this).parent().find("textarea").val();
+
 
         $.ajax({
             type : 'POST',
             url  : '/ajax/controller/send_message.php',
             dataType : "HTML",
-            data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_sender, "id_group" : id_group, "message" : message},
+            data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_user_sender, "id_user_receiver" : id_user_receiver, "id_group" : id_group, "message" : message},
             success : function(data_return)
             {
                 console.log(data_return);
@@ -84,12 +96,12 @@ $(document).ready(function()
                 window.setTimeout(function()
                 {
 
-                    $('#<?= $id_uniq; ?>').modal('toggle');
+                    $('#<?= $id_group; ?>').modal('toggle');
                     setTimeout(reload_page,0);
 
                     window.setTimeout(function()
                     {
-                        $(".modal button[data-action='send_message_<?= $id_uniq; ?>']").parent().find("textarea").val("");
+                        $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().find("textarea").val("");
                     }, 200);
 
 
@@ -101,7 +113,7 @@ $(document).ready(function()
 
     function reload_page()
     {
-        document.location.reload(true);
+        //document.location.reload(true);
     }
 });
 

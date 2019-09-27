@@ -34,7 +34,7 @@
 <script>
     function reload_page()
     {
-       document.location.reload(true);
+       //document.location.reload(true);
     }
 
     $(document).ready(function()
@@ -43,14 +43,14 @@
 	    {
 	        e.stopPropagation()
 	        var id_annonce = $(this).data("id-annonce");
-	        var id_sender = $(this).data("id-sender");
+	        var id_user_sender = $(this).data("id-sender");
 	        var message = $(this).parent().find("textarea").val();
 
 	        $.ajax({
 	            type : 'POST',
 	            url  : '/ajax/controller/send_message.php',
 	            dataType : "HTML",
-	            data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_sender, "message" : message},
+	            data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_user_sender, "message" : message},
 	            success : function(data_return)
 	            {
 

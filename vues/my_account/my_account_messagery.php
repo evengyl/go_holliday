@@ -5,12 +5,13 @@
     {
         foreach($messages as $id_group => $row_messages)
         {
-            $id_uniq = uniqid("Message");
-            $row_last_message = $row_messages[0];?>
+            $row_last_message = $row_messages[0];
+            $split_user = explode(",", $row_last_message->id_user_sender);?>
+            
                 <li class="message" style="padding-top:15px;">
                     <div class="row" style="padding-left:15px; padding-right:15px; "><?
                         if($row_last_message->answer == 0){
-                            if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
+                            if($split_user[0] == $_app->user->id_utilisateurs)
                                 $tmp = '#5cb85c30';
                             else
                                 $tmp = '#f0ad4e30';
@@ -19,10 +20,6 @@
                             $tmp = '#5cb85c30';?>
 
                         <div class='col-xs-12' style="background-color: <?= $tmp?>; padding:15px;">
-
-                            <div class="col-xs-2">
-                                <span class="text-muted"><b>De : <?= $row_last_message->name_sender ?></b></span><br>
-                            </div>
 
                             <div class="col-xs-5">
                                 <div class="col-xs-12">
@@ -40,19 +37,10 @@
                                 </button>
                             </div>
                             <hr>
-                            <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:15px;"><?
-                                if($row_last_message->vu == 0){
-                                    if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
-                                        $tmp = 'Lu';
-                                    else
-                                        $tmp = 'Non lu';
-                                }
-                                else
-                                    $tmp = 'Lu';
-                                ?>
-                                <span class="text-muted"><small><b>Dernier Message : <?= $tmp ?></b></small></span><?
+                            <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:15px;">
+                                <span class="text-muted"><small><b>Dernier Message : </b></small></span><?
                                 if($row_last_message->answer == 0){
-                                    if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
+                                    if($split_user[0] == $_app->user->id_utilisateurs)
                                         $tmp = 'Répondu';
                                     else
                                         $tmp = 'Non répondu';
@@ -60,13 +48,13 @@
                                 else
                                     $tmp = 'Répondu';
                                 ?>
-                                <span class="text-muted"><small><b>, <?= $tmp; ?></b></small></span><br>
+                                <span class="text-muted"><small><b><?= $tmp; ?></b></small></span><br>
                                 <hr>
                                 <blockquote style="font-size:12px;">
                                     <p><?= $row_last_message->message ?></p>
                                     <footer><b><?
                                         if($row_last_message->answer == 0){
-                                            if($row_last_message->id_user_sender == $_app->user->id_utilisateurs)
+                                            if($split_user[0] == $_app->user->id_utilisateurs)
                                                 $tmp = 'De : Moi';
                                             else
                                                 $tmp = 'De : '.$row_last_message->name_sender;
@@ -77,7 +65,7 @@
                                         echo $tmp; ?>
                                     </b></footer>
                                 </blockquote>
-                                <button data-toggle="modal" data-target="#<?= $id_uniq; ?>" class="btn btn-warning btn-sm" style="padding: 5px 20px;">Ouvrir</button>
+                                <button data-toggle="modal" data-target="#<?= $id_group; ?>" class="btn btn-warning btn-sm" style="padding: 5px 20px;">Ouvrir</button>
                             </div>
                         </div>
                     </div>

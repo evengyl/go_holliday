@@ -14,28 +14,19 @@ if(isset($_POST['action']))
 
 		if(!empty($res_sql_get_user_id))
 		{
+
+			affiche($_POST);
 			$message = trim($_POST['message']);
 			$message = htmlspecialchars($message);
-			$id_group;
-			$id_utilisateurs = $res_sql_get_user_id[0]->id_utilisateurs;
 
-			//d'abbord on vérifie qu'iln'y a pas une conversation en cours entre cette annonce et cette user
-			$req_sql_verif = new stdClass();
-			$req_sql_verif->table = "private_message";
-			$req_sql_verif->data = "id_group";
-			$req_sql_verif->where = ["id_annonce = $1 AND id_user_sender = $2", [$_POST['id_annonce'], $_POST['id_user_sender']]];
-			$req_sql_verif->limit = "1";
+			$id_annonceur = $res_sql_get_user_id[0]->id_utilisateurs;
+			// id de la personne possédant l'annonce
 
-			$res_sql_verif = $_app->sql->select($req_sql_verif);
-			
-			if(!empty($res_sql_verif))
-			{
-				// il y a déjà une conversation en cours
-				$id_group = $res_sql_verif[0]->id_group;
-			}
-			else
-				$id_group = str_replace(".", "", uniqid("GroupMessagery", true));
+			$id_sender = $_POST["id_user_sender"];
+			$id_receiver = $_POST["id_user_receiver"];
+			$id_group = $_POST["id_group"];
 
+			// il y a déjà une conversation en cours
 
 			$object_to_sql = new stdClass();
 			$object_to_sql->table = "private_message";
@@ -44,11 +35,12 @@ if(isset($_POST['action']))
 			$object_to_sql->ctx->id_annonce = $_POST['id_annonce'];
 			$object_to_sql->ctx->vu = '0';
 			$object_to_sql->ctx->answer = '0';
-			$object_to_sql->ctx->id_utilisateurs = $id_utilisateurs;
-			$object_to_sql->ctx->id_user_sender = $_POST['id_user_sender'];
+			$object_to_sql->ctx->id_utilisateurs = $id_annonceur;
+			$object_to_sql->ctx->id_user_sender = $id_sender.",".$id_receiver;
+			$object_to_sql->ctx->id_group = $id_group;
 			$object_to_sql->ctx->send_date = date("d/m/Y");
 			$object_to_sql->ctx->time = date("G\hi");
-			$object_to_sql->ctx->id_group = $id_group;
+		
 
 			$_app->sql->insert_into($object_to_sql);
 		}
