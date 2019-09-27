@@ -96,22 +96,32 @@ Class my_account_lateral_left_profil extends base_module
 
 		$sql_message = new stdClass();
 		$sql_message->table = 'private_message';
-		$sql_message->data = "vu";
+		$sql_message->data = "vu, id_group, id_user_sender, id";
+		$sql_message->order = ["id DESC"];
 		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
 
 		if(!empty($res_sql_message))
 		{
+			
+			$tmp = array();
 			foreach($res_sql_message as $row_message)
 			{
-				$this->_app->user->total_private_message++;
+				if(!in_array($row_message->id_group, $tmp))
+				{
 
-				if($row_message->vu)
-					$this->_app->user->private_message_not_view++;
+					$tmp[] = $row_message->id_group;
+					$this->_app->user->total_private_message++;
+					if($row_message->vu == 0)
+					{
+						$id_sender = explode(",", $row_message->id_user_sender);
+						$id_sender = $id_sender[0];
+
+						if($this->_app->user->id_utilisateurs != $id_sender)
+							$this->_app->user->private_message_not_view++;
+					}
+				}
 			}
 		}
 	}
-
-	
-
 }

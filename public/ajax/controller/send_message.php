@@ -15,15 +15,38 @@ if(isset($_POST['action']))
 		if(!empty($res_sql_get_user_id))
 		{
 
+			$id_sender = $_POST["id_user_sender"];
+			$id_receiver = $_POST["id_user_receiver"];
+			$id_group = $_POST["id_group"];
+
+			//il faut set le dernier message du grp a 1 pour reponse
+			$req_sql_set_answer = new stdClass();
+			$req_sql_set_answer->table = "private_message";
+			$req_sql_set_answer->data = "id";
+			$req_sql_set_answer->where = ["id_group = $1", [$id_group]];
+			$req_sql_set_answer->order = ["id DESC"];
+			$req_sql_set_answer->limit = "1";
+			$res_sql_set_answer = $_app->sql->select($req_sql_set_answer);
+
+			if(!empty($res_sql_set_answer[0]->id))
+			{
+				$req_sql = new stdClass;
+				$req_sql->table = "private_message";
+				$req_sql->ctx = new stdClass;
+				$req_sql->ctx->answer = 1;
+				$req_sql->where = "id = '".$res_sql_set_answer[0]->id."'";
+				$_app->sql->update($req_sql);
+			}
+			
+
+
 			$message = trim($_POST['message']);
 			$message = htmlspecialchars($message);
 
 			$id_annonceur = $res_sql_get_user_id[0]->id_utilisateurs;
 			// id de la personne possédant l'annonce
 
-			$id_sender = $_POST["id_user_sender"];
-			$id_receiver = $_POST["id_user_receiver"];
-			$id_group = $_POST["id_group"];
+			
 
 
 			$object_to_sql = new stdClass();

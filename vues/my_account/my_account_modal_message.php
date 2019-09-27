@@ -50,8 +50,8 @@
                         }
                     }?>
                 </div>
-                <div class="modal-footer">
-                    <textarea rows="3" name="message" class="form-control"></textarea>
+                <div class="modal-footer"><form>
+                    <textarea rows="3" name="message" required class="form-control"></textarea>
                     <button 
                         data-id-grp="<?= $id_grp; ?>"
                         data-id-annonce="<?= $row_message->id_annonce; ?>"
@@ -60,7 +60,7 @@
                         data-action="send_message_<?= $id_group; ?>"
                         style="margin-top:15px;" class="btn btn-info" type="button">
                         Envoyer
-                    </button>
+                    </button></form>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@ $(document).ready(function()
 
     function reload_page()
     {
-        document.location.reload(true);
+       document.location.reload(true);
     }
 });
 

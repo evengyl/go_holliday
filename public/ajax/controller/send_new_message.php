@@ -40,7 +40,7 @@ if(isset($_POST['action']))
 			else
 			{
 				// il n'y a pas de convers
-				$id_group = uniqid("GroupMessagery", true);
+				$id_group = str_replace('.', '', uniqid("GroupMessagery", true));
 			}
 
 			$object_to_sql = new stdClass();

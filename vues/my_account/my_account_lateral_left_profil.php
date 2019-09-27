@@ -46,8 +46,8 @@
         }?>
         <h4>
         	<?= $_app->user->total_private_message; ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-comment"></span><br>
-            <small>Message(s) au total</small><br>
-            <small>Dont <?= ($_app->user->private_message_not_view != 0)?'<b style="color:red;">'.$_app->user->private_message_not_view.'</b>':''; ?> Non lu(s)</small>
+            <small>Conversation(s) au total</small><br><br>
+            <small>Dont <?= ($_app->user->private_message_not_view != 0)?'<b style="color:red;">'.$_app->user->private_message_not_view.'</b>':'0'; ?> Non lue(s)</small>
         </h4><hr>
     </div>
 

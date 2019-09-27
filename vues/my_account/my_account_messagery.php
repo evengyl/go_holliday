@@ -10,7 +10,7 @@
             
                 <li class="message" style="padding-top:15px;">
                     <div class="row" style="padding-left:15px; padding-right:15px; "><?
-                        if($row_last_message->answer == 0){
+                        if($row_last_message->vu == 0){
                             if($split_user[0] == $_app->user->id_utilisateurs)
                                 $tmp = '#5cb85c30';
                             else
@@ -31,11 +31,16 @@
                             <div class="col-xs-3">
                                 <span class="text-muted"><small>Date d'envoi : <?= $row_last_message->send_date ?></small></span><br>
                             </div>
-                            <div class="col-xs-1 col-xs-offset-1">
-                                <button class="btn btn-danger" style="padding:5px 10px 5px 10px;" data-action="delete_convers" data-id-grp="<?= $row_last_message->id_group; ?>">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </div>
+                            <?
+                            if($_app->user->user_type == 1)
+                            {?>
+                                <div class="col-xs-1 col-xs-offset-1">
+                                    <button class="btn btn-danger" style="padding:5px 10px 5px 10px;" data-action="delete_convers" data-id-grp="<?= $row_last_message->id_group; ?>">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div><?
+                            }?>
+                            
                             <hr>
                             <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:15px;">
                                 <span class="text-muted"><small><b>Dernier Message : </b></small></span><?
@@ -65,7 +70,25 @@
                                         echo $tmp; ?>
                                     </b></footer>
                                 </blockquote>
-                                <button data-toggle="modal" data-target="#<?= $id_group; ?>" class="btn btn-warning btn-sm" style="padding: 5px 20px;">Ouvrir</button>
+                                <button data-toggle="modal" data-id_message="<?= $row_last_message->id; ?>" data-target="#<?= $id_group; ?>" class="btn btn-warning btn-sm" style="padding: 5px 20px;">
+                                    Ouvrir
+                                </button>
+                                <script>
+                                $(document).ready(function()
+                                {
+                                    $("button[data-target='#<?= $id_group; ?>']").click(function(e)
+                                    {
+                                        var id_message = $(this).data("id_message");
+
+                                        $.ajax({
+                                            type : 'POST',
+                                            url  : '/ajax/controller/set_view_message.php',
+                                            dataType : "HTML",
+                                            data : {"action" : "set_view_message", "id_message" : id_message},
+                                        });
+                                    });
+                                });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -106,7 +129,6 @@ $(document).ready(function()
             data : {"action" : "delete_group", "id_group" : id_group},
             success : function(data_return)
             {
-                console.log(data_return);
             },
             complete : function()
             {

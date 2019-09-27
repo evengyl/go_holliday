@@ -10,9 +10,7 @@ if(isset($_POST['action']))
 		$req_sql->ctx = new stdClass;
 		$req_sql->ctx->on_off = 0;
 		$req_sql->where = "id = '".(int)$_POST["id"]."'";
-		$res_sql = $_app->sql->update($req_sql, 1);
+		$_app->sql->update($req_sql);
 
-
-		$_app->sql->update($res_sql);
 	}
 }
