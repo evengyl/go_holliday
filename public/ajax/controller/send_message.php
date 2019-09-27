@@ -15,7 +15,6 @@ if(isset($_POST['action']))
 		if(!empty($res_sql_get_user_id))
 		{
 
-			affiche($_POST);
 			$message = trim($_POST['message']);
 			$message = htmlspecialchars($message);
 
@@ -26,7 +25,6 @@ if(isset($_POST['action']))
 			$id_receiver = $_POST["id_user_receiver"];
 			$id_group = $_POST["id_group"];
 
-			// il y a déjà une conversation en cours
 
 			$object_to_sql = new stdClass();
 			$object_to_sql->table = "private_message";

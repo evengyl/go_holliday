@@ -113,7 +113,7 @@ $(document).ready(function()
 
     function reload_page()
     {
-        //document.location.reload(true);
+        document.location.reload(true);
     }
 });
 

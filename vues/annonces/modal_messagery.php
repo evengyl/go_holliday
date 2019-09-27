@@ -32,10 +32,7 @@
 
 
 <script>
-    function reload_page()
-    {
-       //document.location.reload(true);
-    }
+    
 
     $(document).ready(function()
 	{
@@ -48,7 +45,7 @@
 
 	        $.ajax({
 	            type : 'POST',
-	            url  : '/ajax/controller/send_message.php',
+	            url  : '/ajax/controller/send_new_message.php',
 	            dataType : "HTML",
 	            data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_user_sender, "message" : message},
 	            success : function(data_return)
@@ -74,4 +71,10 @@
 	        });
 	    });
 	});
+
+
+    function reload_page()
+    {
+       //document.location.reload(true);
+    }
 </script>
