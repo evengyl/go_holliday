@@ -377,15 +377,17 @@ CREATE TABLE `private_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateurs` varchar(255) NOT NULL,
   `id_user_sender` varchar(255) NOT NULL,
-  `id_group` varchar(100) NOT NULL,
+  `id_group` varchar(36) NOT NULL,
   `id_annonce` int(11) NOT NULL,
-  `message` text NOT NULL,
+  `message` varchar(255) NOT NULL,
   `send_date` varchar(20) NOT NULL,
-  `time` varchar(10) NOT NULL,
+  `time` varchar(5) NOT NULL,
   `vu` tinyint(1) NOT NULL DEFAULT '0',
   `answer` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `id_utilisateurs` (`id_utilisateurs`),
+  KEY `id_group` (`id_group`)
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,7 +396,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (97,'4','5,4','GroupMessagery5d8e01aa2adba523088354',225,'Bonjour lol','27/09/2019','14h33',1,1),(102,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'test','27/09/2019','14h41',0,0);
+INSERT INTO `private_message` VALUES (104,'4','5,4','GroupMessagery5d8e01aa2adba523088354',225,'test','30/09/2019','8h20',1,1),(150,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'<a target=\"_blank\" href=\"/datas/annonceurs_documents/4/baudoux.pdf\">Fichier pour Sarah Debeve : baudoux.pdf</a>','30/09/2019','16h30',1,1),(151,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/Ergonomic workspaces 12-2016 GB.pdf\">Ergonomic workspaces 12-2016 GB.pdf</a>','30/09/2019','16h31',1,1),(152,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/DLB-80680-1.pdf\">DLB-80680-1.pdf</a>','30/09/2019','16h31',1,1),(153,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/Easy tube.pdf\">Easy tube.pdf</a>','30/09/2019','16h31',1,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +575,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,96,41,87,10,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -586,4 +588,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-27 15:01:29
+-- Dump completed on 2019-09-30 16:52:13
