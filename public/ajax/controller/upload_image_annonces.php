@@ -105,9 +105,8 @@ if($_app->can_do_user->create_annonce)
 function get_nb_files_uploaded($path_to_upload)
 {
 	$i = 0;
-	if(!file_exists($path_to_upload)){
+	if(!file_exists($path_to_upload))
 		mkdir($path_to_upload);
-	}
 
 	if($dossier = opendir($path_to_upload))
 	{
