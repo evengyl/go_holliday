@@ -16,15 +16,15 @@ Class fct_global_website
 		if(empty($annonces)) return false;
 		foreach($annonces as $key => $row_annonce)
 		{
-			if(file_exists($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
+			if(file_exists($this->_app->base_dir."/public/datas/annonces_images/".$row_annonce->id."/"))
 			{
-				if($dossier = opendir($this->_app->base_dir."/public/images/annonces/".$row_annonce->id."/"))
+				if($dossier = opendir($this->_app->base_dir."/public/datas/annonces_images/".$row_annonce->id."/"))
 				{
 					while(false !== ($fichier = readdir($dossier)))
 					{
 						if($fichier != '.' && $fichier != '..')
 						{
-							$annonces[$key]->img_principale = "/images/annonces/".$row_annonce->id."/".$fichier;
+							$annonces[$key]->img_principale = "/datas/annonces_images/".$row_annonce->id."/".$fichier;
 							break;
 						}
 					}

@@ -19,9 +19,9 @@
                         else
                             $tmp = '#5cb85c30';?>
 
-                        <div class='col-xs-12' style="background-color: <?= $tmp?>; padding:15px;">
+                        <div class='col-xs-12' style="background-color: <?= $tmp?>; padding:10px;">
 
-                            <div class="col-xs-5">
+                            <div class="col-xs-9 text-left">
                                 <div class="col-xs-12">
                                     <span class="text-muted">
                                         <small><b>Pour l'Annonce : <a href="<?= $row_last_message->url_annonce ?>"><?= $row_last_message->name_announce ?></a></b></small>
@@ -31,7 +31,7 @@
                             <div class="col-xs-3">
                                 <span class="text-muted"><small>Date d'envoi : <?= $row_last_message->send_date ?></small></span><br>
                             </div>
-                            <?
+                            <?/*
                             if($_app->user->user_type == 1)
                             {?>
                                 <div class="col-xs-1 col-xs-offset-1">
@@ -39,10 +39,8 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div><?
-                            }?>
-                            
-                            <hr>
-                            <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:15px;">
+                            }*/?>
+                            <div class='col-xs-12' style="text-align:left; background:white; padding:10px; margin-top:10px;">
                                 <span class="text-muted"><small><b>Dernier Message : </b></small></span><?
                                 if($row_last_message->answer == 0){
                                     if($split_user[0] == $_app->user->id_utilisateurs)
@@ -54,8 +52,8 @@
                                     $tmp = 'Répondu';
                                 ?>
                                 <span class="text-muted"><small><b><?= $tmp; ?></b></small></span><br>
-                                <hr>
-                                <blockquote style="font-size:12px;">
+                                <hr style="margin:10px 10px;">
+                                <blockquote style="margin:15px 0 15px; font-size:12px;">
                                     <p><?= $row_last_message->message ?></p>
                                     <footer><b><?
                                         if($row_last_message->answer == 0){

@@ -28,7 +28,7 @@
                             <div class="col-xs-8 col-xs-offset-4" style="padding:10px; background-color:#5cb85c30; margin-bottom:15px;">
                                 <p class='col-xs-10'>
                                     <?= $row_message->message; ?>
-                                    <small class="thin text-muted">à <?= $row_message->time; ?></small>
+                                    <small class="thin text-muted">Le <?= $row_message->send_date; ?> à <?= $row_message->time; ?></small>
                                 </p>
                                 <p class="col-xs-2">
                                     <i style="position:absolute; right:0px; color: #5bc0de;" class="fa-2x far fa-sun"></i>
@@ -44,14 +44,15 @@
                                 </p>
                                 <p class='col-xs-10'>
                                     <?= $row_message->message; ?>
-                                    <small class="thin text-muted">à <?= $row_message->time; ?></small>
+                                    <small class="thin text-muted">Le <?= $row_message->send_date; ?> à <?= $row_message->time; ?></small>
                                 </p>
                             </div><?
                         }
                     }?>
                 </div>
                 <div class="modal-footer"><form>
-                    <textarea rows="3" name="message" required class="form-control"></textarea>
+                    <textarea data-id-grp="<?= $id_grp; ?>" rows="3" name="message" maxlength="250" class="form-control"></textarea>
+                    <span class="max_char">250</span>&nbsp;caractères restant
                     <button 
                         data-id-grp="<?= $id_grp; ?>"
                         data-id-annonce="<?= $row_message->id_annonce; ?>"
@@ -71,6 +72,15 @@
 <script>
 $(document).ready(function()
 {
+    $(".modal textarea[data-id-grp='<?= $id_group; ?>']").keyup(function()
+    {
+        var length = $(this).val().length;
+        var max_char = 250;
+        length = max_char - length;
+        console.log($(this).parent().parent().find("span.max_char"));
+        $(this).parent().parent().find("span.max_char").html(length);
+    });
+
     $(".modal button[data-action='send_message_<?= $id_group; ?>']").click(function(e)
     {
         e.stopPropagation()

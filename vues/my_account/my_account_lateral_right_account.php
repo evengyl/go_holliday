@@ -26,12 +26,17 @@
         <h5 class="sub_title">Partie Annonces</h5>
 
         <div class="add_annonces">
-            <a class="btn btn-xs btn-warning" <?= (!$_app->can_do_user->create_annonce)?"disabled":""; ?> href="/Mon_compte/Creation-Annonce"><i class="far fa-edit"></i>&nbsp;Ajouter une annonce</a>
+            <a class="btn btn-xs btn-warning"  href="/Mon_compte/Creation-Annonce"><i class="far fa-edit"></i>&nbsp;Ajouter une annonce</a>
         </div>
 
         <div class="view_annonces">
-            <a class="btn btn-xs btn-success" <?= (!$_app->can_do_user->view_infos_annonce)?"disabled":""; ?> href="/Mon_compte"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Voir mes annonces</a>
+            <a class="btn btn-xs btn-success" href="/Mon_compte"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Voir mes annonces</a>
         </div>
+
+        <div class="view_documents">
+            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_documents"><span class="glyphicon glyphicon-file"></span>&nbsp;Voir mes documents</a>
+        </div>
+
         <hr><?
     }?>
 

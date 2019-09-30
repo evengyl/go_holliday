@@ -27,7 +27,7 @@
 	var id_annonces = $("span[data-id-annonce]").attr("data-id-annonce");
 
 	// Dropzone class:
-	var myDropzone = new Dropzone("#dropzone_img_upload",
+	var imgDropzone = new Dropzone("#dropzone_img_upload",
 	{
 		url: "/ajax/controller/upload_image_annonces.php?id_annonces="+id_annonces,
 		paramName: "file",

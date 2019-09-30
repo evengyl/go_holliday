@@ -6,7 +6,7 @@ if($_app->can_do_user->create_annonce)
 {
 
 	$nb_img_per_announce_max = 10;
-	$path_to_upload_img_annonce = $_app->base_dir."/public/images/annonces/";
+	$path_to_upload_img_annonce = $_app->base_dir."/public/datas/annonces_images/";
 
 	$name_image_rand = str_replace(".", "", uniqid("Image", true));
 
@@ -14,7 +14,7 @@ if($_app->can_do_user->create_annonce)
 	$id_annonce = $_GET["id_annonces"];
 
 	$path_to_upload = $path_to_upload_img_annonce.$id_annonce."/";
-	$path_to_preview = "/images/annonces/".$id_annonce."/";
+	$path_to_preview = "/datas/annonces_images/".$id_annonce."/";
 	$nb_files_uploaded = get_nb_files_uploaded($path_to_upload);
 	
 

@@ -22,6 +22,9 @@
 
                     if($_GET['second_page'] == "Mes_favoris")
                         echo "__MOD2_my_account_favorite__";
+
+                    if($_GET['second_page'] == "Mes_documents")
+                        echo "__MOD2_my_account_documents__";
                 }
 
                 else if($_app->can_do_user->view_infos_annonce)

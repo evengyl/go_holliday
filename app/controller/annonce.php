@@ -91,12 +91,12 @@ Class annonce extends base_module
 	{
 		$array_slide = array();
 
-		if($dossier = opendir($this->_app->base_dir.'/public/images/annonces/'.$this->id_annonce))
+		if($dossier = opendir($this->_app->base_dir.'/public/datas/annonces_images/'.$this->id_annonce))
 		{
 			while(false !== ($fichier = readdir($dossier)))
 			{
 				if($fichier != '.' && $fichier != '..')
-					$array_slide[] = "/images/annonces/".$this->id_annonce."/".$fichier;
+					$array_slide[] = "/datas/annonces_images/".$this->id_annonce."/".$fichier;
 			}
 		}
 		return $array_slide;
