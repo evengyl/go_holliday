@@ -41,7 +41,7 @@ if(isset($_POST['action']))
 
 
 			$message = trim($_POST['message']);
-			$message = htmlspecialchars($message);
+			$message = $message;
 
 			$id_annonceur = $res_sql_get_user_id[0]->id_utilisateurs;
 			// id de la personne possédant l'annonce

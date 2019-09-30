@@ -1,24 +1,25 @@
+<?
+$row_messages = array_reverse($row_messages);
+
+$id_grp = $row_messages[0]->id_group;
+$list_user = explode(",", $row_messages[0]->id_user_sender);
+
+$list_user = array_flip($list_user);
+unset($list_user[$_app->user->id_utilisateurs]);
+$list_user = array_flip($list_user);
+$list_user = array_values($list_user);
+$id_user_receiver = $list_user[0];
+?>                    
+
 <div class="modal fade" id="<?= $id_group; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xlg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Conversation avec <?= $row_last_message->name_sender; ?></h4>
+                <h4 class="modal-title">Conversation avec <?= $row_messages[0]->name_sender; ?></h4>
             </div>
             <div class="modal-body">
-                <div class="zone_message" style="height:600px; overflow: scroll; padding-left:50px; padding-right:50px;"><?
-
-                    $row_messages = array_reverse($row_messages);
-                    $id_grp = $row_messages[0]->id_group;
-
-                    $list_user = explode(",", $row_messages[0]->id_user_sender);
-                    
-                    $list_user = array_flip($list_user);
-                    unset($list_user[$_app->user->id_utilisateurs]);
-                    $list_user = array_flip($list_user);
-                    $list_user = array_values($list_user);
-                    $id_user_receiver = $list_user[0];
-
+                <div class="zone_message" style="height:350px; overflow: scroll; padding-left:50px; padding-right:50px;"><?
                     foreach($row_messages as $row_message)
                     {
                         $split_user = explode(",", $row_message->id_user_sender);
@@ -50,18 +51,32 @@
                         }
                     }?>
                 </div>
-                <div class="modal-footer"><form>
-                    <textarea data-id-grp="<?= $id_grp; ?>" rows="3" name="message" maxlength="250" class="form-control"></textarea>
-                    <span class="max_char">250</span>&nbsp;caractères restant
-                    <button 
-                        data-id-grp="<?= $id_grp; ?>"
-                        data-id-annonce="<?= $row_message->id_annonce; ?>"
-                        data-id-sender="<?= $_app->user->id_utilisateurs; ?>" 
-                        data-id-receiver="<?= $id_user_receiver; ?>" 
-                        data-action="send_message_<?= $id_group; ?>"
-                        style="margin-top:15px;" class="btn btn-info" type="button">
-                        Envoyer
-                    </button></form>
+                <div class="modal-footer">
+                    <form>
+                        <textarea data-id-grp="<?= $id_grp; ?>" rows="3" name="message" maxlength="250" class="form-control"></textarea>
+
+                        <small><span class="thin text-muted max_char">250</span>&nbsp;caractères restants</small>
+
+                        <button 
+                            data-id-grp="<?= $id_grp; ?>"
+                            data-id-annonce="<?= $row_message->id_annonce; ?>"
+                            data-id-sender="<?= $_app->user->id_utilisateurs; ?>" 
+                            data-id-receiver="<?= $id_user_receiver; ?>" 
+                            data-action="send_message_<?= $id_group; ?>"
+                            style="margin-top:15px;" class="btn-sm btn btn-info" type="button">
+                            Envoyer
+                        </button>
+                    </form>
+                    <hr style="margin:10px 10px;">
+                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#addFiles">
+                        Envoyer un fichier
+                    </button>
+                    <hr style="margin:10px 10px;">
+                    <div class="collapse" id="addFiles">
+                        <div class="well col-xs-12" id="list_file">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,9 +84,45 @@
 </div>
 
 
+
+
+
 <script>
 $(document).ready(function()
 {
+
+    $("button[data-target='#addFiles'").click(function(e){
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/send_files.php',
+            dataType : "Json",
+            data : {"action" : "get_list", "id_utilisateurs" : <?= $_app->user->id_utilisateurs ?>},
+            success : function(data_return)
+            {   
+               $.each(data_return, function(idx, obj){ 
+                    
+                    $("#list_file").append('<div class="col-xs-3 mini_doc"><div class="thumbnail">'+
+                                              '<img src="'+obj.extension_icon+'">'+
+                                              '<div class="caption">'+
+                                                '<a target="_blank" href="'+obj.link+'">'+obj.name+'</a>'+
+                                                '<p>'+
+                                                    '<button href="'+obj.link+'" class="btn btn-primary btn-sm button_send" data-id="'+idx+'" role="button">Envoyer</button>'+
+                                                '</p>'+
+                                              '</div></div></div>');
+
+                    $(".button_send[data-id='"+idx+"'").click(function(e)
+                    {
+                        e.stopPropagation();
+                        $(this).parent().parent().parent().parent().parent().parent().parent().parent().find("textarea").val('Fichier pour <?= $row_messages[0]->name_sender; ?> : <a target="_blank" href="'+obj.link+'">'+obj.name+'</a>');
+                         $(".modal button[data-action='send_message_<?= $id_group; ?>']").trigger("click");
+                    });
+                });
+
+            },
+        });
+    });
+
+
     $(".modal textarea[data-id-grp='<?= $id_group; ?>']").keyup(function()
     {
         var length = $(this).val().length;
@@ -81,9 +132,10 @@ $(document).ready(function()
         $(this).parent().parent().find("span.max_char").html(length);
     });
 
+
     $(".modal button[data-action='send_message_<?= $id_group; ?>']").click(function(e)
     {
-        e.stopPropagation()
+        e.stopPropagation();
 
         var id_annonce = $(this).data("id-annonce");
         var id_user_sender = $(this).data("id-sender");
@@ -99,23 +151,12 @@ $(document).ready(function()
             data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_user_sender, "id_user_receiver" : id_user_receiver, "id_group" : id_group, "message" : message},
             success : function(data_return)
             {
-                console.log(data_return);
+                $('#<?= $id_group; ?>').modal('toggle');
             },
             complete : function()
             {
-                window.setTimeout(function()
-                {
-
-                    $('#<?= $id_group; ?>').modal('toggle');
-                    setTimeout(reload_page,0);
-
-                    window.setTimeout(function()
-                    {
-                        $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().find("textarea").val("");
-                    }, 200);
-
-
-                }, 400);
+                reload_page();
+                $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().find("textarea").val("");
             }
         });
     });

@@ -37,6 +37,38 @@ Class fct_global_website
 	}
 
 
+	public function get_list_file()
+	{
+
+		if(!file_exists($this->_app->base_dir."/public/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs))
+			mkdir($this->_app->base_dir."/public/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs);
+
+
+		$array_list_files = array();
+
+		if($dossier = opendir($this->_app->base_dir."/public/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs))
+		{
+			$i = 0;
+			while(false !== ($fichier = readdir($dossier)))
+			{
+				if($fichier != '.' && $fichier != '..')
+				{
+					$array_list_files[$i]["link"] = "/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs."/".$fichier;
+					$array_list_files[$i]["time"] = date('d/m/Y', fileatime($this->_app->base_dir."/public/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs."/".$fichier));
+					$array_list_files[$i]["size"] = (filesize($this->_app->base_dir."/public/datas/annonceurs_documents/".$this->_app->user->id_utilisateurs."/".$fichier))/1024/1024;
+					$array_list_files[$i]["name"] = $fichier;
+					$array_list_files[$i]["extension"] = pathinfo($fichier, PATHINFO_EXTENSION);
+					$array_list_files[$i]["extension_icon"] = "/images/file_extension/".pathinfo($fichier, PATHINFO_EXTENSION).".png";
+					$i++;
+				}
+
+			}
+		}
+
+		return $array_list_files;
+	}
+
+
 	public function send_confirm_create_account_by_mail($mail_user)
 	{
 		$req_sql = new StdClass();

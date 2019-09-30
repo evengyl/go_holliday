@@ -7,7 +7,7 @@
     {
         foreach($documents as $row_document)
         {?>
-            <li class="annonce" style="padding-top:15px;">
+            <li class="annonce" style="padding:10px;">
                 <div class="row" style="padding-left:15px; padding-right:15px;">
                     <div class="col-xs-2">
                         <a title="Voir le fichier" style="margin-top:0px;" href="<?= $row_document['link'];?>" class="opt_annonce btn btn-success">
@@ -17,7 +17,7 @@
                             <i class="far fa-trash-alt"></i>
                         </button>
                     </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-8">
                         <div class="col-xs-6">
                             <a title="Voir le fichier" style="margin-top:0px;" href="<?= $row_document['link'];?>">
 	                            <b><?= $row_document['name'] ?></b>
@@ -25,7 +25,10 @@
                             <br>
                             <span class="text-muted"><small>Date d'ajout : <?= $row_document['time'] ?></small></span>
                         </div>
-                    </div>
+                        
+                </div>
+                <div class="col-xs-2">
+            		<img class="img-responsive" src="<?= $row_document['extension_icon']; ?>">
                 </div>
             </li><?
         }

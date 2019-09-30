@@ -35,7 +35,7 @@ Class my_account_messagery extends base_module
 				$tmp[$row_message->id_group][] = $row_message;
 
 			}
-			
+
 		}
 		$this->messages = $tmp;
 	}

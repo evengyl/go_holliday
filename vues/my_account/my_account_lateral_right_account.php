@@ -1,5 +1,5 @@
 <div class="option_account">
-    <h4 class="title">Option(s) de compte</h4><hr>
+    <h4 class="title">Options de compte</h4><hr>
 
     <h5 class="sub_title">Partie personnelle</h5><?
 
@@ -34,7 +34,7 @@
         </div>
 
         <div class="view_documents">
-            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_documents"><span class="glyphicon glyphicon-file"></span>&nbsp;Voir mes documents</a>
+            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_documents"><span class="glyphicon glyphicon-file"></span>&nbsp;Mes documents</a>
         </div>
 
         <hr><?
