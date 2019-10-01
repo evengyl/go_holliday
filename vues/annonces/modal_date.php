@@ -37,18 +37,20 @@
 							</p>
 							<p id="start_date_selected" style="display:none;" data-value="0"></p>
 							<p id="end_date_selected" style="display:none;" data-value="0"></p>
-							<form method="post">
+							<form method="post" action="#">
 								<div class="form-group">
 									<div class="input-group">
 										<div class="input-group-addon">Date d'arrivée</div>
-										<input required class="form-control" type="text" id="start_datepicker" placeholder="Date d'arrivée désirée" />
+										<input name="demand_start_date" required class="form-control" type="text" id="start_datepicker" placeholder="Date d'arrivée désirée" />
 									</div><br>
 
 									<div style="display:none;" class="input-group">
 										<div class="input-group-addon">Date de départ</div>
-										<input required  class="form-control" type="text" id="end_datepicker" placeholder="Date de départ désirée"/>
+										<input name="demand_end_date" required class="form-control" type="text" id="end_datepicker" placeholder="Date de départ désirée"/>
 									</div>
+									<input type="hidden" name="id_annonce" value="<?= $annonce->id; ?>">
 								</div>
+								<input type="hidden" name="rand_id_for_demand" value="<?= $rand_id_for_demand ?>">
 								<button type="submit" class="btn btn-success">Envoyer la demande</button> 
 							</form>
 						</div>	
@@ -96,7 +98,7 @@ $(document).ready(function()
 			$('#at').html(str);
 
 			//on set la sate select pour lused dans l'ajax pour faire le nb de nuit et le prix moyen
-			var date_start = start.format('YYYY-MM-Do');
+			var date_start = start.format('YYYY-MM-DD');
 			$("#start_date_selected").attr("data-value" , date_start);
 
 
@@ -128,7 +130,7 @@ $(document).ready(function()
 				        str += end ? end.format('Do MMMM YYYY') : '...';
 				        $('#to').html(str);
 
-				        var date_end = end.format('YYYY-MM-Do');
+				        var date_end = end.format('YYYY-MM-DD');
 						$("#end_date_selected").attr("data-value" , date_end);
 
 				        var date_start = $("#start_date_selected").attr("data-value");
@@ -202,7 +204,13 @@ function set_nb_night_and_price(date_start, date_end)
 	            data : {"action" : "calcul_moy_price", "date_start" : date_start, "date_end" : date_end, "id_annonce" : id_annonce},
 	            success : function(price)
 	            {
-	            	$("#how_many").html("Prix total moyen de "+price+" euros");
+	            	if(price == 0){
+	            		$("#how_many").html("Plus de quatres semaines, le propriétaire vous contactera pour la valeur en");
+	            	}
+	            	else{
+	            		$("#how_many").html("Prix total moyen de "+price+" euros");
+	            	}
+
 	            	$("#text_explain").show();
 	            },
 	        });

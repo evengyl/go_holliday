@@ -233,7 +233,7 @@ Class fct_global_website
 					{
 						if($total_night > 28)
 						{
-							$price_moyen = "Plus de quatres semaines, le propriétaire vous contactera pour la valeur en";	
+							$price_moyen = 0;	
 						}
 						else if($total_night == 28)
 						{
@@ -244,7 +244,7 @@ Class fct_global_website
 						{
 							//Trois grosses semaines
 							$tmp = $total_night - 21;
-							$price_moyen = ($moy_price_one_week * 3) + ($moy_price_one_night * $tmp);
+							$price_moyen = ceil(($moy_price_one_week * 3) + ($moy_price_one_night * $tmp));
 						}
 					}
 					else if($total_night == 21)
@@ -256,7 +256,7 @@ Class fct_global_website
 					{
 						//Deux grosses semaines
 						$tmp = $total_night - 14;
-						$price_moyen = ($moy_price_one_week * 2) + ($moy_price_one_night * $tmp);
+						$price_moyen = ceil(($moy_price_one_week * 2) + ($moy_price_one_night * $tmp));
 					}
 
 				}
@@ -269,7 +269,7 @@ Class fct_global_website
 				{
 					//Grosse semaine
 					$tmp = $total_night - 7;
-					$price_moyen = $moy_price_one_week + ($moy_price_one_night * $tmp);
+					$price_moyen = ceil($moy_price_one_week + ($moy_price_one_night * $tmp));
 					
 				}
 			}
@@ -287,7 +287,7 @@ Class fct_global_website
 			$price_moyen = $moy_price_one_night * $total_night;
 		}
 
-		return ceil($price_moyen);
+		return $price_moyen;
 
 	}
 

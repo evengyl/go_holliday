@@ -16,10 +16,10 @@ Class _app extends fct_global_website
 	public $user;
 	public $lang;
 	public $site_name = "Go Holidays";
-	public $month = ['01' => "Janvier", '02' => "Février", '03' => "Mars",
-					 '04' => "Avril", '05' => "Mai", '06' => "Juin",
-					 '07' => "Juillet", '08' => "Aout", '09' => "Septembre", 
-					 '10' =>"Octobre", '11' => "Novembre", '12' => "Décembre"];
+	public $month = ['00' => "Janvier", '01' => "Février", '02' => "Mars",
+					 '03' => "Avril", '04' => "Mai", '05' => "Juin",
+					 '06' => "Juillet", '07' => "Aout", '08' => "Septembre", 
+					 '09' =>"Octobre", '10' => "Novembre", '11' => "Décembre"];
 
 	public $time_start = 0;
 	public $time_stop = 0;

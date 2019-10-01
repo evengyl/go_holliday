@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="col-xs-4">
-                            <b><?= $row_annonce->title ?></b>
+                            <b><a href="/Annonces/<?= $row_annonce->id?>"><?= $row_annonce->title ?></a></b>
                             <br>
                             <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
                     </div>

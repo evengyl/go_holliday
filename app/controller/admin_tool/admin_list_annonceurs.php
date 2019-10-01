@@ -70,7 +70,7 @@ Class admin_list_annonceurs extends base_module
 
 				$sql_get_infos_annonceurs = new stdClass();
 				$sql_get_infos_annonceurs->table = 'annonces';
-				$sql_get_infos_annonceurs->data = "id, vues, active";
+				$sql_get_infos_annonceurs->data = "id, vues, active, title, admin_validate, user_validate, vues";
 				$sql_get_infos_annonceurs->where = ["id_utilisateurs = $1 AND on_off = $2", [$row_clients->id, 1]];
 				$list_annonces_by_annonceur = $this->_app->sql->select($sql_get_infos_annonceurs);
 

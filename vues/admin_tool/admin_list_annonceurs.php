@@ -1,11 +1,7 @@
  <div class="col-lg-12">
     <div class="col-lg-12 annonces_list text-center">
     	<hr>
-		<button disabled class="btn btn-info">Nb Annonceurs : <?= $total_annonceurs ?></button>
-		<button disabled class="btn btn-info">Nb Clients : <?= $total_users ?></button>
-		<button disabled class="btn btn-info">Total des Annonces : <?= $total_annonce ?></button>
-		<button disabled class="btn btn-success">Annonce Active : <?= $total_annonce_active ?></button>
-		<button disabled class="btn btn-warning">Annonce Inactive : <?= $total_annonce_inactive ?></button>
+    	<? require("admin_status_annonce.php"); ?>
 		<h3 class="thin">Liste des Annonceurs</h3>
 		<hr>
 
@@ -50,13 +46,36 @@
 										if(!empty($row_annonceurs->annonces))
 										{
 											foreach($row_annonceurs->annonces as $row_annonces)
-											{?>
-    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="padding:5px 20px;"  class="btn btn-info btn-xs">
-    												Voir / Editer : Id-<?= $row_annonces->id ?>
+											{
+												$btn = "danger";
+												if($row_annonces->user_validate)
+													$btn = "warning";
+
+												if($row_annonces->admin_validate)
+													$btn = "info";
+
+												if($row_annonces->active)
+													$btn = "success";
+
+												?>
+    											<a href='/Annonces/<?= $row_annonces->id ?>' type="button" style="margin-bottom:15px;"  class="thin btn btn-<?= $btn ?>">
+    												Voir / Editer : Id-<?= $row_annonces->id ?><br>
+    												<?= $row_annonces->title; ?><br>
+    												<?= $row_annonces->vues; ?> vues<br>
     											</a><?
 											}
 										}?>
+
+										<div class="row">
+											<hr>
+											<span class="col-xs-12">Légende : (du rouge (moins aboutti) au vert (en ligne)</span>
+											<div style="padding:5px;" disabled class="col-xs-3 btn btn-danger">(Rouge) Aucune validation</div>
+											<div style="padding:5px;" disabled class="col-xs-3 btn btn-warning">(Orange) Validation user ok</div>
+											<div style="padding:5px;" disabled class="col-xs-3 btn btn-info">(Bleu) Validation administrative ok</div>
+											<div style="padding:5px;" disabled class="col-xs-3 btn btn-success">(Vert) En ligne</div>
+										</div>
 									</div>
+
 								</div>
 
 

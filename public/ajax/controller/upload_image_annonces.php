@@ -91,11 +91,8 @@ if($_app->can_do_user->create_annonce)
 
 		else if($_GET["option"] == "delete_img")
 		{
-			if(file_exists($path_to_upload . "/" . $_GET['id_img'] . ".jpg")){
+			if(file_exists($path_to_upload . "/" . $_GET['id_img'] . ".jpg"))
 				unlink($path_to_upload . "/" . $_GET['id_img'] .".jpg");
-				//unlink($path_to_upload . "/" . $_GET['id_img'] .$name_for_thumb);
-
-			}
 		}
 	}
 }

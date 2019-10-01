@@ -18,9 +18,13 @@ $res_sql = $_app->sql->select($req_sql);
 foreach($res_sql as $key_view => $row_view)
 {
 	$res_sql[$key_view]->periode = substr($row_view->periode, 0, 2);
+
 	$res_sql[$key_view]->periode_txt = $_app->month[$res_sql[$key_view]->periode];
 
 	$array_used_month[$res_sql[$key_view]->periode] = $res_sql[$key_view]->periode_txt;
+
+
+
 
 	$array_views['Connexion'][] = $res_sql[$key_view]->login;
 
@@ -31,7 +35,7 @@ foreach($res_sql as $key_view => $row_view)
 	$array_views['Accueil'][] = $res_sql[$key_view]->accueil;
 
 	$array_views['Contacter-nous'][] = $res_sql[$key_view]->contact_us;
-
+	
 	$array_color[0] = '#C71585';
 	$array_color[1] = '#FF0000';
 	$array_color[2] = '#FFA500';

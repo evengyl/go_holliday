@@ -1,4 +1,8 @@
-<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+<div class="navbar navbar-inverse navbar-fixed-top headroom" ><?
+    if($_app->user->level_admin == 3){
+        ?><a style="float:left; margin-left:15px;" class="btn btn-info <?=($_GET['page'] == 'admin')?'active':''; ?>"  href="/admin">Administration</a><?
+    }?>
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,6 +27,9 @@
                 if(Config::$is_connect){
                     ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a href="/Mon_compte">Mon Compte</a></li><?
                 }
+
+                
+
 
                 if(!Config::$is_connect){
                     ?><li class="<?=($_GET['page'] == 'my_account')?'active':''; ?>"><a class="btn" href="/Connexion">Se connecter</a></li><?

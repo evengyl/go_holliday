@@ -13,6 +13,22 @@ Class annonce extends base_module
 	{	
 		parent::__construct($_app);
 
+		
+
+
+		//on check le form avec la session du random id form pour la demande de date
+		if(isset($_SESSION['rand_id_for_demand']) && isset($_POST['rand_id_for_demand']))
+		{
+			if($_SESSION['rand_id_for_demand'] == $_POST['rand_id_for_demand'])
+				$this->push_new_demand($_POST);
+		}
+
+		//on génère un nombre aléatoire pour valider un form unique pour la demande de date
+		$_SESSION['rand_id_for_demand'] = str_replace(".", "", uniqid("DemandDate", true));
+
+
+
+			
 
 		if($this->id_annonce = $this->_app->verif_if_announce_exist($_GET['id_annonce']))
 		{
@@ -26,6 +42,7 @@ Class annonce extends base_module
 			$this->add_vues();
 
 			$this->assign_var("slide_img", $array_img_annonce)
+			->assign_var('rand_id_for_demand',$_SESSION['rand_id_for_demand'])
 			->assign_var("annonce", $this->annonce)
 			->assign_var("list_start_date", $this->list_start_date)
 			->assign_var("list_end_date", $this->list_end_date)
@@ -40,6 +57,32 @@ Class annonce extends base_module
 		}
 
 		
+	}
+
+
+	private function push_new_demand($post)
+	{
+		$date_ = [];
+
+		$tmp_demand_start_date = str_replace('/', '-', $post["demand_start_date"]);
+		$tmp_demand_end_date = str_replace('/', '-', $post["demand_end_date"]);
+
+		$date_[0] = date("Y-m-d", strtotime(trim($tmp_demand_start_date)));
+		$date_[1] = date("Y-m-d", strtotime(trim($tmp_demand_end_date)));
+		
+		$price_moyen = $this->_app->calcule_moy_price_annocne($date_, (int)$post['id_annonce']);
+
+		$object_to_sql = new stdClass();
+		$object_to_sql->table = "annonce_dates";
+		$object_to_sql->ctx = new stdClass();
+		$object_to_sql->ctx->start_date = $post["demand_start_date"];
+		$object_to_sql->ctx->end_date = $post["demand_end_date"];
+		$object_to_sql->ctx->prix = $price_moyen;
+		$object_to_sql->ctx->id_annonce = $post['id_annonce'];
+		$object_to_sql->ctx->state = "waiting";
+		
+
+		$this->_app->sql->insert_into($object_to_sql);
 	}
 
 	private function date_work()

@@ -8,12 +8,19 @@
 		if($annonce->admin_validate == 1)
 			echo '<button id="suspendre_'.$annonce->id.'" class="btn btn-danger">Mettre en suspend</button>&nbsp;';
 		else
-			echo '<button id="admin_validate_'.$annonce->id.'" class="btn btn-success">Valider l\'annonce</button>&nbsp;';
+			echo '<button id="admin_validate_'.$annonce->id.'" class="btn btn-warning">Valider l\'annonce</button>&nbsp;';
+
+		if($annonce->admin_validate == 1 && $annonce->user_validate == 1 && $annonce->active == 0)
+			echo '<button id="offer_'.$annonce->id.'" class="btn btn-success">Offrir la mise en ligne</button>&nbsp;';
 
 		?>
+		<div class="loading_ajax col-xs-12">
+	        <img src="/images/loading.gif">
+	    </div>
 		<hr>
 		<script>
 			$("button#suspendre_<?= $annonce->id; ?>").click(function(){
+				$("div.loading_ajax").show();
 				$.ajax({
 				    type : 'POST',
 				    url  : '/ajax/controller/suspend_annonce_by_admin.php',
@@ -22,10 +29,33 @@
 				    success : function(){
 				    	document.location.reload(true);
 				    },
+				    complete : function(){
+		                $("div.loading_ajax").hide();
+		            }
 				});
 			});
 
+
+			$("button#offer_<?= $annonce->id; ?>").click(function(){
+				$("div.loading_ajax").show();
+				$.ajax({
+				    type : 'POST',
+				    url  : '/ajax/controller/offer_annonce.php',
+				    dataType : "HTML",
+				    data : {"action" : "offer", "id_annonce": <?= $annonce->id; ?>},
+				    success : function(){
+				    	document.location.reload(true);
+				    },
+				    complete : function(){
+		                $("div.loading_ajax").hide();
+		            }
+				});
+			});
+
+
+
 			$("button#admin_validate_<?= $annonce->id; ?>").click(function(){
+				$("div.loading_ajax").show();
 				$.ajax({
 				    type : 'POST',
 				    url  : '/ajax/controller/validate_annonce_by_admin.php',
@@ -34,6 +64,9 @@
 				    success : function(){
 				    	document.location.reload(true);
 				    },
+				    complete : function(){
+		                $("div.loading_ajax").hide();
+		            }
 				});
 			});
 		</script>
