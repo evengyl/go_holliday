@@ -17,7 +17,7 @@
 	<br><br>
 	<h2 class="thin">Nous réalisons vos envies de vacances simple et directement en ligne</h2>
 	
-	<h3 class="thin text-muted">La différence entre nous et d'autre site de vacances est que nous ne travaillons qu'avec des privés qui possède un bien secondaire de type vacancier</h3>
+	<h4 class="thin text-muted">La différence entre nous et d'autre site de vacances est que nous ne travaillons qu'avec des privés qui possède un bien secondaire de type vacancier</h4>
 </div>
 
 __MOD_search_type__

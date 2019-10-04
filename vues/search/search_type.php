@@ -1,4 +1,8 @@
-<header id="head" class="secondary"></header>
+<?
+if($_app->route['page'] != "home")
+    echo '<header id="head" class="secondary"></header>';
+?>
+
 <div class="container text-center">
 
     <div class="row">

@@ -39,7 +39,11 @@
 					            </div><?
 					        }
 					    }
-				    }?>
+				    }
+                    else
+                        echo '<div class="col-xs-12 bg-warning" style="padding:10px; margin-bottom:15px;">Cette conversation ne comprend aucun mesages</div>'
+
+                        ?>
 				</div>
 				<div class="modal-footer">
 

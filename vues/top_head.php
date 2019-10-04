@@ -9,7 +9,7 @@
 
 
 <link rel="shortcut icon" href="/images/logo.ico">
-<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+<link rel="stylesheet" media="screen" href="/css/google_font.css">
 <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="/css/dropzone.css" type="text/css">
 <link rel="stylesheet" href="/css/lightbox.css" type="text/css">
@@ -24,7 +24,7 @@
 
 <script src="/js/headroom.min.js"></script>
 
-<script src="/js/less-1.7.4.min.js"></script>
+<script src="/js/less-3.9.0.min.js"></script>
 
 <script src="/js/validator.js"></script>
 
