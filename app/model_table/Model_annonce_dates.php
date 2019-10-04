@@ -15,6 +15,8 @@ class Model_annonce_dates
 		$this->last_name_user = new OneToOneType("utilisateurs", "last_name", "id_utilisateurs");
 		$this->user_mail = new OneToOneType("utilisateurs", "mail", "id_utilisateurs");
 		$this->title = new OneToOneType("annonces", "title", "id_annonce");
+		$this->id_proprio = new OneToOneType("annonces", "id_utilisateurs", "id_annonce");
+
 	}
 
 }

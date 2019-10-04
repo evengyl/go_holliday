@@ -35,7 +35,7 @@
             </div><?
             $data = new stdclass();
             $data->id = $row_demand_success->id;
-            $data->id_user = $row_demand_success->id_utilisateurs;
+            $data->id_user = $row_demand_success->id_proprio;
             ?>__MOD2_messagery("id_annonce=<?= $data->id; ?>","id_receiver=<?= $data->id_user; ?>","specific_id_modal=<?= $row_demand_success->id; ?>")__<?
         }
     }?>
