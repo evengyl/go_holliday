@@ -69,7 +69,7 @@
                                 {
                                     $("button[data-id_message='<?= $row_last_message->id;?>']").click(function(e)
                                     {
-                                        $(".zone_message").animate({ scrollTop: $(".zone_message").height() });
+                                        $('.zone_message').animate({scrollTop : 9999999});
 
                                         var id_message = $(this).data("id_message");
                                         $.ajax({
@@ -77,10 +77,7 @@
                                             url  : '/ajax/controller/set_view_message.php',
                                             dataType : "HTML",
                                             data : {"action" : "set_view_message", "id_message" : id_message},
-                                            success : function()
-                                            {
-
-                                            }
+                                        
                                         });
                                     });
                                 });
@@ -138,11 +135,6 @@ $(document).ready(function()
         }
     });
 
-
-    function reload_page()
-    {
-        document.location.reload(true);
-    }
 });
 
 

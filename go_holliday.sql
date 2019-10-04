@@ -389,7 +389,7 @@ CREATE TABLE `private_message` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateurs` (`id_utilisateurs`),
   KEY `id_group` (`id_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +398,6 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (173,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','15h51',0,0,1),(174,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','15h54',0,0,1),(176,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h35',0,0,1),(177,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h36',0,0,1),(178,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'atatt','03/10/2019','16h38',0,0,1),(179,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'fefefeff','03/10/2019','16h38',0,0,1),(180,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h47',0,0,1),(181,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'<a target=\"_blank\" href=\"/datas/clients_documents/4/dipp_3_all.pdf\">dipp_3_all.pdf</a> (Enregistrer ce document, il pourrait servir)','04/10/2019','8h34',0,0,1),(182,'4','5,4','GroupMessagery5d95fcc8612e1577747889',229,'test','04/10/2019','9h15',0,1,0),(183,'4','4,5','GroupMessagery5d96f21639976357346407',225,'test','04/10/2019','9h19',0,0,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +576,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,32,15,478,7,'10-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,36,17,481,8,'10-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -590,4 +589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-04 12:02:51
+-- Dump completed on 2019-10-04 13:59:45

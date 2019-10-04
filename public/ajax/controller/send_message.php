@@ -8,7 +8,7 @@ if(isset($_POST['action']))
 		//il me faut l id du createur
 		$req_sql_get_user_id = new stdClass();
 		$req_sql_get_user_id->table = "annonces";
-		$req_sql_get_user_id->data = "id_utilisateurs";
+		$req_sql_get_user_id->data = "id_utilisateurs, title";
 		$req_sql_get_user_id->where = ["id = $1", [$_POST['id_annonce']]];
 		$res_sql_get_user_id = $_app->sql->select($req_sql_get_user_id);
 
@@ -64,7 +64,25 @@ if(isset($_POST['action']))
 			$object_to_sql->ctx->time = date("G\hi");
 		
 
-			$_app->sql->insert_into($object_to_sql);
+			$responce = $_app->sql->insert_into($object_to_sql,0,1);
+
+			if($responce)
+			{
+				$req_infos_mail = new stdClass();
+				$req_infos_mail->table = "utilisateurs";
+				$req_infos_mail->data = "mail, name, last_name";
+				$req_infos_mail->where = ["id = $1", [$id_receiver]];
+				$res_infos_mail = $_app->sql->select($req_infos_mail);
+				$res_infos_mail = $res_infos_mail[0];
+
+				$_app->send_new_mail_client("Vous avez reçu un nouveau message de : ".$res_infos_mail->name." ".$res_infos_mail->last_name."<br>"."
+							Pour l'annonce : ".$res_sql_get_user_id[0]->title."<br>
+							Message : ".$message."<br>
+							L'administration.", $res_infos_mail->mail, "admin_say", "Vous avez reçu un nouveau message de : ".$res_infos_mail->name." ".$res_infos_mail->last_name);
+			}
+
+
+
 		}
 
 		

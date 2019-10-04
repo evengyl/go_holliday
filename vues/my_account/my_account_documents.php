@@ -113,10 +113,5 @@ $(document).ready(function()
         }
     });
 
-
-    function reload_page()
-    {
-        document.location.reload(true);
-    }
 });
 </script>

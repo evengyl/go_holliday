@@ -6,7 +6,7 @@
                 <h4 class="modal-title">Conversation avec <?= $name_receiver; ?></h4>
             </div>
             <div class="modal-body">
-				<div id="zone_message_<?= $id_specific_modal;?>" class="zone_message" style="height:350px; overflow: scroll; padding-left:50px; padding-right:50px;"><?
+				<div class="zone_message" style="height:350px; overflow-y: scroll; padding-left:50px; padding-right:50px;"><?
 					if(!empty($messages))
 					{
 					    foreach($messages[$id_group] as $row_message)
@@ -44,19 +44,22 @@
 				<div class="modal-footer">
 
 					 <form>
-						<textarea data-id-grp="<?= $id_group; ?>" rows="3" name="message" maxlength="250" class="form-control"></textarea>
+                        <div class="form-group has-feedback">
+    						<textarea data-id-grp="<?= $id_group; ?>" rows="3" name="message" maxlength="250" class="form-control"></textarea>
 
-						<small><span class="thin text-muted max_char">250</span>&nbsp;caractères restants</small>
+    						<small><span class="thin text-muted max_char">250</span>&nbsp;caractères restants</small>
 
-						<button 
-						    data-id-grp="<?= $id_group; ?>"
-						    data-id-annonce="<?= $id_annonce; ?>"
-						    data-id-sender="<?= $id_sender; ?>" 
-						    data-id-receiver="<?= $id_receiver; ?>" 
-						    data-action="send_message_<?= $id_group; ?>"
-						    style="margin-top:15px;" class="btn-sm btn btn-info" type="button">
-						    Envoyer
-						</button>
+    						<button 
+                                type="submit"
+    						    data-id-grp="<?= $id_group; ?>"
+    						    data-id-annonce="<?= $id_annonce; ?>"
+    						    data-id-sender="<?= $id_sender; ?>" 
+    						    data-id-receiver="<?= $id_receiver; ?>" 
+    						    data-action="send_message_<?= $id_group; ?>"
+    						    style="margin-top:15px;" class="btn-sm btn btn-info" type="button">
+    						    Envoyer
+					       	</button>
+                        </div>
 					</form>
 
 					<hr style="margin:10px 10px;">
@@ -96,11 +99,11 @@
    
 $(document).ready(function()
 { 
-    
 
 	$(".modal button[data-action='send_message_<?= $id_group; ?>']").click(function(e)
     {
         e.stopPropagation();
+        e.preventDefault();
 
         var id_annonce = $(this).data("id-annonce");
         var id_user_sender = $(this).data("id-sender");
@@ -108,6 +111,13 @@ $(document).ready(function()
         var id_group = $(this).data("id-grp");
         var message = $(this).parent().find("textarea").val();
 
+
+        if(message.length == 0)
+        {
+            $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().find("textarea").attr("placeholder", "Veuillez complèter ce champs");
+            $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().addClass("has-error");
+            return false;
+        }
 
         $.ajax({
             type : 'POST',
@@ -134,7 +144,7 @@ $(document).ready(function()
         var length = $(this).val().length;
         var max_char = 250;
         length = max_char - length;
-        console.log($(this).parent().parent().find("span.max_char"));
+        $(this).parent().removeClass("has-error").addClass("has-success");
         $(this).parent().parent().find("span.max_char").html(length);
     });
 

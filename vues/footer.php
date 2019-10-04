@@ -76,12 +76,3 @@
 		</div>
 	</div>
 </footer>	
-
-<script>
-
-$(document).ready(function()
-{ 
-    
-  $(".zone_message").animate({ scrollTop: $(".zone_message").height() }, 1000);
-});
-</script>

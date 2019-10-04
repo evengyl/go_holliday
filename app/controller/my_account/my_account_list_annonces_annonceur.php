@@ -32,37 +32,43 @@ Class my_account_list_annonces_annonceur extends base_module
 		$sql_annonce->where = ["id_utilisateurs = $1 AND on_off = $2", [$this->_app->user->id_utilisateurs, 1] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
 
-		$res_sql_annonces = $this->_app->get_first_image($res_sql_annonces);
-
-		foreach($res_sql_annonces as $row_annonce)
+		if(!empty($res_sql_annonces))
 		{
-			$row_annonce->nb_waiting = 0;
-			$row_annonce->nb_reserved = 0;
-			$row_annonce->total_price_win = 0;
-			$row_annonce->total_price_afk = 0;
+			$res_sql_annonces = $this->_app->get_first_image($res_sql_annonces);
 
-			if(!isset($row_annonce->date_annonces)) continue;
-			foreach($row_annonce->date_annonces as $key => $row_date)
+			foreach($res_sql_annonces as $row_annonce)
 			{
-				
-				if($row_date->state == "waiting")
+				$row_annonce->nb_waiting = 0;
+				$row_annonce->nb_reserved = 0;
+				$row_annonce->total_price_win = 0;
+				$row_annonce->total_price_afk = 0;
+
+				if(!isset($row_annonce->date_annonces)) continue;
+				foreach($row_annonce->date_annonces as $key => $row_date)
 				{
-					$row_annonce->total_price_afk = $row_annonce->total_price_afk + $row_date->prix;
-					$row_annonce->nb_waiting++;
-				}
+					
+					if($row_date->state == "waiting")
+					{
+						$row_annonce->total_price_afk = $row_annonce->total_price_afk + $row_date->prix;
+						$row_annonce->nb_waiting++;
+					}
 
-				if($row_date->state == "reserved"){
-					$row_annonce->total_price_win = $row_annonce->total_price_win + $row_date->prix;
-					$row_annonce->nb_reserved++;
-					unset($row_annonce->date_annonces[$key]);
-				}
+					if($row_date->state == "reserved"){
+						$row_annonce->total_price_win = $row_annonce->total_price_win + $row_date->prix;
+						$row_annonce->nb_reserved++;
+						unset($row_annonce->date_annonces[$key]);
+					}
 
-				if($row_date->state == "deleted"){
-					unset($row_annonce->date_annonces[$key]);
+					if($row_date->state == "deleted"){
+						unset($row_annonce->date_annonces[$key]);
+					}
 				}
 			}
+			return $res_sql_annonces;
 		}
+		else
+			return false;
 
-		return $res_sql_annonces;
+		
 	}
 }
