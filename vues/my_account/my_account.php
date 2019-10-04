@@ -25,6 +25,9 @@
 
                     if($_GET['second_page'] == "Mes_documents")
                         echo "__MOD2_my_account_documents__";
+
+                    if($_GET['second_page'] == "Mes_demandes")
+                        echo "__MOD2_my_account_list_demand_success__";
                 }
 
                 else if($_app->can_do_user->view_infos_annonce)

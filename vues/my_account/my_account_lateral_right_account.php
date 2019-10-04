@@ -30,7 +30,11 @@
         </div>
 
         <div class="view_annonces">
-            <a class="btn btn-xs btn-success" href="/Mon_compte"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Voir mes annonces</a>
+            <a class="btn btn-xs btn-success" href="/Mon_compte"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Mes annonces</a>
+        </div>
+
+        <div class="view_annonces">
+            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_demandes"><span class="glyphicon glyphicon-eye-open"></span>&nbspMes demandes acceptées</a>
         </div>
 
         

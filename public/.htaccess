@@ -17,6 +17,7 @@ RewriteRule ^Mon_compte/Desactivate/([0-9]+)[/]{0,1}$ ?page=my_account&desactiva
 RewriteRule ^Mon_compte/(Messages)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
 RewriteRule ^Mon_compte/(Mes_favoris)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
 RewriteRule ^Mon_compte/(Mes_documents)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
+RewriteRule ^Mon_compte/(Mes_demandes)[/]{0,1}$ ?page=my_account&second_page=$1 [L]
 
 
 RewriteRule ^Mon_compte/Annonces/([0-9]+)[/]{0,1}$ ?page=my_account&num_page=$1 [L]
