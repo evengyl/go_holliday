@@ -91,22 +91,26 @@ $(document).ready(function()
 
     $("button[data-action='delete_file']").click(function(e)
     {
-        confirm("Voulez-vous vraiment supprimer ce fichier ?");
+        var confirmate = confirm("Voulez-vous vraiment supprimer ce fichier ?");
 
-        e.stopPropagation()
+        if(confirmate === true)
+        {
 
-        var link = $(this).data("link");
+            e.stopPropagation()
 
-        $.ajax({
-            type : 'POST',
-            url  : '/ajax/controller/delete_file.php',
-            dataType : "HTML",
-            data : {"action" : "delete_file", "link" : link},
-            success : function(data_return)
-            {
-                reload_page();
-            },
-        });
+            var link = $(this).data("link");
+
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/delete_file.php',
+                dataType : "HTML",
+                data : {"action" : "delete_file", "link" : link},
+                success : function(data_return)
+                {
+                    reload_page();
+                },
+            });
+        }
     });
 
 

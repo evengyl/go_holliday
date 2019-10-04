@@ -10,6 +10,10 @@ class Model_annonce_dates
 		$this->prix = new NormalType("prix");
 		$this->state = new NormalType("state");
 		$this->id_annonce = new NormalType("id_annonce");
+		$this->id_utilisateurs = new NormalType("id_utilisateurs");
+		$this->name_user = new OneToOneType("utilisateurs", "name", "id_utilisateurs");
+		$this->last_name_user = new OneToOneType("utilisateurs", "last_name", "id_utilisateurs");
+		$this->user_mail = new OneToOneType("utilisateurs", "mail", "id_utilisateurs");
 	}
 
 }

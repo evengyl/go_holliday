@@ -40,22 +40,19 @@
                             <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
                             <br>
 
-                            <span class="text-muted"><small>Nombre de date validées : <b><?=(!empty($row_annonce->date_reserved))?count($row_annonce->date_reserved):0 ?></b></small></span>
+                            <span class="text-muted"><small>Nombre de date validées : <b style="color:green;"><?= $row_annonce->nb_reserved; ?></b></small></span>
                             <br>
 
-                            <span class="text-muted"><small>Nombre de demande en cours : <b><?=(!empty($row_annonce->date_waiting))?count($row_annonce->date_waiting):0 ?></b></small></span>
+                            <span class="text-muted"><small>Nombre de demande en cours : <b style="color:#f0ad4e;"><?= $row_annonce->nb_waiting; ?></b></small></span>
                             <br>
 
-                            <span class="text-muted"><small style="color:#5bc0de;"><?= $row_annonce->vues ?></small> <small>Vues</small></span>
+                            <span class="text-muted"><small>Somme gagnée estimée : <b style="color:green;"><?= $row_annonce->total_price_win; ?>&nbsp;€</b></small></span>
+                            <br>
 
+                            <span class="text-muted"><small>Somme dormante estimée : <b style="color:red;"><?= $row_annonce->total_price_afk; ?>&nbsp;€</b></small></span>
+                            <br>
 
-                            <a role="button" 
-                                class="opt_annonce" 
-                                data-toggle="modal" 
-                                data-target="#view_avis_<?= $row_annonce->id ?>"
-                            >
-                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
-                            </a>                        
+                                                  
                         </div>
 
                         <div class="col-xs-6">
@@ -68,7 +65,17 @@
                             <span class="text-muted"><small title="Validation final, quand cela est fait vous pourrez souscrire une formule pour celle-ci">Validée par l'administration : <?=($row_annonce->admin_validate)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
                             <br>
 
-                            <span class="text-muted statut_active"><small title="Activer ou désactiver cette annonce, attention tout abonnement non terminé ne prendra ni pause ni fin lors de la désactivation. prenez garde à ce boutton">Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span>
+                            <span class="text-muted statut_active"><small title="Activer ou désactiver cette annonce, attention tout abonnement non terminé ne prendra ni pause ni fin lors de la désactivation. prenez garde à ce boutton">Active : <?=($row_annonce->active)?"<b style='color:green;'>Oui</b>":"<b style='color:red;'>Non</b>" ?></b></small></span><br>
+
+                            <span class="text-muted"><small style="color:#5bc0de;"><?= $row_annonce->vues ?></small> <small>Vues</small></span>
+
+                            <a role="button" 
+                                class="opt_annonce" 
+                                data-toggle="modal" 
+                                data-target="#view_avis_<?= $row_annonce->id ?>"
+                            >
+                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
+                            </a>  
                         </div>
                     </div>
                     <div class="col-xs-10"><?
@@ -160,6 +167,64 @@
 $(document).ready(function()
 {
 
+
+    $("button[data-action='accept_demand_dates']").click(function(e)
+    {
+        var confirmate = confirm("Voulez-vous vraiment accepter cette date ?");
+
+        if(confirmate === true)
+        {
+            $("div.loading_ajax").show();
+
+            e.stopPropagation()
+            var id_demand = $(this).data("id_demand");
+
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/gestion_demand_dates.php',
+                dataType : "HTML",
+                data : {"action" : "accept", "id_demand" : id_demand},
+                success : function(data_return)
+                {
+                    reload_page();
+                },
+                complete : function(){
+                    $("div.loading_ajax").hide();
+                }
+            });
+        }
+    });
+
+    $("button[data-action='refuse_demand_dates']").click(function(e)
+    {
+        var confirmate = confirm("Voulez-vous vraiment refuser cette date ?");
+
+        if(confirmate === true)
+        {
+            $("div.loading_ajax").show();
+
+            e.stopPropagation()
+            var id_demand = $(this).data("id_demand");
+
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/gestion_demand_dates.php',
+                dataType : "HTML",
+                data : {"action" : "refuse", "id_demand" : id_demand},
+                success : function(data_return)
+                {
+                    reload_page();
+                },
+                complete : function(){
+                    $("div.loading_ajax").hide();
+                }
+
+            });
+        }
+    });
+
+
+
     $("button[data-action='activate_annonce']").click(function(e){
         $("div.loading_ajax").show();
 
@@ -185,29 +250,34 @@ $(document).ready(function()
 
 
     $("button[data-action='desactivate_annonce']").click(function(e){
-        confirm("Voulez-vous vraiment désactiver cette annonce ?");
-
-        $("div.loading_ajax").show();
-
-        e.stopPropagation()
-
-        var btn_clicked = $(this);
-        var id_annonce = btn_clicked.attr("data-id");
-
         
+        var confirmate = confirm("Voulez-vous vraiment désactiver cette annonce ?");
 
-        $.ajax({
-            type : 'POST',
-            url  : '/ajax/controller/activate_desactivate_annonce.php',
-            dataType : "HTML",
-            data : {"action" : "desactivate", "id_annonce": id_annonce},
-            success : function(){
-                reload_page()
-            },
-            complete : function(){
-                $("div.loading_ajax").hide();
-            }
-        });
+        if(confirmate === true)
+        {
+
+            $("div.loading_ajax").show();
+
+            e.stopPropagation()
+
+            var btn_clicked = $(this);
+            var id_annonce = btn_clicked.attr("data-id");
+
+            
+
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/activate_desactivate_annonce.php',
+                dataType : "HTML",
+                data : {"action" : "desactivate", "id_annonce": id_annonce},
+                success : function(){
+                    reload_page()
+                },
+                complete : function(){
+                    $("div.loading_ajax").hide();
+                }
+            });
+        }
     });
 
 
@@ -242,22 +312,26 @@ $(document).ready(function()
 
     $("button[data-action='delete_announce']").click(function(e)
     {
-        confirm("Voulez-vous vraiment supprimer cette annonce ?");
+        var confirmate = confirm("Voulez-vous vraiment supprimer cette annonce ?");
 
-        e.stopPropagation()
 
-        var id = $(this).data("id");
+        if(confirmate === true)
+        {
+            e.stopPropagation()
 
-        $.ajax({
-            type : 'POST',
-            url  : '/ajax/controller/delete_announce.php',
-            dataType : "HTML",
-            data : {"action" : "delete_announce", "id" : id},
-            success : function(data_return)
-            {
-                setTimeout(reload_page,400);
-            },
-        });
+            var id = $(this).data("id");
+
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/delete_announce.php',
+                dataType : "HTML",
+                data : {"action" : "delete_announce", "id" : id},
+                success : function(data_return)
+                {
+                    setTimeout(reload_page,400);
+                },
+            });
+        }
     });
 
 

@@ -1,6 +1,6 @@
 <?
 
-Class _app extends fct_global_website
+Class _app extends fct_global_account
 {
 
 	public $array_sql_ = [];
@@ -32,7 +32,7 @@ Class _app extends fct_global_website
 	{
 		parent::__construct($this);
 
-		$this->option_app["view_time_exec_all_sql"] = false;
+		$this->option_app["view_time_exec_all_sql"] = "0";
 	}
 
 

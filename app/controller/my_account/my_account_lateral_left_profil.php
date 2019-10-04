@@ -22,6 +22,7 @@ Class my_account_lateral_left_profil extends base_module
 		// va récuper les stat des message priver
 		$this->get_infos_nb();
 		$this->get_nb_private_message();
+		$this->get_total_benefit();
 
 
 
@@ -41,11 +42,15 @@ Class my_account_lateral_left_profil extends base_module
 		$this->_app->user->nb_vues_total = 0;
 		$this->_app->user->nb_annonces_active = 0;
 		$this->_app->user->nb_annonces = 0;
+		$this->_app->user->list_id_annonce = [];
+		
 
 		if(!empty($res_sql))
 		{
 			foreach($res_sql as $key_annonce => $row_annonce)
 			{
+				$this->_app->user->list_id_annonce[] = $row_annonce->id;
+
 				$this->_app->user->nb_vues_total += (int)$row_annonce->vues;
 				$this->_app->user->nb_annonces ++;
 
@@ -96,7 +101,7 @@ Class my_account_lateral_left_profil extends base_module
 
 		$sql_message = new stdClass();
 		$sql_message->table = 'private_message';
-		$sql_message->data = "vu, id_group, id_user_sender, id";
+		$sql_message->data = "vu_receiver, id_group, id_user_sender, id";
 		$sql_message->order = ["id DESC"];
 		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
@@ -112,7 +117,7 @@ Class my_account_lateral_left_profil extends base_module
 
 					$tmp[] = $row_message->id_group;
 					$this->_app->user->total_private_message++;
-					if($row_message->vu == 0)
+					if($row_message->vu_receiver == 0)
 					{
 						$id_sender = explode(",", $row_message->id_user_sender);
 						$id_sender = $id_sender[0];
@@ -122,6 +127,32 @@ Class my_account_lateral_left_profil extends base_module
 					}
 				}
 			}
+		}
+	}
+
+	public function get_total_benefit()
+	{
+		$this->_app->user->total_benefit = 0;
+		$this->_app->user->total_possible_benefit = 0;
+
+		$tmp = implode(", ", $this->_app->user->list_id_annonce);
+
+		$sql_benefit = new stdClass();
+		$sql_benefit->table = 'annonce_dates';
+		$sql_benefit->data = "prix, state";
+		$sql_benefit->where = ["id_annonce IN $1 AND state != $2", [$this->_app->user->list_id_annonce, "deleted"]];
+		$res_sql_benefit = $this->_app->sql->select($sql_benefit);
+
+
+		if(!empty($res_sql_benefit))
+		{
+			foreach($res_sql_benefit as $row)
+			{
+				if($row->state == "reserved")
+					$this->_app->user->total_benefit += $row->prix;
+				else
+					$this->_app->user->total_possible_benefit += $row->prix;
+			}	
 		}
 	}
 }

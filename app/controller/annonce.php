@@ -15,17 +15,17 @@ Class annonce extends base_module
 
 		
 
+		//partie gestion des demande client
+			//on check le form avec la session du random id form pour la demande de date
+			if(isset($_SESSION['rand_id_for_demand']) && isset($_POST['rand_id_for_demand']))
+			{
+				if($_SESSION['rand_id_for_demand'] == $_POST['rand_id_for_demand'])
+					$this->push_new_demand($_POST);
+			}
 
-		//on check le form avec la session du random id form pour la demande de date
-		if(isset($_SESSION['rand_id_for_demand']) && isset($_POST['rand_id_for_demand']))
-		{
-			if($_SESSION['rand_id_for_demand'] == $_POST['rand_id_for_demand'])
-				$this->push_new_demand($_POST);
-		}
-
-		//on génère un nombre aléatoire pour valider un form unique pour la demande de date
-		$_SESSION['rand_id_for_demand'] = str_replace(".", "", uniqid("DemandDate", true));
-
+			//on génère un nombre aléatoire pour valider un form unique pour la demande de date
+			$_SESSION['rand_id_for_demand'] = str_replace(".", "", uniqid("DemandDate", true));
+		// Fin
 
 
 			
@@ -37,8 +37,8 @@ Class annonce extends base_module
 			$this->annonce = $this->_app->get_announce_user($this->id_annonce);
 			$this->_app->title_page = $this->annonce->title.", ".$this->annonce->sub_title;
 
-			$this->date_work();
-			$this->get_list_date();
+			$this->render_date_text();
+			$this->get_list_date_demand();
 			$this->add_vues();
 
 			$this->assign_var("slide_img", $array_img_annonce)
@@ -62,30 +62,38 @@ Class annonce extends base_module
 
 	private function push_new_demand($post)
 	{
-		$date_ = [];
+		if(empty($post["demand_start_date"]) || empty($post["demand_end_date"]) || empty($post['id_annonce'])) return 0;
 
-		$tmp_demand_start_date = str_replace('/', '-', $post["demand_start_date"]);
-		$tmp_demand_end_date = str_replace('/', '-', $post["demand_end_date"]);
+		if(Config::$is_connect)
+		{
+			$date_ = [];
 
-		$date_[0] = date("Y-m-d", strtotime(trim($tmp_demand_start_date)));
-		$date_[1] = date("Y-m-d", strtotime(trim($tmp_demand_end_date)));
-		
-		$price_moyen = $this->_app->calcule_moy_price_annocne($date_, (int)$post['id_annonce']);
+			$tmp_demand_start_date = str_replace('/', '-', $post["demand_start_date"]);
+			$tmp_demand_end_date = str_replace('/', '-', $post["demand_end_date"]);
 
-		$object_to_sql = new stdClass();
-		$object_to_sql->table = "annonce_dates";
-		$object_to_sql->ctx = new stdClass();
-		$object_to_sql->ctx->start_date = $post["demand_start_date"];
-		$object_to_sql->ctx->end_date = $post["demand_end_date"];
-		$object_to_sql->ctx->prix = $price_moyen;
-		$object_to_sql->ctx->id_annonce = $post['id_annonce'];
-		$object_to_sql->ctx->state = "waiting";
-		
+			$date_[0] = date("Y-m-d", strtotime(trim($tmp_demand_start_date)));
+			$date_[1] = date("Y-m-d", strtotime(trim($tmp_demand_end_date)));
+			
+			$price_moyen = $this->_app->calcule_moy_price_annocne($date_, (int)$post['id_annonce']);
 
-		$this->_app->sql->insert_into($object_to_sql);
+			$object_to_sql = new stdClass();
+			$object_to_sql->table = "annonce_dates";
+			$object_to_sql->ctx = new stdClass();
+			$object_to_sql->ctx->start_date = $post["demand_start_date"];
+			$object_to_sql->ctx->end_date = $post["demand_end_date"];
+			$object_to_sql->ctx->prix = $price_moyen;
+			$object_to_sql->ctx->id_annonce = $post['id_annonce'];
+			$object_to_sql->ctx->id_utilisateurs = $this->_app->user->id_utilisateurs;
+			$object_to_sql->ctx->state = "waiting";
+			
+
+			$this->_app->sql->insert_into($object_to_sql);
+		}
+		else
+			return 0;
 	}
 
-	private function date_work()
+	private function render_date_text()
 	{
 		$this->annonce->date_start_saison_uk_format = $this->_app->convert_date_to_uk($this->annonce->date_start_saison);
 		$this->annonce->date_end_saison_uk_format = $this->_app->convert_date_to_uk($this->annonce->date_end_saison);
@@ -93,7 +101,7 @@ Class annonce extends base_module
 		$this->annonce->text_date_saison = "Le début de la saison de location commence le ".$this->annonce->date_start_saison." et se termine le ".$this->annonce->date_end_saison;
 	}
 
-	private function get_list_date()
+	private function get_list_date_demand()
 	{
 		if(!empty($this->annonce->date_annonces))
 		{

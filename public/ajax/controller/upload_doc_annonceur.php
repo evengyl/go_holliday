@@ -6,7 +6,7 @@ if($_app->can_do_user->create_annonce)
 {
 	$array_return = [];
 	$id_utilisateurs = $_GET["id_utilisateurs"];
-	$path_to_upload = $_app->base_dir."/public/datas/annonceurs_documents/".$id_utilisateurs."/";
+	$path_to_upload = $_app->base_dir."/public/datas/clients_documents/".$id_utilisateurs."/";
 
 	if(get_nb_files_uploaded($path_to_upload) < 10)
 	{

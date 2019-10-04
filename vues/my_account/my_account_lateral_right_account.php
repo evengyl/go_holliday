@@ -33,12 +33,14 @@
             <a class="btn btn-xs btn-success" href="/Mon_compte"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Voir mes annonces</a>
         </div>
 
-        <div class="view_documents">
-            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_documents"><span class="glyphicon glyphicon-file"></span>&nbsp;Mes documents</a>
-        </div>
+        
 
         <hr><?
     }?>
+
+    <div class="view_documents">
+            <a class="btn btn-xs btn-success" href="/Mon_compte/Mes_documents"><span class="glyphicon glyphicon-file"></span>&nbsp;Mes documents</a>
+        </div>
 
     <div class="view_annonces">
         <a class="btn btn-xs btn-success" href="/Mon_compte"><i class="far fa-address-card"></i>&nbsp;Retour à Mon compte</a>

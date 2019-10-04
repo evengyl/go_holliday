@@ -6,7 +6,8 @@ Class search_type extends base_module
 	public function __construct(&$_app)
 	{	
 		parent::__construct($_app);
-		$this->_app->title_page = "Recherche de vacances par type";
+		if(empty($this->_app->title_page))
+			$this->_app->title_page = "Recherche de vacances par type de départs";
 
 
 		$array_type = $this->get_list_type();

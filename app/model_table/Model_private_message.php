@@ -13,6 +13,7 @@ class Model_private_message
 		$this->send_date = new NormalType("send_date");
 		$this->time = new NormalType("time");
 		$this->vu = new NormalType("vu");
+		$this->vu_receiver = new NormalType("vu_receiver");
 		$this->answer = new NormalType("answer");
 
 		$this->name_sender = new OneToOneType("utilisateurs", "name", "id_user_sender");

@@ -59,22 +59,24 @@
         $("button[data-action='Delete_fav']").click(function(e)
         {
 
-            confirm("Voulez-vous vraiment supprimer cette annonce de vos favoris ?");
+            var confirmate = confirm("Voulez-vous vraiment supprimer cette annonce de vos favoris ?");
 
             e.stopPropagation()
 
-
-            var button_clicked = $(this);
-            $.ajax({
-                type : 'POST',
-                url  : '/ajax/controller/add_del_announce_favorite.php',
-                dataType : "HTML",
-                data : {"app_fct" : "del_to_favorite", "id_annonce" : button_clicked.attr("data-id_annonce")},
-                success : function(data_return)
-                {
-                    document.location.reload(true);
-                },
-            });
+            if(confirmate === true)
+            {
+                var button_clicked = $(this);
+                $.ajax({
+                    type : 'POST',
+                    url  : '/ajax/controller/add_del_announce_favorite.php',
+                    dataType : "HTML",
+                    data : {"app_fct" : "del_to_favorite", "id_annonce" : button_clicked.attr("data-id_annonce")},
+                    success : function(data_return)
+                    {
+                        document.location.reload(true);
+                    },
+                });
+            }
         });
         
     });

@@ -42,6 +42,14 @@
             <h4>
             	<?= $_app->user->nb_vues_total ?>&nbsp;&nbsp;<span class="glyphicon glyphicon-eye-open"></span><br>
             	<small>Vues sur le total de vos annonce, actives ou non</small>
+            </h4><hr>
+
+            <h4>
+                <span style="color:#5cb85c;"><?= $_app->user->total_benefit ?></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-euro"></span><br>
+                <small>Bénéfice moyen sur vos réservations</small><br><br>
+
+                <span style="color:#f0ad4e;"><?= $_app->user->total_possible_benefit ?></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-euro"></span><br>
+                <small>Bénéfice dormant sur vos demandes</small>
             </h4><hr><?
         }?>
         <h4>

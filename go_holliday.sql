@@ -32,7 +32,7 @@ CREATE TABLE `annonce_activity` (
   `bar` tinyint(1) NOT NULL DEFAULT '0',
   `spa` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `annonce_activity` (
 
 LOCK TABLES `annonce_activity` WRITE;
 /*!40000 ALTER TABLE `annonce_activity` DISABLE KEYS */;
-INSERT INTO `annonce_activity` VALUES (210,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(232,0,1,0,0,0,0,0),(236,0,0,0,1,0,0,1),(238,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0),(243,0,0,1,0,1,0,0),(244,1,0,1,0,1,0,0);
+INSERT INTO `annonce_activity` VALUES (210,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0),(229,0,1,1,1,0,0,0),(232,0,1,0,0,0,0,0),(236,0,0,0,1,0,0,1),(238,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0),(243,0,0,1,0,1,0,0),(244,1,0,1,0,1,0,0),(245,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `annonce_activity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `annonce_address` (
   `address_localite` varchar(50) NOT NULL,
   `address_zip_code` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `annonce_address` (
 
 LOCK TABLES `annonce_address` WRITE;
 /*!40000 ALTER TABLE `annonce_address` DISABLE KEYS */;
-INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','6567'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567'),(235,'','','','',''),(236,'test','test','test','test','6567'),(238,'','','','',''),(239,'','','','',''),(240,'','','','',''),(241,'','','','',''),(242,'','','','',''),(243,'test','test','25','test','7569'),(244,'ahha ma maison dada','rue dla turlute','25','labuissiere','6567');
+INSERT INTO `annonce_address` VALUES (210,'Camping perroquet','rue des dunes','1','bray-dunes','5900'),(225,'Camping perroquet','rue des dunes','1','bray-dunes','6567'),(226,'','','','',''),(227,'','','','',''),(228,'','','','',''),(229,'camping perroquet','rue des dunes','1','Bray-Dunes','59123'),(230,'test','test','1','test','6567'),(231,'','','','',''),(232,'test','tst','tet','tetet','6567'),(235,'','','','',''),(236,'test','test','test','test','6567'),(238,'','','','',''),(239,'','','','',''),(240,'','','','',''),(241,'','','','',''),(242,'','','','',''),(243,'test','test','25','test','7569'),(244,'ahha ma maison dada','rue dla turlute','25','labuissiere','6567'),(245,'','','','','');
 /*!40000 ALTER TABLE `annonce_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `annonce_commoditer` (
   `max_personn` tinyint(4) NOT NULL DEFAULT '1',
   `caution` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,7 +125,7 @@ CREATE TABLE `annonce_commoditer` (
 
 LOCK TABLES `annonce_commoditer` WRITE;
 /*!40000 ALTER TABLE `annonce_commoditer` DISABLE KEYS */;
-INSERT INTO `annonce_commoditer` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0),(235,0,0,0,1,0),(236,1,1,1,15,200),(238,0,0,0,1,0),(239,0,0,0,1,0),(240,0,0,0,1,0),(241,0,0,0,1,0),(242,0,0,0,1,0),(243,1,0,1,1,300),(244,1,1,0,6,300);
+INSERT INTO `annonce_commoditer` VALUES (210,1,1,1,15,1500),(225,1,1,1,15,1500),(226,0,0,0,1,0),(227,0,0,0,1,0),(228,0,0,0,1,0),(229,0,0,0,6,300),(230,0,0,0,1,0),(231,0,0,0,1,0),(232,0,0,0,1,0),(235,0,0,0,1,0),(236,1,1,1,15,200),(238,0,0,0,1,0),(239,0,0,0,1,0),(240,0,0,0,1,0),(241,0,0,0,1,0),(242,0,0,0,1,0),(243,1,0,1,1,300),(244,1,1,0,6,300),(245,0,0,0,1,0);
 /*!40000 ALTER TABLE `annonce_commoditer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,11 +140,12 @@ CREATE TABLE `annonce_dates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_date` varchar(15) NOT NULL DEFAULT '01/01/1970',
   `end_date` varchar(15) NOT NULL DEFAULT '01/01/1970',
-  `prix` smallint(6) NOT NULL DEFAULT '0',
+  `prix` smallint(8) NOT NULL DEFAULT '0',
   `id_annonce` int(11) NOT NULL,
+  `id_utilisateurs` int(11) NOT NULL,
   `state` varchar(20) NOT NULL DEFAULT 'waiting',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +154,7 @@ CREATE TABLE `annonce_dates` (
 
 LOCK TABLES `annonce_dates` WRITE;
 /*!40000 ALTER TABLE `annonce_dates` DISABLE KEYS */;
-INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,'reserved'),(5,'08/04/2019','15/04/2019',250,225,'waiting'),(6,'01/09/2019','22/09/2019',300,225,'reserved'),(7,'23/08/2019','30/08/2019',350,225,'waiting');
+INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,5,'waiting'),(5,'08/04/2019','15/04/2019',250,225,5,'waiting'),(6,'01/09/2019','22/09/2019',300,225,5,'waiting'),(7,'23/08/2019','30/08/2019',350,225,5,'waiting'),(9,'01/08/2019','31/08/2019',0,229,5,'waiting'),(10,'01/09/2019','13/09/2019',818,229,5,'waiting');
 /*!40000 ALTER TABLE `annonce_dates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +231,7 @@ CREATE TABLE `annonce_sport` (
   `skate` tinyint(1) NOT NULL DEFAULT '0',
   `arc` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +240,7 @@ CREATE TABLE `annonce_sport` (
 
 LOCK TABLES `annonce_sport` WRITE;
 /*!40000 ALTER TABLE `annonce_sport` DISABLE KEYS */;
-INSERT INTO `annonce_sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(232,0,0,0,0,1,0,0,0,0,0),(236,1,0,0,1,1,1,1,1,1,0),(238,0,0,0,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0,0,0,0),(243,0,1,0,0,0,0,0,1,1,0),(244,1,0,0,0,1,0,0,1,0,0);
+INSERT INTO `annonce_sport` VALUES (210,0,0,0,0,0,0,0,0,0,0),(225,1,0,0,0,0,0,0,0,0,0),(229,0,0,1,0,1,1,0,1,0,0),(232,0,0,0,0,1,0,0,0,0,0),(236,1,0,0,1,1,1,1,1,1,0),(238,0,0,0,0,0,0,0,0,0,0),(239,0,0,0,0,0,0,0,0,0,0),(240,0,0,0,0,0,0,0,0,0,0),(241,0,0,0,0,0,0,0,0,0,0),(242,0,0,0,0,0,0,0,0,0,0),(243,0,1,0,0,0,0,0,1,1,0),(244,1,0,0,0,1,0,0,1,0,0),(245,0,0,0,0,0,0,0,0,0,0);
 /*!40000 ALTER TABLE `annonce_sport` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +298,7 @@ CREATE TABLE `annonces` (
   `create_date` varchar(20) NOT NULL,
   `on_off` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +307,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1546,0,0,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',19,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',1,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',14,1,1,1,'13/09/2019',1),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',19,0,0,0,'24/09/2019',1),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',18,1,1,1,'26/09/2019',1);
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1548,0,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',74,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',46,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',17,1,1,1,'13/09/2019',0),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',24,0,1,1,'24/09/2019',0),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',21,1,1,1,'26/09/2019',0),(245,NULL,NULL,NULL,4,NULL,NULL,'00/00/0000','00/00/0000',0,0,0,0,'02/10/2019',0);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,11 +384,12 @@ CREATE TABLE `private_message` (
   `send_date` varchar(20) NOT NULL,
   `time` varchar(5) NOT NULL,
   `vu` tinyint(1) NOT NULL DEFAULT '0',
+  `vu_receiver` tinyint(1) NOT NULL DEFAULT '0',
   `answer` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `id_utilisateurs` (`id_utilisateurs`),
   KEY `id_group` (`id_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +398,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
-INSERT INTO `private_message` VALUES (104,'4','5,4','GroupMessagery5d8e01aa2adba523088354',225,'test','30/09/2019','8h20',1,1),(150,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'<a target=\"_blank\" href=\"/datas/annonceurs_documents/4/baudoux.pdf\">Fichier pour Sarah Debeve : baudoux.pdf</a>','30/09/2019','16h30',1,1),(151,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/Ergonomic workspaces 12-2016 GB.pdf\">Ergonomic workspaces 12-2016 GB.pdf</a>','30/09/2019','16h31',1,1),(152,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/DLB-80680-1.pdf\">DLB-80680-1.pdf</a>','30/09/2019','16h31',1,1),(153,'4','4,5','GroupMessagery5d8e01aa2adba523088354',225,'Fichier pour Sarah Debeve : <a target=\"_blank\" href=\"/datas/annonceurs_documents/4/Easy tube.pdf\">Easy tube.pdf</a>','30/09/2019','16h31',1,0);
+INSERT INTO `private_message` VALUES (173,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','15h51',0,0,1),(174,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','15h54',0,0,1),(176,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h35',0,0,1),(177,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h36',0,0,1),(178,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'atatt','03/10/2019','16h38',0,0,1),(179,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'fefefeff','03/10/2019','16h38',0,0,1),(180,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'test','03/10/2019','16h47',0,0,1),(181,'4','4,5','GroupMessagery5d95fcc8612e1577747889',229,'<a target=\"_blank\" href=\"/datas/clients_documents/4/dipp_3_all.pdf\">dipp_3_all.pdf</a> (Enregistrer ce document, il pourrait servir)','04/10/2019','8h34',0,0,1),(182,'4','5,4','GroupMessagery5d95fcc8612e1577747889',229,'test','04/10/2019','9h15',0,1,0),(183,'4','4,5','GroupMessagery5d96f21639976357346407',225,'test','04/10/2019','9h19',0,0,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,7 +446,7 @@ CREATE TABLE `range_price_announce` (
   `price_week_end` varchar(20) NOT NULL,
   `price_one_week` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -453,7 +455,7 @@ CREATE TABLE `range_price_announce` (
 
 LOCK TABLES `range_price_announce` WRITE;
 /*!40000 ALTER TABLE `range_price_announce` DISABLE KEYS */;
-INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400'),(235,'','',''),(236,'71-100','151-200','301-400'),(242,'','',''),(243,'71-100','151-200','301-400'),(244,'41-70','101-150','301-400');
+INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(225,'0-40','101-150','301-400'),(226,'0-40','201-250','301-400'),(227,'0-40','201-250','301-400'),(228,'0-40','201-250','301-400'),(229,'71-100','151-200','301-400'),(230,'101-150','201-250','401-500'),(231,'0-40','201-250','301-400'),(232,'71-100','151-200','301-400'),(235,'','',''),(236,'71-100','151-200','301-400'),(242,'','',''),(243,'71-100','151-200','301-400'),(244,'41-70','101-150','301-400'),(245,'','','');
 /*!40000 ALTER TABLE `range_price_announce` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +548,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Sarah','Debeve','dark.evengyl@gmail.com',28,'0497312523','jean jaures','59','lablab','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d8b810608e63497485790',1,'','');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Sarah','Debeve','dark.evengyl@gmail.com',28,'0497312523','jean jaures','59','lablab','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d8b810608e63497485790',1,'225','');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +568,7 @@ CREATE TABLE `vues` (
   `contact_us` int(11) NOT NULL DEFAULT '0',
   `periode` varchar(7) DEFAULT '00-0000',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -575,7 +577,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,32,15,478,7,'10-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -588,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-30 16:52:13
+-- Dump completed on 2019-10-04 12:02:51

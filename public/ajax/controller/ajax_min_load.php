@@ -33,6 +33,8 @@ if( is_dir($directory) ){
 
 
 require $base_dir.'/app/includes/fct_global_website.php';
+require $base_dir.'/app/includes/fct_global_annonce.php';
+require $base_dir.'/app/includes/fct_global_account.php';
 require $base_dir.'/app/includes/_app.php';
 require $base_dir.'/app/includes/can_do_user.php';
 

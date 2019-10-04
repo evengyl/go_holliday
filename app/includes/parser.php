@@ -16,16 +16,16 @@ class parser
 	{
 		if(!empty($page))
 		{
-			if(preg_match('/__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
+			if(preg_match('/__MOD_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê,=<> \"\']*[\]]*[)]*__/', $page, $match))
 				$page = $this->parse_module($match[0], $page);
 			
 			else
 			{
-				if(preg_match('/__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
+				if(preg_match('/__MOD2_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê,=<> \"\']*[\]]*[)]*__/', $page, $match))
 					$page = $this->parse_module($match[0], $page);
 				else
 				{
-					if(preg_match('/__MOD3_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê=<> \"\']*[\]]*[)]*__/', $page, $match))
+					if(preg_match('/__MOD3_[a-z0-9_]+[(]*[\[]*[a-zA-Z0-9_éèçàê,=<> \"\']*[\]]*[)]*__/', $page, $match))
 						$page = $this->parse_module($match[0], $page);
 				}
 			}
@@ -42,14 +42,28 @@ class parser
 	{
 		$var_in_module_name = array();
 
-		$module_name = trim(preg_replace(array('/__[MOD]*[0-9]*_/', '/[(\"]+[a-zA-Z0-9_éèçàê \']*[\")]+/',  '/__/', '[\(\[]', '[\]\)]', '[=>]'), '', $match_module));
+		$module_name = trim(preg_replace(array('/__[MOD]*[0-9]*_/', '/[(\"]+[a-zA-Z0-9_éèçàê= \']*[\")]+/',  '/__/', '[\(\[]', '[\]\)]', '[=>]'), '', $match_module));
 
-		if(preg_match_all('/[(\"]+([a-zA-Z0-9_éèçàê \']*)[\")]+/', $match_module, $match_var))
-			$var_in_module_name[$match_var[1][0]] = $match_var[1][0];
-		
+		if(preg_match_all('/[(\"]+([a-zA-Z0-9_éèçàê \']*)=([a-zA-Z0-9_éèçàê \']*)[\")]+/', $match_module, $match_var))
+		{
+			$var_in_module_name[$match_var[1][0]] = $match_var[2][0];
+
+			if(isset($match_var[1][1]))
+			{
+				$var_in_module_name[$match_var[1][1]] = $match_var[2][1];
+				$module_name = str_replace(",", "", $module_name);
+
+				if(isset($match_var[1][2]))
+				{
+					$var_in_module_name[$match_var[1][2]] = $match_var[2][2];
+					$module_name = str_replace(",", "", $module_name);
+				}
+			}
+		}
+
 		if($module_name != "")
 		{
-			
+
 			$this->_app->var_module = "";
 			if(is_array($var_in_module_name))
 				$this->_app->var_module = $var_in_module_name;

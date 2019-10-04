@@ -54,7 +54,8 @@ if(isset($_POST['action']))
 			$object_to_sql->ctx = new stdClass();
 			$object_to_sql->ctx->message = $message;
 			$object_to_sql->ctx->id_annonce = $_POST['id_annonce'];
-			$object_to_sql->ctx->vu = '0';
+			$object_to_sql->ctx->vu = '1';
+			$object_to_sql->ctx->vu_receiver = '0';
 			$object_to_sql->ctx->answer = '0';
 			$object_to_sql->ctx->id_utilisateurs = $id_annonceur;
 			$object_to_sql->ctx->id_user_sender = $id_sender.",".$id_receiver;

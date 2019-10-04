@@ -43,6 +43,8 @@ class Autoloader
 
 
             case "_app":
+            case "fct_global_account":
+            case "fct_global_annonce":
             case "fct_global_website":
             case "app_init":   
             case "can_do_user":             

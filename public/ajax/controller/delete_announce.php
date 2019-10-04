@@ -8,7 +8,7 @@ if(isset($_POST['action']))
 		$req_sql = new stdClass;
 		$req_sql->table = "annonces";
 		$req_sql->ctx = new stdClass;
-		$req_sql->ctx->on_off = 0;
+		$req_sql->ctx->on_off = '0';
 		$req_sql->where = "id = '".(int)$_POST["id"]."'";
 		$_app->sql->update($req_sql);
 

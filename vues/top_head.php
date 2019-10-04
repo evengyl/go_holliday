@@ -36,6 +36,13 @@
 
 <script src="/js/lightbox.js"></script>
 
+<script>
+	function reload_page()
+    {
+        document.location.reload(true);
+    }
+</script>
+
 
 <?
 if(isset($_app->title_page))

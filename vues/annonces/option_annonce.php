@@ -29,8 +29,8 @@ if(Config::$is_connect)
 				</div>
 			</div>
 		</div><?
-
-		require($_app->base_dir."/vues/annonces/modal_messagery.php");
+		$data = $annonce;
+		require($_app->base_dir."/vues/modal_messagery.php");
 	}
 }?>
 
