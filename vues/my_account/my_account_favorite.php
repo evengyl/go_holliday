@@ -19,6 +19,9 @@
                             <b><a href="/Annonces/<?= $row_annonce->id?>"><?= $row_annonce->title ?></a></b>
                             <br>
                             <span class="text-muted"><small>Date d'ajout : <?= $row_annonce->create_date ?></small></span>
+                            <br>
+                            <span class="text-muted"><small>Lieu : <?= $row_annonce->address[0]->address_lieux_dit." à ".$row_annonce->address[0]->address_localite ?></small></span>
+                            
                     </div>
                     <div class="col-xs-4">
                             <span class="text-muted"><small>Nombre de date validées : <b><?=(!empty($row_annonce->date_reserved))?count($row_annonce->date_reserved):0 ?></b></small></span>
@@ -34,7 +37,7 @@
                                 data-toggle="modal" 
                                 data-target="#view_avis_<?= $row_annonce->id ?>"
                             >
-                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
+                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=(isset($row_annonce->avis))?count($row_annonce->avis):"0"; ?>)</small>
                             </a>                        
                     </div>
                     <div class="col-xs-2">

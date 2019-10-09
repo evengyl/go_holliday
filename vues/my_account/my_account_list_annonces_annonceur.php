@@ -74,7 +74,7 @@
                                 data-toggle="modal" 
                                 data-target="#view_avis_<?= $row_annonce->id ?>"
                             >
-                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis</small>
+                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=(isset($row_annonce->avis))?count($row_annonce->avis):"0"; ?>)</small>
                             </a>  
                         </div>
                     </div>

@@ -27,7 +27,7 @@ Class my_account_list_annonces_annonceur extends base_module
 	{
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = 'annonces';
-		$sql_annonce->data = "id, user_name, user_last_name, id_utilisateurs, title, sub_title, active, user_validate, admin_validate, create_date, vues, private_message, date_annonces, habitat_name_sql";
+		$sql_annonce->data = "id, user_name, user_last_name, id_utilisateurs, title, sub_title, active, user_validate, admin_validate, create_date, vues, private_message, date_annonces, habitat_name_sql, avis";
 		$sql_annonce->order = ["id DESC"];
 		$sql_annonce->where = ["id_utilisateurs = $1 AND on_off = $2", [$this->_app->user->id_utilisateurs, 1] ];
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);

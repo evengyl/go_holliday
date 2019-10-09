@@ -18,7 +18,7 @@ Class my_account_favorite extends base_module
 
 		$req_sql = new stdClass();
 		$req_sql->table = "annonces";
-		$req_sql->data = "id, title, sub_title, id_utilisateurs, id_type_vacances, active, vues, create_date";
+		$req_sql->data = "id, title, sub_title, id_utilisateurs, id_type_vacances, active, vues, create_date, address, avis";
 		$req_sql->where = ["id IN $1",[$array_id_fav]];
 		$array_annonce_fav = $this->_app->sql->select($req_sql);
 

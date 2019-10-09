@@ -31,6 +31,7 @@ class Model_annonces
 		$this->text_sql_to_human = new ManyToManyType("text_sql_to_human", "", "");
 
 		$this->address = new ManyToManyType("annonce_address", "id", $second_where = "id");
+		$this->avis = new ManyToManyType("annonce_avis", "id_utilisateurs", $second_where = "id_annonce");
 		$this->commoditer_announces = new OneToManyType("annonce_commoditer", "id");
 
 		$this->private_message = new ManyToManyType($table = "private_message", $link_a_to_b = "id_utilisateurs", $second_where = "id_annonce");

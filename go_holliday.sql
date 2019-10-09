@@ -82,11 +82,12 @@ DROP TABLE IF EXISTS `annonce_avis`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `annonce_avis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_annonces` int(11) NOT NULL,
+  `id_annonce` int(11) NOT NULL,
   `create_date` varchar(25) NOT NULL,
-  `login_published` varchar(50) NOT NULL,
+  `id_utilisateurs` int(11) NOT NULL,
   `message` text NOT NULL,
   `active` tinyint(1) NOT NULL,
+  `star` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -97,7 +98,7 @@ CREATE TABLE `annonce_avis` (
 
 LOCK TABLES `annonce_avis` WRITE;
 /*!40000 ALTER TABLE `annonce_avis` DISABLE KEYS */;
-INSERT INTO `annonce_avis` VALUES (1,1,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(2,1,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(3,1,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(4,1,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(5,2,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(6,2,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(7,2,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(8,2,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(9,3,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(10,3,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(11,3,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(12,3,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1),(13,4,'20/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(14,4,'21/01/2019','evengyl','C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1),(15,4,'25/01/2019','evengyl','C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1),(16,4,'22/02/2019','evengyl','C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1);
+INSERT INTO `annonce_avis` VALUES (1,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,1),(2,225,'21/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1,5),(3,225,'25/01/2019',5,'C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,4),(4,225,'22/02/2019',5,'C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1,3),(5,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,2);
 /*!40000 ALTER TABLE `annonce_avis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +155,7 @@ CREATE TABLE `annonce_dates` (
 
 LOCK TABLES `annonce_dates` WRITE;
 /*!40000 ALTER TABLE `annonce_dates` DISABLE KEYS */;
-INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,5,'waiting'),(5,'08/04/2019','15/04/2019',250,225,5,'waiting'),(6,'01/09/2019','22/09/2019',300,225,5,'waiting'),(7,'23/08/2019','30/08/2019',350,225,5,'waiting'),(9,'01/08/2019','31/08/2019',0,229,5,'waiting'),(10,'01/09/2019','13/09/2019',818,229,5,'waiting');
+INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,5,'reserved'),(5,'08/04/2019','15/04/2019',250,225,5,'reserved'),(6,'01/09/2019','22/09/2019',300,225,5,'reserved'),(7,'23/08/2019','30/08/2019',350,225,5,'waiting'),(9,'01/08/2019','31/08/2019',0,229,5,'waiting'),(10,'01/09/2019','13/09/2019',818,229,5,'waiting');
 /*!40000 ALTER TABLE `annonce_dates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +390,7 @@ CREATE TABLE `private_message` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateurs` (`id_utilisateurs`),
   KEY `id_group` (`id_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,33 +485,6 @@ INSERT INTO `text_sql_to_human` VALUES (1,'spa','Spa / Sauna'),(2,'bar','Bar / B
 UNLOCK TABLES;
 
 --
--- Table structure for table `translate`
---
-
-DROP TABLE IF EXISTS `translate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `translate` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name_fr` varchar(255) NOT NULL,
-  `name_en` varchar(255) NOT NULL,
-  `name_nl` varchar(255) NOT NULL,
-  `name_code` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `translate`
---
-
-LOCK TABLES `translate` WRITE;
-/*!40000 ALTER TABLE `translate` DISABLE KEYS */;
-INSERT INTO `translate` VALUES (1,'Acceuil','','','__TRANS_accueil__'),(2,'Réservation','','','__TRANS_reservation__'),(3,'Contactez nous','','','__TRANS_contact_us__'),(5,'Ce que vous voulez','','','__TRANS_who_would_like__'),(6,'Reserver','','','__TRANS_reserver__'),(7,'Détails de contact','','','__TRANS__contact_detail__'),(8,'Adresse','','','__TRANS_address_title__'),(9,'Téléphone 2','','','__TRANS_tel_1__'),(10,'Téléphone','','','__TRANS_tel__'),(11,'Tous les prix sont TVAC','','','__TRANS_footer_price__'),(12,'Se connecter','','','__TRANS_login__'),(13,'Documentation','','','__TRANS_documentations__'),(14,'Envoyer','','','__TRANS_envoyer__'),(15,'Téléphone Administrateur','','','__TRANS_tel_mainteance__'),(16,'Téléphone Commercial','','','__TRANS_tel_commercial__');
-/*!40000 ALTER TABLE `translate` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `utilisateurs`
 --
 
@@ -529,7 +503,7 @@ CREATE TABLE `utilisateurs` (
   `address_localite` varchar(60) NOT NULL DEFAULT 'Aucun(e)',
   `zip_code` varchar(10) NOT NULL DEFAULT 'Aucun(e)',
   `pays` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
-  `genre` varchar(50) NOT NULL DEFAULT 'Aucun(e)',
+  `genre` varchar(10) NOT NULL DEFAULT 'Aucun(e)',
   `user_type` tinyint(4) NOT NULL,
   `id_background_profil` tinyint(4) NOT NULL DEFAULT '1',
   `account_verify` tinyint(1) NOT NULL DEFAULT '0',
@@ -547,7 +521,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','jean jaurès','12','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','test','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Sarah','Debeve','dark.evengyl@gmail.com',28,'0497312523','jean jaures','59','lablab','6567','Belgique','Monsieur',0,1,1,'CreateAccount5d8b810608e63497485790',1,'225','');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','rue sous ghoy','25','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Martin','valenduc','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','lablab','6567','Belgique','Monsieur',0,10,1,'CreateAccount5d8b810608e63497485790',1,'225','');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,7 +550,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,36,17,481,8,'10-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,51,24,638,10,'10-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -589,4 +563,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-04 13:59:45
+-- Dump completed on 2019-10-09 16:58:24
