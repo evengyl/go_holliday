@@ -13,7 +13,7 @@ class Autoloader
        {
             case "_db_connect":
 
-                require("Evengyl/modele/".$class.".class.php");
+                require($base_dir."/app/modele/Evengyl/modele/".$class.".class.php");
 
             break;
 
@@ -31,7 +31,7 @@ class Autoloader
             case "OneToOneType":
             case "ManyToManyType":
 
-                require("Evengyl/core/".$class.".php");
+                require($base_dir."/app/modele/Evengyl/core/".$class.".php");
 
             break;
 
