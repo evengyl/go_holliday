@@ -44,7 +44,7 @@ RewriteRule ^(Condition)[/]{0,1}$ 		?page=condition [L]
 
 
 RewriteRule ^(admin)[/]{0,1}$ ?page=$1 [L]
-RewriteRule ^(admin)/([a-z_]+)[/]{0,1}$ ?page=$1&action=$2 [L]
+RewriteRule ^(admin)/([a-z_]+)[/]{0,1}(.*){0,1}$ ?page=$1&action=$2&login_simulate=$3 [L]
 RewriteRule ^(admin)/(validate)/([0-9]+)[/]{0,1}$ ?page=$1&action=$2&id=$3 [L]
 Options -Indexes
 

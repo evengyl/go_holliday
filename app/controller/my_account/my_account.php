@@ -9,6 +9,8 @@ Class my_account extends base_module
 		parent::__construct($_app);
 		$this->_app->title_page = "Mon compte";
 
+
+
 		if(Config::$is_connect)
 		{
 			$this->render_tpl();

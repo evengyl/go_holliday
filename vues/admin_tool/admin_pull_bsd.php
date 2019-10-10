@@ -1,4 +1,4 @@
- <div class="col-lg-9" style="background:#DCDCDC;">
+ <div class="col-lg-10" style="background:#DCDCDC;">
     <div class="col-lg-12 annonces_list text-center">
 		<h3 class="thin"><b>Action éffectuée : Pull BSD</b></h3>
 		<div class="container">

@@ -11,6 +11,9 @@ Class admin_list_annonceurs extends base_module
 	{		
 		parent::__construct($_app);
 
+		//redirige l'admin sur le compte client en simulant sont profil complet
+		$this->_app->simulate_profil_user();
+
 
 		if(isset($_POST["send_message_annonceur"]))
 			$this->_app->send_new_mail_client("Bonjour chère Annonceur ".$_POST["name_annonceur"]." : <br>".$_POST["message"], $_POST["email_annonceur"], "admin_say", "Message direct de l'administration de ".$this->_app->site_name."");
@@ -65,8 +68,20 @@ Class admin_list_annonceurs extends base_module
 
 			foreach($res_sql_list_annonceurs as $key => $row_clients)
 			{
+				//sql for id_user;
+				$sql_get_id_user = new stdClass();
+				$sql_get_id_user->table = 'login';
+				$sql_get_id_user->data = "login";
+				$sql_get_id_user->where = ["id_utilisateurs = $1", [$row_clients->id]];
+				$res_sql_get_id_user = $this->_app->sql->select($sql_get_id_user);
+				$res_sql_list_annonceurs[$key]->login_user_app = $res_sql_get_id_user[0]->login;
+
+
+
+
 				$res_sql_list_annonceurs[$key]->vues = 0;
 				$res_sql_list_annonceurs[$key]->nb_annonces = 0;
+
 
 				$sql_get_infos_annonceurs = new stdClass();
 				$sql_get_infos_annonceurs->table = 'annonces';

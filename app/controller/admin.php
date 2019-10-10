@@ -11,13 +11,24 @@ Class admin extends base_module
 
 		$this->_app->navigation->set_breadcrumb("Option d'administration");
 
+
+		//quand on a été simuler un profil pour le voir, si on retourne sur l'admin on dois remettre le compte en ordre
+		 if(isset($_SESSION["return_ad"]) && $_SESSION["return_ad"] == 1)
+		 {
+		 	$_SESSION["pseudo"] = "evengyl";
+			$_SESSION["return_ad"] = 0;
+			header('Location: /admin');
+		 }
+
+
 		if(isset($_SESSION['pseudo']))
 		{
 			$level_current_user = $this->_app->check_level_user($_SESSION['pseudo']);
 
 			if($level_current_user == 3)
 			{
-					
+				
+
 				if(isset($_GET['action']))
 				{
 					switch ($_GET['action'])
@@ -26,30 +37,36 @@ Class admin extends base_module
 							$this->other_mod_to_exec[] = 'admin_edit_config_app';
 						break;
 
-						case "eval":
-							$this->other_mod_to_exec[] = 'admin_eval';
-						break;
-
 						case "pull_bsd":
 							$this->other_mod_to_exec[] = 'admin_pull_bsd';
 						break;
 
-						case "go_to_annonceur_view":
-							$this->set_status(1);
+						case "stat_view":
+							$this->other_mod_to_exec[] = 'admin_stats_site';
 						break;
 
-						case "go_to_client_view":
-							$this->set_status(0);
-						break;
+						case "annonce_wait_validate_admin":
+							$this->other_mod_to_exec[] = 'admin_verify_new_announce';
+						break;		
+
+						case "client_list":
+							$this->other_mod_to_exec[] = 'admin_list_clients';
+						break;	
+
+						case "annonceur_list":
+							$this->other_mod_to_exec[] = 'admin_list_annonceurs';
+						break;	
+
+						default:
+							$this->other_mod_to_exec[] = 'admin_default_intro';
+
 					}
+
 				}
+				else
+						$this->other_mod_to_exec[] = 'admin_default_intro';
 
-				$this->other_mod_to_exec[] = 'admin_stats_site';
-				$this->other_mod_to_exec[] = 'admin_verify_new_announce';
-				$this->other_mod_to_exec[] = 'admin_list_annonceurs';
-				$this->other_mod_to_exec[] = 'admin_list_clients';
-				//$this->other_mod_to_exec[] = 'admin_verify_status_vip';
-
+				
 				$this->render_tpl(); //on affiche l'administration
 
 			}
@@ -67,19 +84,4 @@ Class admin extends base_module
 				
 		}	
 	}
-
-	
-
-	public function set_status($user_type)
-	{
-		$sql = new stdClass();
-		$sql->table = "utilisateurs";
-		$sql->ctx = new stdClass();
-		$sql->ctx->user_type = $user_type;
-		$sql->where = "id = ".$this->_app->user->id_utilisateurs;
-
-		$this->_app->sql->update($sql);
-		$this->_app->set_user_infos_on_app();
-	}
-	
 }

@@ -1,4 +1,4 @@
- <div class="col-lg-9">
+ <div class="col-xs-10">
     <div class="col-lg-12 annonces_list text-center">
 		<h3 class="thin">Statistiques vues</h3>
 		<div id="graphViewsStats"></div>					

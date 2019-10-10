@@ -1,5 +1,5 @@
 <div class="navbar navbar-inverse navbar-fixed-top headroom" ><?
-    if(isset($_app->user->level_admin) && $_app->user->level_admin == 3){
+    if(isset($_app->user->level_admin) && $_app->user->level_admin == 3 || (isset($_SESSION["return_ad"]) && $_SESSION["return_ad"] == 1)){
         ?><a style="float:left; margin-left:15px;" class="btn btn-info <?=($_GET['page'] == 'admin')?'active':''; ?>"  href="/admin">Administration</a><?
     }?>
 

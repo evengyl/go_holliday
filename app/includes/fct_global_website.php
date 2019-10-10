@@ -71,6 +71,7 @@ Class fct_global_website
 
 	protected function set_user_infos_on_app()
 	{
+
 		$req_sql = new stdClass;
 		$req_sql->table = "login";
 		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre";
@@ -85,6 +86,19 @@ Class fct_global_website
 		//on ressemble les deux array pour mettre a jour l'_app->user
 		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
 		return $merge_array_user;
+	}
+
+	public function simulate_profil_user()
+	{
+		//redirige l'admin sur le compte client en simulant sont profil complet
+		if(isset($_GET['login_simulate']) && !empty($_GET['login_simulate']))
+		{
+			$_SESSION["pseudo"] = $_GET['login_simulate'];
+			$_SESSION["return_ad"] = 1;
+			header('Location: /Mon_compte');
+		}
+		else
+			return false;
 	}
 
 	public function check_level_user($login)

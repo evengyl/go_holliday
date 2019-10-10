@@ -1,4 +1,4 @@
- <div class="col-lg-12">
+ <div class="col-xs-10">
     <div class="col-lg-12 annonces_list text-center">
 		<h3 class="thin">Liste des annonces en attente de validation administrative</h3>
 		<div class="container">

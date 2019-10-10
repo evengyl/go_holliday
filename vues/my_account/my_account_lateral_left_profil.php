@@ -3,7 +3,7 @@
         <img class="img-responsive" src="/images/background_profil/<?= $_app->user->id_background_profil; ?>.jpg" alt="..."/>
         <div class="in_top_right"><button data-toggle="modal" data-target="#change_back_profil" class="btn" style=""><i class="fa fa-cog"></i></button></div>
     </div>
-
+    
     <div style="text-align: center; text-transform: none; margin-top: -65px;">
     	<div class="content-image-profil">
             <span><?
@@ -29,6 +29,7 @@
     <p class="text-muted">
         @Adresse : <b><?= $_app->user->address_numero.", Rue ".ucfirst($_app->user->address_rue)." à ".$_app->user->zip_code." : ".ucfirst($_app->user->address_localite) ?></b>
     </p>
+
     <hr>
     <div class="block_suivis"><?
         if($_app->can_do_user->view_infos_annonce)
