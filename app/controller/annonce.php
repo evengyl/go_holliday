@@ -28,11 +28,8 @@ Class annonce extends base_module
 		// Fin
 
 
-			
-
 		if($this->id_annonce = $this->_app->verif_if_announce_exist($_GET['id_annonce']))
 		{
-
 			$array_img_annonce = $this->get_img_files();
 			$this->annonce = $this->_app->get_announce_user($this->id_annonce);
 			$this->_app->title_page = $this->annonce->title.", ".$this->annonce->sub_title;
@@ -42,8 +39,22 @@ Class annonce extends base_module
 			$this->add_vues();
 			$this->check_if_let_avis();
 
+
+			//partie gestion des avis client
+				//on check le form avec la session du random id form pour l'avis
+				if(isset($_SESSION['rand_id_for_avis']) && isset($_POST['rand_id_for_avis']))
+				{
+					if($_SESSION['rand_id_for_avis'] == $_POST['rand_id_for_avis'])
+						$this->set_new_avis();
+				}
+
+				//on génère un nombre aléatoire pour valider un form unique pour la demande de date
+				$_SESSION['rand_id_for_avis'] = str_replace(".", "", uniqid("Avis", true));
+			// Fin
+
 			$this->assign_var("slide_img", $array_img_annonce)
 			->assign_var('rand_id_for_demand',$_SESSION['rand_id_for_demand'])
+			->assign_var('rand_id_for_avis',$_SESSION['rand_id_for_avis'])
 			->assign_var("annonce", $this->annonce)
 			->assign_var("list_start_date", $this->list_start_date)
 			->assign_var("list_end_date", $this->list_end_date)
@@ -61,33 +72,62 @@ Class annonce extends base_module
 	}
 
 
+	private function set_new_avis()
+	{
+		$object_to_sql = new stdClass();
+		$object_to_sql->table = "annonce_avis";
+		$object_to_sql->ctx = new stdClass();
+		$object_to_sql->ctx->id_annonce = $this->annonce->id;
+		$object_to_sql->ctx->create_date = date("d/m/Y");
+		$object_to_sql->ctx->id_utilisateurs = $this->_app->user->id_utilisateurs;
+		$object_to_sql->ctx->message = $_POST['message'];
+		$object_to_sql->ctx->active = 1;
+		$object_to_sql->ctx->star = (int)$_POST["note"];
+		
+		$this->_app->sql->insert_into($object_to_sql);
+	}
+
 
 
 	private function check_if_let_avis()
 	{
-		//prvoir un bouton laisser un avis, mais uniquement sur les user qui on une date reserved et le end date supérieur à la date actuel<?
-		$date_today = mktime();
-
-		//on va chercher si un date correspond dnas la bsd
-		$req_sql_get_date = new stdClass();
-		$req_sql_get_date->table = 'annonce_dates';
-		$req_sql_get_date->data = "*";
-		$req_sql_get_date->where = ["state = $1 AND id_utilisateurs = $2", ["reserved", $this->_app->user->id_utilisateurs]];
-		$res_sql_get_date = $this->_app->sql->select($req_sql_get_date);
+		//d'abbord on vois si il y a déjà un avis sur cette annocne apr cette persoone
+		$req_sql_get_avis = new stdClass();
+		$req_sql_get_avis->table = 'annonce_avis';
+		$req_sql_get_avis->data = "id";
+		$req_sql_get_avis->where = ["id_annonce = $1 AND id_utilisateurs = $2 AND active = $3", [$this->annonce->id, $this->_app->user->id_utilisateurs, "1"]];
+		$res_sql_get_avis = $this->_app->sql->select($req_sql_get_avis);
 
 		$this->_app->user->can_let_avis = 0;
 		$this->_app->user->as_reserved = 0;
-		
-		if(!empty($res_sql_get_date))
+
+		if(empty($res_sql_get_avis))
 		{
-			$this->_app->user->as_reserved = 1;
-			foreach($res_sql_get_date as $row_date)
+			$date_today = mktime();
+
+			//on va chercher si un date correspond dnas la bsd
+			$req_sql_get_date = new stdClass();
+			$req_sql_get_date->table = 'annonce_dates';
+			$req_sql_get_date->data = "*";
+			$req_sql_get_date->where = ["state = $1 AND id_utilisateurs = $2", ["reserved", $this->_app->user->id_utilisateurs]];
+			$res_sql_get_date = $this->_app->sql->select($req_sql_get_date);
+
+			
+
+			if(!empty($res_sql_get_date))
 			{
-				$date = DateTime::createFromFormat('d/m/Y', $row_date->end_date);
-				if(mktime() > $date->format('U'))
-					$this->_app->user->can_let_avis = 1;
+				$this->_app->user->as_reserved = 1;
+				foreach($res_sql_get_date as $row_date)
+				{
+					$date = DateTime::createFromFormat('d/m/Y', $row_date->end_date);
+					if(mktime() > $date->format('U'))
+						$this->_app->user->can_let_avis = 1;
+				}
 			}
 		}
+		else 
+			$this->_app->user->can_let_avis = 0;
+
 	}
 
 	private function push_new_demand($post)

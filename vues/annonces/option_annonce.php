@@ -11,6 +11,12 @@ if(Config::$is_connect)
 				<div class="alert alert-info">
 				<strong>Patience</strong>, vous avez déjà des dates pour cette endroits <i class="far fa-lg fa-smile-wink"></i>
 				<strong>&nbsp;(vous pourrez laisser un avis par après en revenant ici !</strong></div><?
+			}
+			else if($_app->user->as_reserved == 0)
+			{?>
+				<div class="alert alert-info">
+					Vous n'avez pas encore de dates réservée et validée pour cette annonce&nbsp;<i class="far fa-lg fa-grin-beam-sweat"></i>
+				</div><?
 			}?>
 			
 			<div class="row" style="margin-top:25px;"><?
@@ -46,23 +52,23 @@ if(Config::$is_connect)
 						if($_app->user->can_let_avis == 1)
 						{?>
 							<div class="btn-group" role="group">
-								<button class="btn btn-warning" data-toggle="modal" data-target="#modal_date">
+								<button class="btn btn-warning" data-toggle="modal" data-target="#modal_avis">
 									<i class="far fa-lg fa-star"></i>&nbsp;&nbsp;&nbsp;Laisser un avis de votre passage
 								</button>
 
-								<div class="modal fade" id="Mesage_to_client_<?= $row_client->id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal fade" id="modal_avis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								    <div class="modal-dialog modal-lg" role="document">
 								        <div class="modal-content">
 								            <div class="modal-header">
 								                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								                <h4 class="modal-title">Enoyer un mail à <?= $row_client->name." ".$row_client->last_name ?></h4>
+								                <h4 class="modal-title">Laisser un avis pour <?= $annonce->title ?></h4>
 								            </div>
 								            <div class="modal-body">
 								            	<form action="#" method="post">
-								            		<input type="hidden" name="send_message_client">
-								            		<input type="hidden" name="email_client" value="<?= $row_client->mail; ?>">
-								            		<input type="hidden" name="name_client" value="<?= $row_client->name." ".$row_client->last_name ?>">
-								                    <textarea rows="3" name="message" class="form-control" placeholder=""></textarea>
+								            		<? require($_app->base_dir."/vues/annonces/notation_etoile.php"); ?>
+								                    <textarea rows="2" name="message" class="form-control" placeholder="Laisser votre avis"></textarea>
+								                    <input type="hidden" name="note" value="" id="note"/>
+								                    <input type="hidden" name="rand_id_for_avis" value="<?= $_SESSION['rand_id_for_avis']; ?>" id="note"/>
 								                    <button style="margin-top:15px;" class="btn btn-info" type="submit" role="button">
 								                        Envoyer
 								                    </button>
