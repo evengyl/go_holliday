@@ -1,5 +1,5 @@
 <?
-if(!isset($_SESSION['pseudo'])) //donc il est connecté
+if(!Config::$is_connect) //donc il est connecté
 {
 //si la personne a déjà tenter une connexion, sont pseudo qu'il à déjà entré vas se remettre dans le input
 	if(isset($_SESSION['first_try_pseudo']))
@@ -57,7 +57,11 @@ if(!isset($_SESSION['pseudo'])) //donc il est connecté
 	</div><?
 }
 else
-{?>
+{
+	header('Location: /Mon_compte');
+
+
+	/*?>	
 	<div class="secondary" id="head"></div>
 	<div class="container">
 		<div class="row">
@@ -81,7 +85,7 @@ else
 				</div>
 			</article>
 		</div>
-	</div><?
+	</div><?*/
 }
 
 include("modal_recorvery_password.php");
