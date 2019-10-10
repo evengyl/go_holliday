@@ -61,27 +61,13 @@
                                         echo $tmp; ?>
                                     </b></footer>
                                 </blockquote>
-                                <button id="modal_<?= $row_last_message->id;?>" data-toggle="modal" data-id_message="<?= $row_last_message->id;?>" data-target="#send_message_<?= $row_last_message->id;?>" class="btn btn-warning btn-sm" style="padding: 5px 20px;">
+                                <button id="modal_<?= $row_last_message->id;?>" 
+                                        data-toggle="modal" 
+                                        data-id_message="<?= $row_last_message->id;?>" 
+                                        data-target="#send_message_<?= $row_last_message->id;?>" 
+                                        class="btn btn-warning btn-sm" style="padding: 5px 20px;">
                                     Ouvrir
                                 </button>
-                                <script>
-                                $(document).ready(function()
-                                {
-                                    $("button[data-id_message='<?= $row_last_message->id;?>']").click(function(e)
-                                    {
-                                        $('.zone_message').animate({scrollTop : 9999999});
-
-                                        var id_message = $(this).data("id_message");
-                                        $.ajax({
-                                            type : 'POST',
-                                            url  : '/ajax/controller/set_view_message.php',
-                                            dataType : "HTML",
-                                            data : {"action" : "set_view_message", "id_message" : id_message},
-                                        
-                                        });
-                                    });
-                                });
-                                </script>
                             </div>
                         </div>
                     </div>
@@ -108,6 +94,20 @@
 <script>
 $(document).ready(function()
 {
+    $("button[data-id_message='<?= $row_last_message->id;?>']").click(function(e)
+    {
+        $('.zone_message').animate({scrollTop : 9999999});
+
+        var id_message = $(this).data("id_message");
+        $.ajax({
+            type : 'POST',
+            url  : '/ajax/controller/set_view_message.php',
+            dataType : "HTML",
+            data : {"action" : "set_view_message", "id_message" : id_message},
+        
+        });
+    });
+
     $("button[data-action='delete_convers']").click(function(e)
     {
         var confirmate = confirm("Voulez-vous vraiment supprimer cette conversation ?");

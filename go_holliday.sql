@@ -308,7 +308,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1548,0,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',74,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',46,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',17,1,1,1,'13/09/2019',0),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',24,0,1,1,'24/09/2019',0),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',21,1,1,1,'26/09/2019',0),(245,NULL,NULL,NULL,4,NULL,NULL,'00/00/0000','00/00/0000',0,0,0,0,'02/10/2019',0);
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1549,0,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',74,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',46,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',17,1,1,1,'13/09/2019',0),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',24,0,1,1,'24/09/2019',0),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',21,1,1,1,'26/09/2019',0),(245,NULL,NULL,NULL,4,NULL,NULL,'00/00/0000','00/00/0000',0,0,0,0,'02/10/2019',0);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -563,4 +563,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-09 16:58:24
+-- Dump completed on 2019-10-09 17:00:48

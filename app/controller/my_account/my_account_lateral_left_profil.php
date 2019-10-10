@@ -101,21 +101,21 @@ Class my_account_lateral_left_profil extends base_module
 
 		$sql_message = new stdClass();
 		$sql_message->table = 'private_message';
-		$sql_message->data = "vu_receiver, id_group, id_user_sender, id";
+		$sql_message->data = "vu_receiver, id_group, id_user_sender";
 		$sql_message->order = ["id DESC"];
-		$sql_message->where = ["id_utilisateurs = $1", [$this->_app->user->id_utilisateurs]];
+		$sql_message->where = ["id_user_sender LIKE $1", [$this->_app->user->id_utilisateurs]];
 		$res_sql_message = $this->_app->sql->select($sql_message);
 
 		if(!empty($res_sql_message))
 		{
-			
 			$tmp = array();
 			foreach($res_sql_message as $row_message)
 			{
+
 				if(!in_array($row_message->id_group, $tmp))
 				{
-
 					$tmp[] = $row_message->id_group;
+
 					$this->_app->user->total_private_message++;
 					if($row_message->vu_receiver == 0)
 					{

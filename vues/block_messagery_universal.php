@@ -63,6 +63,9 @@
     						    style="margin-top:15px;" class="btn-sm btn btn-info" type="button">
     						    Envoyer
 					       	</button>
+                            <div class="loading_ajax col-xs-12">
+                                <img src="/images/loading.gif">
+                            </div>
                         </div>
 					</form>
 
@@ -123,17 +126,23 @@ $(document).ready(function()
             return false;
         }
 
+
+        $("div.loading_ajax").show();
+
+        
         $.ajax({
             type : 'POST',
             url  : '/ajax/controller/send_message.php',
             dataType : "HTML",
             data : {"action" : "send_message", "id_annonce" : id_annonce, "id_user_sender" : id_user_sender, "id_user_receiver" : id_user_receiver, "id_group" : id_group, "message" : message},
+
             success : function(data_return)
             {
-                $('#<?= $id_group; ?>').modal('toggle');
+                $('#send_message_<?= $id_specific_modal; ?>').modal('toggle');
             },
             complete : function()
             {
+               $("div.loading_ajax").hide();
                reload_page();
            	   $(".modal button[data-action='send_message_<?= $id_group; ?>']").parent().find("textarea").val("");
             }

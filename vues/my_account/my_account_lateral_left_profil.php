@@ -15,7 +15,7 @@
                 echo '<i class="fas fa-chess-rook" style="color:#9c7ccf;"></i>';?>
         	</span>
         </div>
-    	<h4><?= ucfirst($_app->user->last_name)." ".ucfirst($_app->user->name) ?></h4>
+    	<h4><?= ucfirst($_app->user->name)." ".ucfirst($_app->user->last_name) ?></h4>
         <h5><?= ucfirst($_app->user->login) ?></h5>
     	<p class="text-muted" ><small>@Type D'utilisateur : <b><?= $_app->can_do_user->text_user_type ?></b></small></p>
     </div>

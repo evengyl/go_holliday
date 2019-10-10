@@ -7,18 +7,18 @@ $base_dir = dirname(dirname(dirname(dirname(__FILE__))));
 
 require $base_dir.'/app/modele/Config.php';
 
-require 'Evengyl/modele/_db_connect.class.php';
-require 'Evengyl/core/all_query.php';
-require 'Evengyl/core/select.php';
-require 'Evengyl/core/var_processing.php';
-require 'Evengyl/core/parse_table_jointure.php';
-require 'Evengyl/core/where.php';
-require 'Evengyl/core/order_processing.php';
-require 'Evengyl/core/limit_processing.php';
-require 'Evengyl/core/ManyToManyType.php';
-require 'Evengyl/core/OneToOneType.php';
-require 'Evengyl/core/OneToManyType.php';
-require 'Evengyl/core/NormalType.php';
+require $base_dir.'/app/modele/Evengyl/modele/_db_connect.class.php';
+require $base_dir.'/app/modele/Evengyl/core/all_query.php';
+require $base_dir.'/app/modele/Evengyl/core/select.php';
+require $base_dir.'/app/modele/Evengyl/core/var_processing.php';
+require $base_dir.'/app/modele/Evengyl/core/parse_table_jointure.php';
+require $base_dir.'/app/modele/Evengyl/core/where.php';
+require $base_dir.'/app/modele/Evengyl/core/order_processing.php';
+require $base_dir.'/app/modele/Evengyl/core/limit_processing.php';
+require $base_dir.'/app/modele/Evengyl/core/ManyToManyType.php';
+require $base_dir.'/app/modele/Evengyl/core/OneToOneType.php';
+require $base_dir.'/app/modele/Evengyl/core/OneToManyType.php';
+require $base_dir.'/app/modele/Evengyl/core/NormalType.php';
 
 $directory = $base_dir.'/app/model_table/';
 if( is_dir($directory) ){
