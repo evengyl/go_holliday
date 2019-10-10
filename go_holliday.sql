@@ -89,7 +89,7 @@ CREATE TABLE `annonce_avis` (
   `active` tinyint(1) NOT NULL,
   `star` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `annonce_avis` (
 
 LOCK TABLES `annonce_avis` WRITE;
 /*!40000 ALTER TABLE `annonce_avis` DISABLE KEYS */;
-INSERT INTO `annonce_avis` VALUES (1,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,1),(2,225,'21/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1,5),(3,225,'25/01/2019',5,'C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,4),(4,225,'22/02/2019',5,'C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1,3),(5,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,2);
+INSERT INTO `annonce_avis` VALUES (1,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',0,1),(2,225,'21/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera en fait non c\'est le deuxieme',1,5),(3,225,'25/01/2019',5,'C\'est le troisemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,4),(4,225,'22/02/2019',5,'C\'est le quatriemeavis du site, j\'espère qu\'il sera bien foutu et que ça marchera ',1,3),(5,225,'20/01/2019',5,'C\'est le premier avis du site, j\'espère qu\'il sera bien foutu et que ça marchera',1,2),(6,225,'10/10/2019',5,'test',1,5),(7,225,'10/10/2019',5,'ahah super',1,5);
 /*!40000 ALTER TABLE `annonce_avis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `annonce_dates` (
 
 LOCK TABLES `annonce_dates` WRITE;
 /*!40000 ALTER TABLE `annonce_dates` DISABLE KEYS */;
-INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,5,'reserved'),(5,'08/04/2019','15/04/2019',250,225,5,'reserved'),(6,'01/09/2019','22/09/2019',300,225,5,'reserved'),(7,'23/08/2019','30/08/2019',350,225,5,'waiting'),(9,'01/08/2019','31/08/2019',0,229,5,'waiting'),(10,'01/09/2019','13/09/2019',818,229,5,'waiting');
+INSERT INTO `annonce_dates` VALUES (2,'01/04/2019','07/04/2019',300,225,5,'reserved'),(5,'08/04/2019','15/04/2019',250,225,5,'reserved'),(6,'01/09/2019','22/09/2019',300,225,5,'reserved'),(7,'23/08/2019','30/08/2020',350,225,5,'reserved'),(9,'01/08/2019','31/08/2019',0,225,5,'reserved'),(10,'01/09/2019','13/09/2019',818,225,5,'reserved');
 /*!40000 ALTER TABLE `annonce_dates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +308,7 @@ CREATE TABLE `annonces` (
 
 LOCK TABLES `annonces` WRITE;
 /*!40000 ALTER TABLE `annonces` DISABLE KEYS */;
-INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1549,0,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',74,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',46,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',17,1,1,1,'13/09/2019',0),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',24,0,1,1,'24/09/2019',0),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',21,1,1,1,'26/09/2019',0),(245,NULL,NULL,NULL,4,NULL,NULL,'00/00/0000','00/00/0000',0,0,0,0,'02/10/2019',0);
+INSERT INTO `annonces` VALUES (210,1,1,'2,3',4,'testtata','test sub','27/09/2019','27/10/2019',1578,0,1,1,'28/01/2019',1),(225,1,3,'2,3',4,'Premi&egrave;re annonce','Celle ci fait office d\'alpha test','01/04/2019','30/09/2019',169,1,1,1,'02/08/2019',1),(229,1,5,'1,2,3',4,'aller deuxieme test','on va voir','01/04/2019','30/09/2019',46,1,1,1,'05/08/2019',1),(236,1,5,'1,2',4,'testtest','testtest','01/09/2019','29/09/2019',17,1,1,1,'13/09/2019',0),(243,1,4,'1,2',4,'Votre Titre','Votre sous-titre','01/09/2019','01/11/2019',24,0,1,1,'24/09/2019',0),(244,1,6,'1,2,3',4,'aller on test un peu le mode de cr&eacute;ation d\'annonce','il faut un petit sous titre quand m&ecirc;me','01/09/2019','04/11/2019',21,1,1,1,'26/09/2019',0),(245,NULL,NULL,NULL,4,NULL,NULL,'00/00/0000','00/00/0000',0,0,0,0,'02/10/2019',0);
 /*!40000 ALTER TABLE `annonces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `private_message` (
   PRIMARY KEY (`id`),
   KEY `id_utilisateurs` (`id_utilisateurs`),
   KEY `id_group` (`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,6 +399,7 @@ CREATE TABLE `private_message` (
 
 LOCK TABLES `private_message` WRITE;
 /*!40000 ALTER TABLE `private_message` DISABLE KEYS */;
+INSERT INTO `private_message` VALUES (1,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h09',1,0,1),(2,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h12',1,0,1),(3,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h14',1,0,1),(4,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h14',1,0,1),(5,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'rzqr','10/10/2019','8h15',1,0,1),(6,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h15',1,0,1),(7,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h16',1,0,1),(8,'4','1,4','GroupMessagery5d9ecaf722254635938348',210,'test','10/10/2019','8h18',1,1,1),(10,'4','4,1','GroupMessagery5d9ecaf722254635938348',210,'atatat','10/10/2019','8h25',1,0,0);
 /*!40000 ALTER TABLE `private_message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,7 +522,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','rue sous ghoy','25','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Martin','valenduc','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','lablab','6567','Belgique','Monsieur',0,10,1,'CreateAccount5d8b810608e63497485790',1,'225','');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','rue sous ghoy','25','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Martin','valenduc','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','lablab','6567','Belgique','Monsieur',0,10,1,'CreateAccount5d8b810608e63497485790',1,'225','10/06/2017');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -550,7 +551,7 @@ CREATE TABLE `vues` (
 
 LOCK TABLES `vues` WRITE;
 /*!40000 ALTER TABLE `vues` DISABLE KEYS */;
-INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,51,24,638,10,'10-2019');
+INSERT INTO `vues` VALUES (1,4,20,0,3,1,'01-2019'),(2,5,15,0,2,0,'02-2019'),(3,6,10,10,0,0,'03-2019'),(4,7,50,0,0,0,'04-2019'),(5,9,20,8,0,0,'05-2019'),(6,54,10,6,30,6,'06-2019'),(7,1,24,24,81,8,'07-2019'),(8,14,173,35,212,10,'08-2019'),(9,5,113,48,109,12,'09-2019'),(10,3,79,36,659,12,'10-2019');
 /*!40000 ALTER TABLE `vues` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -563,4 +564,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-09 17:00:48
+-- Dump completed on 2019-10-10 16:26:12
