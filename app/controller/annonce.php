@@ -40,6 +40,7 @@ Class annonce extends base_module
 			$this->render_date_text();
 			$this->get_list_date_demand();
 			$this->add_vues();
+			$this->check_if_let_avis();
 
 			$this->assign_var("slide_img", $array_img_annonce)
 			->assign_var('rand_id_for_demand',$_SESSION['rand_id_for_demand'])
@@ -59,6 +60,35 @@ Class annonce extends base_module
 		
 	}
 
+
+
+
+	private function check_if_let_avis()
+	{
+		//prvoir un bouton laisser un avis, mais uniquement sur les user qui on une date reserved et le end date supérieur à la date actuel<?
+		$date_today = mktime();
+
+		//on va chercher si un date correspond dnas la bsd
+		$req_sql_get_date = new stdClass();
+		$req_sql_get_date->table = 'annonce_dates';
+		$req_sql_get_date->data = "*";
+		$req_sql_get_date->where = ["state = $1 AND id_utilisateurs = $2", ["reserved", $this->_app->user->id_utilisateurs]];
+		$res_sql_get_date = $this->_app->sql->select($req_sql_get_date);
+
+		$this->_app->user->can_let_avis = 0;
+		$this->_app->user->as_reserved = 0;
+		
+		if(!empty($res_sql_get_date))
+		{
+			$this->_app->user->as_reserved = 1;
+			foreach($res_sql_get_date as $row_date)
+			{
+				$date = DateTime::createFromFormat('d/m/Y', $row_date->end_date);
+				if(mktime() > $date->format('U'))
+					$this->_app->user->can_let_avis = 1;
+			}
+		}
+	}
 
 	private function push_new_demand($post)
 	{

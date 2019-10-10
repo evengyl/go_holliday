@@ -3,6 +3,10 @@
 
     <div class="row">
         <h2 class="thin">Mon compte</h2>
+        <p class="text-center text-danger">
+            <b><?= (isset($_SESSION["error_admin"]))?$_SESSION["error_admin"]:''; ?></b>
+        </p>
+
         <?=(isset($_SESSION['error_change_password']))?"<h4 style='color:red;' class='title'>" . $_SESSION['error_change_password'] . "</h4><hr>":""; ?>
     </div>
 
@@ -44,3 +48,5 @@
 
     </div>
 </div>
+
+<? unset($_SESSION["error_admin"]); ?>

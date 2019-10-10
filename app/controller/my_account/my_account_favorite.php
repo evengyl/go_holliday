@@ -23,6 +23,28 @@ Class my_account_favorite extends base_module
 		$array_annonce_fav = $this->_app->sql->select($req_sql);
 
 		$array_annonce_fav = $this->_app->get_first_image($array_annonce_fav);
+
+		
+
+		if(!empty($array_annonce_fav))
+		{
+			foreach($array_annonce_fav as $row_annonce)
+			{
+				$row_annonce->total_avis = 0;
+
+			
+				if(isset($row_annonce->avis))
+				{
+					foreach($row_annonce->avis as $row)
+					{
+						if($row->active == 1)
+							$row_annonce->total_avis++;
+					}
+				}
+
+			}					
+		}
+
 		return $array_annonce_fav;
 	}
 

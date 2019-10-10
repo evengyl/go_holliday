@@ -42,6 +42,16 @@ Class my_account_list_annonces_annonceur extends base_module
 				$row_annonce->nb_reserved = 0;
 				$row_annonce->total_price_win = 0;
 				$row_annonce->total_price_afk = 0;
+				$row_annonce->total_avis = 0;
+
+
+				if(isset($row_annonce->avis)){
+					foreach($row_annonce->avis as $row)
+					{
+						if($row->active == 1)
+							$row_annonce->total_avis++;
+					}
+				}
 
 				if(!isset($row_annonce->date_annonces)) continue;
 				foreach($row_annonce->date_annonces as $key => $row_date)

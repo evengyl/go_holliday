@@ -12,9 +12,7 @@ Class my_account extends base_module
 
 
 		if(Config::$is_connect)
-		{
 			$this->render_tpl();
-		}
 		else
 		{
 			$_SESSION["error_admin"] = "Vous n'avez pas accès à cette page.</br>Vous devez d'abord vous connecter";

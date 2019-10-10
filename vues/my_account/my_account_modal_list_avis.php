@@ -13,8 +13,6 @@
                         if($row_avis->active == 0) continue;?>
                         <li class="annonce" style="padding-top:15px;">
                             <div class="row" style="padding-left:15px; padding-right:15px;">
-
-
                                 <div class="col-xs-12">
                                         <b><a href="/Annonces/<?= $row_avis->id?>"><?= $row_annonce->title ?></a></b>
                                         <br>
@@ -23,6 +21,13 @@
                                         <span class="text-muted"><small>Le : <?= $row_avis->create_date ?>"</small></span>
                                         
                                 </div><?
+                                
+                                if($_app->user->level_admin == 3)
+                                {?>
+                                    <button style="position:absolute; right:25px; padding:3px 7px;" class="btn btn-xs btn-danger" title="Retirer l'avis" data-action="Delete_avis" data-id_avis="<?= $row_avis->id; ?>">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button><?
+                                }
                                     
                                 $star_max = 5;
                                 $full = $row_avis->star;
@@ -57,3 +62,6 @@
         </div>
     </div>
 </div>
+
+
+

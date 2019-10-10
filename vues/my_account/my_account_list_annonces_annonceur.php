@@ -74,7 +74,7 @@
                                 data-toggle="modal" 
                                 data-target="#view_avis_<?= $row_annonce->id ?>"
                             >
-                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=(isset($row_annonce->avis))?count($row_annonce->avis):"0"; ?>)</small>
+                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=$row_annonce->total_avis; ?>)</small>
                             </a>  
                         </div>
                     </div>
@@ -329,6 +329,30 @@ $(document).ready(function()
                 success : function(data_return)
                 {
                     setTimeout(reload_page,400);
+                },
+            });
+        }
+    });
+
+
+    $("button[data-action='Delete_avis']").click(function(e)
+    {
+
+        var confirmate = confirm("Voulez-vous vraiment supprimer cette avis ?");
+
+        e.stopPropagation()
+
+        if(confirmate === true)
+        {
+            var button_clicked = $(this);
+            $.ajax({
+                type : 'POST',
+                url  : '/ajax/controller/del_avis.php',
+                dataType : "HTML",
+                data : {"action" : "del_avis", "id_avis" : button_clicked.attr("data-id_avis")},
+                success : function(data_return)
+                {
+                    //reload_page();
                 },
             });
         }

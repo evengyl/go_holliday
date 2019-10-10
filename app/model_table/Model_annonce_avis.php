@@ -4,6 +4,7 @@ class Model_annonce_avis
 {
 	public function __construct()
 	{
+		$this->id = new NormalType("id");
 		$this->id_annonce = new NormalType("id_annonce");
 		$this->create_date = new NormalType("create_date");
 		$this->user_name = new OneToOneType("utilisateurs", "name", "id_utilisateurs");

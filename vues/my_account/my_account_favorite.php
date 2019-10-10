@@ -23,7 +23,7 @@
                             <span class="text-muted"><small>Lieu : <?= $row_annonce->address[0]->address_lieux_dit." à ".$row_annonce->address[0]->address_localite ?></small></span>
                             
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-5">
                             <span class="text-muted"><small>Nombre de date validées : <b><?=(!empty($row_annonce->date_reserved))?count($row_annonce->date_reserved):0 ?></b></small></span>
                             <br>
 
@@ -37,11 +37,11 @@
                                 data-toggle="modal" 
                                 data-target="#view_avis_<?= $row_annonce->id ?>"
                             >
-                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=(isset($row_annonce->avis))?count($row_annonce->avis):"0"; ?>)</small>
+                                <small><i class="fa fa-angle-double-right "></i>&nbsp;Voir les avis (<?=$row_annonce->total_avis; ?>)</small>
                             </a>                        
                     </div>
-                    <div class="col-xs-2">
-                        <button class="btn btn-xs btn-danger" title="Retirer de la liste des favoris" data-action="Delete_fav" data-id_annonce="<?= $row_annonce->id; ?>"><span class="glyphicon glyphicon-remove"></span></button>
+                    <div class="col-xs-1">
+                        <button style="padding:6px 10px;" class="btn btn-xs btn-danger" title="Retirer de la liste des favoris" data-action="Delete_fav" data-id_annonce="<?= $row_annonce->id; ?>"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </li><?
