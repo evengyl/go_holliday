@@ -36,8 +36,12 @@ Class annonce extends base_module
 
 			$this->render_date_text();
 			$this->get_list_date_demand();
-			$this->add_vues();
-			$this->check_if_let_avis();
+			
+			if(isset($this->annonce->id_utilisateurs) && isset($this->_app->user->id_utilisateurs))
+			{
+				$this->add_vues();
+				$this->check_if_let_avis();
+			}
 
 
 			//partie gestion des avis client

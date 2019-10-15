@@ -20,7 +20,7 @@
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="restaurant_map">
 				<a role="button" data-toggle="collapse" href="#collapseRestaurant" aria-expanded="false" aria-controls="collapseRestaurant">
-					<li class="list-group-item"><img src="/images/markers/marker-icon-blue.png">&nbsp;&nbsp;Restaurant</li>
+					<li class="list-group-item"><img src="/images/markers/marker-icon-blue.png">&nbsp;&nbsp;Restaurant<br><small class="thin text-muted">(Cliquer pour dérouler)</small></li>
 				</a>
 				<div class="collapse" id="collapseRestaurant">
 					<div class="well">
@@ -31,7 +31,7 @@
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="bar_map">
 				<a role="button" data-toggle="collapse" href="#collapseBar" aria-expanded="false" aria-controls="collapseBar">
-					<li class="list-group-item"><img src="/images/markers/marker-icon-green.png">&nbsp;&nbsp;Bar</li>
+					<li class="list-group-item"><img src="/images/markers/marker-icon-green.png">&nbsp;&nbsp;Bar<br><small class="thin text-muted">(Cliquer pour dérouler)</small></li>
 				</a>
 				<div class="collapse" id="collapseBar">
 					<div class="well">
@@ -43,7 +43,7 @@
 		<span class="col-xs-3 text-muted thin">
 			<ul class="list-group" id="supermarche_map">
 				<a role="button" data-toggle="collapse" href="#collapseSupermarché" aria-expanded="false" aria-controls="collapseSupermarché">
-					<li class="list-group-item"><img src="/images/markers/marker-icon-violet.png">&nbsp;&nbsp;Supermarché</li>
+					<li class="list-group-item"><img src="/images/markers/marker-icon-violet.png">&nbsp;&nbsp;Supermarché<br><small class="thin text-muted">(Cliquer pour dérouler)</small></li>
 				</a>
 				<div class="collapse" id="collapseSupermarché">
 					<div class="well">
@@ -78,9 +78,9 @@
 
 $(document).ready(function()
 {
-/*
 
-	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $annonce->address[0]->address_rue; ?>, <?= $annonce->address[0]->address_localite; ?>,<?= $annonce->address[0]->address_zip_code; ?>, <?= $annonce->address[0]->name_address_pays_human;?>&format=json&addressdetails=1&extratags=1";
+
+	var url = "https://eu1.locationiq.com/v1/search.php?key=17bb9e209eb39c&q=<?= $annonce->address[0]->address_rue; ?>, <?= $annonce->address[0]->address_localite; ?>,<?= $annonce->address[0]->address_zip_code; ?>, <?= $annonce->pays_name_human;?>&format=json&addressdetails=1&extratags=1";
 
 	var settings_localisation = {
 	  "async": true,
@@ -174,6 +174,6 @@ $(document).ready(function()
 		  })(i);
 		};
 
-	});*/
+	});
 });
 </script>

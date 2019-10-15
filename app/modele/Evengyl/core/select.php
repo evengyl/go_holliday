@@ -130,7 +130,13 @@ class select extends all_query
 		$from = array_unique($from);
 
 
-		$str_select = "SELECT ";
+		
+		if(isset($this->req->distinct) && $this->req->distinct)
+			$str_select = "SELECT DISTINCT ";
+		else
+			$str_select = "SELECT ";
+
+
 		if(count($select) > 0)
 		{
 			foreach($select as $row_var_select)

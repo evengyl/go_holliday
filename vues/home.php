@@ -1,9 +1,9 @@
 <header id="head" style="background:#181015 url(<?= $slides; ?>) no-repeat center; margin-left:-15px; margin-right:-15px;">
 	<div class="container">
 		<div class="row">
-			<h1 class="lead">Bienvenue sur <?= $_app->site_name; ?></h1>
-			<p class="tagline"><span style="background: #0007; padding: 4px;">&nbsp;&nbsp;&nbsp;Votre site de recherche de vacances entre particuliers pour trouver VOS vacances selon VOS envies !&nbsp;&nbsp;&nbsp;</span></p>
-			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0006;" role="button">Chercher ce dont vous rêvez</a></p><?
+			<h1 class="lead" style="font-size:5rem;">Bienvenue sur <?= $_app->site_name; ?></h1>
+			<p class="tagline"><span style="background: #0008; padding: 5px; font-size:1.6rem;">&nbsp;&nbsp;&nbsp;Votre site de recherche de vacances entre particuliers pour trouver VOS vacances selon VOS envies !&nbsp;&nbsp;&nbsp;</span></p>
+			<p><a class="btn btn-default btn-lg" href="/Recherche" style="color:white; background:#0007;" role="button">Chercher ce dont vous rêvez</a></p><?
 			if($_app->option_app['app_with_login_option'])
 			{
 				if(!Config::$is_connect)

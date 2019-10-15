@@ -8,7 +8,7 @@
                 <div class="col-xs-2">
                     <div class="img_annonce">
                         <a href="#" disabled class="thumbnail" style="cursor:default;">
-                            <img src="<?= $row_annonce->img_principale; ?>" class="img-responsive">
+                            <img src="<?= $row_annonce->img_principale; ?>" style="height:230px;" class="img-responsive">
                         </a>
                     </div>
                 </div>

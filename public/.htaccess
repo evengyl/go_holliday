@@ -32,14 +32,15 @@ RewriteRule ^ConfirmSignUp/(CreateAccount[a-zA-Z0-9]{22})[/]{0,1}$ 		?page=sign_
 
 RewriteRule ^Recherche[/]{0,1}$ ?page=Recherche [L]
 RewriteRule ^Recherche/([a-zA-Z_]+)[/]{0,1}$ 		?page=Recherche&type=$1 [L]
-
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)[/]{0,1}$ 		?page=$1&type=$2&selection_ok=$3 [L]
 RewriteRule ^(Recherche)/([a-zA-Z_]+)/(Selection_destination)/vue=([a-zA-Z]+)$ 		?page=$1&type=$2&selection_ok=$3&type_of_view=$4 [L]
-
 RewriteRule ^(Recherche)/(Toutes-les-annonces)[/]{0,1}$		 ?page=$1&all_select=$2 [L]
 
-RewriteRule ^(Annonces)/([0-9]+)[/]{0,1}$ 		?page=$1&id_annonce=$2 [L]
 
+
+RewriteRule ^(Search)/([a-zA-Z_]+)/([a-zA-Z_]+)[/]{0,1}$		 ?page=$1&table=$2&value=$3 [L]
+
+RewriteRule ^(Annonces)/([0-9]+)[/]{0,1}$ 		?page=$1&id_annonce=$2 [L]
 RewriteRule ^(Condition)[/]{0,1}$ 		?page=condition [L]
 
 

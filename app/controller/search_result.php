@@ -11,12 +11,13 @@ Class search_result extends base_module
 
 		$pays = array();
 		$habitat = array();
-		$type_id = "";
+		$type = "";
 		$str_pays = "Aucun sélectionné(s)";
 		$str_habitat = "Aucun sélectionné(s)";
-		$str_type = null;
+		$str_type = "Aucun sélectionné(s)";
 		$all = false;
 		$error = false;
+		$where_clicked = null;
 		
 		if(isset($_POST['pays_id']) && isset($_POST['pays_name']))
 			$str_pays = implode(", ", $_POST['pays_id']);
@@ -26,7 +27,7 @@ Class search_result extends base_module
 
 
 		if(isset($this->_app->route['type']))
-			$array_type = $this->get_infos_type($this->_app->route['type']);
+			$array_type = $this->get_id_type($this->_app->route['type']);
 
 
 
@@ -35,8 +36,28 @@ Class search_result extends base_module
 			$error = true;
 		else
 		{
-			$type_id = $array_type[0]->id;
+			$type = $array_type[0]->id;
 			$str_type = $array_type[0]->type_vacances_name_human;
+		}
+
+
+		//si recherche depuis le module form de recheche
+		if(isset($_GET['table']) && isset($_GET['value']))
+		{
+			$error = false;
+
+			if($_GET['table'] == "Pays"){
+				$pays[] = $this->get_id_pays($_GET['value']);
+				$str_pays = $_GET['value'];
+			}
+			else if($_GET['table'] == "Habitat"){
+				$habitat[] = $this->get_id_habitat($_GET['value']);
+				$str_habitat = $_GET['value'];
+			}
+			else if($_GET['table'] == "Type"){
+				$type = $this->get_id_type($_GET['value']);
+				$str_type = $_GET['value'];
+			}
 		}
 
 
@@ -45,9 +66,8 @@ Class search_result extends base_module
 			$all = true;
 
 
-		$this->annonces = $this->get_list_annonces_search($type_id, $pays, $habitat, $all);
+		$this->annonces = $this->get_list_annonces_search($type, $pays, $habitat, $all);
 
-		$this->annonces = $this->_app->get_first_image($this->annonces);
 
 		if($error && !$all)
 			$this->use_module("p_404");
@@ -62,32 +82,47 @@ Class search_result extends base_module
 		}
 	}
 
-	private function get_infos_type($type)
+
+	private function get_id_pays($value)
+	{
+		$sql_type = new stdClass();
+		$sql_type->table = "annonce_pays";
+		$sql_type->data = "id";
+		$sql_type->where = ["name_human = $1", [$value]];
+		$res_sql = $this->_app->sql->select($sql_type);
+		return $res_sql[0]->id;
+	}
+
+	private function get_id_type($value)
 	{
 		$sql_type = new stdClass();
 		$sql_type->table = "annonce_type_vacances";
-		$sql_type->data = "id, type_vacances_name_human";
-		$sql_type->where = ["name_sql = $1", [strtolower($type)]];
+		$sql_type->data = "id";
+		$sql_type->where = ["name_human = $1", [$value]];
 		$res_sql = $this->_app->sql->select($sql_type);
+		return $res_sql[0]->id;
+	}
 
-		if(!empty($res_sql))
-		{
-			if(in_array($type, (array)$res_sql[0]))
-				return $res_sql;
-			else
-				return false;
-		}
-		else
-			return false;
-		
+	private function get_id_habitat($value)
+	{
+		$sql_type = new stdClass();
+		$sql_type->table = "annonce_habitat";
+		$sql_type->data = "id";
+		$sql_type->where = ["name_human = $1", [$value]];
+		$res_sql = $this->_app->sql->select($sql_type);
+		return $res_sql[0]->id;
 	}
 
 
 
-	private function get_list_annonces_search($type_id, $pays = array(), $habitat = array(), $all)
+	private function get_list_annonces_search($type, $pays = array(), $habitat = array(), $all)
 	{
 		$str_pays_id = "";
 		$str_habitat_id = "";
+		$str_type_id = "";
+
+		if(!empty($type))
+			$str_type_id = " AND id_type_vacances LIKE $4";
 
 		if(isset($pays[0]))
 			$str_pays_id = " AND id_pays IN $5";
@@ -96,20 +131,30 @@ Class search_result extends base_module
 			$str_habitat_id = " AND id_habitat IN $6";
 
 
-
-		$where = "admin_validate = $1 AND active = $2 AND on_off = $3 AND id_type_vacances LIKE $4".$str_pays_id.$str_habitat_id;
+		$where = "admin_validate = $1 AND active = $2 AND on_off = $3".$str_type_id.$str_pays_id.$str_habitat_id;
 
 
 		$sql_annonce = new stdClass();
 		$sql_annonce->table = "annonces";
-		$sql_annonce->data = "id, title, sub_title, vues, address, pays_name_human, price, habitat_name_human, date_start_saison, date_end_saison";
+		$sql_annonce->data = "id";
 
 		if(!$all)
-			$sql_annonce->where = [$where, ["1", "1", "1", $type_id, $pays, $habitat]];
+			$sql_annonce->where = [$where, ["1", "1", "1", $type, $pays, $habitat]];
 		else
 			$sql_annonce->where = ["admin_validate = $1 AND active = $2 AND on_off = $3", ['1','1','1']];
 
 		$res_sql_annonces = $this->_app->sql->select($sql_annonce);
+
+
+		if(!empty($res_sql_annonces))
+		{
+			foreach($res_sql_annonces as $key => $row_search)
+			{
+				$tmp = $this->_app->get_announce_user($row_search->id);
+				$tmp = $this->_app->get_first_image($tmp);
+				$res_sql_annonces[$key] = $tmp;
+			}
+		}
 
 		return $res_sql_annonces;
 	}

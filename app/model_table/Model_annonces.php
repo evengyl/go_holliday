@@ -10,6 +10,7 @@ class Model_annonces
 		$this->id_utilisateurs = new NormalType("id_utilisateurs");
 		$this->id_type_vacances = new NormalType("id_type_vacances");
 		$this->pays_name_human = new OneToOneType("annonce_pays", "name_human", "id_pays");
+		$this->img_pays = new OneToOneType("annonce_pays", "img", "id_pays");
 		$this->date_start_saison = new NormalType("start_saison");
 		$this->date_end_saison = new NormalType("end_saison");
 		

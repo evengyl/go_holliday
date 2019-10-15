@@ -45,13 +45,14 @@ $_app = new _app();
 $_app->base_dir = $base_dir;
 $_app->sql = new all_query($_app);
 
+if(isset($_SESSION['pseudo']))
+{
+	$_app->set_user_infos_on_app();
 
-$_app->set_user_infos_on_app();
+	$_app->can_do_user = new can_do_user($_app);
 
-$_app->can_do_user = new can_do_user($_app);
-
-
-if(isset($_SESSION['user_type']))
-	$_app->user->user_type = $_SESSION['user_type'];
-else
-	$_app->user->user_type = 1;
+	if(isset($_SESSION['user_type']))
+		$_app->user->user_type = $_SESSION['user_type'];
+	else
+		$_app->user->user_type = 1;
+}

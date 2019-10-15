@@ -12,26 +12,47 @@ Class fct_global_annonce extends fct_global_website
 	public function get_first_image($annonces)
 	{
 		if(empty($annonces)) return false;
-		foreach($annonces as $key => $row_annonce)
+
+		if(isset($annonces->id)) //il s'agit d'une annonce unique et non d'un array d'annonce
 		{
-			if(file_exists($this->_app->base_dir."/public/datas/annonces_images/".$row_annonce->id."/"))
+			$annonces->img_principale = $this->return_img($annonces->id);
+
+			if(empty($annonces->img_principale))
+				$annonces->img_principale = "/images/No_Image.jpg";
+		}
+
+		else
+		{
+			foreach($annonces as $key => $row_annonce)
 			{
-				if($dossier = opendir($this->_app->base_dir."/public/datas/annonces_images/".$row_annonce->id."/"))
+				$row_annonce->img_principale = $this->return_img($row_annonce->id);
+
+				if(empty($row_annonce->img_principale))
+					$row_annonce->img_principale = "/images/No_Image.jpg";
+			}
+		}
+
+		return $annonces;
+	}
+
+	private function return_img($id_annonce)
+	{
+		$url_img = "";
+		if(file_exists($this->_app->base_dir."/public/datas/annonces_images/".$id_annonce."/"))
+		{
+			if($dossier = opendir($this->_app->base_dir."/public/datas/annonces_images/".$id_annonce."/"))
+			{
+				while(false !== ($fichier = readdir($dossier)))
 				{
-					while(false !== ($fichier = readdir($dossier)))
+					if($fichier != '.' && $fichier != '..')
 					{
-						if($fichier != '.' && $fichier != '..')
-						{
-							$annonces[$key]->img_principale = "/datas/annonces_images/".$row_annonce->id."/".$fichier;
-							break;
-						}
+						$url_img = "/datas/annonces_images/".$id_annonce."/".$fichier;
+						break;
 					}
 				}
 			}
-			if(!isset($row_annonce->img_principale))
-				$annonces[$key]->img_principale = "images/No_Image.jpg";
 		}
-		return $annonces;
+		return $url_img;
 	}
 
 	public function getDatesBetween($start, $end)
@@ -296,13 +317,13 @@ Class fct_global_annonce extends fct_global_website
 
 	private function render_human_price_range()
 	{
-		$this->annonce->price_one_night_human = "<b class='text-muted'>Prix moyen pour une nuit : </b><br><i style='color:#008000;'>".
+		$this->annonce->price_one_night_human = "<b class='text-muted'>Prix moyen pour une nuit : </b><i style='color:#008000;'>".
 													ceil($this->render_moy_price($this->annonce->id, "price_one_night"))." Euros</i>";
 
-		$this->annonce->price_week_end_human = "<b class='text-muted'>Prix moyen pour un week-end : </b><br><i style='color:#008000;'>".
+		$this->annonce->price_week_end_human = "<b class='text-muted'>Prix moyen pour un week-end : </b><i style='color:#008000;'>".
 													ceil($this->render_moy_price($this->annonce->id, "price_week_end"))." Euros</i>";
 
-		$this->annonce->price_one_week_human = "<b class='text-muted'>Prix moyen pour une semaine : </b><br><i style='color:#008000;'>".
+		$this->annonce->price_one_week_human = "<b class='text-muted'>Prix moyen pour une semaine : </b><i style='color:#008000;'>".
 													ceil($this->render_moy_price($this->annonce->id, "price_one_week"))." Euros</i>";
 
 		$this->annonce->caution_human = "Une caution de <b>".$this->annonce->caution."&nbsp;€</b> est demandée pour garantir le bien.";

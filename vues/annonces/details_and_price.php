@@ -48,13 +48,16 @@
 		<h3 class="text-center thin" style="margin-top:0px;">Informations pratiques complémentaires</h3>
 		<div class="row">
 			<div class="col-md-4 highlight">
-				<div class="h-caption"><h4><i style="color:<?=($annonce->handicap)?'#5cb85c':'#d9534f';?>" class="fab fa-accessible-icon"></i>Accès personnes à mobilité réduite</h4></div>
+				<div class="h-caption"><h4><i style="color:<?=($annonce->handicap)?'#5cb85c':'#d9534f';?>" class="fab fa-accessible-icon"></i>
+				<?=($annonce->handicap)?'Accès personnes à mobilité réduite':'Pas d\'accès pour les personnes à mobilitée réduite';?></h4></div>
 			</div>
 			<div class="col-md-4 highlight">
-				<div class="h-caption"><h4><i style="color:<?=($annonce->pet)?'#5cb85c':'#d9534f';?>" class="fas fa-dog"></i>Animaux de compagnie autorisé</h4></div>
+				<div class="h-caption"><h4><i style="color:<?=($annonce->pet)?'#5cb85c':'#d9534f';?>" class="fas fa-dog"></i>
+				<?=($annonce->pet)?'Animaux de compagnie autorisé':'Les animaux de compagnies ne sont pas acceptés';?></h4></div>
 			</div>
 			<div class="col-md-4 highlight">
-				<div class="h-caption"><h4><i style="color:<?=($annonce->parking)?'#5cb85c':'#d9534f';?>"  class="fas fa-car-side"></i>Parking à proximité immédiate</h4></div>
+				<div class="h-caption"><h4><i style="color:<?=($annonce->parking)?'#5cb85c':'#d9534f';?>"  class="fas fa-car-side"></i>
+				<?=($annonce->parking)?'Parking à proximité immédiate':'Il n\'y a rien pour se garer juste à coté';?></h4></div>
 			</div>
 		</div>
 	</div>

@@ -11,7 +11,6 @@ Class router
 		$this->_app->route = $route;
 
 
-
 		if($security->check_if_module_need_to_do_connect())
 		{
 			if(!empty($this->_app->route))
@@ -79,6 +78,9 @@ Class router
 							$this->assign_mod('annonce');
 							break;
 
+					case 'Search':
+							$this->assign_mod('search_result');
+							break;
 					default:
 						$this->assign_mod('p_404');
 						unset($route);

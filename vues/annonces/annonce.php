@@ -1,7 +1,7 @@
 <div class="secondary" id="head"></div>
 <div class="container-fluid text-center page_annonce"><?
 
-	if($_app->user->level_admin == 3)
+	if(isset($_app->user->level_admin) && $_app->user->level_admin == 3)
 	{?>
 		<a class="btn btn-warning" href="/Mon_compte/Edition-Annonce/<?= $annonce->id; ?>">Editer</a>&nbsp;<?
 		

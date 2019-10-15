@@ -91,7 +91,15 @@ if(Config::$is_connect)
 		$data = $annonce;?>
 		__MOD2_messagery("id_annonce=<?= $annonce->id; ?>","id_receiver=<?= $annonce->id_utilisateurs; ?>","specific_id_modal=<?= $annonce->id; ?>")__<?
 	}
+}
+else
+{?>
+	<div class="alert alert-danger">
+		<strong>Attention</strong> Veuillez vous connecter ou créer un compte pour voir plus d'informations <i class="far fa-lg fa-smile-wink"></i>
+		<strong>&nbsp;(vous pouvez le faire ici <a href="/Connexion">Se connecter / s'inscrire</a>)</strong>
+	</div><?
 }?>
+
 
 
 <script>
