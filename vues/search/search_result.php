@@ -16,12 +16,12 @@ else
             <img src="/images/logo.png" class="img-responsive" alt="">
             <hr>
             <div class="caption">
-                <p class="text-muted">Vacances pour : <?= $type_selected; ?></p>
-                <p class="text-muted">Pays : <?= $pays_selected; ?></p>
-                <p class="text-muted">Habitat(s) : <?= $habitat_selected; ?></p>
+                <p class="text-muted">Vacances pour : <?= (!empty($type_selected))?$type_selected:"Aucun sélectionné(s)"; ?></p>
+                <p class="text-muted">Pays : <?= (!empty($pays_selected))?$pays_selected:"Aucun sélectionné(s)"; ?></p>
+                <p class="text-muted">Habitat(s) : <?= (!empty($habitat_selected))?$habitat_selected:"Aucun sélectionné(s)"; ?></p>
                 <p class="text-muted">Nombre d'annonces trouvées : <?= count($annonces); ?></p>
                 <?
-                if($type_selected != null)
+                if($type_selected != "")
                 {?>
                     <p class="text-center">
                         <a href="/Recherche/<?= $type_selected; ?>" class="btn btn-success" role="button" style="padding:10px 17px;">Changer de pays/habitat</a>

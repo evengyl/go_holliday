@@ -1,6 +1,7 @@
 <h4 class="title">Listes de mes annonces</h4><hr>
 <p class="text-muted title"><small>Attention !, une annonce créée mais non validée de votre pars ne vous permettra pas d'en créer une nouvelles, ni de l'activée ni que nous puissions l'autorisée</small></p><hr>
 <h4 class='title' data-fct="return_fct_annonce" style='display:none; color:green;'></h4>
+<h4 class='title' style='color:orange;'><?=(isset($_SESSION['infos_annonce'])?$_SESSION['infos_annonce']:''); ?></h4>
 
 <ul class="list-unstyled list_annonces_max"><?
     if(!empty($annonces))
@@ -160,6 +161,9 @@
     require($_app->base_dir. "/vues/my_account/my_account_legend_annonce.php");?>
 
 </ul>
+<? 
+unset($_SESSION['infos_annonce']);
+?>
     
 
 

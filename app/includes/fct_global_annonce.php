@@ -289,24 +289,8 @@ Class fct_global_annonce extends fct_global_website
 
 			$this->render_human_price_range();
 			$this->render_type_vacances();
-
-				
-			$tmp = [];
-			foreach($this->annonce->text_sql_to_human as $row_text)
-				$tmp[$row_text->name_sql] = $row_text->name_human;
-			$this->annonce->text_sql_to_human = $tmp;
-
-
-			$tmp = [];
-			foreach($this->annonce->sport[0] as $key => $row_sport)
-				$tmp[] = (object)["value" => $row_sport, "name_human" => $this->annonce->text_sql_to_human[$key], "name_sql" => $key];
-			$this->annonce->sport[0] = $tmp;
-
-
-			$tmp = [];
-			foreach($this->annonce->activity[0] as $key => $row_activity)
-				$tmp[] = (object)["value" => $row_activity, "name_human" => $this->annonce->text_sql_to_human[$key], "name_sql" => $key];
-			$this->annonce->activity[0] = $tmp;
+			$this->annonce->sport = $this->render_list_sport();
+			$this->annonce->activity = $this->render_list_activity();
 
 			$this->annonce->url_annonce = "/Recherche/Vues/Annonces/".$this->annonce->id;
 		}
@@ -314,6 +298,40 @@ Class fct_global_annonce extends fct_global_website
 		$this->annonce = (object)$this->annonce;
 		return $this->annonce;
 	}
+
+
+	private function render_list_sport()
+	{
+		$list_sport = $this->get_list_sport();
+
+		$tmp_id = explode(",", $this->annonce->sport);
+		$this->annonce->list_id_sport = $tmp_id;
+		$data = array();
+
+		foreach($list_sport as $row_sport)
+		{
+			if(in_array($row_sport->id, $tmp_id))
+				$data[] = $row_sport;
+		}
+		return $data;
+	}
+
+	private function render_list_activity()
+	{
+		$list_activity = $this->get_list_activity();
+
+		$tmp_id = explode(",", $this->annonce->activity);
+		$this->annonce->list_id_activity = $tmp_id;
+		$data = array();
+
+		foreach($list_activity as $row_activity)
+		{
+			if(in_array($row_activity->id, $tmp_id))
+				$data[] = $row_activity;
+		}
+		return $data;
+	}
+
 
 	private function render_human_price_range()
 	{
@@ -352,4 +370,28 @@ Class fct_global_annonce extends fct_global_website
 			}
 		}
 	}
+
+	public function get_list_sport()
+	{
+		$req_sql_list_sport = new stdClass();
+		$req_sql_list_sport->table = "annonce_sport";
+		$req_sql_list_sport->data = "id, name_human, name_sql";
+		$req_sql_list_sport->where = ["1"];
+		$res_sql_list_sport = $this->_app->sql->select($req_sql_list_sport);
+
+		return $res_sql_list_sport;
+	}
+
+	public function get_list_activity()
+	{
+		$req_sql_list_activity = new stdClass();
+		$req_sql_list_activity->table = "annonce_activity";
+		$req_sql_list_activity->data = "id, name_human, name_sql";
+		$req_sql_list_activity->where = ["1"];
+		$res_sql_list_activity = $this->_app->sql->select($req_sql_list_activity);
+
+		return $res_sql_list_activity;
+	}
+
+
 }

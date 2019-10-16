@@ -27,20 +27,20 @@ class Model_annonces
 		$this->habitat_img = new OneToOneType("annonce_habitat", "img", "id_habitat");
 		$this->habitat_text = new OneToOneType("annonce_habitat", "text", "id_habitat");
 
-		$this->sport = new ManyToManyType("annonce_sport", "id", "id");
-		$this->activity = new ManyToManyType("annonce_activity", "id", "id");
-		$this->text_sql_to_human = new ManyToManyType("text_sql_to_human", "", "");
+
+		$this->sport = new NormalType("id_sport");
+		$this->activity = new NormalType("id_activity");
+
 
 		$this->address = new ManyToManyType("annonce_address", "id", $second_where = "id");
 		$this->avis = new ManyToManyType("annonce_avis", "id_utilisateurs", $second_where = "id_annonce");
 		$this->commoditer_announces = new OneToManyType("annonce_commoditer", "id");
 
+
 		$this->private_message = new ManyToManyType($table = "private_message", $link_a_to_b = "id_utilisateurs", $second_where = "id_annonce");
-		
 		$this->date_annonces = new ManyToManyType($table = "annonce_dates", $link_a_to_b = "id_utilisateurs", $second_where = "id_annonce");
-
-
 		$this->price = new OneToManyType("range_price_announce", "id");
+
 
 		$this->id_user = new OneToOneType("utilisateurs", "id", "id_utilisateurs");
 		$this->user_name = new OneToOneType("utilisateurs", "name", "id_utilisateurs");

@@ -20,20 +20,18 @@
 			<div class="col-md-3">
 				<div class="h-caption"><h4><i class="fas fa-child"></i>Liste d'activités à proximité direct</h4></div>
 				<div class="h-body text-center"><?
-					foreach($annonce->activity[0] as $row_activity)
+					foreach($annonce->activity as $row_activity)
 					{
-						if($row_activity->value)
-							echo "<p class='text-muted'>". $row_activity->name_human ."</p>";
+						echo "<p class='text-muted'>". $row_activity->name_human ."</p>";
 					}?>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="h-caption"><h4><i class="fas fa-volleyball-ball"></i>Liste des sports à proximité direct</h4></div>
 				<div class="h-body text-center"><?
-					foreach($annonce->sport[0] as $row_sport)
+					foreach($annonce->sport as $row_sport)
 					{
-						if($row_sport->value)
-							echo "<p class='text-muted'>". $row_sport->name_human ."</p>";
+						echo "<p class='text-muted'>". $row_sport->name_human ."</p>";
 					}?>
 				</div>
 			</div>

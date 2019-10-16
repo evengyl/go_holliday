@@ -74,15 +74,16 @@ Class fct_global_website
 
 		$req_sql = new stdClass;
 		$req_sql->table = "login";
-		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre";
+		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre, preference";
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 		$res_fx = $this->_app->sql->select($req_sql);
+
 
 
 		//la liste des annonces favorite est en chaine de caractere on la remet en array
 		$res_fx[0]->id_favorite = explode(",", $res_fx[0]->id_favorite);
 		
-
+	
 		//on ressemble les deux array pour mettre a jour l'_app->user
 		$merge_array_user = (object) array_merge((array) $this->_app->user, (array)$res_fx[0]);
 		return $merge_array_user;

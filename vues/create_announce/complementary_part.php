@@ -40,20 +40,7 @@
                 </div>
             </div>
 		</div>
-	</div><?
-
-	$tmp_sport = array();
-	$tmp_activity = array();
-	foreach($annonce->sport[0] as $row_sport)
-	{
-		if($row_sport->value == 1)
-			$tmp_sport[] = $row_sport->name_sql;
-	}
-	foreach($annonce->activity[0] as $row_activity)
-	{
-		if($row_activity->value == 1)
-			$tmp_activity[] = $row_activity->name_sql;
-	}?>
+	</div>
 
 
 	<div class="panel-heading" role="tab" id="headingOne" style="margin-top:15px;">
@@ -68,10 +55,11 @@
 
                 <div class="input-group col-xs-12">
 				    <div class="checkbox"><?
-				    foreach($array_list_sport as $row_sport)
+
+				    foreach($list_sport as $row_sport)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($annonce->sport) && in_array($row_sport->name_sql, $tmp_sport))? 'checked="true"' : ''; ?> name="list_sport[]" value="<?= $row_sport->name_sql; ?>"><?= $row_sport->name_human; ?>
+				        	<input type="checkbox" <?= (isset($annonce->sport) && in_array($row_sport->id, $annonce->list_id_sport))? 'checked="true"' : ''; ?> name="list_sport[]" value="<?= $row_sport->id; ?>"><?= $row_sport->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>
@@ -92,10 +80,10 @@
             <div class="form-group">
                 <div class="input-group col-xs-12">
 				    <div class="checkbox"><?
-				    foreach($array_list_activity as $row_activity)
+				    foreach($list_activity as $row_activity)
 				    {?>
 				    	<label class="col-xs-4" style="text-align:left;">
-				        	<input type="checkbox" <?= (isset($annonce->activity) && in_array($row_activity->name_sql, $tmp_activity))? 'checked="true"' : ''; ?> name="list_activity[]" value="<?= $row_activity->name_sql; ?>"><?= $row_activity->name_human; ?>
+				        	<input type="checkbox" <?= (isset($annonce->activity) && in_array($row_activity->id, $annonce->list_id_activity))? 'checked="true"' : ''; ?> name="list_activity[]" value="<?= $row_activity->id; ?>"><?= $row_activity->name_human; ?>
 			        	</label><?
 				    }?>
 				    </div>

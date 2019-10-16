@@ -12,9 +12,9 @@ Class search_result extends base_module
 		$pays = array();
 		$habitat = array();
 		$type = "";
-		$str_pays = "Aucun sélectionné(s)";
-		$str_habitat = "Aucun sélectionné(s)";
-		$str_type = "Aucun sélectionné(s)";
+		$str_pays = "";
+		$str_habitat = "";
+		$str_type = "";
 		$all = false;
 		$error = false;
 		$where_clicked = null;

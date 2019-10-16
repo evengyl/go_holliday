@@ -4,13 +4,9 @@ class Model_annonce_activity
 {
 	public function __construct()
 	{
-		$this->hiking = new NormalType("hiking");
-		$this->dancing = new NormalType("dancing");
-		$this->disco = new NormalType("disco");
-		$this->restaurant = new NormalType("restaurant");
-		$this->plage = new NormalType("plage");
-		$this->bar = new NormalType("bar");
-		$this->spa = new NormalType("spa");
+		$this->id = new NormalType("id");
+		$this->name_human = new NormalType("name_human");
+		$this->name_sql = new NormalType("name_sql");
 	}
 
 }

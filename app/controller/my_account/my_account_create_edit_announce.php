@@ -6,8 +6,8 @@ Class my_account_create_edit_announce extends base_module
 	private $list_pays_for_compar = [];
 	public $value_form_completed;
 	public $create_announce;
-	public $array_list_sport;
-	public $array_list_activity;
+	public $list_sport;
+	public $list_activity;
 	public $id_annonce = false;
 
 
@@ -34,8 +34,9 @@ Class my_account_create_edit_announce extends base_module
 			$array_type_vacances = $this->get_list_type(); //ok
 			$array_type_habitat = $this->get_list_habitat(); //ok
 
-			$this->array_list_activity = $this->get_list_activity(); //ok
-			$this->array_list_sport = $this->get_list_sport(); //ok
+			$this->list_activity = $this->_app->get_list_activity(); //ok
+			$this->list_sport = $this->_app->get_list_sport(); //ok
+
 			$array_type_vacances = $this->get_list_type(); //ok
 			$this->list_pays_for_compar = $this->get_list_pays(); // OK
 
@@ -50,8 +51,8 @@ Class my_account_create_edit_announce extends base_module
 				->assign_var("array_type_vacances", $array_type_vacances)
 				->assign_var("array_type_habitat", $array_type_habitat)
 				->assign_var("array_list_pays_for_tpl", $this->array_list_pays_for_tpl)
-				->assign_var("array_list_activity", $this->array_list_activity)
-				->assign_var("array_list_sport", $this->array_list_sport)
+				->assign_var("list_activity", $this->list_activity)
+				->assign_var("list_sport", $this->list_sport)
 				->assign_var("annonce", $this->annonce)
 				->use_template("my_account_create_announce");
 
@@ -112,8 +113,12 @@ Class my_account_create_edit_announce extends base_module
 		$this->annonce->handicap = (isset($post["handicap"])?"1":"0");
 		$this->annonce->parking = (isset($post["parking"])?"1":"0");
 
-		$this->annonce->list_activity = (isset($post['list_activity'])?$post['list_activity']:'0');
-		$this->annonce->list_sport = (isset($post['list_sport'])?$post['list_sport']:'0');
+
+		if(isset($post['list_activity']))
+			$this->annonce->list_id_activity = implode($post['list_activity'], ',');
+
+		if(isset($post['list_sport']))
+			$this->annonce->list_id_sport = implode($post['list_sport'], ',');
 		
 		
 		if(!empty($post['other_activity']))
@@ -130,6 +135,7 @@ Class my_account_create_edit_announce extends base_module
 		$this->insert_value_form_annonce();
 		$this->annonce = $this->_app->get_announce_user($this->id_annonce);
 
+		$_SESSION['infos_annonce'] = "Votre annonce à bien été créee / modifiée, merci de faire attention à vodre validation personnelle";
 		header('Location: /Mon_compte'); 
 		
 	}
@@ -169,58 +175,6 @@ Class my_account_create_edit_announce extends base_module
 
 		foreach($this->array_list_pays_for_tpl as $row_list_pays)
 			$tmp_list[$row_list_pays->id] = $row_list_pays->name_sql;
-
-		return $tmp_list;
-	}
-
-
-	public function get_list_activity()
-	{
-		$tmp_list = [];
-
-		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = 'annonce_activity';
-		$req_sql_verify->data = "*";
-		$req_sql_verify->where = ["1"];
-		$req_sql_verify->limit = "1";
-		$this->array_list_activity_for_tpl = $this->_app->sql->select($req_sql_verify);
-		unset($this->array_list_activity_for_tpl[0]->id);
-
-		foreach($this->array_list_activity_for_tpl[0] as $key_list_activity => $row_list_activity)
-		{
-			$req_sql_verify_second = new stdClass();
-			$req_sql_verify_second->table = 'text_sql_to_human';
-			$req_sql_verify_second->data = "name_sql, name_human";
-			$req_sql_verify_second->where = ["name_sql = $1", [$key_list_activity]];
-			$tmp_list[$key_list_activity] = $this->_app->sql->select($req_sql_verify_second)[0];
-		}
-
-		return $tmp_list;
-	}
-
-
-
-
-	public function get_list_sport()
-	{
-		$tmp_list = [];
-
-		$req_sql_verify = new stdClass();
-		$req_sql_verify->table = 'annonce_sport';
-		$req_sql_verify->data = "*";
-		$req_sql_verify->where = ["1"];
-		$req_sql_verify->limit = "1";
-		$this->array_list_sport_for_tpl = $this->_app->sql->select($req_sql_verify);
-		unset($this->array_list_sport_for_tpl[0]->id);
-
-		foreach($this->array_list_sport_for_tpl[0] as $key_list_sport => $row_list_sport)
-		{
-			$req_sql_verify_second = new stdClass();
-			$req_sql_verify_second->table = 'text_sql_to_human';
-			$req_sql_verify_second->data = "name_sql, name_human";
-			$req_sql_verify_second->where = ["name_sql = $1", [$key_list_sport]];
-			$tmp_list[$key_list_sport] = $this->_app->sql->select($req_sql_verify_second)[0];
-		}
 
 		return $tmp_list;
 	}
@@ -281,6 +235,8 @@ Class my_account_create_edit_announce extends base_module
 		$req_sql_update_annonce->ctx->id_habitat = $this->annonce->type_habitat;
 		$req_sql_update_annonce->ctx->id_type_vacances = $this->annonce->type_vacances;
 		$req_sql_update_annonce->ctx->title = $this->annonce->title;
+		$req_sql_update_annonce->ctx->id_sport = $this->annonce->list_id_sport;
+		$req_sql_update_annonce->ctx->id_activity = $this->annonce->list_id_activity;
 		$req_sql_update_annonce->ctx->sub_title = $this->annonce->sub_title;
 		$req_sql_update_annonce->ctx->start_saison = $this->annonce->start_saison;
 		$req_sql_update_annonce->ctx->end_saison = $this->annonce->end_saison;
@@ -330,39 +286,6 @@ Class my_account_create_edit_announce extends base_module
 		$this->_app->sql->update($req_sql_update_annonce);
 
 
-
-		foreach($this->array_list_sport as $row_sport)
-		{
-			if(in_array($row_sport->name_sql, (array)$this->annonce->list_sport))
-				$ctx_sport[$row_sport->name_sql] = 1;
-			else
-				$ctx_sport[$row_sport->name_sql] = 0;
-		}
-		$req_sql_update_annonce = new stdClass();
-		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx = $ctx_sport;
-		$req_sql_update_annonce->table = "annonce_sport";
-		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
-		$this->_app->sql->update($req_sql_update_annonce);
-
-
-
-		foreach($this->array_list_activity as $row_activity)
-		{
-			if(in_array($row_activity->name_sql, (array)$this->annonce->list_activity))
-				$ctx_activity[$row_activity->name_sql] = 1;
-			else
-				$ctx_activity[$row_activity->name_sql] = 0;
-		}
-		$req_sql_update_annonce = new stdClass();
-		$req_sql_update_annonce->ctx = new stdClass();
-		$req_sql_update_annonce->ctx = $ctx_activity;
-		$req_sql_update_annonce->table = "annonce_activity";
-		$req_sql_update_annonce->where = "id = '".$this->annonce->id."'";
-		$this->_app->sql->update($req_sql_update_annonce);
-
-
-
 	}
 
 
@@ -385,21 +308,6 @@ Class my_account_create_edit_announce extends base_module
 			$req_sql_insert_annonce->ctx->create_date = date("d/m/Y");
 			$req_sql_insert_annonce->table = "annonces";
 			$id_annonce = $this->_app->sql->insert_into($req_sql_insert_annonce,0 ,1);
-
-
-
-			$req_sql_insert_sport = new stdClass();
-			$req_sql_insert_sport->ctx = new stdClass();
-			$req_sql_insert_sport->ctx->id = $id_annonce;
-			$req_sql_insert_sport->table = "annonce_activity";
-			$this->_app->sql->insert_into($req_sql_insert_sport);
-
-			
-			$req_sql_insert_activity = new stdClass();
-			$req_sql_insert_activity->ctx = new stdClass();
-			$req_sql_insert_activity->ctx->id = $id_annonce;
-			$req_sql_insert_activity->table = "annonce_sport";
-			$this->_app->sql->insert_into($req_sql_insert_activity);
 
 
 			$req_sql_insert_address = new stdClass();

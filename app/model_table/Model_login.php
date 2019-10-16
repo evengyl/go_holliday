@@ -14,8 +14,6 @@ class Model_login
 		$this->id_utilisateurs = new NormalType("id_utilisateurs");
 
 
-
-
 		$this->name = new OneToOneType("utilisateurs", "name", "id_utilisateurs");
 		$this->last_name = new OneToOneType("utilisateurs", "last_name", "id_utilisateurs");
 		$this->id_create_account = new OneToOneType("utilisateurs", "id_create_account", "id_utilisateurs");
@@ -32,6 +30,6 @@ class Model_login
 		$this->account_verify = new OneToOneType("utilisateurs", "account_verify", "id_utilisateurs");
 		$this->newsletter = new OneToOneType("utilisateurs", "newsletter", "id_utilisateurs");
 		$this->id_favorite = new OneToOneType("utilisateurs", "id_favorite", "id_utilisateurs");
+		
 	}
-
 }
