@@ -30,6 +30,7 @@ class Model_login
 		$this->account_verify = new OneToOneType("utilisateurs", "account_verify", "id_utilisateurs");
 		$this->newsletter = new OneToOneType("utilisateurs", "newsletter", "id_utilisateurs");
 		$this->id_favorite = new OneToOneType("utilisateurs", "id_favorite", "id_utilisateurs");
-		
+		$this->id_preference = new OneToOneType("utilisateurs", "id_preference", "id_utilisateurs");
+
 	}
 }

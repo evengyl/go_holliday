@@ -11,11 +11,11 @@
                     <div class="form-group">
                         <div class="form-inline row">
                             <div class="row"><?	
-                        		foreach($_app->user->preference as $row_preference)
+                        		foreach($list_preference as $row_preference)
                         		{?>
 									<div class="col-xs-8 col-xs-offset-2">
 										<label class="col-xs-12" style="text-align:left;">
-								        	<input type="checkbox" <?= ($row_preference->value)? 'checked="true"' : ''; ?> name="list_preference[<?= $row_preference->name_sql; ?>]" value="<?= $row_preference->value; ?>">&nbsp;&nbsp;<?= $row_preference->name_human; ?>
+								        	<input type="checkbox" <?= (in_array($row_preference->id, $_app->user->id_preference))? 'checked="true"' : ''; ?> name="list_preference[]" value="<?= $row_preference->name_sql; ?>">&nbsp;&nbsp;<?= $row_preference->name_human; ?>
 							        	</label>
 									</div><?
 								}?>

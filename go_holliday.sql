@@ -419,31 +419,6 @@ INSERT INTO `range_price_announce` VALUES (210,'0-40','101-150','301-400'),(211,
 UNLOCK TABLES;
 
 --
--- Table structure for table `text_sql_to_human`
---
-
-DROP TABLE IF EXISTS `text_sql_to_human`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `text_sql_to_human` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_sql` varchar(50) NOT NULL,
-  `name_human` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `text_sql_to_human`
---
-
-LOCK TABLES `text_sql_to_human` WRITE;
-/*!40000 ALTER TABLE `text_sql_to_human` DISABLE KEYS */;
-INSERT INTO `text_sql_to_human` VALUES (1,'spa','Spa / Sauna'),(2,'bar','Bar / Buvette'),(3,'plage','Plage'),(4,'restaurant','Restaurant / Cafetaria / Bistro'),(5,'disco','Discothèque'),(6,'dancing','Piste de dance / Karaoké'),(7,'hiking','Randonnée'),(8,'foot','Terrain de Foot'),(9,'basket','Terrain de Basket'),(10,'tennis','Terrain de Tennis'),(11,'petanque','Terrain de Pétanque'),(12,'piscine','Piscine'),(13,'aqua_center','Centre aquatique'),(14,'sport','Salle de sports'),(15,'skate','Skate-park'),(16,'arc','Tir à l\'arc'),(17,'velos','Randonnées en vélos'),(18,'see_phone','Le client peux voir votre numéro de téléphone'),(19,'see_mail','Le client peux voir votre adresse Mail');
-/*!40000 ALTER TABLE `text_sql_to_human` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `translate`
 --
 
@@ -479,10 +454,10 @@ DROP TABLE IF EXISTS `utilisateur_preference`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `utilisateur_preference` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `see_phone` tinyint(1) NOT NULL DEFAULT '0',
-  `see_mail` tinyint(1) NOT NULL DEFAULT '0',
+  `name_sql` varchar(50) DEFAULT NULL,
+  `name_human` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +466,7 @@ CREATE TABLE `utilisateur_preference` (
 
 LOCK TABLES `utilisateur_preference` WRITE;
 /*!40000 ALTER TABLE `utilisateur_preference` DISABLE KEYS */;
-INSERT INTO `utilisateur_preference` VALUES (4,1,1);
+INSERT INTO `utilisateur_preference` VALUES (4,'see_tel','Le client peux voir votre numéro de téléphone');
 /*!40000 ALTER TABLE `utilisateur_preference` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,6 +496,7 @@ CREATE TABLE `utilisateurs` (
   `id_create_account` varchar(35) NOT NULL,
   `newsletter` tinyint(1) NOT NULL DEFAULT '1',
   `id_favorite` text NOT NULL,
+  `id_preference` varchar(50) DEFAULT NULL,
   `date_create` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
@@ -532,7 +508,7 @@ CREATE TABLE `utilisateurs` (
 
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
-INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','rue sous ghoy','25','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229','10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229','10/06/2017'),(5,'Martin','valenduc','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','lablab','6567','Belgique','Monsieur',0,10,1,'CreateAccount5d8b810608e63497485790',1,'225','10/06/2017');
+INSERT INTO `utilisateurs` VALUES (1,'Loïc','Baudoux','dark.evengyl@gmail.com',27,'0497312523','rue sous ghoy','25','labuissiere','6567','Belgique','Monsieur',1,11,1,'0',1,'236,229',NULL,'10/06/2017'),(4,'Jean','Eud','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','test','6567','Belgique','Monsieur',1,1,1,'CreateAccount5d53b5201a121669492182',1,'225,229',NULL,'10/06/2017'),(5,'Martin','valenduc','dark.evengyl@gmail.com',28,'0497312523','rue sous ghoy','25','lablab','6567','Belgique','Monsieur',0,10,1,'CreateAccount5d8b810608e63497485790',1,'225',NULL,'10/06/2017');
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -574,4 +550,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-16 16:09:07
+-- Dump completed on 2019-10-16 16:47:25

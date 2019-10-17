@@ -23,7 +23,7 @@ class Model_utilisateurs
 		$this->newsletter = new NormalType("newsletter");
 		$this->id_favorite = new NormalType("id_favorite");
 		$this->date_create = new NormalType("date_create");
-		$this->preference = new OneToManyType("utilisateur_preference", "id_utilisateurs");
+		$this->id_preference = new NormalType("id_preference");
 	}
 
 }

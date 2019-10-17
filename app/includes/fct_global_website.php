@@ -74,11 +74,26 @@ Class fct_global_website
 
 		$req_sql = new stdClass;
 		$req_sql->table = "login";
-		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre, preference";
+		$req_sql->data = "id, login, password, email, level_admin, id_utilisateurs, name, last_name, user_type, tel, address_numero, address_rue, zip_code, address_localite, age, pays, id_background_profil, account_verify, id_create_account, newsletter, id_favorite, genre, id_preference";
 		$req_sql->where = ["login = $1", [$_SESSION['pseudo']]];
 		$res_fx = $this->_app->sql->select($req_sql);
 
 
+		$res_fx[0]->id_preference = explode(",", $res_fx[0]->id_preference);
+		if(!empty($res_fx[0]->id_preference))
+		{
+			$res_fx[0]->list_preference = array();
+			foreach($res_fx[0]->id_preference as $row_preference)
+			{
+				$req_sql = new stdClass;
+				$req_sql->table = "utilisateur_preference";
+				$req_sql->data = "*";
+				$req_sql->where = ["id = $1", [$row_preference]];
+				$res_sql = $this->_app->sql->select($req_sql);
+				if(isset($res_sql[0]))
+					$res_fx[0]->list_preference[] = $res_sql[0];
+			}
+		}
 
 		//la liste des annonces favorite est en chaine de caractere on la remet en array
 		$res_fx[0]->id_favorite = explode(",", $res_fx[0]->id_favorite);

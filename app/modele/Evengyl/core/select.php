@@ -253,19 +253,13 @@ class select extends all_query
 			$type = $this->stack_data[$this->primary_table][$name_var_in_model]["type"];
 
 			if($type == "TMP_OPERATE_OneToOne")
-			{
 				$this->OneToOne($name_table, $name_var_in_model);
-			}
 
 			if($type == "TMP_OPERATE_OneToMany")
-			{
 				$this->OneToMany($name_table, $name_var_in_model);
-			}
 
 			if($type == "TMP_OPERATE_ManyToMany")
-			{
 				$this->ManyToMany($name_var_in_model, $data_table);
-			}
 		}
 
 
@@ -273,6 +267,7 @@ class select extends all_query
 
 	public function ManyToMany($name_var_in_model, $data_table)
 	{
+
 		$this->array_sql_many[$name_var_in_model] = [
 				"table"  => $data_table->table,
 				"data" => "*",
